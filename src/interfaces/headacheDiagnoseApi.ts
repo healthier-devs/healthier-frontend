@@ -63,10 +63,10 @@ export interface IResultResponse {
   result: IHeadacheResult;
 }
 
-interface IResultCard {
+export interface IResultCard {
   id: number;
   content: string;
-  image: string;
+  banner_illustration: string;
 }
 
 export interface IFinalResult {
@@ -75,6 +75,7 @@ export interface IFinalResult {
     most_likely: IResultCard | null;
     suspicious: IResultCard[] | null;
     likely: IResultCard[] | null;
+    predicted: IResultCard[] | null;
   };
 }
 

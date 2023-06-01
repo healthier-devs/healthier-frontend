@@ -2,7 +2,7 @@ import { useRef, useEffect, Dispatch } from "react";
 import { useNavigate } from "react-router-dom";
 import { HeadacheDiagnose } from "src/api/diagnose";
 import { IAnswer, IHeadacheResult, IQuestion } from "src/interfaces/diagnosisPage";
-import { IHeadacheQuestion, IPainArea } from "src/interfaces/headacheDiagnoseApi";
+import { IHeadacheQuestion, IPainArea, IResultCard } from "src/interfaces/headacheDiagnoseApi";
 import { useAppDispatch, useAppSelector } from "src/state";
 import { popAnswer } from "src/state/answerSlice";
 import { insertType, isHeadache, PAIN_AREA_MAP, typeMapping } from "src/utils/diagnosis";
@@ -112,10 +112,22 @@ function useHeadache({ state, curQuestion, setCurQuestion, selectedAnswer, setSe
           interests,
         });
 
+        let finalResult = {} as IResultCard;
+        if (resultList.results.likely) {
+          finalResult = resultList.results.likely[0];
+        } else if (resultList.results.suspicious) {
+          finalResult = resultList.results.suspicious[0];
+        } else if (resultList.results.predicted) {
+          finalResult = resultList.results.predicted[0];
+        }
+
+        const diagnosisResult = await HeadacheDiagnose.postResultDetail(finalResult.id);
+
         const timer = setTimeout(() => {
-          navigate("/diagnosis-list", {
+          navigate("/result", {
             state: {
-              dataList: resultList,
+              type: "result",
+              diagnostic_result: diagnosisResult.diagnostic_result,
             },
           });
           clearTimeout(timer);
@@ -230,10 +242,22 @@ function useHeadache({ state, curQuestion, setCurQuestion, selectedAnswer, setSe
         interests,
       });
 
+      let finalResult = {} as IResultCard;
+      if (resultList.results.likely) {
+        finalResult = resultList.results.likely[0];
+      } else if (resultList.results.suspicious) {
+        finalResult = resultList.results.suspicious[0];
+      } else if (resultList.results.predicted) {
+        finalResult = resultList.results.predicted[0];
+      }
+
+      const diagnosisResult = await HeadacheDiagnose.postResultDetail(finalResult.id);
+
       const timer = setTimeout(() => {
-        navigate("/diagnosis-list", {
+        navigate("/result", {
           state: {
-            dataList: resultList,
+            type: "result",
+            diagnostic_result: diagnosisResult.diagnostic_result,
           },
         });
         clearTimeout(timer);
