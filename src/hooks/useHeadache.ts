@@ -126,7 +126,6 @@ function useHeadache({ state, curQuestion, setCurQuestion, selectedAnswer, setSe
         const timer = setTimeout(() => {
           navigate("/result", {
             state: {
-              type: "result",
               diagnostic_result: diagnosisResult.diagnostic_result,
             },
           });
@@ -166,7 +165,7 @@ function useHeadache({ state, curQuestion, setCurQuestion, selectedAnswer, setSe
 
       const { type, questions, result } = await HeadacheDiagnose.postNextPrimaryHeadache(primaryAnswer);
       if (type === 2 && result) {
-        results.current.push(result);
+        results.current.push({ result_id: result.id, result: result.content });
 
         if (isFirstPrimaryQuestion.current) {
           // red flag sign -> 일차성 두통 질문으로 바로 이어진 경우 악화 요인 질문 후 로직 종료
@@ -256,7 +255,6 @@ function useHeadache({ state, curQuestion, setCurQuestion, selectedAnswer, setSe
       const timer = setTimeout(() => {
         navigate("/result", {
           state: {
-            type: "result",
             diagnostic_result: diagnosisResult.diagnostic_result,
           },
         });

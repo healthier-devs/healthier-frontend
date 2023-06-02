@@ -48,6 +48,15 @@ export interface ICaseQuestion {
   unknownEmergency?: number;
 }
 
+export interface ICaseQuestionPrimary {
+  type: number;
+  message: string;
+  questions: IHeadacheQuestion[];
+  result?: null | { id: number; content: string };
+  is_chronic?: number;
+  unknownEmergency?: number;
+}
+
 export interface IPrimaryAnswers {
   is_chronic: number;
   questions: IHeadacheAnswer[];

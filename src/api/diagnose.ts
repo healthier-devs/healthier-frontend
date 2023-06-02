@@ -12,6 +12,7 @@ import {
   IResultRequest,
   IHeadacheAnswers,
   IPrimaryHeadacheAnswer,
+  ICaseQuestionPrimary,
 } from "src/interfaces/headacheDiagnoseApi";
 
 const sleepDisorderInstance = axios.create({
@@ -47,7 +48,7 @@ export const HeadacheDiagnose = {
   getPrimaryHeadache: (): Promise<IHeadacheQuestions> => headacheRequests.get(`/headache/primary-headache`),
   getTensionHeadache: (): Promise<IHeadacheQuestions> => headacheRequests.get(`/headache/tension-headache`),
   postPrimaryHeadache: (body: IPrimaryAnswers): Promise<ICaseQuestion> => headacheRequests.post(`/headache/primary-headache`, body),
-  postNextPrimaryHeadache: (body: IPrimaryHeadacheAnswer): Promise<ICaseQuestion> =>
+  postNextPrimaryHeadache: (body: IPrimaryHeadacheAnswer): Promise<ICaseQuestionPrimary> =>
     headacheRequests.post(`/headache/primary-headache/next`, body),
   postFirstHeadacheQuestion: (body: IPainAreaRequest): Promise<IHeadacheQuestions> =>
     headacheRequests.post(`/headache/pain-area/first`, body),
@@ -55,5 +56,5 @@ export const HeadacheDiagnose = {
   getAdditionalQuestion: (): Promise<IHeadacheQuestions> => headacheRequests.get(`/headache/additional-factor`),
   postAdditionalQuestion: (body: IHeadacheAnswers): Promise<IResultResponse> => headacheRequests.post(`/headache/additional-factor`, body),
   postResult: (body: IResultRequest): Promise<IFinalResult> => headacheRequests.post(`/headache/result`, body),
-  postResultDetail: (id: number): Promise<IDiagnosisResult> => headacheRequests.get(`/results/${id}`),
+  postResultDetail: (id: number): Promise<IDiagnosisResult> => headacheRequests.get(`/headache/results/${id}`),
 };
