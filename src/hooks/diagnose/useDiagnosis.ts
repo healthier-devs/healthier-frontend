@@ -43,7 +43,7 @@ function useDiagnosis(state: TDiagnoseType) {
       return;
     }
 
-    answers.current.push({ question_id: curQuestion.id, answer_id: selectedAnswer.map((ans) => ans.answer_id) });
+    answers.current = [...answers.current, { question_id: curQuestion.id, answer_id: selectedAnswer.map((ans) => ans.answer_id) }];
 
     questionHistory.current = [...questionHistory.current, curQuestion];
 
@@ -74,7 +74,7 @@ function useDiagnosis(state: TDiagnoseType) {
 
     setCurQuestion(questionHistory.current[lastIdx]);
     questionHistory.current = questionHistory.current.slice(0, lastIdx);
-    answers.current.pop();
+    answers.current = answers.current.slice(0, answers.current.length - 1);
   };
 
   return { loading, curQuestion, handleNext, handleBack, selectedAnswer, setSelectedAnswer };
