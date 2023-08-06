@@ -24,9 +24,6 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build
-        run: CI='false' npm run build
-
       - name: Environment Setting
         run: |
           echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
@@ -36,6 +33,9 @@ jobs:
           echo "REACT_APP_MAP_STYLE=${{ secrets.REACT_APP_MAP_STYLE }}" >> .env
           echo "REACT_APP_GOOGLE_SEARCH_KEY=${{ secrets.REACT_APP_GOOGLE_SEARCH_KEY }}" >> .env
           cat .env
+
+      - name: Build
+        run: CI='false' npm run build
 
       - name: Deploy
         run: |
