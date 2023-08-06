@@ -24,18 +24,20 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Environment Setting
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }}" >> .env
+          echo "REACT_APP_MAP_ACCESS_TOKEN=${{ secrets.REACT_APP_MAP_ACCESS_TOKEN }}" >> .env
+          echo "REACT_APP_MAP_STYLE=${{ secrets.REACT_APP_MAP_STYLE }}" >> .env
+          echo "REACT_APP_GOOGLE_SEARCH_KEY=${{ secrets.REACT_APP_GOOGLE_SEARCH_KEY }}" >> .env
+          cat .env
+
       - name: Build
         run: CI='false' npm run build
 
       - name: Deploy
-        env:
-          CI: false
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_UR }}
-          REACT_APP_MAP_ACCESS_TOKEN: ${{ secrets.REACT_APP_MAP_ACCESS_TOKEN }}
-          REACT_APP_MAP_STYLE: ${{ secrets.REACT_APP_MAP_STYLE }}
-          REACT_APP_GOOGLE_SEARCH_KEY: ${{ secrets.REACT_APP_GOOGLE_SEARCH_KEY }}
         run: |
           aws s3 cp \
             --recursive \
