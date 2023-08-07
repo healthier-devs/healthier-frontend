@@ -128,7 +128,7 @@ const Search = ({
               .filter(
                 (hospital) =>
                   (selectedFilter.emergencyNight ? hospital.emergencyNight === "Y" : true) &&
-                  (selectedFilter.nightService ? hospital.nightService === "Y" : true),
+                  (selectedFilter.nightService ? hospital.nightService === "Y" : true)
               )
               .map((doctor, idx) => (
                 <SearchCard

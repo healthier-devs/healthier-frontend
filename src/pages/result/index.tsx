@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Loading from "src/components/loading";
 import imageUrl from "src/data/image_url";
@@ -14,6 +14,8 @@ import Pagination from "./pagination";
 import ResultHeader from "./resultHeader";
 import "swiper/css";
 
+const INITIAL_PAGE_COUNT = 5;
+
 const ResultPage = () => {
   const {
     state: { dx_id },
@@ -25,6 +27,17 @@ const ResultPage = () => {
 
   const [page, setPage] = useState<number>(1);
   const { resultData, isLoading } = useGetDDXResult(Number(dx_id));
+  const pageCount = useRef<number>(INITIAL_PAGE_COUNT);
+
+  useEffect(() => {
+    if (!resultData) {
+      return;
+    }
+
+    const { lifestyleHabits, medicines } = resultData;
+
+    pageCount.current = INITIAL_PAGE_COUNT - Number(!lifestyleHabits.length) - Number(!medicines.length);
+  }, [resultData]);
 
   return isLoading ? (
     <Loading
@@ -54,9 +67,11 @@ const ResultPage = () => {
               <SwiperSlide>
                 <DefinitionPage data={resultData} />
               </SwiperSlide>
-              <SwiperSlide>
-                <LifestylePage data={resultData} />
-              </SwiperSlide>
+              {resultData.lifestyleHabits.length > 0 && (
+                <SwiperSlide>
+                  <LifestylePage data={resultData} />
+                </SwiperSlide>
+              )}
               {resultData.medicines.length > 0 && (
                 <SwiperSlide>
                   <MedicinePage data={resultData} />
@@ -67,12 +82,7 @@ const ResultPage = () => {
               </SwiperSlide>
             </Swiper>
           </Styled.SwiperContainer>
-          <Pagination
-            page={page}
-            setPage={setPage}
-            count={resultData.medicines.length > 0 ? 5 : 4}
-            departments={resultData.medicalDepartments}
-          />
+          <Pagination page={page} setPage={setPage} count={pageCount.current} departments={resultData.medicalDepartments} />
         </>
       )}
     </Styled.Container>
