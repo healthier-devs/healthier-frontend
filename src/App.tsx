@@ -19,6 +19,7 @@ import {
   InformationQR,
   SymptomTypeQR,
   CompleteQR,
+  IndexQR,
 } from "./pages";
 import { useAppSelector } from "./state";
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/symptom-type" element={<SymptomTypePage />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/qr" element={<IndexQR />} />
             <Route path="/qr/info" element={<InformationQR />} />
             <Route path="/qr/symptom-type" element={<SymptomTypeQR />} />
             <Route path="/qr/complete" element={<CompleteQR />} />

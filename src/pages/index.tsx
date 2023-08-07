@@ -3,6 +3,7 @@ import CompleteQR from "./complete-qr";
 import Diagnosis from "./diagnosis";
 import DiagnosisList from "./diagnosisList";
 import Error from "./error";
+import IndexQR from "./index-qr";
 import InformationQR from "./info-qr";
 import Information from "./information";
 import MainPage from "./main";
@@ -30,4 +31,5 @@ export {
   InformationQR,
   SymptomTypeQR,
   CompleteQR,
+  IndexQR,
 };
