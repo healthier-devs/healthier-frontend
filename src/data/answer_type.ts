@@ -54,3 +54,48 @@ export const INITIAL_ANSWER = {
   answer_id: [],
   next_question: null,
 };
+
+export const SLIDER_BUTTON_ANSWERS = [
+  {
+    answer_id: "100",
+    answer: "경험해본 적이 없는\n극심한 통증",
+    next_question: null,
+  },
+  {
+    answer_id: "80",
+    answer: "일상생활이 불가한\n심한 통증",
+    next_question: null,
+  },
+  {
+    answer_id: "60",
+    answer: "일상생활에 상당한\n영향을 주는 통증",
+    next_question: null,
+  },
+  {
+    answer_id: "40",
+    answer: "일상생활에 영향이 있지만\n참을 만한 고통",
+    next_question: null,
+  },
+  {
+    answer_id: "20",
+    answer: "일상생활에는 문제가 없는\n경미한 고통",
+    next_question: null,
+  },
+  {
+    answer_id: "0",
+    answer: "통증이 거의 없음",
+    next_question: null,
+  },
+] as const;
+
+export const SLIDER_VALUES = {
+  DEFAULT: 2,
+  MINIMUM: 0,
+  MAXIMUM: 5,
+  STEP: 1,
+  LABELS: [100, 50, 0],
+} as const;
+
+export const SLIDER_DEFAULT_VALUE = 40;
+export const SLIDER_MIN_VALUE = 0;
+export const SLIDER_MAX_VALUE = 100;
