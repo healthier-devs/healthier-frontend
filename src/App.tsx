@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import {
   Diagnosis,
   MyDiagnosis,
@@ -44,6 +45,8 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useGoogleAnalytics();
 
   return (
     <Main>
