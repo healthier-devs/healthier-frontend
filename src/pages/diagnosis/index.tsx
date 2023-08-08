@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import NoteWithMagnifier from "src/assets/images/NoteWithMagnifier";
 import ContentHeader from "src/components/contentHeader";
 import Layout from "src/components/layout";
 import Loading from "src/components/loading";
-import imageUrl from "src/data/image_url";
 import useDiagnosis from "src/hooks/diagnose/useDiagnosis";
 import AnswerButtons from "./answerButtons";
 import * as Styled from "./index.style";
@@ -19,7 +19,7 @@ const Diagnosis = () => {
       {isLoading ? (
         <Loading
           titleTexts={[{ text: "본격적인\n증상 감별을 시작할게요", style: { fontWeight: 500 } }]}
-          illustration={<Styled.LoadingIcon loading="eager" alt="icon" src={imageUrl.diagnosis_loading} />}
+          illustration={<NoteWithMagnifier style={{ width: "77%" }} />}
         />
       ) : (
         <Layout>

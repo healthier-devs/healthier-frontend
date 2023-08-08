@@ -40,12 +40,6 @@ export const LoadingTitle = styled(Heading_3)`
   }
 `;
 
-export const LoadingIcon = styled.img`
-  width: 80%;
-  align-self: flex-end;
-  margin-top: 1.5rem;
-`;
-
 export const LoadingBottomText = styled.section`
   text-align: center;
 `;

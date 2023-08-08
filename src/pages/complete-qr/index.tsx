@@ -1,5 +1,5 @@
+import NoteWithMagnifier from "src/assets/images/NoteWithMagnifier";
 import Loading from "src/components/loading";
-import imageUrl from "src/data/image_url";
 
 function CompleteQR() {
   return (
@@ -16,9 +16,7 @@ function CompleteQR() {
         },
       ]}
       subTitle={"진료실&검사실로 안내해드릴 예정이니\n잠시만 대기해주세요"}
-      illustration={
-        <img alt="illustration" loading="eager" src={imageUrl.diagnosis_loading} style={{ alignSelf: "flex-end", width: "80%" }} />
-      }
+      illustration={<NoteWithMagnifier style={{ width: "77%" }} />}
     />
   );
 }
