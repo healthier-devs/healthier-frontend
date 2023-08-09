@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.nav`
   position: fixed;
   bottom: 0;
   height: 10.9rem;
-  width: calc(var(--vw, 1vw) * 100);
+  width: inherit;
 
   background-image: url("/images/main-tab.svg");
-  background-size: calc(var(--vw, 1vw) * 100);
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
 
@@ -21,6 +21,8 @@ export const ButtonContainer = styled.div<{ gap: number }>`
   align-items: center;
   gap: ${({ gap }) => gap}rem;
   width: 6.3rem;
+
+  cursor: pointer;
 `;
 
 export const Diagnose = styled.button`
