@@ -5,9 +5,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
+import { useAppDispatch } from "./state";
+import { clearHospitalId } from "./state/diagnoseSlice";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
+  const dispatch = useAppDispatch();
   const { reset } = useQueryErrorResetBoundary();
 
   useEffect(() => {
@@ -18,6 +21,10 @@ function App() {
       window.removeEventListener("resize", handleResizeWindow);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(clearHospitalId());
+  }, [dispatch]);
 
   useGoogleAnalytics();
 
