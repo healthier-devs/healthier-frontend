@@ -4,45 +4,18 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
-import {
-  Diagnosis,
-  MyDiagnosis,
-  Information,
-  MainPage,
-  ResultPage,
-  SymptomPage,
-  SymptomTypePage,
-  DiagnosisList,
-  SignUp,
-  Appointment,
-  Error,
-  Test,
-  InformationQR,
-  SymptomTypeQR,
-  CompleteQR,
-  IndexQR,
-} from "./pages";
-import { useAppSelector } from "./state";
-
-const handleResize = () => {
-  const screenRatio = 0.7;
-  const vh = window.innerHeight * 0.01;
-  const vw = Math.min(window.innerWidth * 0.01, vh * screenRatio);
-
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-  document.documentElement.style.setProperty("--vw", `${vw}px`);
-};
+import * as Pages from "./pages";
+import { handleResizeWindow } from "./utils/window";
 
 function App() {
-  const { authenticated } = useAppSelector((state) => state.auth);
   const { reset } = useQueryErrorResetBoundary();
 
   useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    handleResizeWindow();
+    window.addEventListener("resize", handleResizeWindow);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResizeWindow);
     };
   }, []);
 
@@ -51,22 +24,22 @@ function App() {
   return (
     <Main>
       <Container>
-        <ErrorBoundary FallbackComponent={Error} onReset={reset}>
+        <ErrorBoundary FallbackComponent={Pages.Error} onReset={reset}>
           <Routes>
-            <Route path="/" element={authenticated ? <MyDiagnosis /> : <MainPage />} />
-            <Route path="/info" element={<Information />} />
-            <Route path="/result-list" element={<DiagnosisList />} />
-            <Route path="/result" element={<ResultPage />} />
-            <Route path="/diagnosis" element={<Diagnosis />} />
-            <Route path="/symptom" element={<SymptomPage />} />
-            <Route path="/symptom-type" element={<SymptomTypePage />} />
-            <Route path="/appointment" element={<Appointment />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/qr" element={<IndexQR />} />
-            <Route path="/qr/info" element={<InformationQR />} />
-            <Route path="/qr/symptom-type" element={<SymptomTypeQR />} />
-            <Route path="/qr/complete" element={<CompleteQR />} />
-            <Route path="/test" element={<Test />} />
+            <Route path="/" element={<Pages.MainPage />} />
+            <Route path="/info" element={<Pages.Information />} />
+            <Route path="/result-list" element={<Pages.DiagnosisList />} />
+            <Route path="/result" element={<Pages.ResultPage />} />
+            <Route path="/diagnosis" element={<Pages.Diagnosis />} />
+            <Route path="/symptom" element={<Pages.SymptomPage />} />
+            <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
+            <Route path="/appointment" element={<Pages.Appointment />} />
+            <Route path="/signup" element={<Pages.SignUp />} />
+            <Route path="/qr" element={<Pages.IndexQR />} />
+            <Route path="/qr/info" element={<Pages.InformationQR />} />
+            <Route path="/qr/symptom-type" element={<Pages.SymptomTypeQR />} />
+            <Route path="/qr/complete" element={<Pages.CompleteQR />} />
+            <Route path="/test" element={<Pages.Test />} />
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Routes>
         </ErrorBoundary>
