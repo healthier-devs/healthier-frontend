@@ -8,7 +8,7 @@ export const Container = styled.button<{
   justify-content: center;
   align-items: center;
 
-  width: calc(var(--vw, 1vw) * 100 - 4rem);
+  width: 100%;
   height: 5.2rem;
 
   background: ${({ backgroundColor }) => backgroundColor};
