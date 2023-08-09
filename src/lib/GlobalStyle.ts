@@ -64,6 +64,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .click-enabler{
+        width: 100%;
         pointer-events: auto;
     }
 `;

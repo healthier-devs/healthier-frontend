@@ -59,14 +59,8 @@ export const NextButtonContainer = styled.div`
 
   position: fixed;
   bottom: 0;
-  padding-bottom: 3.4rem;
+  padding: 0rem 2rem 3.4rem 2rem;
 
   background: linear-gradient(180deg, rgba(38, 43, 85, 0) 0%, #262c56 78.13%, #282e5b 100%);
   pointer-events: none;
-
-  .click-enabler {
-    pointer-events: auto;
-    display: flex;
-    justify-content: center;
-  }
 `;
