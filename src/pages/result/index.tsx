@@ -34,9 +34,10 @@ const ResultPage = () => {
       return;
     }
 
-    const { lifestyleHabits, medicines } = resultData;
+    const { lifestyleHabits, medicines, examinationTreatments } = resultData;
 
-    pageCount.current = INITIAL_PAGE_COUNT - Number(!lifestyleHabits.length) - Number(!medicines.length);
+    pageCount.current =
+      INITIAL_PAGE_COUNT - Number(!lifestyleHabits.length) - Number(!medicines.length) - Number(!examinationTreatments.length);
   }, [resultData]);
 
   return isLoading ? (
@@ -77,9 +78,11 @@ const ResultPage = () => {
                   <MedicinePage data={resultData} />
                 </SwiperSlide>
               )}
-              <SwiperSlide>
-                <ExaminationTreatmentPage data={resultData} />
-              </SwiperSlide>
+              {resultData.examinationTreatments.length > 0 && (
+                <SwiperSlide>
+                  <ExaminationTreatmentPage data={resultData} />
+                </SwiperSlide>
+              )}
             </Swiper>
           </Styled.SwiperContainer>
           <Pagination page={page} setPage={setPage} count={pageCount.current} departments={resultData.medicalDepartments} />
