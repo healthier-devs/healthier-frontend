@@ -22,24 +22,28 @@ const Diagnosis = () => {
           illustration={<NoteWithMagnifier style={{ width: "77%" }} />}
         />
       ) : (
-        <Layout>
+        <>
           <ContentHeader back={true} backCallback={handleBack} exit={true} exitCallback={() => navigate("/")} label="감별 진단" />
+          <Layout>
+            <Styled.Container>
+              <Styled.TitleContainer>
+                <Styled.Question>
+                  {curQuestion.question.split("\\n").map((text: string, idx: number) => (
+                    <div key={idx}>{text}</div>
+                  ))}
+                </Styled.Question>
+                {curQuestion.sub_content && <Styled.SubContent>{curQuestion.sub_content}</Styled.SubContent>}
+              </Styled.TitleContainer>
 
-          <Styled.Container>
-            <Styled.Question>
-              {curQuestion.question.split("\\n").map((text: string, idx: number) => (
-                <div key={idx}>{text}</div>
-              ))}
-            </Styled.Question>
-            {curQuestion.sub_content && <Styled.SubContent>{curQuestion.sub_content}</Styled.SubContent>}
-            <AnswerButtons
-              question={curQuestion}
-              selectedAnswer={selectedAnswer}
-              setSelectedAnswer={setSelectedAnswer}
-              handleNext={handleNext}
-            />
-          </Styled.Container>
-        </Layout>
+              <AnswerButtons
+                question={curQuestion}
+                selectedAnswer={selectedAnswer}
+                setSelectedAnswer={setSelectedAnswer}
+                handleNext={handleNext}
+              />
+            </Styled.Container>
+          </Layout>
+        </>
       )}
     </>
   );

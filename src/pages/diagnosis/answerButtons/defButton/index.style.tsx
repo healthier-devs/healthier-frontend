@@ -1,7 +1,7 @@
 import { Body_1 } from "src/lib/fontStyle";
 import styled from "styled-components";
 
-export const AnswersContainer = styled.section<{ ansCount: number }>`
+export const AnswersContainer = styled.div<{ ansCount: number }>`
   width: 100%;
 
   display: flex;
@@ -9,10 +9,13 @@ export const AnswersContainer = styled.section<{ ansCount: number }>`
   align-items: center;
 
   margin-top: ${({ ansCount }) => (ansCount === 2 ? 13.4 : ansCount === 3 ? 10.2 : 7)}rem;
+
+  padding: 0 2rem;
+  box-sizing: border-box;
 `;
 
-export const ButtonBox = styled.section<{ selected: boolean }>`
-  width: calc(var(--vw, 1vw) * 100 - 4rem);
+export const ButtonBox = styled.div<{ selected: boolean }>`
+  width: 100%;
 
   & + & {
     margin-top: 1.2rem;
@@ -22,6 +25,7 @@ export const ButtonBox = styled.section<{ selected: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
     padding: ${({ selected }) => (selected ? "1.4rem 2.3rem" : "1.3rem 2.3rem")};
 

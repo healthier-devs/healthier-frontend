@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NextButtonContainer = styled.section`
+export const NextButtonContainer = styled.div`
   width: calc(var(--vw, 1vw) * 100);
 
   display: flex;
@@ -10,8 +10,8 @@ export const NextButtonContainer = styled.section`
   position: fixed;
   bottom: 0;
 
-  padding-bottom: 3rem;
-  padding-top: 6rem;
+  padding: 6rem 2rem 3rem 2rem;
+  box-sizing: border-box;
 
   background: linear-gradient(180deg, rgba(31, 37, 79, 0) 0%, #23284b 100%);
   pointer-events: none;
