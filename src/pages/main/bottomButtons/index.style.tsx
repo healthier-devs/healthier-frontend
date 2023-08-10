@@ -15,17 +15,20 @@ export const Container = styled.nav`
   justify-content: space-evenly;
 `;
 
-export const ButtonContainer = styled.div<{ gap: number }>`
+export const ButtonContainer = styled.button<{ gap: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: ${({ gap }) => gap}rem;
   width: 6.3rem;
 
+  box-sizing: content-box;
+
+  background: none;
   cursor: pointer;
 `;
 
-export const Diagnose = styled.button`
+export const Diagnose = styled.div`
   border-radius: 6rem;
   width: 5.8rem;
   height: 5.8rem;
@@ -40,7 +43,9 @@ export const Diagnose = styled.button`
 export const ButtonText = styled.p`
   font-size: 1.1rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200;
   line-height: 140%;
   letter-spacing: -0.035px;
+
+  color: ${({ theme }) => theme.color.grey_400};
 `;
