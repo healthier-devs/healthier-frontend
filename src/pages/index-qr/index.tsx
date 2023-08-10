@@ -26,7 +26,7 @@ function IndexQR() {
         subTitle={"더 정확하고 자세한 진료를 위해\n다음 문진을 진행해주세요."}
         illustration={<NoteWithMagnifier style={{ width: "77%" }} />}
       />
-      <div style={{ position: "fixed", bottom: 0, padding: "0 2rem 3.4rem 2rem" }}>
+      <div style={{ position: "fixed", bottom: 0, padding: "0 2rem 3.4rem 2rem", width: "inherit", boxSizing: "border-box" }}>
         <RoundButton onClick={handleClickNextButton}>문진 시작하기</RoundButton>
       </div>
     </>

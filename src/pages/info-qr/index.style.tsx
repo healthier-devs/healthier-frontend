@@ -36,6 +36,7 @@ export const NextButtonContainer = styled.div`
   position: fixed;
   bottom: 0;
 
-  width: 100%;
+  width: calc(var(--vw) * 100);
+  box-sizing: border-box;
   padding: 0 2rem 3.4rem 2rem;
 `;

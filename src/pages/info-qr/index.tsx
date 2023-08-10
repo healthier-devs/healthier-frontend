@@ -75,10 +75,10 @@ function InformationQR() {
   return (
     <>
       <ContentHeader back={false} exit={false} label="정보 수집" />
-      <Layout padding="0 0 12rem 0" style={{ height: "(var(--vh, 1vh) * 100)" }}>
-        <section style={{ padding: "0 2.4rem" }}>
+      <Layout padding="5.6rem 0 12rem 0">
+        <div style={{ padding: "0 2.4rem" }}>
           <Title>{"환자분의 기본정보를\n입력해주세요"}</Title>
-        </section>
+        </div>
 
         <Styled.InputsContainer>
           <TextFieldOutlined
