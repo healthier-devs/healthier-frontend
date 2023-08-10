@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const FilterContainer = styled.div`
@@ -64,7 +65,7 @@ export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
 `;
 
 export const BackButton = styled.div`
-  position: fixed;
+  position: absolute;
   left: 1.6rem;
   top: 4.8rem;
 
