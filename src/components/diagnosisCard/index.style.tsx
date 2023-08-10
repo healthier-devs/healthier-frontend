@@ -2,14 +2,13 @@ import { Heading_5 } from "src/lib/fontStyle";
 import styled from "styled-components";
 import type { TSeverity } from "src/interfaces/diagnoseApi/diagnosis";
 
-export const Container = styled.section<{ severity: TSeverity; isSquare: boolean }>`
+export const Container = styled.section<{ severity: TSeverity; isSquare: boolean; imgsrc: string }>`
   position: relative;
   width: 100%;
-  height: ${({ isSquare }) => (isSquare ? "calc(var(--vw, 1vw) * 100 - 4.8rem)" : "16rem")};
-
+  //height: ${({ isSquare }) => (isSquare ? "calc(var(--vw, 1vw) * 100 - 4.8rem)" : "16rem")};
+  padding-top: ${({ isSquare }) => (isSquare ? "100%" : "50%")};
   background: ${({ theme, severity }) => (severity === 1 ? theme.color.blue_300 : severity === 2 ? theme.color.blue_500 : "#2745A9")};
   background-size: cover;
-
   border-radius: 0.8rem;
 
   cursor: pointer;
@@ -17,12 +16,25 @@ export const Container = styled.section<{ severity: TSeverity; isSquare: boolean
   & + & {
     margin-top: 1rem;
   }
+
+  ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: ${({ imgsrc }) => `url(${imgsrc})`};
+    border-radius: 0.8rem;
+    background-size: cover;
+  }
 `;
 
-export const Box = styled.section<{ isDate: Date | null }>`
-  position: relative;
+export const Box = styled.div<{ isDate: Date | null }>`
+  position: absolute;
+  bottom: 0;
 
-  height: 100%;
   box-sizing: border-box;
   padding: 2rem 1.8rem;
 
@@ -46,18 +58,7 @@ export const Title = styled(Heading_5)<{ severity: TSeverity }>`
   font-weight: 300;
 `;
 
-export const DateItem = styled.section<{ severity: number }>`
-  font-size: 1.3rem;
-  font-weight: 200;
-  line-height: 130%;
-  letter-spacing: -0.05rem;
-
-  color: ${({ theme, severity }) => (severity === 3 ? theme.color.blue_700 : theme.color.sub_blue)};
-
-  margin-top: 0.4rem;
-`;
-
-export const Chip = styled.section<{ severity: TSeverity }>`
+export const Chip = styled.div<{ severity: TSeverity }>`
   background-color: ${({ theme, severity }) =>
     severity === 1 ? theme.color.blue : severity === 2 ? theme.color.blue_700 : theme.color.sub_blue};
   color: ${({ theme, severity }) => (severity === 3 ? theme.color.blue : theme.color.grey_100)};
@@ -69,21 +70,6 @@ export const Chip = styled.section<{ severity: TSeverity }>`
 
   padding: 0.6rem 1rem;
   border-radius: 3rem;
-`;
-
-export const IllustrationWrapper = styled.section`
-  position: absolute;
-  right: 0;
-  height: 100%;
-  width: 100%;
-`;
-
-export const Illustration = styled.img<{ isSquare: boolean }>`
-  border-radius: 0.8rem;
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
 `;
 
 export const IllustrationShadow = styled.div`

@@ -6,6 +6,8 @@ export const Title = styled(Heading_3)<{ padding: string }>`
 
   padding: ${({ padding }) => padding};
 
+  white-space: pre-line;
+
   .highlight {
     color: ${({ theme }) => theme.color.green};
   }
