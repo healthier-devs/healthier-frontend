@@ -15,7 +15,7 @@ export const Description = styled(Body_3)`
   margin-top: 0.6rem;
 `;
 
-export const TitleWrapper = styled.section`
+export const TitleWrapper = styled.div`
   margin-top: 2rem;
 `;
 

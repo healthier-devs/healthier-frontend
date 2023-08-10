@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   z-index: 4;
 
   display: flex;
@@ -19,14 +19,14 @@ export const Container = styled.section`
   }
 `;
 
-export const Text = styled.section<{ type: number; severity: number }>`
+export const Text = styled.div<{ type: number; severity: number }>`
   color: ${({ theme, type, severity }) =>
     type !== severity ? theme.color.grey_400 : type === 3 ? theme.color.red : type === 2 ? "#8A5FD0" : theme.color.blue};
   font-weight: ${({ type, severity }) => type === severity && 200};
   text-align: center;
 `;
 
-export const SeverityBackground = styled.section<{ severity: number }>`
+export const SeverityBackground = styled.div<{ severity: number }>`
   margin-top: 1rem;
 
   background: rgba(84, 100, 242, 0.33);

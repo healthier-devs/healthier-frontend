@@ -18,6 +18,6 @@ export const Title = styled(Heading_2)`
   white-space: pre-line;
 `;
 
-export const RootContainer = styled.div`
+export const RootContainer = styled.section`
   padding-bottom: 10.6rem;
 `;

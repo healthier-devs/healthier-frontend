@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header<{ isCover: boolean }>`
   position: fixed;
 
   height: 5.6rem;
-  width: calc(var(--vw, 1vw) * 100);
+  width: inherit;
   letter-spacing: 0.015rem;
 
   border-bottom: ${({ isCover, theme }) => !isCover && `0.05rem solid ${theme.color.grey_800}`};
@@ -14,7 +14,7 @@ export const HeaderContainer = styled.header<{ isCover: boolean }>`
   background-color: ${({ isCover, theme }) => (isCover ? "transparent" : theme.color.grey_900)};
 `;
 
-export const Container = styled.section`
+export const Container = styled.div`
   height: inherit;
 
   display: flex;
@@ -41,7 +41,7 @@ export const Container = styled.section`
   }
 `;
 
-export const Title = styled.section<{ isCover: boolean }>`
+export const Title = styled.span<{ isCover: boolean }>`
   color: ${({ theme }) => theme.color.grey_200};
   font-size: 1.6rem;
   font-weight: 200;

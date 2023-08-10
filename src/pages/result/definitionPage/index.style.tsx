@@ -8,7 +8,7 @@ export const Container = styled(RootContainer)`
   padding-right: 2.4rem;
 `;
 
-export const DescriptionBox = styled.section<{ top: number; bottom: number }>`
+export const DescriptionBox = styled.div<{ top: number; bottom: number }>`
   margin-top: ${({ top }) => top}rem;
   margin-bottom: ${({ bottom }) => bottom}rem;
 `;

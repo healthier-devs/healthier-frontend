@@ -9,15 +9,24 @@ export const Container = styled(RootContainer)`
   }
 `;
 
-export const MainImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+export const MainImg = styled.div<{ imgsrc: string }>`
+  position: relative;
 
-export const MainImgWrapper = styled.div`
   background: ${({ theme }) => theme.color.grey_700};
-  height: calc(var(--vw, 1vw) * 100);
-  height: calc(var(--vw, 1vw) * 100);
+  width: 100%;
+  padding-top: 100%;
+
+  ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${({ imgsrc }) => imgsrc});
+    background-size: cover;
+  }
 `;
 
 export const SeverityBarWrapper = styled.section`

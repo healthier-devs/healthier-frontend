@@ -1,15 +1,18 @@
 import theme from "src/lib/theme";
 import styled from "styled-components";
 
-export const RootContainer = styled.section`
+export const RootContainer = styled.div`
   position: fixed;
   bottom: 0;
-  width: calc(var(--vw, 1vw) * 100);
+  width: calc(var(--vw) * 100);
 
-  padding: 4rem 0;
+  padding: 4rem 2.4rem;
+
+  box-sizing: border-box;
 
   display: flex;
   justify-content: center;
+  background: transparent;
 
   z-index: 5;
 `;

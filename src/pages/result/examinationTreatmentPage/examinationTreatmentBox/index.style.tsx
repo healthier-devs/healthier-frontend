@@ -1,7 +1,7 @@
 import { Heading_5 } from "src/lib/fontStyle";
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   background-color: ${({ theme }) => theme.color.grey_800};
   border-radius: 0.8rem;
 
@@ -14,13 +14,13 @@ export const Container = styled.section`
   }
 `;
 
-export const TitleContainer = styled.section`
+export const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const TitleWrapper = styled.section`
+export const TitleWrapper = styled.div`
   display: flex;
 
   gap: 1rem;

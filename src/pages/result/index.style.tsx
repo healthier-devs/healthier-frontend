@@ -1,27 +1,8 @@
-import { Heading_3, Body_2 } from "src/lib/fontStyle";
+import { Body_2 } from "src/lib/fontStyle";
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: calc(var(--vw, 1vw) * 100);
-  height: calc(var(--vh, 1vh) * 100);
-`;
-
-export const LoadingTitle = styled(Heading_3)`
-  font-weight: 200;
-  text-align: center;
-  word-break: keep-all;
-  color: ${({ theme }) => theme.color.grey_200};
-
-  .highlight {
-    font-weight: 500;
-  }
-`;
-
-export const LoadingImage = styled.img`
-  width: 80%;
-  margin-top: 1.5rem;
-
-  align-self: flex-end;
+export const Container = styled.main`
+  width: 100%;
 `;
 
 export const BottomTextsContainer = styled.div`
