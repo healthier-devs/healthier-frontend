@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <meta name="viewport" content="initial-scale=1.0 minimum-scale=1.0, width=device-width" />
+    <meta name="viewport" content="initial-scale=1.0 minimum-scale=1.0, width=device-width, maximum-scale=1.0 user-scalable=0" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -66,6 +66,13 @@
           url("fonts/SpoqaHanSansNeo-Light.woff2") format("woff2"), url("fonts/SpoqaHanSansNeo-Light.woff") format("woff"),
           url("fonts/SpoqaHanSansNeo-Light.ttf") format("truetype");
       }
+      #root {
+        height: calc(var(--vh, 1vh) * 100);
+        overflow-x: hidden;
+      }
+      #root::-webkit-scrollbar {
+        display: none !important;
+      }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -82,7 +89,6 @@
     <meta name="google-site-verification" content="%REACT_APP_GOOGLE_SEARCH_KEY%" />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
   <!-- Google Tag Manager (noscript) -->

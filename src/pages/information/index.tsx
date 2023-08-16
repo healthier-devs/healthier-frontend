@@ -55,17 +55,19 @@ const Information = () => {
         <>
           <ContentHeader back={false} exit={true} exitCallback={() => navigate("/")} label="정보 수집" />
 
-          <Layout padding="0 2.4rem 12rem 2.4rem" style={{ height: "(var(--vh, 1vh) * 100)" }}>
-            <Title>
-              잠깐! <br />더 나은 감별 서비스를 위해
-              <br /> 간단한 정보가 필요해요
-            </Title>
-            <YearPicker year={year} setYear={setYear} />
-            <Gender gender={gender} setGender={setGender} />
-            <Tags interests={interests} setInterests={setInterests} />
-            <Agreement agree={agree} setAgree={setAgree} setAgreementDetail={setAgreementDetail} />
-            <ButtonBackground>
-              <section className="button-box" onClick={handleProceed}>
+          <Layout>
+            <section style={{ padding: "0 2.4rem 12rem 2.4rem" }}>
+              <Title>
+                잠깐! <br />더 나은 감별 서비스를 위해
+                <br /> 간단한 정보가 필요해요
+              </Title>
+              <YearPicker year={year} setYear={setYear} />
+              <Gender gender={gender} setGender={setGender} />
+              <Tags interests={interests} setInterests={setInterests} />
+              <Agreement agree={agree} setAgree={setAgree} setAgreementDetail={setAgreementDetail} />
+            </section>
+            <ButtonBackground className="button-box" onClick={handleProceed}>
+              <div className="click-enabler">
                 <RoundButton
                   outline="none"
                   backgroundColor={active ? theme.color.blue : theme.color.grey_750}
@@ -73,7 +75,7 @@ const Information = () => {
                 >
                   증상 감별하러 가기
                 </RoundButton>
-              </section>
+              </div>
             </ButtonBackground>
           </Layout>
         </>

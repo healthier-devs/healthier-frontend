@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import Dropdown from "src/components/dropdown";
@@ -8,10 +7,10 @@ import RoundButton from "src/components/roundButton";
 import TextFieldOutlined from "src/components/textFieldOutlined";
 import { Label } from "src/components/textFieldOutlined/index.style";
 import { MONTH_TO_DATES, MONTHS } from "src/data/dates";
+import useHospitalId from "src/hooks/useHospitalId";
 import { IInformation } from "src/interfaces/informationQRPage";
 import theme from "src/lib/theme";
 import { useAppDispatch } from "src/state";
-import { setHospitalId } from "src/state/diagnoseSlice";
 import { setQRInformation } from "src/state/userSlice";
 import { makeYears } from "src/utils/inputUtils";
 import { Title } from "../information/index.style";
@@ -22,7 +21,6 @@ const TEXTFIELD_STYLE: React.CSSProperties = { textAlign: "start", fontSize: "1.
 const YEARS = makeYears();
 
 function InformationQR() {
-  const [searchParams] = useSearchParams();
   const [information, setInformation] = useState<IInformation>({
     name: "",
     birth: {
@@ -36,13 +34,7 @@ function InformationQR() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const hospitalId = searchParams.get("hospitalId");
-
-  useEffect(() => {
-    if (!hospitalId) {
-      navigate("/");
-    }
-  }, [hospitalId, navigate]);
+  useHospitalId();
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInformation({ ...information, name: e.target.value });
@@ -66,7 +58,6 @@ function InformationQR() {
     }
 
     dispatch(setQRInformation(information));
-    dispatch(setHospitalId({ hospitalId: hospitalId ?? "" }));
 
     navigate("/qr/symptom-type", { state: "info" });
   };
@@ -84,10 +75,10 @@ function InformationQR() {
   return (
     <>
       <ContentHeader back={false} exit={false} label="정보 수집" />
-      <Layout padding="0 0 12rem 0" style={{ height: "(var(--vh, 1vh) * 100)" }}>
-        <section style={{ padding: "0 2.4rem" }}>
+      <Layout padding="5.6rem 0 12rem 0">
+        <div style={{ padding: "0 2.4rem" }}>
           <Title>{"환자분의 기본정보를\n입력해주세요"}</Title>
-        </section>
+        </div>
 
         <Styled.InputsContainer>
           <TextFieldOutlined

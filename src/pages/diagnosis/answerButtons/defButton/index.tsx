@@ -78,9 +78,9 @@ const DefButton = ({
         {answers.length !== 0 &&
           answers.map((ans, idx) => (
             <ButtonBox key={idx} onClick={() => handleClickAnswer(ans.answer_id, ans.next_question)} selected={handleActive(ans.answer_id)}>
-              <section className="button">
+              <button className="button">
                 <ButtonText>{ans.answer}</ButtonText>
-              </section>
+              </button>
             </ButtonBox>
           ))}
       </AnswersContainer>

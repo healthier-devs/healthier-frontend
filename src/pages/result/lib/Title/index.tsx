@@ -7,11 +7,11 @@ interface ITitleProps {
 
 function Title({ text, style, subTitle }: ITitleProps) {
   return (
-    <section style={style}>
+    <div style={style}>
       <Styled.Separator />
       <Styled.Title marginBottom={subTitle ? "0.6rem" : "2rem"}>{text}</Styled.Title>
       {subTitle && <Styled.SubTitle>{subTitle}</Styled.SubTitle>}
-    </section>
+    </div>
   );
 }
 

@@ -17,3 +17,5 @@ export interface IBodyPartStyle {
   textFill: string;
   stroke: boolean;
 }
+
+export type TImage = React.HTMLAttributes<HTMLImageElement>;

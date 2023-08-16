@@ -23,50 +23,13 @@ export const Question = styled(Heading_3)`
 
   color: ${({ theme }) => theme.color.grey_200};
 
-  margin-top: 7rem;
-  padding: 0 5rem;
+  padding: 0 3rem;
 
   white-space: pre-line;
 `;
 
-export const LoadingTitle = styled(Heading_3)`
-  font-weight: 200;
-  text-align: center;
-  word-break: keep-all;
-  color: ${({ theme }) => theme.color.grey_200};
-
-  .highlight {
-    font-weight: 500;
-  }
-`;
-
-export const LoadingIcon = styled.img`
-  width: 80%;
-  align-self: flex-end;
-  margin-top: 1.5rem;
-`;
-
-export const LoadingBottomText = styled.section`
-  text-align: center;
-`;
-
-export const Tips = styled(Body_3)`
-  font-weight: 200;
-  letter-spacing: -0.05rem;
-
-  color: ${({ theme }) => theme.color.grey_300};
-`;
-
-export const Description = styled(Body_1)`
-  margin-top: 0.8rem;
-  width: 17.2rem;
-
-  color: ${({ theme }) => theme.color.grey_400};
-`;
-
 export const SubContent = styled.p`
-  margin-top: 0.6rem;
-  padding: 0 4rem;
+  padding: 0 2rem;
 
   font-size: 1.6rem;
   line-height: 140%;
@@ -80,4 +43,16 @@ export const SubContent = styled.p`
   & span {
     color: ${({ theme }) => theme.color.blue_500};
   }
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  margin-top: 7rem;
+
+  gap: 0.6rem;
 `;

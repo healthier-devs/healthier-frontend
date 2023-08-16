@@ -31,6 +31,10 @@ function ToothImgButton({ setSelectedAnswer, handleClickNextButton, isNextButton
       ImageMap("img[usemap]");
     }, 500);
 
+    [ToothBottom, ToothBottomLeft, ToothBottomRight, ToothDefault, ToothTop, ToothTopLeft, ToothTopRight].forEach((image) => {
+      new Image().src = image;
+    });
+
     return () => clearTimeout(timerId);
   }, []);
 

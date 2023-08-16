@@ -1,4 +1,3 @@
-import { number, string } from "prop-types";
 import { Body_2 } from "src/lib/fontStyle";
 import styled from "styled-components";
 
@@ -19,6 +18,9 @@ export const Container = styled.div`
 `;
 
 export const Flex = styled.div<{ gap?: number; direction?: string; align?: string; justify?: string }>`
+  width: 100%;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: ${({ direction }) => direction ?? "row"};
   gap: ${({ gap }) => gap ?? 0}rem;
@@ -144,7 +146,7 @@ export const Table = styled.table`
   }
 `;
 
-export const EditButton = styled.div`
+export const EditButton = styled.button`
   cursor: pointer;
 
   border-radius: 0.8rem;

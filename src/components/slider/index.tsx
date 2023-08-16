@@ -1,3 +1,4 @@
+import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { SliderContainer, SliderNumberLabel, SliderLabelText, SliderInputContainer, SliderTrack, SliderInput } from "./index.style";
@@ -16,7 +17,7 @@ interface ISliderProps {
 
 const SLIDER_NUMBER_LABELS = [100, 50, 0];
 
-function Slider({ min, max, defaultValue, labels, handleChangeAnswer, isLabelActive }: ISliderProps) {
+function Slider2({ min, max, defaultValue, labels, handleChangeAnswer, isLabelActive }: ISliderProps) {
   const [sliderValue, setSliderValue] = useState<number>(defaultValue);
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,4 +50,4 @@ function Slider({ min, max, defaultValue, labels, handleChangeAnswer, isLabelAct
   );
 }
 
-export default Slider;
+export default Slider2;

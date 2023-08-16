@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   padding-top: 5.6rem;
   padding-bottom: 13rem;
   margin: 0 2.4rem;

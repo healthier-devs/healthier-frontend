@@ -12,9 +12,7 @@ const CoverPage = ({ data }: ICoverPageProps) => {
 
   return (
     <Styled.Container>
-      <Styled.MainImgWrapper>
-        <Styled.MainImg src={(mainImg ?? "") + severity + ".png"} alt="main-img" loading="eager" />
-      </Styled.MainImgWrapper>
+      <Styled.MainImg imgsrc={(mainImg ?? "") + severity + ".png"} />
 
       <Styled.ContentsContainer>
         <Styled.TypicalSymptom>{typicalSymptom}</Styled.TypicalSymptom>

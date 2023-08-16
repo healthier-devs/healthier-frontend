@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import { Body_4 } from "src/lib/fontStyle";
+import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   margin-top: 3.2rem;
 
   .gender-container {

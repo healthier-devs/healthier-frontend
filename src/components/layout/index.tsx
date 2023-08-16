@@ -6,7 +6,7 @@ interface TLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-function Layout({ padding = "0", children, ...props }: TLayoutProps) {
+function Layout({ padding, children, ...props }: TLayoutProps) {
   return (
     <Container padding={padding} {...props}>
       {children}

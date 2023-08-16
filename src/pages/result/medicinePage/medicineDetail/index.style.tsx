@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Contents = styled.section`
+export const Contents = styled.div`
   margin-top: 2.2rem;
 
   .sub-title {

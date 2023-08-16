@@ -20,6 +20,7 @@ export const Input = styled.input`
   border: none;
   outline: none;
   border-bottom: 1px solid ${({ theme }) => theme.color.grey_600};
+  border-radius: 0;
 
   &:focus {
     border-bottom: 1px solid #5464f2;
