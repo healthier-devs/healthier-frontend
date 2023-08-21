@@ -63,42 +63,42 @@ function ToothImgButton({ setSelectedAnswer, handleClickNextButton, isNextButton
         <area
           id="ToothPartButton_top"
           href=""
-          coords="182,188,228,232,298,190,403,233,449,188,364,126,267,124"
+          coords="271,243,343,293,398,247,447,231,532,242,586,285,602,299,664,237,592,164,516,129,410,135,331,174"
           shape="poly"
           onClick={handleClickToothPartButton}
         />
         <area
           href=""
-          id="ToothPartButton_top-left"
-          coords="403,237,464,202,498,253,530,330,544,424,547,483,468,483,466,417,428,278"
-          shape="poly"
-          onClick={handleClickToothPartButton}
-        />
-        <area
-          id="ToothPartButton_bottom-left"
-          href=""
-          coords="463,494,549,496,538,589,521,672,484,723,437,770,394,733,430,679,460,617"
-          shape="poly"
-          onClick={handleClickToothPartButton}
-        />
-        <area
-          id="ToothPartButton_bottom"
-          href=""
-          coords="385,736,423,777,334,830,247,806,209,772,246,740,289,760,325,768,360,752"
+          id="ToothPartButton_top-right"
+          coords="668,241,601,304,627,357,658,402,682,468,701,557,698,632,703,673,819,669,801,450,731,309"
           shape="poly"
           onClick={handleClickToothPartButton}
         />
         <area
           id="ToothPartButton_bottom-right"
           href=""
-          coords="86,495,92,598,127,704,195,770,241,731,208,694,178,629,165,579,165,529,163,488"
+          coords="695,688,813,689,801,855,777,943,728,1016,647,1104,580,1050,647,956,691,824"
           shape="poly"
           onClick={handleClickToothPartButton}
         />
         <area
-          id="ToothPartButton_top-right"
+          id="ToothPartButton_bottom"
           href=""
-          coords="78,477,87,385,107,309,137,261,178,198,228,238,185,320,178,345,164,404,163,453,155,482"
+          coords="357,1049,453,1102,523,1085,576,1053,619,1090,618,1115,528,1181,420,1177,364,1148,314,1104"
+          shape="poly"
+          onClick={handleClickToothPartButton}
+        />
+        <area
+          id="ToothPartButton_bottom-left"
+          href=""
+          coords="135,683,249,689,248,819,291,963,355,1045,297,1118,215,1025,155,926,127,753"
+          shape="poly"
+          onClick={handleClickToothPartButton}
+        />
+        <area
+          id="ToothPartButton_top-left"
+          href=""
+          coords="262,248,339,298,283,398,238,555,244,644,238,670,119,672,133,505,159,416,195,342"
           shape="poly"
           onClick={handleClickToothPartButton}
         />
