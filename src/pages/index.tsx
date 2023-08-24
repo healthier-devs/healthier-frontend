@@ -1,4 +1,5 @@
 import Appointment from "./appointment";
+import ChallengeDetail from "./challenge-detail";
 import CompleteQR from "./complete-qr";
 import Diagnosis from "./diagnosis";
 import DiagnosisList from "./diagnosisList";
@@ -32,4 +33,5 @@ export {
   SymptomTypeQR,
   CompleteQR,
   IndexQR,
+  ChallengeDetail,
 };

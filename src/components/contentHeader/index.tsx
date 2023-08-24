@@ -1,5 +1,5 @@
-import HeaderContainer from "../headerContainer";
-import { Container, BackButton, ExitButton } from "./index.style";
+import { useNavigate } from "react-router-dom";
+import { RootContainer, Container, BackButton, ExitButton } from "./index.style";
 
 export interface IContentHeader {
   label?: string;
@@ -7,13 +7,16 @@ export interface IContentHeader {
   exit: boolean;
   backCallback?: () => void;
   exitCallback?: () => void;
+  borderBottom?: boolean;
 }
 
-const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback }: IContentHeader) => {
+const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback, borderBottom = true }: IContentHeader) => {
+  const navigate = useNavigate();
+
   return (
-    <HeaderContainer>
+    <RootContainer borderBottom={borderBottom}>
       <Container>
-        <BackButton visible={back} onClick={() => backCallback && backCallback()}>
+        <BackButton visible={back} onClick={() => (backCallback ? backCallback() : navigate(-1))}>
           {back && <img alt="back" src="/images/header/back.svg" width={32} height={32} />}
         </BackButton>
         <section className="title">{label}</section>
@@ -21,7 +24,7 @@ const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback }: I
           {exit && <img alt="exit" src="/images/header/exit.svg" width={32} height={32} />}
         </ExitButton>
       </Container>
-    </HeaderContainer>
+    </RootContainer>
   );
 };
 
