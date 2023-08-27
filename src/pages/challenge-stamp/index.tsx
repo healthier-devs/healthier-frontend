@@ -86,11 +86,12 @@ const mockStamps = [
   },
 ];
 
-const renderStamp = (stamps: any, rowIdx: number) => {
+const renderStamp = (stamps: any, rowIdx: number, isLast: boolean) => {
   const stampArr = [
     ...stamps.map((stamp: any, dayIdx: number) => {
+      /* TODO: key 수정 필요 */
       return (
-        <Styled.Stamp key={rowIdx * 3 + dayIdx}>
+        <Styled.Stamp key={stamp.dayCnt}>
           {stamp.status === "SUCCESS" ? (
             <>
               <img alt="success stamp" src="/images/stamp/success.png" width={86} height={86} />
@@ -145,25 +146,29 @@ const renderStamp = (stamps: any, rowIdx: number) => {
       return [val];
     }
 
-    return [...acc, <Styled.StampLine key={idx} />, val];
+    return [...acc, <Styled.StampLine key={rowIdx * 3 + idx} />, val];
   }, []);
 
   if (stampArr.length === 3) {
     dottedStampArr = [
       ...dottedStampArr,
-      <Styled.StampLine key={rowIdx + 1} position={(rowIdx / 3) % 2 === 0 ? "right-end" : "left-end"} />,
+      <Styled.StampLine
+        key={rowIdx * 3 + 3}
+        position={(rowIdx / 3) % 2 === 0 ? "right-end" : "left-end"}
+        style={{ opacity: isLast ? 0 : 1 }}
+      />,
     ];
   }
 
   if (isAdded) {
     dottedStampArr = [
       ...dottedStampArr,
-      <Styled.StampLine key={rowIdx + 1} style={{ opacity: 0 }} />,
+      <Styled.StampLine key={rowIdx * 3 + 2} style={{ opacity: 0 }} />,
       <div key={rowIdx + 2} style={{ width: "86px" }} />,
     ];
   }
 
-  return dottedStampArr;
+  return (rowIdx / 3) % 2 === 0 ? dottedStampArr : dottedStampArr.reverse();
 };
 
 function ChallengeStamp() {
@@ -214,9 +219,7 @@ function ChallengeStamp() {
           {mockStamps.map((_, idx) =>
             idx % 3 === 0 ? (
               <Styled.StampRow key={`${idx}row`}>
-                {(idx / 3) % 2 === 0
-                  ? renderStamp(mockStamps.slice(idx, idx + 3), idx)
-                  : renderStamp(mockStamps.slice(idx, idx + 3), idx).reverse()}
+                {renderStamp(mockStamps.slice(idx, idx + 3), idx, Math.ceil(mockStamps.length / 3) === idx / 3 + 1)}
               </Styled.StampRow>
             ) : (
               <></>
