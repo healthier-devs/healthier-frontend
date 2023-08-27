@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+`;
+
+export const TopContainer = styled.div`
+  width: 100%;
+  height: 241px;
+
+  background-color: ${({ theme }) => theme.color.grey_800};
+  border-radius: 0 0 3.2rem 3.2rem;
+`;
+
 export const HeaderContainer = styled.div`
   position: fixed;
   width: inherit;
@@ -47,14 +63,6 @@ export const RightButton = styled.section`
   letter-spacing: -0.15px;
 
   color: ${({ theme }) => theme.color.grey_400};
-`;
-
-export const TopContainer = styled.div`
-  width: 100%;
-  height: 241px;
-
-  background-color: ${({ theme }) => theme.color.grey_800};
-  border-radius: 0 0 3.2rem 3.2rem;
 `;
 
 export const TopContents = styled.div`
@@ -137,4 +145,59 @@ export const CurrentProgress = styled.div<{ percent: number }>`
   height: 0.4rem;
 
   background-color: ${({ theme }) => theme.color.green};
+`;
+
+export const InviteContainer = styled.div`
+  width: calc(100% - 4rem);
+  box-sizing: border-box;
+
+  border-radius: 0.8rem;
+  background-color: ${({ theme }) => theme.color.grey_850};
+  padding: 1.6rem;
+
+  margin-top: 3rem;
+
+  cursor: pointer;
+
+  .top-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
+export const InviteTitle = styled.h2`
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.3px;
+
+  color: ${({ theme }) => theme.color.grey_200};
+`;
+
+export const InviteDescription = styled.p`
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.3px;
+
+  color: ${({ theme }) => theme.color.grey_400};
+
+  margin-top: 0.7rem;
+`;
+
+export const CTAContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 186px;
+  width: 100%;
+  box-sizing: border-box;
+
+  background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.13%, #131416 100%);
+
+  padding: 0 2rem 3.3rem;
+
+  display: flex;
+  align-items: flex-end;
 `;

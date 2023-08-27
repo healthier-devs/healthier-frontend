@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
+import RoundButton from "src/components/roundButton";
 import * as Styled from "./index.style";
-import { ProgressContainer } from "./index.style";
 
 function ChallengeStamp() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Styled.Container>
       <Styled.TopContainer>
         <Styled.HeaderContainer>
           <Styled.LeftButton onClick={() => navigate(-1)}>
@@ -36,7 +37,19 @@ function ChallengeStamp() {
           </Styled.ProgressContainer>
         </Styled.TopContents>
       </Styled.TopContainer>
-    </>
+
+      <Styled.InviteContainer>
+        <div className="top-box">
+          <Styled.InviteTitle>친구 초대하기</Styled.InviteTitle>
+          <ChevronRightIcon />
+        </div>
+        <Styled.InviteDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.InviteDescription>
+      </Styled.InviteContainer>
+
+      <Styled.CTAContainer>
+        <RoundButton>오늘의 챌린지 인증하기</RoundButton>
+      </Styled.CTAContainer>
+    </Styled.Container>
   );
 }
 
