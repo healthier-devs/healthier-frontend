@@ -6,11 +6,15 @@ export const Container = styled.div`
   align-items: center;
 
   width: 100%;
+
+  overflow-y: auto;
+
+  padding-bottom: 10rem;
 `;
 
 export const TopContainer = styled.div`
   width: 100%;
-  height: 241px;
+  padding-bottom: 3rem;
 
   background-color: ${({ theme }) => theme.color.grey_800};
   border-radius: 0 0 3.2rem 3.2rem;
@@ -200,4 +204,79 @@ export const CTAContainer = styled.div`
 
   display: flex;
   align-items: flex-end;
+`;
+
+export const StampContainer = styled.div`
+  width: calc(100% - 4.8rem);
+  margin: 5rem 2.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5.4rem;
+`;
+
+export const StampRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 86px);
+  justify-content: space-between;
+`;
+
+export const CurrentDayStamp = styled.div`
+  width: 100%;
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.color.blue};
+  border: 1px solid ${({ theme }) => theme.color.sub_blue};
+  border-radius: 6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+
+  color: ${({ theme }) => theme.color.grey_200};
+`;
+
+export const Stamp = styled.div`
+  position: relative;
+  width: 86px;
+  height: 86px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+export const StatusText = styled.p<{ status: string }>`
+  position: absolute;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translate(-50%, 0);
+
+  color: ${({ theme, status }) =>
+    status === "SUCCESS" ? theme.color.sub_blue : status === "FAILURE" ? theme.color.red_300 : theme.color.grey_400};
+
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+
+  white-space: nowrap;
+`;
+
+export const TermText = styled.p`
+  position: absolute;
+
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+
+  color: ${({ theme }) => theme.color.grey_200};
 `;
