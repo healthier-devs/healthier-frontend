@@ -13,7 +13,7 @@ export const Container = styled.div`
 `;
 
 export const TopContainer = styled.div`
-  width: 100%;
+  width: calc(var(--vw, 1vw) * 100);
   padding-bottom: 3rem;
 
   background-color: ${({ theme }) => theme.color.grey_800};
