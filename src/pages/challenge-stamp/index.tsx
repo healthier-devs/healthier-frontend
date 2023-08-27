@@ -207,25 +207,27 @@ function ChallengeStamp() {
           </Styled.TopContents>
         </Styled.TopContainer>
 
-        <Styled.InviteContainer>
-          <div className="top-box">
-            <Styled.InviteTitle>친구 초대하기</Styled.InviteTitle>
-            <ChevronRightIcon />
-          </div>
-          <Styled.InviteDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.InviteDescription>
-        </Styled.InviteContainer>
+        <Styled.ContentsContainer>
+          <Styled.InviteContainer>
+            <div className="top-box">
+              <Styled.InviteTitle>친구 초대하기</Styled.InviteTitle>
+              <ChevronRightIcon />
+            </div>
+            <Styled.InviteDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.InviteDescription>
+          </Styled.InviteContainer>
 
-        <Styled.StampContainer>
-          {mockStamps.map((_, idx) =>
-            idx % 3 === 0 ? (
-              <Styled.StampRow key={`${idx}row`}>
-                {renderStamp(mockStamps.slice(idx, idx + 3), idx, Math.ceil(mockStamps.length / 3) === idx / 3 + 1)}
-              </Styled.StampRow>
-            ) : (
-              <></>
-            )
-          )}
-        </Styled.StampContainer>
+          <Styled.StampContainer>
+            {mockStamps.map((_, idx) =>
+              idx % 3 === 0 ? (
+                <Styled.StampRow key={`${idx}row`}>
+                  {renderStamp(mockStamps.slice(idx, idx + 3), idx, Math.ceil(mockStamps.length / 3) === idx / 3 + 1)}
+                </Styled.StampRow>
+              ) : (
+                <></>
+              )
+            )}
+          </Styled.StampContainer>
+        </Styled.ContentsContainer>
       </Styled.Container>
 
       <Styled.CTAContainer>

@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   width: 100%;
 
   overflow-y: auto;
@@ -13,17 +9,28 @@ export const Container = styled.div`
 `;
 
 export const TopContainer = styled.div`
+  position: fixed;
+  top: 0;
+
   width: calc(var(--vw, 1vw) * 100);
   padding-bottom: 3rem;
 
   background-color: ${({ theme }) => theme.color.grey_800};
   border-radius: 0 0 3.2rem 3.2rem;
+
+  z-index: 10;
+`;
+
+export const ContentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 24rem;
 `;
 
 export const HeaderContainer = styled.div`
-  position: fixed;
   width: inherit;
-  top: 0;
 
   height: 5.6rem;
   letter-spacing: 0.015rem;
@@ -70,8 +77,6 @@ export const RightButton = styled.section`
 `;
 
 export const TopContents = styled.div`
-  margin-top: 5.6rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
