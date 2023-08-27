@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -216,9 +216,10 @@ export const StampContainer = styled.div`
 `;
 
 export const StampRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 86px);
+  position: relative;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const CurrentDayStamp = styled.div`
@@ -279,4 +280,35 @@ export const TermText = styled.p`
   letter-spacing: -0.5px;
 
   color: ${({ theme }) => theme.color.grey_200};
+`;
+
+export const StampLine = styled.div<{ position?: string }>`
+  height: 1px;
+  background-image: ${({ theme }) => `linear-gradient(to right, ${theme.color.grey_500} 33%, transparent 0%)`};
+  background-position: bottom;
+  background-size: 6px 8px;
+  background-repeat: repeat-x;
+
+  ${({ position }) =>
+    position === "right-end"
+      ? css`
+          width: 5.4rem;
+          position: absolute;
+          right: 43px;
+          top: 86px;
+          transform: rotate(-90deg);
+          transform-origin: right;
+        `
+      : position === "left-end"
+      ? css`
+          width: 5.4rem;
+          position: absolute;
+          left: 43px;
+          top: 86px;
+          transform: rotate(90deg);
+          transform-origin: left;
+        `
+      : css`
+          flex: 1;
+        `}
 `;

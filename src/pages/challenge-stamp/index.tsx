@@ -86,15 +86,15 @@ const mockStamps = [
   },
 ];
 
-const renderStamp = (stamps: any, idx: number) => {
-  let stampArr = [
-    ...stamps.map((stamp: any) => {
+const renderStamp = (stamps: any, rowIdx: number) => {
+  const stampArr = [
+    ...stamps.map((stamp: any, dayIdx: number) => {
       return (
-        <Styled.Stamp key={idx}>
+        <Styled.Stamp key={rowIdx * 3 + dayIdx}>
           {stamp.status === "SUCCESS" ? (
             <>
               <img alt="success stamp" src="/images/stamp/success.png" width={86} height={86} />
-              <Styled.StatusText status={stamp.status}>{idx + 1}일차</Styled.StatusText>
+              <Styled.StatusText status={stamp.status}>{rowIdx + dayIdx + 1}일차</Styled.StatusText>
             </>
           ) : stamp.status === "FAILURE" ? (
             <>
@@ -138,13 +138,32 @@ const renderStamp = (stamps: any, idx: number) => {
     }),
   ];
 
-  let count = 1;
+  const isAdded = stampArr.length === 2;
 
-  while (stampArr.length < 3) {
-    stampArr = [...stampArr, <div key={idx + count++} style={{ width: "86px" }} />];
+  let dottedStampArr = stampArr.reduce((acc, val, idx) => {
+    if (idx === 0) {
+      return [val];
+    }
+
+    return [...acc, <Styled.StampLine key={idx} />, val];
+  }, []);
+
+  if (stampArr.length === 3) {
+    dottedStampArr = [
+      ...dottedStampArr,
+      <Styled.StampLine key={rowIdx + 1} position={(rowIdx / 3) % 2 === 0 ? "right-end" : "left-end"} />,
+    ];
   }
 
-  return stampArr;
+  if (isAdded) {
+    dottedStampArr = [
+      ...dottedStampArr,
+      <Styled.StampLine key={rowIdx + 1} style={{ opacity: 0 }} />,
+      <div key={rowIdx + 2} style={{ width: "86px" }} />,
+    ];
+  }
+
+  return dottedStampArr;
 };
 
 function ChallengeStamp() {
