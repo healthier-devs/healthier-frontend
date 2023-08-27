@@ -25,7 +25,7 @@ function Challenge() {
           {categories.map((medicine, idx) => (
             <Styled.Item key={medicine.category} isSelected={idx === selectedIdx} onClick={() => setSelectedIdx(idx)}>
               <Styled.ImgWrapper className="background">
-                <Styled.Img className="img" src={medicine.image} alt="pill" />
+                <Styled.Img className="img" src={medicine.image} alt="challenge-icon" />
               </Styled.ImgWrapper>
 
               <span className="label">{medicine.category}</span>
