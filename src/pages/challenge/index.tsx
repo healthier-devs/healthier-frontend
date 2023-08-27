@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContentHeader from "src/components/contentHeader";
+import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
 
 const categories = [
@@ -16,7 +17,7 @@ function Challenge() {
     <>
       <ContentHeader back={true} exit={false} label="건강 챌린지" />
       <Styled.Container>
-        <Styled.List>
+        <Styled.Categories>
           {categories.map((medicine, idx) => (
             <Styled.Item key={medicine.category} isSelected={idx === selectedIdx} onClick={() => setSelectedIdx(idx)}>
               <Styled.ImgWrapper className="background">
@@ -26,7 +27,13 @@ function Challenge() {
               <span className="label">{medicine.category}</span>
             </Styled.Item>
           ))}
-        </Styled.List>
+        </Styled.Categories>
+
+        <Styled.CardList>
+          {Array.from(Array(5).keys()).map((val) => (
+            <ChallengeCard key={val} />
+          ))}
+        </Styled.CardList>
       </Styled.Container>
     </>
   );

@@ -5,10 +5,10 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const List = styled.ul`
+export const Categories = styled.ul`
   display: flex;
-  margin: 2rem 2.4rem;
   gap: 1.6rem;
+  margin: 2rem 2.4rem;
   overflow-x: auto;
 `;
 
@@ -54,4 +54,12 @@ export const ImgWrapper = styled.div`
 export const Img = styled.img`
   width: 100%;
   height: 100%;
+`;
+
+export const CardList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  margin: 1.2rem 2.4rem;
 `;
