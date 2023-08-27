@@ -1,5 +1,6 @@
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
+import ChallengeStamp from "./challenge-stamp";
 import CompleteQR from "./complete-qr";
 import Diagnosis from "./diagnosis";
 import DiagnosisList from "./diagnosisList";
@@ -34,4 +35,5 @@ export {
   CompleteQR,
   IndexQR,
   ChallengeDetail,
+  ChallengeStamp,
 };

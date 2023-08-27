@@ -8,7 +8,7 @@ export const RootContainer = styled.header<{ borderBottom: boolean }>`
   height: 5.6rem;
   letter-spacing: 0.015rem;
 
-  border-bottom: ${({ theme, borderBottom }) => (borderBottom ? `0.5px solid ${theme.color.grey_800}` : "none")}
+  border-bottom: ${({ theme, borderBottom }) => (borderBottom ? `0.5px solid ${theme.color.grey_800}` : "none")};
 
   background: transparent;
 

@@ -45,6 +45,7 @@ function App() {
           <Route path="/qr/info" element={<Pages.InformationQR />} />
           <Route path="/qr/symptom-type" element={<Pages.SymptomTypeQR />} />
           <Route path="/qr/complete" element={<Pages.CompleteQR />} />
+          <Route path="/challenge/stamp/:id" element={<Pages.ChallengeStamp />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
           <Route path="/test" element={<Pages.Test />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
