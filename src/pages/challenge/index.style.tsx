@@ -32,11 +32,8 @@ export const Item = styled.li<{ isSelected: boolean }>`
 
   .background {
     background: ${({ theme, isSelected }) => (isSelected ? theme.color.blue : theme.color.sub_blue)};
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.6)};
     border: ${({ theme, isSelected }) => `1.5px solid ${isSelected ? theme.color.sub_blue : "transparent"}`};
-  }
-
-  .img {
-    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
   }
 `;
 

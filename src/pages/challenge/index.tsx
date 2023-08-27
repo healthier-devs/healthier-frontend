@@ -8,6 +8,10 @@ const categories = [
   { category: "식습관", image: "" },
   { category: "수면", image: "" },
   { category: "운동", image: "" },
+  { category: "영양제", image: "" },
+  { category: "식습관", image: "" },
+  { category: "수면", image: "" },
+  { category: "운동", image: "" },
 ];
 
 function Challenge() {
