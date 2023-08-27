@@ -195,7 +195,7 @@ export const CTAContainer = styled.div`
   position: fixed;
   bottom: 0;
   height: 186px;
-  width: 100%;
+  width: calc(var(--vw, 1vw) * 100);
   box-sizing: border-box;
 
   background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.13%, #131416 100%);
