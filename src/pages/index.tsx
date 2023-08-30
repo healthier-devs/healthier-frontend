@@ -1,4 +1,5 @@
 import Appointment from "./appointment";
+import Challenge from "./challenge";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeStamp from "./challenge-stamp";
 import CompleteQR from "./complete-qr";
@@ -36,4 +37,5 @@ export {
   IndexQR,
   ChallengeDetail,
   ChallengeStamp,
+  Challenge,
 };
