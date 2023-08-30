@@ -6,6 +6,9 @@ interface IStampProps {
   isLast: boolean;
 }
 
+const STAMP_WIDTH = 86;
+const STAMP_HEIGHT = 86;
+
 function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
   const stampArr = [
     ...stamps.map((stamp: any, dayIdx: number) => {
@@ -14,22 +17,22 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
         <Styled.Stamp key={stamp.dayCnt}>
           {stamp.status === "SUCCESS" ? (
             <>
-              <img alt="success stamp" src="/images/stamp/success.png" width={86} height={86} />
+              <img alt="success stamp" src="/images/stamp/success.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>{rowIdx + dayIdx + 1}일차</Styled.StatusText>
             </>
           ) : stamp.status === "FAILURE" ? (
             <>
-              <img alt="failure stamp" src="/images/stamp/failure.png" width={86} height={86} />
+              <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
             </>
           ) : stamp.status === "NOTHING" ? (
             <>
-              <img alt="nothing stamp" src="/images/stamp/lock.png" width={86} height={86} />
+              <img alt="nothing stamp" src="/images/stamp/lock.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>8월 27일</Styled.StatusText>
             </>
           ) : stamp.status === "MIDTERM" ? (
             <>
-              <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={86} height={86} />
+              <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
                 MIDTERM
                 <br />
@@ -38,7 +41,7 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
             </>
           ) : stamp.status === "FINAL" ? (
             <>
-              <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={86} height={86} />
+              <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
                 FINAL
                 <br />
