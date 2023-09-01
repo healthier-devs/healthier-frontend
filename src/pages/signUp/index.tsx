@@ -1,7 +1,16 @@
-import * as Styled from "./index.style";
+import { Outlet } from "react-router-dom";
+import ContentHeader from "src/components/contentHeader";
+import Layout from "src/components/layout";
 
 function SignUp() {
-  return <div></div>;
+  return (
+    <>
+      <ContentHeader back exit></ContentHeader>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </>
+  );
 }
 
 export default SignUp;
