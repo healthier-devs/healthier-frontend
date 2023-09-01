@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContentHeader from "src/components/contentHeader";
+import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
 
@@ -16,6 +17,7 @@ const categories = [
 
 function Challenge() {
   const [selectedIdx, setSelectedIdx] = useState(-1);
+  const { challengesData } = useGetChallenges();
 
   return (
     <>
@@ -34,8 +36,8 @@ function Challenge() {
         </Styled.Categories>
 
         <Styled.CardList>
-          {Array.from(Array(5).keys()).map((val) => (
-            <ChallengeCard key={val} />
+          {challengesData?.map((challenge) => (
+            <ChallengeCard key={challenge.id} challenge={challenge} />
           ))}
         </Styled.CardList>
       </Styled.Container>
