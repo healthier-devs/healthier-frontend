@@ -21,3 +21,26 @@ export interface IChallenge {
 export type TChallengeListResponse = IChallenge[];
 
 export type TChallengeCategory = typeof CHALLENGE_CATEGORIES[number];
+
+export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
+
+export interface IStamp {
+  daycnt: number;
+  status: TStampStatus;
+}
+
+export interface IStampChartResponse {
+  title: string;
+  count: number;
+  duration: number;
+  times: number;
+  method: string;
+  revivalCnt: number;
+  currentDayCnt: number;
+  stamps: IStamp[];
+}
+
+export interface IStampChartRequest {
+  userId: string;
+  challengeId: string;
+}
