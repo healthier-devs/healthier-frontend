@@ -49,7 +49,7 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Img = styled.img`
-  width: 72%;
+  width: 4.9rem;
 `;
 
 export const CardList = styled.ul`
