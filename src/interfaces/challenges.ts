@@ -1,3 +1,5 @@
+import { CHALLENGE_CATEGORIES } from "src/data/challenge";
+
 export interface IChallenge {
   id: string;
   title: string;
@@ -17,3 +19,5 @@ export interface IChallenge {
 }
 
 export type TChallengeListResponse = IChallenge[];
+
+export type TChallengeCategory = typeof CHALLENGE_CATEGORIES[number];

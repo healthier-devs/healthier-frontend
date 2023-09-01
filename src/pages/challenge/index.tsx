@@ -1,42 +1,35 @@
 import { useState } from "react";
 import ContentHeader from "src/components/contentHeader";
+import { CHALLENGE_CATEGORIES } from "src/data/challenge";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
-
-const categories = [
-  { category: "영양제", image: "" },
-  { category: "식습관", image: "" },
-  { category: "수면", image: "" },
-  { category: "운동", image: "" },
-  { category: "영양제", image: "" },
-  { category: "식습관", image: "" },
-  { category: "수면", image: "" },
-  { category: "운동", image: "" },
-];
+import type { TChallengeCategory } from "src/interfaces/challenges";
 
 function Challenge() {
-  const [selectedIdx, setSelectedIdx] = useState(-1);
+  const [selectedCategory, setSelectedCategory] = useState<TChallengeCategory | null>(null);
   const { challengesData } = useGetChallenges();
+
+  const challengeList = challengesData?.filter(({ category }) => (selectedCategory ? category === selectedCategory : true));
 
   return (
     <>
       <ContentHeader back={true} exit={false} label="건강 챌린지" />
       <Styled.Container>
         <Styled.Categories>
-          {categories.map((medicine, idx) => (
-            <Styled.Item key={medicine.category} isSelected={idx === selectedIdx} onClick={() => setSelectedIdx(idx)}>
+          {CHALLENGE_CATEGORIES.map((category) => (
+            <Styled.Item key={category} isSelected={category === selectedCategory} onClick={() => setSelectedCategory(category)}>
               <Styled.ImgWrapper className="background">
-                <Styled.Img className="img" src={medicine.image} alt="challenge-icon" />
+                <Styled.Img className="img" src={"/images/challenge/pill.png"} alt="challenge-icon" />
               </Styled.ImgWrapper>
 
-              <span className="label">{medicine.category}</span>
+              <span className="label">{category}</span>
             </Styled.Item>
           ))}
         </Styled.Categories>
 
         <Styled.CardList>
-          {challengesData?.map((challenge) => (
+          {challengeList?.map((challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} />
           ))}
         </Styled.CardList>
