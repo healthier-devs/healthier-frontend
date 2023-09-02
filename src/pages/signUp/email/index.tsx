@@ -10,6 +10,7 @@ function Email() {
     isError: false,
     errorText: "",
   });
+
   const navigate = useNavigate();
 
   const isEnabled = email.length > 0 && !validation.isError;
