@@ -1,21 +1,37 @@
 import styled from "styled-components";
 
 interface ITextFieldProps {
-  label?: string;
   id: string;
+  label?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isError?: boolean;
   errorText?: string;
   placeholder?: string;
   type?: "text" | "email" | "password" | "number";
+  icon?: React.ReactNode;
+  onClickIcon?: () => void;
 }
 
-function TextField({ label = "", id, value, onChange, isError = false, errorText, placeholder = "", type = "text" }: ITextFieldProps) {
+function TextField({
+  id,
+  value,
+  onChange,
+  isError = false,
+  errorText,
+  label = "",
+  placeholder = "",
+  type = "text",
+  icon,
+  onClickIcon,
+}: ITextFieldProps) {
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
-      <Input id={id} placeholder={placeholder} value={value} onChange={onChange} isError={isError} type={type} />
+      <Container>
+        <Label htmlFor={id}>{label}</Label>
+        <Input id={id} placeholder={placeholder} value={value} onChange={onChange} isError={isError} type={type} />
+        {icon && <IconButton onClick={onClickIcon}>{icon}</IconButton>}
+      </Container>
       {isError && <ErrorText>{errorText}</ErrorText>}
     </div>
   );
@@ -35,7 +51,8 @@ const Label = styled.label`
 
 const Input = styled.input<{ isError: boolean }>`
   width: 100%;
-  padding: 0 0 0.8rem 0;
+  padding: 0 3rem 0.8rem 0;
+  box-sizing: border-box;
 
   color: ${({ theme }) => theme.color.grey_400};
   font-size: 1.6rem;
@@ -62,4 +79,20 @@ const ErrorText = styled.p`
   color: ${({ theme }) => theme.color.red_600};
   font-size: 1.3rem;
   font-weight: 100;
+`;
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const IconButton = styled.button`
+  position: absolute;
+  bottom: 6px;
+  right: 0;
+
+  background: transparent;
+
+  padding: 0 0 0 6px;
+
+  cursor: pointer;
 `;

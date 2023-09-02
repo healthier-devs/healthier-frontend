@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RemoveIcon from "src/assets/icons/RemoveIcon";
 import { validateEmail } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 
@@ -39,6 +40,14 @@ function Email() {
     });
   };
 
+  const handleClickRemoveIcon = () => {
+    setEmail("");
+    setValidation({
+      isError: false,
+      errorText: "",
+    });
+  };
+
   return (
     <>
       <Lib.Container>
@@ -52,6 +61,8 @@ function Email() {
           isError={validation.isError}
           errorText={validation.errorText}
           type="email"
+          icon={<RemoveIcon />}
+          onClickIcon={handleClickRemoveIcon}
         />
       </Lib.Container>
       <Lib.NextButton isEnabled={isEnabled} onClick={handleClickNextButton} />
