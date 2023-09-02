@@ -6,7 +6,7 @@ function SignUp() {
   return (
     <>
       <ContentHeader back exit></ContentHeader>
-      <Layout>
+      <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>
     </>
