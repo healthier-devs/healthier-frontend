@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
+import { useSignIn } from "src/hooks/account/useSignIn";
 import * as Lib from "../lib";
 
 function Password() {
@@ -16,6 +17,8 @@ function Password() {
     isError: false,
     errorText: "",
   });
+
+  const { signIn } = useSignIn();
 
   const isEnabled = password.length > 0 && password === passwordConfirm;
 
@@ -40,15 +43,26 @@ function Password() {
       confirmPassword: passwordConfirm,
     });
 
-    if (success) {
-      alert("성공");
+    if (!success) {
+      setValidation({
+        isError: true,
+        errorText: data,
+      });
 
       return;
     }
 
-    setValidation({
-      isError: true,
-      errorText: data,
+    signIn({
+      username: email,
+      name: "홍길동",
+      phoneNumber: "010-1234-5678",
+      gender: "m",
+      birthDate: "1971-01-01",
+      nickname: "길동쓰",
+      marketingOptIn: true,
+      healthInterests: ["미용"],
+      confirmPassword: passwordConfirm,
+      password,
     });
   };
 
