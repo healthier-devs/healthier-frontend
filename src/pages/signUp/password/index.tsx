@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
-import { validatePassword } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 
 function Password() {
@@ -23,37 +23,32 @@ function Password() {
     const { value } = e.target;
 
     setPassword(value);
+    setValidation({
+      isError: false,
+      errorText: "",
+    });
+  };
 
-    if (value.length > 0 && value.length < 6) {
-      setValidation({
-        isError: true,
-        errorText: "최소 6자이상 설정할 수 있어요",
-      });
-
+  const handleClickNextButton = async () => {
+    if (!isEnabled) {
       return;
     }
 
-    if (value.length > 18) {
-      setValidation({
-        isError: true,
-        errorText: "최대 18자까지 설정할 수 있어요",
-      });
+    const { data, success } = await validatePassword({
+      email,
+      password,
+      confirmPassword: passwordConfirm,
+    });
 
-      return;
-    }
-
-    if (!validatePassword(value)) {
-      setValidation({
-        isError: true,
-        errorText: "잘못된 비밀번호 형식입니다",
-      });
+    if (success) {
+      alert("성공");
 
       return;
     }
 
     setValidation({
-      isError: false,
-      errorText: "",
+      isError: true,
+      errorText: data,
     });
   };
 
@@ -104,7 +99,7 @@ function Password() {
           />
         </form>
       </Lib.Container>
-      <Lib.NextButton isEnabled={isEnabled} onClick={() => null}></Lib.NextButton>
+      <Lib.NextButton isEnabled={isEnabled} onClick={handleClickNextButton}></Lib.NextButton>
     </>
   );
 }

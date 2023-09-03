@@ -12,6 +12,6 @@ export const accountFetcher = {
     return fetcher.get(`/validate-email?email=${email}`);
   },
   validatePassword(body: IValidatePasswordRequest) {
-    return fetcher.post("/user/validate-password", body);
+    return fetcher.post("/validate-password", body);
   },
 };
