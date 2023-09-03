@@ -1,44 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { validateEmail } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
-import { validateEmail } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 
 function Email() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>("");
   const [validation, setValidation] = useState<{ isError: boolean; errorText: string }>({
     isError: false,
     errorText: "",
   });
 
-  const navigate = useNavigate();
-
   const isEnabled = email.length > 0 && !validation.isError;
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isEmailValidated = validateEmail(e.target.value);
-
     setValidation({
-      isError: !isEmailValidated,
-      errorText: isEmailValidated ? "" : "잘못된 이메일 형식입니다",
+      isError: false,
+      errorText: "",
     });
-
     setEmail(e.target.value);
-  };
-
-  const handleClickNextButton = () => {
-    if (!isEnabled) {
-      return;
-    }
-    /*
-      <TODO>
-      1. 중복 이메일인지 확인
-      2. 탈퇴한 계정인지 확인
-    */
-
-    navigate("/signup/password", {
-      state: { email },
-    });
   };
 
   const handleClickRemoveIcon = () => {
@@ -47,6 +29,40 @@ function Email() {
       isError: false,
       errorText: "",
     });
+  };
+
+  const handleClickNextButton = async () => {
+    if (!isEnabled) {
+      return;
+    }
+
+    const { data, success } = await validateEmail(email);
+
+    if (success) {
+      navigate("/signup/password", {
+        state: { email },
+      });
+
+      return;
+    }
+
+    if (data === "입력한 이메일 주소가 올바르지 않습니다.") {
+      setValidation({
+        isError: true,
+        errorText: "잘못된 이메일 형식입니다",
+      });
+
+      return;
+    }
+
+    if (data === "이미 사용 중인 이메일 주소입니다.") {
+      setValidation({
+        isError: true,
+        errorText: "이미 사용 중인 이메일 주소입니다.",
+      });
+
+      return;
+    }
   };
 
   return (
