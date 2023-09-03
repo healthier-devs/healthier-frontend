@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
 import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
+import { IStamp } from "src/interfaces/challenges";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 
@@ -18,6 +19,17 @@ function ChallengeStamp() {
       navigate(-1);
     }
   }, []);
+
+  const makeStampChart = (stamps: IStamp[], duration: number) => {
+    let currentStamps = [...stamps];
+    const lastDayCnt = stamps.length !== 0 ? stamps[stamps.length - 1].dayCnt : 0;
+
+    for (let i = 1; i <= duration - stamps.length; i++) {
+      currentStamps = [...currentStamps, { dayCnt: lastDayCnt + i, status: "NOTHING" }];
+    }
+
+    return currentStamps;
+  };
 
   return (
     <>
@@ -60,14 +72,14 @@ function ChallengeStamp() {
           </Styled.InviteContainer>
 
           <Styled.StampContainer>
-            {stampChartData?.stamps.map((_, idx) =>
+            {makeStampChart(stampChartData?.stamps ?? [], stampChartData?.duration ?? 0).map((_, idx) =>
               idx % 3 === 0 ? (
                 <Styled.StampRow key={`${idx}row`}>
                   <Stamp
-                    stamps={stampChartData?.stamps.slice(idx, idx + 3)}
+                    stamps={(stampChartData?.stamps ?? []).slice(idx, idx + 3)}
                     rowIdx={idx}
-                    duration={stampChartData.duration ?? 0}
-                    isLast={Math.ceil(stampChartData?.stamps.length / 3) === idx / 3 + 1}
+                    duration={stampChartData?.duration ?? 0}
+                    isLast={Math.ceil((stampChartData?.stamps.length ?? 1) / 3) === idx / 3 + 1}
                   />
                 </Styled.StampRow>
               ) : (
