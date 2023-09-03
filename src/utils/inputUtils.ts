@@ -33,3 +33,11 @@ export const validateEmail = (input: string) => {
     /^((?:[A-Za-z0-9!#$%&'*+\-/=?^_`{|}~]|(?<=^|\.)"|"(?=$|\.|@)|(?<=".*)[ .](?=.*")|(?<!\.)\.){1,64})(@)((?:[A-Za-z0-9.-])*(?:[A-Za-z0-9])\.(?:[A-Za-z0-9]){2,})$/gm
   ).test(input);
 };
+
+export const validatePassword = (input: string) => {
+  if (input.length === 0) {
+    return true;
+  }
+
+  return new RegExp(/^.*(?=^}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(input);
+};

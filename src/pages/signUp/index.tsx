@@ -23,7 +23,11 @@ function SignUp() {
           description="돌아가면 약관동의부터 다시 시작돼요."
           onClickBackDrop={closeDialog}
           onClickCancel={closeDialog}
-          onClickConfirm={() => navigate(-1)}
+          onClickConfirm={() => {
+            closeDialog();
+            // TODO: 약관 동의 화면으로 이동
+            navigate(-1);
+          }}
         />
       )}
       {isDialogOpen.exit && (
@@ -32,7 +36,10 @@ function SignUp() {
           description="진행 중인 내용은 저장되지 않습니다."
           onClickBackDrop={closeDialog}
           onClickCancel={closeDialog}
-          onClickConfirm={() => navigate("/")}
+          onClickConfirm={() => {
+            closeDialog();
+            navigate("/");
+          }}
         />
       )}
       <ContentHeader

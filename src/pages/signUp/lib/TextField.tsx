@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface ITextFieldProps {
+interface ITextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   value?: string;
@@ -11,6 +11,7 @@ interface ITextFieldProps {
   type?: "text" | "email" | "password" | "number";
   icon?: React.ReactNode;
   onClickIcon?: () => void;
+  containerStyle?: React.CSSProperties;
 }
 
 function TextField({
@@ -24,13 +25,28 @@ function TextField({
   type = "text",
   icon,
   onClickIcon,
+  containerStyle,
+  ...props
 }: ITextFieldProps) {
   return (
     <div>
-      <Container>
+      <Container style={containerStyle}>
         <Label htmlFor={id}>{label}</Label>
-        <Input id={id} placeholder={placeholder} value={value} onChange={onChange} isError={isError} type={type} />
-        {icon && <IconButton onClick={onClickIcon}>{icon}</IconButton>}
+        <Input
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          isError={isError}
+          type={type}
+          autoComplete={type === "password" ? "off" : "on"}
+          {...props}
+        />
+        {icon && (
+          <IconButton type="button" onClick={onClickIcon}>
+            {icon}
+          </IconButton>
+        )}
       </Container>
       {isError && <ErrorText>{errorText}</ErrorText>}
     </div>
