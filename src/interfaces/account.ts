@@ -12,7 +12,7 @@ export interface IValidatePasswordRequest {
   confirmPassword: string;
 }
 
-export interface ISignInRequest {
+export interface ISignUpRequest {
   username: string;
   password: string;
   confirmPassword: string;

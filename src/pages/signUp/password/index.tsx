@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
-import { useSignIn } from "src/hooks/account/useSignIn";
+import { useSignUp } from "src/hooks/account/useSignUp";
 import * as Lib from "../lib";
 
 function Password() {
@@ -18,7 +18,7 @@ function Password() {
     errorText: "",
   });
 
-  const { signIn } = useSignIn();
+  const { signUp } = useSignUp();
 
   const isEnabled = password.length > 0 && password === passwordConfirm;
 
@@ -52,7 +52,7 @@ function Password() {
       return;
     }
 
-    signIn({
+    signUp({
       username: email,
       name: "홍길동",
       phoneNumber: "010-1234-5678",
