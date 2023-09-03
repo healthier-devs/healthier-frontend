@@ -1,94 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
+import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 
-const mockStamps = [
-  {
-    dayCnt: 1,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 2,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 3,
-    status: "FAILURE",
-  },
-  {
-    dayCnt: 4,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 5,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 6,
-    status: "FAILURE",
-  },
-  {
-    dayCnt: 7,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 8,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 9,
-    status: "FAILURE",
-  },
-  {
-    dayCnt: 10,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 11,
-    status: "SUCCESS",
-  },
-  {
-    dayCnt: 12,
-    status: "FAILURE",
-  },
-  {
-    dayCnt: 13,
-    status: "CURRENT",
-  },
-  {
-    dayCnt: 14,
-    status: "NOTHING",
-  },
-  {
-    dayCnt: 15,
-    status: "NOTHING",
-  },
-  {
-    dayCnt: 16,
-    status: "NOTHING",
-  },
-  {
-    dayCnt: 17,
-    status: "MIDTERM",
-  },
-  {
-    dayCnt: 18,
-    status: "NOTHING",
-  },
-  {
-    dayCnt: 19,
-    status: "NOTHING",
-  },
-  {
-    dayCnt: 20,
-    status: "NOTHING",
-  },
-];
-
 function ChallengeStamp() {
   const navigate = useNavigate();
+  const param = useParams();
+
+  // TODO: userId 처리
+  const { stampChartData } = useGetStampChart({ userId: "", challengeId: param.id ?? "" });
+
+  useEffect(() => {
+    if (!param.id) {
+      navigate(-1);
+    }
+  }, []);
 
   return (
     <>
@@ -102,21 +31,20 @@ function ChallengeStamp() {
           </Styled.HeaderContainer>
 
           <Styled.TopContents>
-            <Styled.Title>매일 아침 공복에 유산균 먹기</Styled.Title>
+            <Styled.Title>{stampChartData?.title}</Styled.Title>
             <Styled.TagContainer>
-              <Styled.Tag>매일인증</Styled.Tag>
-              <Styled.Tag>28일동안</Styled.Tag>
-              <Styled.Tag>사진인증</Styled.Tag>
+              <Styled.Tag>{stampChartData?.method}</Styled.Tag>
+              <Styled.Tag>{stampChartData?.duration}일동안</Styled.Tag>
             </Styled.TagContainer>
 
             <Styled.ProgressContainer>
               <Styled.ProgressBar>
-                <Styled.CurrentProgress percent={50} />
+                <Styled.CurrentProgress percent={stampChartData?.currentDayCnt ?? 1 / (stampChartData?.duration ?? 1)} />
               </Styled.ProgressBar>
 
               <Styled.ProgressTextBox>
-                <p className="highlight">12일째 진행중</p>
-                <p>총 28일</p>
+                <p className="highlight">{stampChartData?.currentDayCnt}일째 진행중</p>
+                <p>총 {stampChartData?.duration}일</p>
               </Styled.ProgressTextBox>
             </Styled.ProgressContainer>
           </Styled.TopContents>
@@ -132,10 +60,15 @@ function ChallengeStamp() {
           </Styled.InviteContainer>
 
           <Styled.StampContainer>
-            {mockStamps.map((_, idx) =>
+            {stampChartData?.stamps.map((_, idx) =>
               idx % 3 === 0 ? (
                 <Styled.StampRow key={`${idx}row`}>
-                  <Stamp stamps={mockStamps.slice(idx, idx + 3)} rowIdx={idx} isLast={Math.ceil(mockStamps.length / 3) === idx / 3 + 1} />
+                  <Stamp
+                    stamps={stampChartData?.stamps.slice(idx, idx + 3)}
+                    rowIdx={idx}
+                    duration={stampChartData.duration ?? 0}
+                    isLast={Math.ceil(stampChartData?.stamps.length / 3) === idx / 3 + 1}
+                  />
                 </Styled.StampRow>
               ) : (
                 <></>

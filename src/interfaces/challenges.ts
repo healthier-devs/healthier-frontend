@@ -25,7 +25,7 @@ export type TChallengeCategory = typeof CHALLENGE_CATEGORIES[number];
 export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
 
 export interface IStamp {
-  daycnt: number;
+  dayCnt: number;
   status: TStampStatus;
 }
 
