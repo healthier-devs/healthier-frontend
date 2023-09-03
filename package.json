@@ -24,6 +24,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "framer-motion": "^10.12.16",
+    "http-status-codes": "^2.2.0",
     "image-map": "^2.0.1",
     "lamina": "^1.1.20",
     "leaflet": "^1.7.1",
