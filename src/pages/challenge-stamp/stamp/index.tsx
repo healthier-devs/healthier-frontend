@@ -1,24 +1,27 @@
+import { ReactElement } from "react";
+import { IStamp } from "src/interfaces/challenges";
 import * as Styled from "./index.style";
 
 interface IStampProps {
-  stamps: any;
+  stamps: IStamp[];
   rowIdx: number;
+  duration: number;
   isLast: boolean;
 }
 
 const STAMP_WIDTH = 86;
 const STAMP_HEIGHT = 86;
 
-function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
+function Stamp({ stamps, rowIdx, duration, isLast }: IStampProps) {
   const stampArr = [
-    ...stamps.map((stamp: any, dayIdx: number) => {
+    ...stamps.map((stamp: IStamp) => {
       /* TODO: key 수정 필요 */
       return (
         <Styled.Stamp key={stamp.dayCnt}>
           {stamp.status === "SUCCESS" ? (
             <>
               <img alt="success stamp" src="/images/stamp/success.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
-              <Styled.StatusText status={stamp.status}>{rowIdx + dayIdx + 1}일차</Styled.StatusText>
+              <Styled.StatusText status={stamp.status}>{stamp.dayCnt}일차</Styled.StatusText>
             </>
           ) : stamp.status === "FAILURE" ? (
             <>
@@ -26,11 +29,12 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
             </>
           ) : stamp.status === "NOTHING" ? (
+            // TODO: 챌린지 날짜 처리
             <>
               <img alt="nothing stamp" src="/images/stamp/lock.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>8월 27일</Styled.StatusText>
             </>
-          ) : stamp.status === "MIDTERM" ? (
+          ) : duration === stamp.dayCnt * 2 ? (
             <>
               <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
@@ -39,7 +43,7 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
                 인증
               </Styled.TermText>
             </>
-          ) : stamp.status === "FINAL" ? (
+          ) : duration === stamp.dayCnt ? (
             <>
               <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
@@ -48,14 +52,13 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
                 인증
               </Styled.TermText>
             </>
-          ) : stamp.status === "CURRENT" ? (
+          ) : (
+            // TODO: 현재 날짜 처리
             <Styled.CurrentDayStamp>
               챌린지
               <br />
               인증하기
             </Styled.CurrentDayStamp>
-          ) : (
-            <></>
           )}
         </Styled.Stamp>
       );
@@ -70,7 +73,7 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
     }
 
     return [...acc, <Styled.StampLine key={rowIdx * 3 + idx} />, val];
-  }, []);
+  }, [] as ReactElement[]);
 
   if (stampArr.length === 3) {
     dottedStampArr = [
@@ -91,7 +94,7 @@ function Stamp({ stamps, rowIdx, isLast }: IStampProps) {
     ];
   }
 
-  return (rowIdx / 3) % 2 === 0 ? dottedStampArr : dottedStampArr.reverse();
+  return <>{(rowIdx / 3) % 2 === 0 ? dottedStampArr : dottedStampArr.reverse()}</>;
 }
 
 export default Stamp;
