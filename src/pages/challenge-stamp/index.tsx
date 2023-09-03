@@ -21,14 +21,10 @@ function ChallengeStamp() {
   }, []);
 
   const makeStampChart = (stamps: IStamp[], duration: number) => {
-    let currentStamps = [...stamps];
     const lastDayCnt = stamps.length !== 0 ? stamps[stamps.length - 1].dayCnt : 0;
+    const restStamps = [...Array(duration - stamps.length)].map((_, i) => ({ dayCnt: lastDayCnt + i + 1, status: "NOTHING" }));
 
-    for (let i = 1; i <= duration - stamps.length; i++) {
-      currentStamps = [...currentStamps, { dayCnt: lastDayCnt + i, status: "NOTHING" }];
-    }
-
-    return currentStamps;
+    return [...stamps, ...restStamps];
   };
 
   return (
