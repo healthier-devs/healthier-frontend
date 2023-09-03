@@ -13,6 +13,8 @@ import MainPage from "./main";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
 import SignUp from "./signUp";
+import Email from "./signUp/email";
+import Password from "./signUp/password";
 import SymptomPage from "./symptom";
 import SymptomTypeQR from "./symptom-qr";
 import SymptomTypePage from "./symptomType";
@@ -38,4 +40,6 @@ export {
   ChallengeDetail,
   ChallengeStamp,
   Challenge,
+  Email,
+  Password,
 };

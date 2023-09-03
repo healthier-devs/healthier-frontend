@@ -9462,6 +9462,11 @@
     "follow-redirects" "^1.0.0"
     "requires-port" "^1.0.0"
 
+"http-status-codes@^2.2.0":
+  "integrity" "sha512-feERVo9iWxvnejp3SEfm/+oNG517npqL2/PIA8ORjyOZjGC7TwCRQsZylciLS64i6pJ0wRYz3rkXLRwbtFa8Ng=="
+  "resolved" "https://registry.npmjs.org/http-status-codes/-/http-status-codes-2.2.0.tgz"
+  "version" "2.2.0"
+
 "https-browserify@^1.0.0":
   "integrity" "sha512-J+FkSdyD+0mA0N+81tMotaRMfSL9SGi+xpD3T6YApKsc3bGSXJlfXri3VyFOeYkfLRQisDk1W+jIFFKBeUBbBg=="
   "resolved" "https://registry.npmjs.org/https-browserify/-/https-browserify-1.0.0.tgz"

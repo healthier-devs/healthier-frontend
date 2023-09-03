@@ -40,7 +40,11 @@ function App() {
           <Route path="/symptom" element={<Pages.SymptomPage />} />
           <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
           <Route path="/appointment" element={<Pages.Appointment />} />
-          <Route path="/signup" element={<Pages.SignUp />} />
+          <Route path="/signup" element={<Pages.SignUp />}>
+            <Route index element={<Navigate to="/signup/email" replace />} />
+            <Route path="/signup/email" element={<Pages.Email />} />
+            <Route path="/signup/password" element={<Pages.Password />} />
+          </Route>
           <Route path="/qr" element={<Pages.IndexQR />} />
           <Route path="/qr/info" element={<Pages.InformationQR />} />
           <Route path="/qr/symptom-type" element={<Pages.SymptomTypeQR />} />
