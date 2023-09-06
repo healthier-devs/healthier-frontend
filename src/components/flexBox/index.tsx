@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface IStyledFlexBox {
+interface IStyledFlexBox extends React.HTMLAttributes<HTMLDivElement> {
   flexDirection?: "column" | "row";
   justifyContent?: "start" | "center" | "space-between" | "space-around" | "space-evenly";
   alignItems?: "stretch" | "center" | "start" | "end";

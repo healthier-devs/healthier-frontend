@@ -14,6 +14,7 @@ import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
 import SignUp from "./signUp";
 import Email from "./signUp/email";
+import SignUpError from "./signUp/error";
 import Password from "./signUp/password";
 import SymptomPage from "./symptom";
 import SymptomTypeQR from "./symptom-qr";
@@ -42,4 +43,5 @@ export {
   Challenge,
   Email,
   Password,
+  SignUpError,
 };

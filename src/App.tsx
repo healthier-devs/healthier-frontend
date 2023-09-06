@@ -45,6 +45,7 @@ function App() {
             <Route path="/signup/email" element={<Pages.Email />} />
             <Route path="/signup/password" element={<Pages.Password />} />
           </Route>
+          <Route path="signup/error" element={<Pages.SignUpError />} />
           <Route path="/qr" element={<Pages.IndexQR />} />
           <Route path="/qr/info" element={<Pages.InformationQR />} />
           <Route path="/qr/symptom-type" element={<Pages.SymptomTypeQR />} />
