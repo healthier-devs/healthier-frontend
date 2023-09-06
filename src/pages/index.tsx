@@ -9,6 +9,7 @@ import Error from "./error";
 import IndexQR from "./index-qr";
 import InformationQR from "./info-qr";
 import Information from "./information";
+import ExistingAccount from "./login/existing";
 import MainPage from "./main";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
@@ -44,4 +45,5 @@ export {
   Email,
   Password,
   SignUpError,
+  ExistingAccount,
 };
