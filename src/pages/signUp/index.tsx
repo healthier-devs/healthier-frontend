@@ -10,9 +10,20 @@ function SignUp() {
     exit: false,
   });
   const navigate = useNavigate();
+  const [path] = window.location.pathname.split("/").slice(-1);
 
   const closeDialog = () => {
     setIsDialogOpen({ back: false, exit: false });
+  };
+
+  const handleClickBackButton = () => {
+    if (path === "password") {
+      navigate(-1);
+
+      return;
+    }
+
+    setIsDialogOpen({ ...isDialogOpen, back: true });
   };
 
   return (
@@ -26,7 +37,7 @@ function SignUp() {
           onClickConfirm={() => {
             closeDialog();
             // TODO: 약관 동의 화면으로 이동
-            navigate(-1);
+            navigate("/signup");
           }}
         />
       )}
@@ -45,9 +56,7 @@ function SignUp() {
       <ContentHeader
         back
         exit
-        backCallback={() => {
-          setIsDialogOpen({ ...isDialogOpen, back: true });
-        }}
+        backCallback={handleClickBackButton}
         exitCallback={() => {
           setIsDialogOpen({ ...isDialogOpen, exit: true });
         }}
