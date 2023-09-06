@@ -36,7 +36,6 @@ function SignUp() {
           onClickCancel={closeDialog}
           onClickConfirm={() => {
             closeDialog();
-            // TODO: 약관 동의 화면으로 이동
             navigate("/signup");
           }}
         />

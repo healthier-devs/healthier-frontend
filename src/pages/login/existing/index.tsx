@@ -1,18 +1,22 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import FlexBox from "src/components/flexBox";
 import * as Styled from "./index.style";
 import LoginButton from "./LoginButton";
 
-function ExistingAccount() {
+interface IExistingAccountProps {
+  email: string;
+}
+
+function ExistingAccount({ email }: IExistingAccountProps) {
   const navigate = useNavigate();
-  const { state } = useLocation();
 
   useEffect(() => {
-    // TODO: state 값에 따른 예외 처리
-    // if(!state || !state.email) navigate("/")
-  }, [state]);
+    if (!email) {
+      navigate("/");
+    }
+  }, [email, navigate]);
 
   return (
     <>
@@ -24,9 +28,9 @@ function ExistingAccount() {
         </Styled.TitleWrapper>
 
         <FlexBox flexDirection="column" gap="1.2rem" style={{ flex: 1 }}>
-          <LoginButton type="kakao" email="email@domain" />
-          <LoginButton type="apple" email="email@domain" />
-          <LoginButton type="email" email="email@domain" />
+          <LoginButton type="kakao" email={email} />
+          <LoginButton type="apple" email={email} />
+          <LoginButton type="email" email={email} />
         </FlexBox>
 
         <Styled.ResetPasswordContainer>

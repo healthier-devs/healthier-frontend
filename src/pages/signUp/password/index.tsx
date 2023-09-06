@@ -68,8 +68,8 @@ function Password() {
 
   useEffect(() => {
     if (!email) {
-      alert("이메일을 입력해 주세요");
-      navigate("/signup/email");
+      alert("유효하지 않은 접근입니다.");
+      navigate("/signup");
     }
   }, [email, navigate]);
 
