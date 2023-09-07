@@ -26,9 +26,9 @@ function ChallengeDetail() {
             <Styled.Title>매일 아침 공복에 유산균 먹기</Styled.Title>
 
             <FlexBox flexDirection="row" gap="1rem">
-              <Styled.Chip variant="primary">매일 인증</Styled.Chip>
-              <Styled.Chip variant="primary">28일 동안</Styled.Chip>
-              <Styled.Chip variant="primary">사진 인증</Styled.Chip>
+              <Styled.Chip variant="sub">매일 인증</Styled.Chip>
+              <Styled.Chip variant="sub">28일 동안</Styled.Chip>
+              <Styled.Chip variant="sub">사진 인증</Styled.Chip>
             </FlexBox>
           </FlexBox>
 
@@ -48,8 +48,9 @@ function ChallengeDetail() {
             </FlexBox>
           </FlexBox>
 
-          <Styled.Typography fontSize="1.2rem" color="500" mb="2.4rem">
-            상품권 제휴사는 전국 5대 편의점 (CU, GS25, 7-Eleven, Ministop, emart24)/교보문고/CGV/다이소/네이버페이 중 선택 가능합니다.
+          <Styled.Typography fontSize="1.2rem" color="500" mb="3.6rem">
+            {/* 상품권 제휴사는 전국 5대 편의점 (CU, GS25, 7-Eleven, Ministop, emart24)/교보문고/CGV/다이소/네이버페이 중 선택 가능합니다. */}
+            상품권 제휴사는 네이버페이로 제공됩니다.
           </Styled.Typography>
 
           <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
@@ -63,11 +64,16 @@ function ChallengeDetail() {
               매일 아침에 일어나자마자 공복상태로 유산균을 복용하는 챌린지예요.
             </Styled.Typography>
           </ChallengeDescription>
-
           <ChallengeDescription highlight="WHY : " title="왜 이 챌린지를 해야하나요?">
-            <Styled.Typography color="300" lineHeight="150%">
+            <Styled.Typography color="300" lineHeight="150%" mb="1.2rem">
               장내 미생물은 인간의 몸속에 공존하면서 생체대사 조절과 소화능력, 그리고 각종 질병의 조절 등에 영향을 미쳐요. 유산균 제제는
               장내 미생물의 균형을 유지하고 유익한 미생물을 증식시켜요.
+            </Styled.Typography>
+            <Styled.Typography color="200" lineHeight="150%" thickness="300" mb="1.2rem">
+              1. 장 트러블 관리
+            </Styled.Typography>
+            <Styled.Typography color="300" lineHeight="150%">
+              유산균 제제를 복용하면 장 건강과 면역력 향상, 알러지 예방, 감염성 질환을 예방에 효과가 있어요.
             </Styled.Typography>
           </ChallengeDescription>
 

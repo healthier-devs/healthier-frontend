@@ -50,13 +50,14 @@ export const Typography = styled.p<{
   color?: "200" | "300" | "500";
   lineHeight?: "140%" | "150%";
   fontSize?: string;
+  thickness?: string;
 }>`
   .highlight {
     color: ${({ theme }) => theme.color.blue_500};
   }
 
   font-size: ${({ fontSize = "1.4rem" }) => fontSize};
-  font-weight: 200;
+  font-weight: ${({ thickness = "200" }) => thickness};
 
   margin-top: ${({ mt }) => mt};
   margin-bottom: ${({ mb }) => mb};
@@ -69,17 +70,18 @@ export const Title = styled(Heading_2)`
   color: ${({ theme }) => theme.color.grey_200};
 
   margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
-export const Chip = styled.div<{ variant: "primary" | "secondary" }>`
-  font-size: 1.2rem;
+export const Chip = styled.div<{ variant: "primary" | "secondary" | "sub" }>`
+  font-size: ${({ variant }) => (variant === "sub" ? "1.3rem" : "1.2rem")};
 
-  font-weight: ${({ variant }) => (variant === "primary" ? "200" : "300")};
-  padding: ${({ variant }) => (variant === "primary" ? "4px 8px" : "5px 10px")};
-  border-radius: ${({ variant }) => (variant === "primary" ? "8px" : "4px")};
-  color: ${({ variant, theme }) => (variant === "primary" ? theme.color.green_300 : theme.color.sub_blue)};
-  background-color: ${({ variant }) => (variant === "primary" ? "#E6FAAF26" : "#5464F233")};
+  font-weight: ${({ variant }) => (variant === "sub" ? "200" : "300")};
+  padding: ${({ variant }) => (variant === "primary" ? "4px 8px" : variant === "secondary" ? "5px 10px" : "8px 10px")};
+  border-radius: ${({ variant }) => (variant === "primary" ? "8px" : variant === "secondary" ? "4px" : "100px")};
+  color: ${({ variant, theme }) =>
+    variant === "primary" ? theme.color.green_300 : variant === "secondary" ? theme.color.sub_blue : theme.color.grey_300};
+  background-color: ${({ variant }) => (variant === "primary" ? "#E6FAAF26" : variant === "secondary" ? "#5464F233" : "#23272E")};
 `;
 
 export const Button = styled.button`
@@ -96,5 +98,5 @@ export const Button = styled.button`
 
   cursor: pointer;
 
-  margin-bottom: 2.4rem;
+  margin-bottom: 3.2rem;
 `;
