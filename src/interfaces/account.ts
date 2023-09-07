@@ -11,3 +11,16 @@ export interface IValidatePasswordRequest {
   password: string;
   confirmPassword: string;
 }
+
+export interface ISignUpRequest {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  name: string;
+  phoneNumber: string;
+  gender: string;
+  birthDate: string;
+  nickname: string;
+  marketingOptIn: boolean;
+  healthInterests: string[];
+}

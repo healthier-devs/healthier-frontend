@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
+import { useSignUp } from "src/hooks/account/useSignUp";
+import { generateNickname } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 
 function Password() {
@@ -16,6 +18,8 @@ function Password() {
     isError: false,
     errorText: "",
   });
+
+  const { signUp } = useSignUp({ setValidation });
 
   const isEnabled = password.length > 0 && password === passwordConfirm;
 
@@ -40,22 +44,33 @@ function Password() {
       confirmPassword: passwordConfirm,
     });
 
-    if (success) {
-      alert("성공");
+    if (!success) {
+      setValidation({
+        isError: true,
+        errorText: data,
+      });
 
       return;
     }
 
-    setValidation({
-      isError: true,
-      errorText: data,
+    signUp({
+      username: email,
+      name: "홍길동",
+      phoneNumber: "010-1234-5678",
+      gender: "m",
+      birthDate: "1971-01-01",
+      nickname: generateNickname(),
+      marketingOptIn: true,
+      healthInterests: ["미용"],
+      confirmPassword: passwordConfirm,
+      password,
     });
   };
 
   useEffect(() => {
     if (!email) {
-      alert("이메일을 입력해 주세요");
-      navigate("/signup/email");
+      alert("유효하지 않은 접근입니다.");
+      navigate("/signup");
     }
   }, [email, navigate]);
 

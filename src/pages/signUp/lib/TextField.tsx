@@ -40,6 +40,7 @@ function TextField({
           isError={isError}
           type={type}
           autoComplete={type === "password" ? "off" : "on"}
+          maxLength={500}
           {...props}
         />
         {icon && (

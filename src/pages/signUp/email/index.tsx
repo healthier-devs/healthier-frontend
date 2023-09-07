@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { validateEmail } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
 import * as Lib from "../lib";
 
 function Email() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState<string>("");
   const [validation, setValidation] = useState<{ isError: boolean; errorText: string }>({
@@ -14,6 +15,7 @@ function Email() {
   });
 
   const isEnabled = email.length > 0 && !validation.isError;
+  const { isAgree } = location.state ?? false;
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValidation({
@@ -64,6 +66,13 @@ function Email() {
       return;
     }
   };
+
+  useEffect(() => {
+    if (!isAgree) {
+      alert("유효하지 않은 접근입니다");
+      navigate("/signup");
+    }
+  }, [isAgree, navigate]);
 
   return (
     <>
