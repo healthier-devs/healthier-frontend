@@ -1,3 +1,5 @@
+import { NICKNAME_DETERMINERS, NICKNAME_OBJECTS } from "src/data/account";
+
 export const validateNumber = (input: string) => {
   const parsedNumber = parseInt(input);
 
@@ -40,4 +42,11 @@ export const validatePassword = (input: string) => {
   }
 
   return new RegExp(/^.*(?=^}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(input);
+};
+
+export const generateNickname = () => {
+  const determinerIdx = Math.floor(Math.random() * NICKNAME_DETERMINERS.length);
+  const objectIdx = Math.floor(Math.random() * NICKNAME_OBJECTS.length);
+
+  return NICKNAME_DETERMINERS[determinerIdx] + NICKNAME_OBJECTS[objectIdx];
 };

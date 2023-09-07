@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
 import { useSignUp } from "src/hooks/account/useSignUp";
+import { generateNickname } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 
 function Password() {
@@ -18,7 +19,7 @@ function Password() {
     errorText: "",
   });
 
-  const { signUp } = useSignUp();
+  const { signUp } = useSignUp({ setValidation });
 
   const isEnabled = password.length > 0 && password === passwordConfirm;
 
@@ -58,7 +59,7 @@ function Password() {
       phoneNumber: "010-1234-5678",
       gender: "m",
       birthDate: "1971-01-01",
-      nickname: "길동쓰",
+      nickname: generateNickname(),
       marketingOptIn: true,
       healthInterests: ["미용"],
       confirmPassword: passwordConfirm,
