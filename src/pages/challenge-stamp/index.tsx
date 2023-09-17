@@ -12,7 +12,7 @@ function ChallengeStamp() {
   const param = useParams();
 
   // TODO: userId 처리
-  const { stampChartData } = useGetStampChart({ userId: "", challengeId: param.id ?? "" });
+  const { stampChartData } = useGetStampChart({ userId: "64f87356d626021b19434f36", challengeId: param.id ?? "" });
 
   useEffect(() => {
     if (!param.id) {

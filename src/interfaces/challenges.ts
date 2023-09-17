@@ -1,26 +1,24 @@
-import { CHALLENGE_CATEGORIES } from "src/data/challenge";
-
 export interface IChallenge {
   id: string;
-  title: string;
-  category: string;
-  count: number;
-  gift80: number | null;
-  gift90: number | null;
-  gift100: number | null;
-  duration: number;
-  times: number;
+  name: string;
+  duration: string;
+  times: string;
   method: string;
-  detail: string;
-  notice: string;
-  image: string;
-  participants: string;
-  status: string;
+  maximumGift: string;
 }
 
-export type TChallengeListResponse = IChallenge[];
+export type TChallengeListResponse = {
+  data: IChallenge[];
+  total: number;
+};
 
-export type TChallengeCategory = typeof CHALLENGE_CATEGORIES[number];
+export interface TChallengeCategory {
+  name: string;
+  koreanName: string;
+  imageUrl: string;
+}
+
+export type TChallengeCategoryListResponse = TChallengeCategory[];
 
 export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
 

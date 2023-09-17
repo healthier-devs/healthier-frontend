@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { challengeFetcher } from "src/api/challenge/fetcher";
 import { queryKeys } from "src/api/queryKeys";
+import { stampFetcher } from "src/api/stamp/fetcher";
 import type { IStampChartResponse } from "src/interfaces/challenges";
 
 interface IUseGetChallengesProps {
@@ -11,7 +11,7 @@ interface IUseGetChallengesProps {
 export const useGetStampChart = ({ userId, challengeId }: IUseGetChallengesProps) => {
   const { data: stampChartData, isLoading } = useQuery<IStampChartResponse>({
     queryKey: [queryKeys.STAMP, userId, challengeId],
-    queryFn: () => challengeFetcher.getStampChart({ userId, challengeId }),
+    queryFn: () => stampFetcher.getStampChart({ userId, challengeId }),
   });
 
   return {
