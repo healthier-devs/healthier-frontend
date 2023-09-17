@@ -4,18 +4,22 @@ import { stampFetcher } from "src/api/stamp/fetcher";
 import type { IStampChartResponse } from "src/interfaces/challenges";
 
 interface IUseGetChallengesProps {
-  userId: string;
   challengeId: string;
 }
 
-export const useGetStampChart = ({ userId, challengeId }: IUseGetChallengesProps) => {
-  const { data: stampChartData, isLoading } = useQuery<IStampChartResponse>({
-    queryKey: [queryKeys.STAMP, userId, challengeId],
-    queryFn: () => stampFetcher.getStampChart({ userId, challengeId }),
+export const useGetStampChart = ({ challengeId }: IUseGetChallengesProps) => {
+  const {
+    data: stampChartData,
+    isLoading,
+    isSuccess,
+  } = useQuery<IStampChartResponse>({
+    queryKey: [queryKeys.STAMP, challengeId],
+    queryFn: () => stampFetcher.getStampChart(challengeId),
   });
 
   return {
     stampChartData,
     isLoading,
+    isSuccess,
   };
 };

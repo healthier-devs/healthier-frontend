@@ -30,15 +30,17 @@ export interface IStamp {
 export interface IStampChartResponse {
   title: string;
   count: number;
-  duration: number;
-  times: number;
+  duration: string;
+  times: string;
   method: string;
   revivalCnt: number;
   currentDayCnt: number;
   stamps: IStamp[];
 }
 
-export interface IStampChartRequest {
+export interface IStampBodyRequest {
+  image: string;
   userId: string;
   challengeId: string;
+  dayCount: number;
 }

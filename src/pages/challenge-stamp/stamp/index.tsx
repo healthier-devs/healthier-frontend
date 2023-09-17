@@ -7,18 +7,25 @@ interface IStampProps {
   rowIdx: number;
   duration: number;
   isLast: boolean;
+  currentDayCnt: number;
 }
 
 const STAMP_WIDTH = 86;
 const STAMP_HEIGHT = 86;
 
-function Stamp({ stamps, rowIdx, duration, isLast }: IStampProps) {
+function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps) {
   const stampArr = [
     ...stamps.map((stamp: IStamp) => {
       /* TODO: key 수정 필요 */
       return (
         <Styled.Stamp key={stamp.dayCnt}>
-          {stamp.status === "SUCCESS" ? (
+          {currentDayCnt === stamp.dayCnt ? (
+            <Styled.CurrentDayStamp>
+              챌린지
+              <br />
+              인증하기
+            </Styled.CurrentDayStamp>
+          ) : stamp.status === "SUCCESS" ? (
             <>
               <img alt="success stamp" src="/images/stamp/success.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>{stamp.dayCnt}일차</Styled.StatusText>
@@ -27,12 +34,6 @@ function Stamp({ stamps, rowIdx, duration, isLast }: IStampProps) {
             <>
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
-            </>
-          ) : stamp.status === "NOTHING" ? (
-            // TODO: 챌린지 날짜 처리
-            <>
-              <img alt="nothing stamp" src="/images/stamp/lock.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
-              <Styled.StatusText status={stamp.status}>8월 27일</Styled.StatusText>
             </>
           ) : duration === stamp.dayCnt * 2 ? (
             <>
@@ -52,13 +53,14 @@ function Stamp({ stamps, rowIdx, duration, isLast }: IStampProps) {
                 인증
               </Styled.TermText>
             </>
+          ) : stamp.status === "NOTHING" ? (
+            <>
+              {/* TODO: 날짜 설정 */}
+              <img alt="nothing stamp" src="/images/stamp/lock.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
+              <Styled.StatusText status={stamp.status}>8월 27일</Styled.StatusText>
+            </>
           ) : (
-            // TODO: 현재 날짜 처리
-            <Styled.CurrentDayStamp>
-              챌린지
-              <br />
-              인증하기
-            </Styled.CurrentDayStamp>
+            <></>
           )}
         </Styled.Stamp>
       );
