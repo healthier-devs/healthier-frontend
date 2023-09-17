@@ -24,6 +24,7 @@ export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REV
 
 export interface IStamp {
   dayCnt: number;
+  date: string;
   status: TStampStatus;
 }
 
