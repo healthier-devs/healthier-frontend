@@ -3,10 +3,20 @@ import { challengeFetcher } from "src/api/challenge/fetcher";
 import { queryKeys } from "src/api/queryKeys";
 import type { TChallengeListResponse } from "src/interfaces/challenges";
 
-export const useGetChallenges = () => {
+interface IUseGetChallenges {
+  category: string;
+  enabled: boolean;
+  pageInfo: {
+    page: number;
+    size: number;
+  };
+}
+
+export const useGetChallenges = ({ category, enabled, pageInfo }: IUseGetChallenges) => {
   const { data: challengesData, isLoading } = useQuery<TChallengeListResponse>({
-    queryKey: [queryKeys.CHALLENGE],
-    queryFn: () => challengeFetcher.getChallenges(),
+    queryKey: [queryKeys.CHALLENGE, category, pageInfo],
+    queryFn: () => challengeFetcher.getChallengesByCategory(category, pageInfo),
+    enabled,
   });
 
   return {
