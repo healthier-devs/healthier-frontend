@@ -70,8 +70,6 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  display: flex;
-
   width: 100vw;
   @media (min-width: 500px) {
     width: calc(var(--vw, 1vw) * 100);
