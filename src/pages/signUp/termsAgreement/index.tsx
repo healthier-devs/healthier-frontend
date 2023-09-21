@@ -1,20 +1,98 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import FlexBox from "src/components/flexBox";
+import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
+import * as Lib from "../lib";
+import * as Styled from "./index.style";
+
+const NECESSARY_NUMS = NECESSARY_AGREEMENTS.length;
+const OPTIONAL_NUMS = OPTIONAL_AGREEMENTS.length;
+const TERMS_NUM = NECESSARY_NUMS + OPTIONAL_NUMS;
 
 function TermsAgreement() {
   const navigate = useNavigate();
+  const [all, setAll] = useState<boolean>(false);
+  const [necessaries, setNecessaries] = useState<boolean[]>(Array.from({ length: NECESSARY_NUMS }, () => false));
+  const [optionals, setOptionals] = useState<boolean[]>(Array.from({ length: OPTIONAL_NUMS }, () => false));
+
+  const isEnabled = necessaries.filter((agree) => agree === true).length === NECESSARY_NUMS;
+
+  const handleClickNextButton = () => {
+    navigate("/signup/email", {
+      state: { isAgree: true },
+    });
+  };
+
+  const handleClickAgreeAll = () => {
+    if (all) {
+      setNecessaries(Array.from({ length: NECESSARY_NUMS }, () => false));
+      setOptionals(Array.from({ length: OPTIONAL_NUMS }, () => false));
+      setAll(false);
+
+      return;
+    }
+
+    setNecessaries(Array.from({ length: NECESSARY_NUMS }, () => true));
+    setOptionals(Array.from({ length: OPTIONAL_NUMS }, () => true));
+    setAll(true);
+  };
+
+  const handleClickNecessary = (idx: number) => {
+    setNecessaries([...necessaries.slice(0, idx), !necessaries[idx], ...necessaries.slice(idx + 1)]);
+  };
+
+  const handleClickOptional = (idx: number) => {
+    setOptionals([...optionals.slice(0, idx), !optionals[idx], ...optionals.slice(idx + 1)]);
+  };
+
+  useEffect(() => {
+    if (necessaries.filter((agree) => agree === true).length + optionals.filter((agree) => agree === true).length === TERMS_NUM) {
+      setAll(true);
+
+      return;
+    }
+    setAll(false);
+  }, [necessaries, optionals, setAll]);
 
   return (
-    <div>
-      <button
-        onClick={() =>
-          navigate("/signup/email", {
-            state: { isAgree: true },
-          })
-        }
-      >
-        동의하고 계속하기
-      </button>
-    </div>
+    <>
+      <Lib.Container>
+        <Lib.Title text={"헬시어 서비스 이용약관에\n동의해주세요"} />
+        <Styled.Box>
+          <FlexBox alignItems="center" gap="1.6rem">
+            <Lib.Checkbox id="agree-all" checked={all} onClick={handleClickAgreeAll} />
+            <Styled.Typography className="body1">전체 동의합니다</Styled.Typography>
+          </FlexBox>
+        </Styled.Box>
+        <div>
+          <Styled.List>
+            {NECESSARY_AGREEMENTS.map(({ text, url }, idx) => (
+              <Styled.ListItem key={idx}>
+                <FlexBox alignItems="center">
+                  <Lib.Checkbox id="agree-1" checked={necessaries[idx]} onClick={() => handleClickNecessary(idx)} />
+                  <Styled.Typography>{text} (필수)</Styled.Typography>
+                  <Link to={url} target="_blank">
+                    내용 보기
+                  </Link>
+                </FlexBox>
+              </Styled.ListItem>
+            ))}
+            {OPTIONAL_AGREEMENTS.map(({ text, url }, idx) => (
+              <Styled.ListItem key={idx}>
+                <FlexBox alignItems="center">
+                  <Lib.Checkbox id="agree-3" checked={optionals[idx]} onClick={() => handleClickOptional(idx)} />
+                  <Styled.Typography>{text} (선택)</Styled.Typography>
+                  <Link to={url} target="_blank">
+                    내용 보기
+                  </Link>
+                </FlexBox>
+              </Styled.ListItem>
+            ))}
+          </Styled.List>
+        </div>
+      </Lib.Container>
+      <Lib.NextButton isEnabled={isEnabled} onClick={handleClickNextButton} text="동의하고 계속하기" />
+    </>
   );
 }
 
