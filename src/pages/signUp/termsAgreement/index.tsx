@@ -58,7 +58,7 @@ function TermsAgreement() {
     <>
       <Lib.Container>
         <Lib.Title text={"헬시어 서비스 이용약관에\n동의해주세요"} />
-        <Styled.Box>
+        <Styled.Box isEnabled={all}>
           <FlexBox alignItems="center" gap="1.6rem">
             <Lib.Checkbox id="agree-all" checked={all} onClick={handleClickAgreeAll} />
             <Styled.Typography className="body1">전체 동의합니다</Styled.Typography>
@@ -68,22 +68,32 @@ function TermsAgreement() {
           <Styled.List>
             {NECESSARY_AGREEMENTS.map(({ text, url }, idx) => (
               <Styled.ListItem key={idx}>
-                <FlexBox alignItems="center">
-                  <Lib.Checkbox id="agree-1" checked={necessaries[idx]} onClick={() => handleClickNecessary(idx)} />
-                  <Styled.Typography>{text} (필수)</Styled.Typography>
+                <FlexBox alignItems="center" gap="10px">
+                  <Lib.Checkbox
+                    id={`necessary-${idx + 1}`}
+                    variant="secondary"
+                    checked={necessaries[idx]}
+                    onClick={() => handleClickNecessary(idx)}
+                  />
+                  <Styled.Typography className="body2">{text} (필수)</Styled.Typography>
                   <Link to={url} target="_blank">
-                    내용 보기
+                    <Styled.Typography className="link">내용 보기</Styled.Typography>
                   </Link>
                 </FlexBox>
               </Styled.ListItem>
             ))}
             {OPTIONAL_AGREEMENTS.map(({ text, url }, idx) => (
               <Styled.ListItem key={idx}>
-                <FlexBox alignItems="center">
-                  <Lib.Checkbox id="agree-3" checked={optionals[idx]} onClick={() => handleClickOptional(idx)} />
-                  <Styled.Typography>{text} (선택)</Styled.Typography>
+                <FlexBox alignItems="center" gap="10px">
+                  <Lib.Checkbox
+                    id={`optional-${idx + 1}`}
+                    variant="secondary"
+                    checked={optionals[idx]}
+                    onClick={() => handleClickOptional(idx)}
+                  />
+                  <Styled.Typography className="body2">{text} (선택)</Styled.Typography>
                   <Link to={url} target="_blank">
-                    내용 보기
+                    <Styled.Typography className="link">내용 보기</Styled.Typography>
                   </Link>
                 </FlexBox>
               </Styled.ListItem>
