@@ -26,7 +26,7 @@ export const ContentsContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-top: 24rem;
+  margin: 24rem 0 2.4rem 0;
 `;
 
 export const HeaderContainer = styled.div`
@@ -156,7 +156,7 @@ export const CurrentProgress = styled.div<{ percent: number }>`
   background-color: ${({ theme }) => theme.color.green};
 `;
 
-export const InviteContainer = styled.div`
+export const BannerContainer = styled.div`
   width: calc(100% - 4rem);
   box-sizing: border-box;
 
@@ -175,7 +175,7 @@ export const InviteContainer = styled.div`
   }
 `;
 
-export const InviteTitle = styled.h2`
+export const BannerTitle = styled.h2`
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 140%;
@@ -184,16 +184,21 @@ export const InviteTitle = styled.h2`
   color: ${({ theme }) => theme.color.grey_200};
 `;
 
-export const InviteDescription = styled.p`
+export const BannerDescription = styled.p`
   font-size: 1.3rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 140%;
   letter-spacing: -0.3px;
 
   color: ${({ theme }) => theme.color.grey_400};
 
   margin-top: 0.7rem;
+
+  .highlight {
+    font-weight: 400;
+    color: ${({ theme }) => theme.color.green};
+  }
 `;
 
 export const CTAContainer = styled.div`
@@ -213,7 +218,7 @@ export const CTAContainer = styled.div`
 
 export const StampContainer = styled.div`
   width: calc(100% - 4.8rem);
-  margin: 5rem 2.4rem;
+  margin: 3rem 2.4rem 0;
 
   display: flex;
   flex-direction: column;

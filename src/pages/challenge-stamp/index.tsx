@@ -55,13 +55,18 @@ function ChallengeStamp() {
             </Styled.TopContainer>
 
             <Styled.ContentsContainer>
-              <Styled.InviteContainer>
+              <Styled.BannerContainer>
                 <div className="top-box">
-                  <Styled.InviteTitle>친구 초대하기</Styled.InviteTitle>
+                  <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+                    <Styled.BannerTitle>부활티켓 사용하기</Styled.BannerTitle>
+                    <Styled.BannerDescription style={{ margin: 0 }}>
+                      <span className="highlight">n장</span> 보유중
+                    </Styled.BannerDescription>
+                  </div>
                   <ChevronRightIcon />
                 </div>
-                <Styled.InviteDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.InviteDescription>
-              </Styled.InviteContainer>
+                <Styled.BannerDescription>부활티켓을 사용해서 실패한 회차를 복구해보세요!</Styled.BannerDescription>
+              </Styled.BannerContainer>
 
               <Styled.StampContainer>
                 {stampChartData &&
@@ -81,6 +86,14 @@ function ChallengeStamp() {
                     )
                   )}
               </Styled.StampContainer>
+
+              <Styled.BannerContainer>
+                <div className="top-box">
+                  <Styled.BannerTitle>친구 초대하기</Styled.BannerTitle>
+                  <ChevronRightIcon />
+                </div>
+                <Styled.BannerDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.BannerDescription>
+              </Styled.BannerContainer>
             </Styled.ContentsContainer>
           </Styled.Container>
 
