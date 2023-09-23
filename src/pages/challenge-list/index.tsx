@@ -11,7 +11,7 @@ interface IPageInfo {
   size: number;
 }
 
-function Challenge() {
+function ChallengeList() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: -1, size: 15 });
 
@@ -62,4 +62,4 @@ function Challenge() {
   );
 }
 
-export default Challenge;
+export default ChallengeList;
