@@ -43,7 +43,7 @@ function ChallengeStamp() {
 
                 <Styled.ProgressContainer>
                   <Styled.ProgressBar>
-                    <Styled.CurrentProgress percent={stampChartData?.currentDayCnt ?? 1 / (duration === 0 ? 1 : duration)} />
+                    <Styled.CurrentProgress percent={((stampChartData?.currentDayCnt ?? 1) / (duration === 0 ? 1 : duration)) * 100} />
                   </Styled.ProgressBar>
 
                   <Styled.ProgressTextBox>
