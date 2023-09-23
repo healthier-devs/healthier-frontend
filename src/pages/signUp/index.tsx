@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
-import Dialog from "src/components/diaglog";
+import Dialog from "src/components/dialog";
 import Layout from "src/components/layout";
 import useModal from "src/hooks/useModal";
 
