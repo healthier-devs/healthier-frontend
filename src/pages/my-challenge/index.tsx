@@ -1,79 +1,22 @@
-import { useState, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
-import { IProgressChallenge, IFinishChallenge } from "../../interfaces/challenges";
+import { useGetMyChallenges } from "src/hooks/challenge/useGetMyChallenges";
+import { IMyChallengeProgress, IMyChallengeFinish } from "../../interfaces/challenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
 
-interface IPageInfo {
-  page: number;
-  size: number;
-}
-
-type TTabType = "참여중" | "완료";
-
-const myChallengeData: { data: IProgressChallenge[] } = {
-  data: [
-    {
-      id: "1",
-      name: "하루 7시간 수면 달성하기",
-      dayCnt: 5,
-      duration: 23,
-      status: "NOTHING",
-    },
-    {
-      id: "2",
-      name: "하루 7시간 수면 달성하기",
-      dayCnt: 5,
-      duration: 23,
-      status: "NOTHING",
-    },
-    {
-      id: "3",
-      name: "매일 유산소운동 30분 하기",
-      dayCnt: 3,
-      duration: 25,
-      status: "SUCCESS",
-    },
-  ],
-};
-
-const finishChallengeData: { data: IFinishChallenge[] } = {
-  data: [
-    {
-      id: "1",
-      name: "하루 7시간 수면 달성하기",
-      percent: 100,
-      status: "SUCCESS",
-    },
-    {
-      id: "2",
-      name: "매일 유산소운동 30분 하기",
-      percent: 50,
-      status: "FAILURE",
-    },
-  ],
-};
+type TTabType = "PROGRESS" | "CLOSED";
 
 function ChallengeList() {
   const navigate = useNavigate();
 
-  const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: -1, size: 15 });
-  const [selectedTab, setSelectedTab] = useState<TTabType>("참여중");
+  const [selectedTab, setSelectedTab] = useState<TTabType>("PROGRESS");
 
-  const [ref, inView] = useInView();
-
-  // TODO: 참여중인 challenge API 연동
-  // const { myChallengesData } = useGetMyChallenges({
-  //   pageInfo,
-  // });
-
-  useEffect(() => {
-    if (inView) {
-      setPageInfo({ ...pageInfo, page: pageInfo.page + 1 });
-    }
-  }, [inView]);
+  const { myChallengesData, isLoading, isSuccess } = useGetMyChallenges({
+    status: selectedTab,
+  });
+  const isReadyData = !isLoading && isSuccess;
 
   return (
     <div>
@@ -88,49 +31,47 @@ function ChallengeList() {
       </Styled.HeaderContainer>
 
       <Styled.TabContainer>
-        <Styled.Tab onClick={() => setSelectedTab("참여중")}>
+        <Styled.Tab onClick={() => setSelectedTab("PROGRESS")}>
           <Styled.TabTitle>
-            참여중인 챌린지 <span className="highlight">{myChallengeData.data.length}</span>
+            참여중인 챌린지 <span className="highlight">{myChallengesData?.length ?? 0}</span>
           </Styled.TabTitle>
-          {selectedTab === "참여중" && <Styled.SelectedLine />}
+          {selectedTab === "PROGRESS" && <Styled.SelectedLine />}
         </Styled.Tab>
-        <Styled.Tab onClick={() => setSelectedTab("완료")}>
+        <Styled.Tab onClick={() => setSelectedTab("CLOSED")}>
           <Styled.TabTitle>완료한 챌린지</Styled.TabTitle>
-          {selectedTab === "완료" && <Styled.SelectedLine />}
+          {selectedTab === "CLOSED" && <Styled.SelectedLine />}
         </Styled.Tab>
       </Styled.TabContainer>
 
-      {selectedTab === "참여중" && (
+      {selectedTab === "PROGRESS" && isReadyData && (
         <Styled.CardList>
-          {myChallengeData?.data.map((challenge) => (
+          {((myChallengesData ?? []) as IMyChallengeProgress[]).map((challenge) => (
             <ChallengeCard
-              key={challenge.id}
-              name={challenge.name}
+              key={challenge.challengeId}
+              name={challenge.challengeName}
               dayCnt={challenge.dayCnt}
               duration={challenge.duration}
               status={`PROGRESS-${challenge.status}`}
-              onClick={() => navigate(`/challenge/${challenge.id}`)}
+              onClick={() => navigate(`/challenge/${challenge.challengeId}`)}
             />
           ))}
           <Styled.ExtraChallengeButton onClick={() => navigate("/challenge-list")}>
             <p>다른 챌린지도 보러가기</p>
             <ChevronRightIcon stroke="#787C83" strokeWidth={2} />
           </Styled.ExtraChallengeButton>
-          <div ref={ref} />
         </Styled.CardList>
       )}
-      {selectedTab === "완료" && (
+      {selectedTab === "CLOSED" && isReadyData && (
         <Styled.CardList>
-          {finishChallengeData?.data.map((challenge) => (
+          {((myChallengesData ?? []) as IMyChallengeFinish[]).map((challenge) => (
             <ChallengeCard
-              key={challenge.id}
-              name={challenge.name}
-              percent={challenge.percent}
-              status={`FINISH-${challenge.status}`}
-              onClick={() => navigate(`/challenge/${challenge.id}`)}
+              key={challenge.challengeId}
+              name={challenge.challengeName}
+              percent={challenge.achievement}
+              status={`FINISH-${challenge.achievement === 100 ? "SUCCESS" : "FAILURE"}`}
+              onClick={() => navigate(`/challenge/${challenge.challengeId}`)}
             />
           ))}
-          <div ref={ref} />
         </Styled.CardList>
       )}
     </div>

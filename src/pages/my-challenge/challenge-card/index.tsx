@@ -1,7 +1,6 @@
 import { HTMLAttributes } from "react";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import * as Styled from "./index.style";
-import type { IProgressChallenge } from "src/interfaces/challenges";
 
 interface IChallengeCardProps extends HTMLAttributes<HTMLDivElement> {
   name: string;
@@ -13,7 +12,6 @@ interface IChallengeCardProps extends HTMLAttributes<HTMLDivElement> {
 
 function ChallengeCard({ name, dayCnt, duration, percent, status, onClick }: IChallengeCardProps) {
   const isProgress = status.startsWith("PROGRESS");
-
   const isSuccess = status.endsWith("SUCCESS");
 
   return (

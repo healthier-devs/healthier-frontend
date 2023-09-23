@@ -1,5 +1,10 @@
 import axios, { AxiosResponse } from "axios";
-import type { TChallengeListResponse, TChallengeCategoryListResponse } from "src/interfaces/challenges";
+import type {
+  TChallengeListResponse,
+  TChallengeCategoryListResponse,
+  IMyChallengeFinish,
+  IMyChallengeProgress,
+} from "src/interfaces/challenges";
 
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}/challenges`,
@@ -21,5 +26,8 @@ export const challengeFetcher = {
   },
   getChallengesByCategory(category: string, pageInfo: { page: number; size: number }): Promise<TChallengeListResponse> {
     return fetcher.get(`/category/${category}?page=${pageInfo.page}&size=${pageInfo.size}`);
+  },
+  getMyChallenge(status: "PROGRESS" | "CLOSED"): Promise<IMyChallengeFinish[] | IMyChallengeProgress[]> {
+    return fetcher.get(`/my-challenges?status=${status}`);
   },
 };

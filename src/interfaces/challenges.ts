@@ -7,21 +7,6 @@ export interface IChallenge {
   maximumGift: string;
 }
 
-export interface IProgressChallenge {
-  id: string;
-  name: string;
-  dayCnt: number;
-  duration: number;
-  status: "SUCCESS" | "NOTHING";
-}
-
-export interface IFinishChallenge {
-  id: string;
-  name: string;
-  percent: number;
-  status: "SUCCESS" | "FAILURE";
-}
-
 export type TChallengeListResponse = {
   data: IChallenge[];
   total: number;
@@ -36,6 +21,20 @@ export interface TChallengeCategory {
 export type TChallengeCategoryListResponse = TChallengeCategory[];
 
 export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
+
+export interface IMyChallengeProgress {
+  challengeId: string;
+  challengeName: string;
+  dayCnt: number;
+  duration: number;
+  status: "SUCCESS" | "NOTHING";
+}
+
+export interface IMyChallengeFinish {
+  challengeId: string;
+  challengeName: string;
+  achievement: number;
+}
 
 export interface IStamp {
   dayCnt: number;
