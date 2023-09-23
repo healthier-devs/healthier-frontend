@@ -1,48 +1,61 @@
-import FlexBox from "../flexBox";
+import { forwardRef, ReactNode } from "react";
 import * as Styled from "./index.style";
 
-interface IDialogProps {
-  title?: string;
-  description?: string;
-  onClickBackDrop: () => void;
+export interface IDialogProps {
+  title?: ReactNode;
+  description?: ReactNode;
+  subDescription?: ReactNode;
+  onClickBackDrop?: () => void;
+  imageUrl?: string;
+  buttonType?: "one" | "two";
   cancelText?: string;
   confirmText?: string;
   onClickCancel?: () => void;
   onClickConfirm?: () => void;
+  singleButtonText?: ReactNode;
 }
 
-function Dialog({
-  title = "",
-  description = "",
-  cancelText = "취소",
-  confirmText = "확인",
-  onClickBackDrop,
-  onClickCancel,
-  onClickConfirm,
-}: IDialogProps) {
+const Dialog = forwardRef<HTMLDivElement, IDialogProps>(function Dialog(
+  {
+    title = "",
+    description,
+    subDescription,
+    imageUrl,
+    buttonType = "two",
+    cancelText = "취소",
+    confirmText = "확인",
+    singleButtonText = "확인",
+    onClickCancel,
+    onClickConfirm,
+  },
+  ref
+) {
   return (
-    <>
-      <Styled.Container>
-        <Styled.BackDrop onClick={onClickBackDrop} />
-
-        <Styled.Content>
-          <Styled.TitleContainer>
-            <Styled.Title>{title}</Styled.Title>
-            <Styled.Description>{description}</Styled.Description>
-          </Styled.TitleContainer>
-
-          <FlexBox>
-            <Styled.Button borderRight onClick={onClickCancel}>
-              <span className="cancel">{cancelText}</span>
-            </Styled.Button>
-            <Styled.Button onClick={onClickConfirm}>
-              <span className="confirm">{confirmText}</span>
-            </Styled.Button>
-          </FlexBox>
-        </Styled.Content>
+    <Styled.Wrapper>
+      <Styled.Container ref={ref}>
+        <Styled.ContentContainer>
+          <Styled.Title>{title}</Styled.Title>
+          {description && <Styled.Description>{description}</Styled.Description>}
+          {imageUrl && <Styled.Image src={imageUrl} />}
+          {subDescription && <Styled.SubDescription>{subDescription}</Styled.SubDescription>}
+        </Styled.ContentContainer>
+        <Styled.ButtonContainer>
+          {buttonType === "one" ? (
+            <Styled.SingleButton onClick={onClickConfirm}>{singleButtonText}</Styled.SingleButton>
+          ) : (
+            <>
+              <Styled.DoubleButton position="left" onClick={onClickCancel}>
+                {cancelText}
+              </Styled.DoubleButton>
+              <Styled.DoubleButton position="right" onClick={onClickConfirm}>
+                {confirmText}
+              </Styled.DoubleButton>
+            </>
+          )}
+        </Styled.ButtonContainer>
       </Styled.Container>
-    </>
+    </Styled.Wrapper>
   );
-}
+});
 
 export default Dialog;
