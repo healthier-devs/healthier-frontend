@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import Tooltip from "src/components/tooltip";
 import { IStamp } from "src/interfaces/challenges";
 import * as Styled from "./index.style";
 
@@ -14,9 +15,24 @@ const STAMP_WIDTH = 86;
 const STAMP_HEIGHT = 86;
 
 function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps) {
+  let isFirstFailure = true;
   const stampArr = [
     ...stamps.map((stamp: IStamp) => {
       const [_, month, day] = stamp.date.split("-").map(Number);
+
+      if (stamp.status === "FAILURE" && isFirstFailure) {
+        isFirstFailure = false;
+
+        return (
+          <Styled.Stamp key={stamp.dayCnt}>
+            <div style={{ position: "relative", left: 0, top: 0 }}>
+              <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
+              <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
+              <Tooltip>부활티켓을 사용해보세요</Tooltip>
+            </div>
+          </Styled.Stamp>
+        );
+      }
 
       return (
         <Styled.Stamp key={stamp.dayCnt}>
@@ -68,8 +84,6 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps)
       );
     }),
   ];
-
-  const isAdded = stampArr.length === 2;
 
   let dottedStampArr = stampArr.reduce((acc, val, idx) => {
     if (idx === 0) {
