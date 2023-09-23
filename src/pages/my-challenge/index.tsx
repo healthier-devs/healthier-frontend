@@ -90,7 +90,7 @@ function ChallengeList() {
       <Styled.TabContainer>
         <Styled.Tab onClick={() => setSelectedTab("참여중")}>
           <Styled.TabTitle>
-            참여중인 챌린지 <span className="highlight">9</span>
+            참여중인 챌린지 <span className="highlight">{myChallengeData.data.length}</span>
           </Styled.TabTitle>
           {selectedTab === "참여중" && <Styled.SelectedLine />}
         </Styled.Tab>
