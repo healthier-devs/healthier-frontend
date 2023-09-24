@@ -9,20 +9,22 @@ interface IStampProps {
   duration: number;
   isLast: boolean;
   currentDayCnt: number;
+  isRevivalDayLine: boolean;
 }
 
 const STAMP_WIDTH = 86;
 const STAMP_HEIGHT = 86;
 
-function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps) {
+function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLine }: IStampProps) {
   let isFirstFailure = true;
+
   const stampArr = [
-    ...stamps.map((stamp: IStamp, idx: number) => {
+    ...stamps.map((stamp: IStamp) => {
       const [_, month, day] = stamp.date.split("-").map(Number);
 
-      if (stamp.status === "FAILURE" && isFirstFailure) {
+      if (isFirstFailure && isRevivalDayLine) {
         isFirstFailure = false;
-        const position = getTooltipPosition(idx);
+        const position = getTooltipPosition(stamp.dayCnt - 1);
 
         return (
           <Styled.Stamp key={stamp.dayCnt}>
@@ -117,7 +119,7 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps)
 export default Stamp;
 
 function getTooltipPosition(idx: number) {
-  if (idx % 2 === 0) {
+  if (Math.floor(idx / 3) % 2 === 0) {
     // 짝수 행
     return idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right";
   } else {

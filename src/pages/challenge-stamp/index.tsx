@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
@@ -11,6 +11,8 @@ function ChallengeStamp() {
   const param = useParams();
 
   const { stampChartData, isLoading, isSuccess } = useGetStampChart({ challengeId: param.id ?? "" });
+
+  const isRevivalDayLine = useRef<boolean>(true);
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -43,7 +45,7 @@ function ChallengeStamp() {
 
                 <Styled.ProgressContainer>
                   <Styled.ProgressBar>
-                    <Styled.CurrentProgress percent={stampChartData?.currentDayCnt ?? 1 / (duration === 0 ? 1 : duration)} />
+                    <Styled.CurrentProgress percent={((stampChartData?.currentDayCnt ?? 1) / (duration === 0 ? 1 : duration)) * 100} />
                   </Styled.ProgressBar>
 
                   <Styled.ProgressTextBox>
@@ -65,21 +67,41 @@ function ChallengeStamp() {
 
               <Styled.StampContainer>
                 {stampChartData &&
-                  stampChartData.stamps.map((_, idx) =>
-                    idx % 3 === 0 ? (
-                      <Styled.StampRow key={`${idx}row`}>
-                        <Stamp
-                          stamps={stampChartData.stamps.slice(idx, idx + 3)}
-                          rowIdx={idx}
-                          duration={duration}
-                          isLast={Math.ceil((stampChartData.stamps.length ?? 1) / 3) === idx / 3 + 1}
-                          currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                        />
-                      </Styled.StampRow>
-                    ) : (
-                      <></>
-                    )
-                  )}
+                  stampChartData.stamps.map((stamp, idx) => {
+                    if (isRevivalDayLine.current && stamp.status === "FAILURE") {
+                      isRevivalDayLine.current = false;
+
+                      return (
+                        <Styled.StampRow key={`${idx}row`}>
+                          <Stamp
+                            stamps={stampChartData.stamps.slice(idx, idx + 3)}
+                            rowIdx={idx}
+                            duration={duration}
+                            isLast={Math.ceil((stampChartData.stamps.length ?? 1) / 3) === idx / 3 + 1}
+                            currentDayCnt={stampChartData.currentDayCnt ?? 0}
+                            isRevivalDayLine={true}
+                          />
+                        </Styled.StampRow>
+                      );
+                    }
+
+                    if (idx % 3 === 0) {
+                      return (
+                        <Styled.StampRow key={`${idx}row`}>
+                          <Stamp
+                            stamps={stampChartData.stamps.slice(idx, idx + 3)}
+                            rowIdx={idx}
+                            duration={duration}
+                            isLast={Math.ceil((stampChartData.stamps.length ?? 1) / 3) === idx / 3 + 1}
+                            currentDayCnt={stampChartData.currentDayCnt ?? 0}
+                            isRevivalDayLine={isRevivalDayLine.current}
+                          />
+                        </Styled.StampRow>
+                      );
+                    }
+
+                    return <></>;
+                  })}
               </Styled.StampContainer>
             </Styled.ContentsContainer>
           </Styled.Container>
