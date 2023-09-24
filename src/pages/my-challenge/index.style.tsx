@@ -100,3 +100,22 @@ export const ExtraChallengeButton = styled.div`
     color: ${({ theme }) => theme.color.grey_200};
   }
 `;
+
+export const EmptyText = styled.p`
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03rem;
+
+  color: ${({ theme }) => theme.color.grey_300};
+  text-align: center;
+`;
+
+export const EmptyContainer = styled.ul`
+  height: calc(100% - 20rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3.6rem;
+`;

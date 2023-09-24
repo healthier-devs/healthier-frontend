@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
+import RoundButton from "src/components/roundButton";
 import { useGetMyChallenges } from "src/hooks/challenge/useGetMyChallenges";
 import { IMyChallengeProgress, IMyChallengeFinish } from "../../interfaces/challenges";
 import ChallengeCard from "./challenge-card";
@@ -43,7 +44,7 @@ function ChallengeList() {
         </Styled.Tab>
       </Styled.TabContainer>
 
-      {selectedTab === "PROGRESS" && isReadyData && (
+      {selectedTab === "PROGRESS" && isReadyData && (myChallengesData?.length ?? 0) > 0 && (
         <Styled.CardList>
           {((myChallengesData ?? []) as IMyChallengeProgress[]).map((challenge) => (
             <ChallengeCard
@@ -61,7 +62,7 @@ function ChallengeList() {
           </Styled.ExtraChallengeButton>
         </Styled.CardList>
       )}
-      {selectedTab === "CLOSED" && isReadyData && (
+      {selectedTab === "CLOSED" && isReadyData && (myChallengesData?.length ?? 0) > 0 && (
         <Styled.CardList>
           {((myChallengesData ?? []) as IMyChallengeFinish[]).map((challenge) => (
             <ChallengeCard
@@ -73,6 +74,18 @@ function ChallengeList() {
             />
           ))}
         </Styled.CardList>
+      )}
+      {isReadyData && (myChallengesData?.length ?? 0) === 0 && (
+        <Styled.EmptyContainer>
+          <Styled.EmptyText>
+            아직 도전을 시작한 챌린지가 없어요!
+            <br />
+            함께 챌린지를 살펴볼까요?
+          </Styled.EmptyText>
+          <RoundButton style={{ padding: "1.4rem 2.2rem", width: "auto" }} onClick={() => navigate("/challenge-list")}>
+            모든 챌린지 보러가기
+          </RoundButton>
+        </Styled.EmptyContainer>
       )}
     </div>
   );
