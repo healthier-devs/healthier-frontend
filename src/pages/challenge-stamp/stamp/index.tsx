@@ -17,18 +17,19 @@ const STAMP_HEIGHT = 86;
 function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps) {
   let isFirstFailure = true;
   const stampArr = [
-    ...stamps.map((stamp: IStamp) => {
+    ...stamps.map((stamp: IStamp, idx: number) => {
       const [_, month, day] = stamp.date.split("-").map(Number);
 
       if (stamp.status === "FAILURE" && isFirstFailure) {
         isFirstFailure = false;
+        const position = getTooltipPosition(idx);
 
         return (
           <Styled.Stamp key={stamp.dayCnt}>
             <div style={{ position: "relative", left: 0, top: 0 }}>
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
-              <Tooltip>부활티켓을 사용해보세요</Tooltip>
+              <Tooltip position={position}>부활티켓을 사용해보세요</Tooltip>
             </div>
           </Styled.Stamp>
         );
@@ -114,3 +115,13 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt }: IStampProps)
 }
 
 export default Stamp;
+
+function getTooltipPosition(idx: number) {
+  if (idx % 2 === 0) {
+    // 짝수 행
+    return idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right";
+  } else {
+    // 홀수 행
+    return idx % 3 === 2 ? "left" : idx % 3 === 1 ? "center" : "right";
+  }
+}
