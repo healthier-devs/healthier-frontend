@@ -1,3 +1,4 @@
+import Footer from "src/components/footer";
 import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
 import imageUrl from "src/data/image_url";
@@ -24,6 +25,8 @@ const MainPage = () => {
           </MainImage>
         </Container>
       </Layout>
+      <Footer />
+
       <BottomButtons openModal={openModal} />
       {isOpenModal && <MainModal ref={modalRef} closeModal={closeModal} />}
     </>
