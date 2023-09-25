@@ -1,20 +1,15 @@
-import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
-import Dialog from "src/components/diaglog";
+import Dialog from "src/components/dialog";
 import Layout from "src/components/layout";
+import useModal from "src/hooks/useModal";
 
 function SignUp() {
-  const [isDialogOpen, setIsDialogOpen] = useState({
-    back: false,
-    exit: false,
-  });
+  const backDialog = useModal();
+  const exitDialog = useModal();
+
   const navigate = useNavigate();
   const [path] = window.location.pathname.split("/").slice(-1);
-
-  const closeDialog = () => {
-    setIsDialogOpen({ back: false, exit: false });
-  };
 
   const handleClickBackButton = () => {
     if (path === "password") {
@@ -23,43 +18,36 @@ function SignUp() {
       return;
     }
 
-    setIsDialogOpen({ ...isDialogOpen, back: true });
+    backDialog.openModal();
   };
 
   return (
     <>
-      {isDialogOpen.back && (
+      {backDialog.isOpenModal && (
         <Dialog
+          ref={backDialog.modalRef}
           title="이전 화면으로 돌아가시겠어요?"
           description="돌아가면 약관동의부터 다시 시작돼요."
-          onClickBackDrop={closeDialog}
-          onClickCancel={closeDialog}
+          onClickCancel={backDialog.closeModal}
           onClickConfirm={() => {
-            closeDialog();
+            backDialog.closeModal();
             navigate("/signup");
           }}
         />
       )}
-      {isDialogOpen.exit && (
+      {exitDialog.isOpenModal && (
         <Dialog
+          ref={backDialog.modalRef}
           title="회원가입을 중단하실건가요?"
           description="진행 중인 내용은 저장되지 않습니다."
-          onClickBackDrop={closeDialog}
-          onClickCancel={closeDialog}
+          onClickCancel={backDialog.closeModal}
           onClickConfirm={() => {
-            closeDialog();
+            backDialog.closeModal();
             navigate("/");
           }}
         />
       )}
-      <ContentHeader
-        back
-        exit
-        backCallback={handleClickBackButton}
-        exitCallback={() => {
-          setIsDialogOpen({ ...isDialogOpen, exit: true });
-        }}
-      ></ContentHeader>
+      <ContentHeader back exit backCallback={handleClickBackButton} exitCallback={backDialog.openModal}></ContentHeader>
       <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>
