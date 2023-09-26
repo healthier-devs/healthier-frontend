@@ -12,7 +12,7 @@ function SignUp() {
   const [path] = window.location.pathname.split("/").slice(-1);
 
   const handleClickBackButton = () => {
-    if (path === "password") {
+    if (path !== "email") {
       navigate(-1);
 
       return;
@@ -47,7 +47,7 @@ function SignUp() {
           }}
         />
       )}
-      <ContentHeader back exit backCallback={handleClickBackButton} exitCallback={backDialog.openModal}></ContentHeader>
+      <ContentHeader back exit backCallback={handleClickBackButton} exitCallback={exitDialog.openModal}></ContentHeader>
       <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>
