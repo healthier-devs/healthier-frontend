@@ -24,3 +24,13 @@ export interface ISignUpRequest {
   marketingOptIn: boolean;
   healthInterests: string[];
 }
+
+export interface ILoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface ILoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}

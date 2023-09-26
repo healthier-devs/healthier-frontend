@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IValidateAccountResponse, IValidatePasswordRequest, ISignUpRequest } from "src/interfaces/account";
+import { IValidateAccountResponse, IValidatePasswordRequest, ISignUpRequest, ILoginRequest } from "src/interfaces/account";
 import { fetcher } from "../";
 
 export const instance = axios.create({
@@ -16,5 +16,8 @@ export const accountFetcher = {
   },
   signUpUser(body: ISignUpRequest) {
     return fetcher.post("", body);
+  },
+  loginUser(body: ILoginRequest) {
+    return fetcher.post("/signin", body);
   },
 };
