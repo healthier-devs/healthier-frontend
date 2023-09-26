@@ -46,8 +46,8 @@ function App() {
             <Route path="/signup/agreement" element={<Pages.TermsAgreement />} />
             <Route path="/signup/email" element={<Pages.Email />} />
             <Route path="/signup/password" element={<Pages.Password />} />
-            <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           </Route>
+          <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
 
           <Route path="/login" element={<Pages.Login />} />
