@@ -686,11 +686,11 @@ export const member_agreement = [
 export const NECESSARY_AGREEMENTS = [
   {
     text: "회원 이용약관에 동의 합니다",
-    url: "",
+    url: "https://seolapeutic.notion.site/2c86d82850564d9097d94ad3c334932d",
   },
   {
     text: "개인 정보 처리 방침에 동의 합니다",
-    url: "",
+    url: "https://seolapeutic.notion.site/dac6c64b62e344f188476541b5ff9377",
   },
 ] as const;
 

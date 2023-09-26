@@ -92,9 +92,11 @@ function TermsAgreement() {
                     onClick={() => handleClickOptional(idx)}
                   />
                   <Styled.Typography className="body2">{text} (선택)</Styled.Typography>
-                  <Link to={url} target="_blank">
-                    <Styled.Typography className="link">내용 보기</Styled.Typography>
-                  </Link>
+                  {url && (
+                    <Link to={url} target="_blank">
+                      <Styled.Typography className="link">내용 보기</Styled.Typography>
+                    </Link>
+                  )}
                 </FlexBox>
               </Styled.ListItem>
             ))}
