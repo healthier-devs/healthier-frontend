@@ -28,7 +28,7 @@ function Footer() {
           {"\n"}
           사업자등록번호 315-61-00596
           {"\n"}
-          고객센터 | Email: be@healthier.bio Tel: 0504-0803-7188
+          고객센터 <span>|</span> Email: be@healthier.bio Tel: 0504-0803-7188
           {"\n"}
           Copyright 2023 헬시어(Healthier). All right reserved
         </Typography>
@@ -66,6 +66,10 @@ const Typography = styled.p`
     font-size: 1.3rem;
     line-height: 160%;
     white-space: pre-line;
+  }
+
+  & > span {
+    color: ${({ theme }) => theme.color.grey_600};
   }
 `;
 
