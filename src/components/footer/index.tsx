@@ -26,7 +26,11 @@ function Footer() {
           {"\n"}
           주소: (03777) 서울특별시 서대문구 연세로2나길 61
           {"\n"}
-          사업자등록번호 315-61-00596 고객센터: be@healthier.bio Copyright 2023 헬시어(Healthier). All right reserved
+          사업자등록번호 315-61-00596
+          {"\n"}
+          고객센터 | Email: be@healthier.bio Tel: 0504-0803-7188
+          {"\n"}
+          Copyright 2023 헬시어(Healthier). All right reserved
         </Typography>
       </Box>
     </Container>

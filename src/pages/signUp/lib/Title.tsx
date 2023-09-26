@@ -24,6 +24,7 @@ const TitleWrapper = styled.div`
 
 const TitleText = styled(Heading_3)`
   color: ${({ theme }) => theme.color.grey_200};
+  white-space: pre-line;
 `;
 
 const Description = styled(Body_4)`
