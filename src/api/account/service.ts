@@ -7,6 +7,7 @@ import type {
   IValidatePasswordRequest,
   ILoginRequest,
   ILoginResponse,
+  IException,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -63,7 +64,7 @@ export const signup = async (body: ISignUpRequest): Promise<IValidateAccountResp
   }
 };
 
-export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse> => {
+export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse | IException> => {
   try {
     const loginData = await accountFetcher.loginUser(body);
 
@@ -73,7 +74,7 @@ export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse> =>
       const { status } = err.response;
 
       if (status === StatusCodes.UNAUTHORIZED) {
-        return err.response.data as ILoginResponse;
+        return err.response.data as IException;
       }
     }
 

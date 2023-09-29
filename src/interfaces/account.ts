@@ -34,3 +34,8 @@ export interface ILoginResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IException {
+  code: number;
+  message: string;
+}

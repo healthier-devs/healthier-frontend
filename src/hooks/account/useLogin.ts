@@ -9,8 +9,14 @@ export const useLogin = () => {
   const { mutate: login } = useMutation({
     mutationFn: (body: ILoginRequest) => loginUser(body),
     onSuccess(data) {
-      alert("로그인 성공");
-      navigate("/");
+      if ("accessToken" in data && "refreshToken" in data) {
+        alert("로그인 성공");
+        navigate("/");
+
+        return;
+      }
+
+      alert(data.message);
     },
   });
 
