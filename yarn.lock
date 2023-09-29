@@ -3875,6 +3875,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cookie@*", "@types/cookie@^0.5.1":
+  "integrity" "sha512-DBpRoJGKJZn7RY92dPrgoMew8xCWc2P71beqsjyhEI/Ds9mOyVmBwtekyfhpwFIVt1WrxTonFifiOZ62V8CnNA=="
+  "resolved" "https://registry.npmjs.org/@types/cookie/-/cookie-0.5.2.tgz"
+  "version" "0.5.2"
+
 "@types/eslint-scope@^3.7.3":
   "integrity" "sha512-PB3ldyrcnAicT35TWPs5IcwKD8S333HMaa2VVv4+wdvebJkjWuW/xESoB8IwRcog8HYVYamb1g/R31Qv5Bx03g=="
   "resolved" "https://registry.npmjs.org/@types/eslint-scope/-/eslint-scope-3.7.3.tgz"
@@ -4139,6 +4144,14 @@
   "version" "4.1.0"
   dependencies:
     "react-calendar" "*"
+
+"@types/react-cookies@^0.1.1":
+  "integrity" "sha512-w2ZOpGwJo2LlsiaFqGdMuHX8xAM/Tkoiljze5eyvtZDe1ZckHAcyM3iwtvpu1Q/2nemMLPwe6/9UZrEV1UPvyQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-cookies/-/react-cookies-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "@types/cookie" "*"
+    "@types/express" "*"
 
 "@types/react-dom@^16.8 || ^17.0 || ^18.0", "@types/react-dom@^18.0.0", "@types/react-dom@^18.0.5":
   "integrity" "sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA=="
@@ -6655,7 +6668,7 @@
   "resolved" "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz"
   "version" "1.0.6"
 
-"cookie@0.5.0":
+"cookie@^0.5.0", "cookie@0.5.0":
   "integrity" "sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw=="
   "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.5.0.tgz"
   "version" "0.5.0"
@@ -13447,6 +13460,15 @@
   "resolved" "https://registry.npmjs.org/react-colorful/-/react-colorful-5.5.1.tgz"
   "version" "5.5.1"
 
+"react-cookie@^6.1.1":
+  "integrity" "sha512-fuFRpf8LH6SfmVMowDUIRywJF5jAUDUWrm0EI5VdXfTl5bPcJ7B0zWbuYpT0Tvikx7Gs18MlvAT+P+744dUz2g=="
+  "resolved" "https://registry.npmjs.org/react-cookie/-/react-cookie-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.1"
+    "hoist-non-react-statics" "^3.3.2"
+    "universal-cookie" "^6.0.0"
+
 "react-dev-utils@^12.0.1":
   "integrity" "sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
@@ -16036,6 +16058,14 @@
     "@types/unist" "^2.0.0"
     "unist-util-is" "^4.0.0"
     "unist-util-visit-parents" "^3.0.0"
+
+"universal-cookie@^6.0.0", "universal-cookie@^6.1.1":
+  "integrity" "sha512-33S9x3CpdUnnjwTNs2Fgc41WGve2tdLtvaK2kPSbZRc5pGpz2vQFbRWMxlATsxNNe/Cy8SzmnmbuBM85jpZPtA=="
+  "resolved" "https://registry.npmjs.org/universal-cookie/-/universal-cookie-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@types/cookie" "^0.5.1"
+    "cookie" "^0.5.0"
 
 "universalify@^0.1.2":
   "integrity" "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg=="
