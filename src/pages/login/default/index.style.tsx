@@ -38,41 +38,19 @@ export const Typography = styled.p`
   line-height: 150%;
 `;
 
-export const LoginButton = styled.button<{ mb?: string }>`
-  display: flex;
+export const LoginButton = styled.button<{ mr?: string }>`
+  width: 54px;
+  height: 54px;
 
-  width: 100%;
-  padding: 1.4rem 2.4rem;
-  margin-bottom: ${({ mb }) => mb};
+  margin-right: ${({ mr }) => mr};
 
-  border-radius: 38px;
+  border-radius: 27px;
 
   &.kakao {
-    background: #ffeb3b;
-
-    > span {
-      color: ${({ theme }) => theme.color.grey_900};
-    }
+    background: #fee500;
   }
 
   &.apple {
-    background: ${({ theme }) => theme.color.grey_700};
-
-    > span {
-      color: ${({ theme }) => theme.color.grey_100};
-    }
+    background: ${({ theme }) => theme.color.grey_100};
   }
-`;
-
-export const Icon = styled.img`
-  width: 2.4rem;
-  height: 2.4rem;
-`;
-
-export const LoginText = styled.span`
-  font-size: 1.6rem;
-  font-weight: 300;
-  line-height: 150%;
-
-  flex: 1;
 `;

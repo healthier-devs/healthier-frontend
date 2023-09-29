@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AppleIcon from "src/assets/icons/AppleIcon";
+import KakaoIcon from "src/assets/icons/KakaoIcon";
 import FlexBox from "src/components/flexBox";
 import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
@@ -55,6 +57,7 @@ function DefaultLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="true"
               />
             </Styled.Box>
 
@@ -63,31 +66,33 @@ function DefaultLogin() {
             </Styled.Box>
           </form>
 
-          <Styled.Box mt="2rem">
-            <UnderlinedButton text="로그인 없이 둘러보기" onClick={() => navigate("/")} />
+          <Styled.Box mt="10px">
+            <RoundButton onClick={() => navigate("/")} backgroundColor="#D2FA64" color="#000">
+              로그인 없이 둘러보기
+            </RoundButton>
           </Styled.Box>
         </div>
 
-        <Styled.Box mt="5rem">
-          <TextDivider text="또는 SNS 계정으로 시작하기" />
-        </Styled.Box>
+        <div>
+          <Styled.Box mt="5rem">
+            <TextDivider text="또는 SNS 계정으로 시작하기" />
+          </Styled.Box>
 
-        <Styled.Box mt="2.4rem">
-          <Styled.LoginButton mb="10px" className="kakao">
-            <Styled.Icon src="/images/signup/kakao.svg" />
-            <Styled.LoginText>카카오톡으로 로그인하기</Styled.LoginText>
-          </Styled.LoginButton>
+          <Styled.Box mt="2.4rem">
+            <Styled.LoginButton mr="16px" className="kakao">
+              <KakaoIcon width={30} height={30} />
+            </Styled.LoginButton>
 
-          <Styled.LoginButton className="apple">
-            <Styled.Icon src="/images/signup/apple.svg" />
-            <Styled.LoginText>Apple ID로 로그인하기</Styled.LoginText>
-          </Styled.LoginButton>
-        </Styled.Box>
+            <Styled.LoginButton className="apple">
+              <AppleIcon width={30} height={30} />
+            </Styled.LoginButton>
+          </Styled.Box>
 
-        <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">
-          <Styled.Typography>계정이 없으신가요?</Styled.Typography>
-          <UnderlinedButton text="회원가입하기" onClick={() => navigate("/signup")} />
-        </FlexBox>
+          <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">
+            <Styled.Typography>계정이 없으신가요?</Styled.Typography>
+            <UnderlinedButton text="회원가입하기" onClick={() => navigate("/signup")} />
+          </FlexBox>
+        </div>
       </Layout>
     </>
   );
