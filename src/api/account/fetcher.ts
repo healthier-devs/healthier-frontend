@@ -17,4 +17,7 @@ export const accountFetcher = {
   loginUser(body: ILoginRequest) {
     return unauthorizedFetcher.post("/signin", body);
   },
+  validateToken() {
+    return fetcher.post("/validate-token", {});
+  },
 };
