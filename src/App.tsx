@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import NavigationBar from "./components/navigationBar";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
@@ -63,6 +64,7 @@ function App() {
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </ErrorBoundary>
+      <NavigationBar />
     </Container>
   );
 }
@@ -77,4 +79,6 @@ const Container = styled.div`
 
   height: 100%;
   margin: 0 auto;
+
+  padding-bottom: 120px;
 `;

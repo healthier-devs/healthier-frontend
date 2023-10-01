@@ -73,6 +73,9 @@ const GlobalStyle = createGlobalStyle`
     a{
         text-decoration: none;
     }
+    .click{
+        cursor:pointer;
+    }
 `;
 
 export default GlobalStyle;
