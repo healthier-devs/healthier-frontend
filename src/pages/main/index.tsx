@@ -27,7 +27,6 @@ const MainPage = () => {
       </Layout>
       <Footer />
 
-      <BottomButtons openModal={openModal} />
       {isOpenModal && <MainModal ref={modalRef} closeModal={closeModal} />}
     </>
   );
