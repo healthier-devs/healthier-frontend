@@ -18,6 +18,10 @@ export const accountFetcher = {
     return unauthorizedFetcher.post("/signin", body);
   },
   validateToken() {
-    return fetcher.post("/validate-token", {});
+    return fetcher.post("/validate-token", undefined, {
+      headers: {
+        accept: "application/json",
+      },
+    });
   },
 };

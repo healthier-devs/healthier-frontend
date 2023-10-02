@@ -3,7 +3,9 @@ import * as Styled from "./index.style";
 
 function Test() {
   const handleClickTokenTest = async () => {
-    const data = validateToken();
+    const data = await validateToken();
+
+    console.log(data);
 
     if ("message" in data && "code" in data) {
       alert("인증 실패");
