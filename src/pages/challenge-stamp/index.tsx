@@ -67,25 +67,29 @@ function ChallengeStamp() {
 
               <Styled.StampContainer>
                 {stampChartData &&
-                  stampChartData.submissions.map((stamp, idx) => {
-                    if (isRevivalDayLine.current && stamp.status === "FAILURE") {
-                      isRevivalDayLine.current = false;
-
-                      return (
-                        <Styled.StampRow key={`${idx}row`}>
-                          <Stamp
-                            stamps={stampChartData.submissions.slice(idx, idx + 3)}
-                            rowIdx={idx}
-                            duration={duration}
-                            isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
-                            currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                            isRevivalDayLine={true}
-                          />
-                        </Styled.StampRow>
-                      );
-                    }
-
+                  stampChartData.submissions.map((_, idx) => {
                     if (idx % 3 === 0) {
+                      const isFailureLine = stampChartData.submissions
+                        .slice(idx, idx + 3)
+                        .some((submission) => submission.status === "FAILURE");
+
+                      if (isRevivalDayLine.current && isFailureLine) {
+                        isRevivalDayLine.current = false;
+
+                        return (
+                          <Styled.StampRow key={`${idx}row`}>
+                            <Stamp
+                              stamps={stampChartData.submissions.slice(idx, idx + 3)}
+                              rowIdx={idx}
+                              duration={duration}
+                              isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
+                              currentDayCnt={stampChartData.currentDayCnt ?? 0}
+                              isRevivalDayLine={true}
+                            />
+                          </Styled.StampRow>
+                        );
+                      }
+
                       return (
                         <Styled.StampRow key={`${idx}row`}>
                           <Stamp
@@ -94,7 +98,7 @@ function ChallengeStamp() {
                             duration={duration}
                             isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
                             currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                            isRevivalDayLine={isRevivalDayLine.current}
+                            isRevivalDayLine={false}
                           />
                         </Styled.StampRow>
                       );
