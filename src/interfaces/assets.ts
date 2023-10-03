@@ -3,6 +3,7 @@ export interface IIcon extends React.HTMLAttributes<HTMLOrSVGElement> {
   width?: number;
   height?: number;
   stroke?: string;
+  fill?: string;
 }
 
 export interface IBodyPartIcon extends IIcon {
