@@ -1,10 +1,10 @@
 export interface IChallenge {
-  id: string;
+  id: number;
   name: string;
   duration: string;
   times: string;
   method: string;
-  maximumGift: string;
+  maximumGift: number;
 }
 
 export type TChallengeListResponse = {
