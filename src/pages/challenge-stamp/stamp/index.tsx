@@ -20,7 +20,7 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
 
   const stampArr = [
     ...stamps.map((stamp: IStamp) => {
-      const [_, month, day] = stamp.date.split("-").map(Number);
+      const date = new Date(stamp.submitTime);
 
       if (isFirstFailure && isRevivalDayLine) {
         isFirstFailure = false;
