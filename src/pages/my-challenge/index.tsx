@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
@@ -13,11 +14,18 @@ function ChallengeList() {
   const navigate = useNavigate();
 
   const [selectedTab, setSelectedTab] = useState<TTabType>("PROGRESS");
+  const [progressChallengeCount, setProgressChallengeCount] = useState<number>(0);
 
   const { myChallengesData, isLoading, isSuccess } = useGetMyChallenges({
     status: selectedTab,
   });
   const isReadyData = !isLoading && isSuccess;
+
+  useEffect(() => {
+    if (selectedTab === "PROGRESS" && isReadyData) {
+      setProgressChallengeCount(myChallengesData?.count ?? 0);
+    }
+  }, [selectedTab, isReadyData, myChallengesData]);
 
   return (
     <div>
@@ -34,7 +42,7 @@ function ChallengeList() {
       <Styled.TabContainer>
         <Styled.Tab onClick={() => setSelectedTab("PROGRESS")}>
           <Styled.TabTitle>
-            참여중인 챌린지 <span className="highlight">{myChallengesData?.length ?? 0}</span>
+            참여중인 챌린지 <span className="highlight">{progressChallengeCount}</span>
           </Styled.TabTitle>
           {selectedTab === "PROGRESS" && <Styled.SelectedLine />}
         </Styled.Tab>
@@ -44,15 +52,15 @@ function ChallengeList() {
         </Styled.Tab>
       </Styled.TabContainer>
 
-      {selectedTab === "PROGRESS" && isReadyData && (myChallengesData?.length ?? 0) > 0 && (
+      {selectedTab === "PROGRESS" && isReadyData && (myChallengesData?.count ?? 0) > 0 && (
         <Styled.CardList>
-          {((myChallengesData ?? []) as IMyChallengeProgress[]).map((challenge) => (
+          {((myChallengesData?.myChallenge ?? []) as IMyChallengeProgress[]).map((challenge) => (
             <ChallengeCard
               key={challenge.challengeId}
               name={challenge.challengeName}
-              dayCnt={challenge.dayCnt}
-              duration={challenge.duration}
-              status={`PROGRESS-${challenge.status}`}
+              days={challenge.days}
+              remainDays={challenge.remainDays}
+              status={`PROGRESS-${challenge.isStampForToday ? "SUCCESS" : "NOTHING"}`}
               onClick={() => navigate(`/challenge/${challenge.challengeId}`)}
             />
           ))}
@@ -62,9 +70,9 @@ function ChallengeList() {
           </Styled.ExtraChallengeButton>
         </Styled.CardList>
       )}
-      {selectedTab === "CLOSED" && isReadyData && (myChallengesData?.length ?? 0) > 0 && (
+      {selectedTab === "CLOSED" && isReadyData && (myChallengesData?.count ?? 0) > 0 && (
         <Styled.CardList>
-          {((myChallengesData ?? []) as IMyChallengeFinish[]).map((challenge) => (
+          {((myChallengesData?.myChallenge ?? []) as IMyChallengeFinish[]).map((challenge) => (
             <ChallengeCard
               key={challenge.challengeId}
               name={challenge.challengeName}
@@ -75,7 +83,7 @@ function ChallengeList() {
           ))}
         </Styled.CardList>
       )}
-      {isReadyData && (myChallengesData?.length ?? 0) === 0 && (
+      {isReadyData && (myChallengesData?.count ?? 0) === 0 && (
         <Styled.EmptyContainer>
           <Styled.EmptyText>
             아직 도전을 시작한 챌린지가 없어요!

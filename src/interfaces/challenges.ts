@@ -23,17 +23,28 @@ export type TChallengeCategoryListResponse = TChallengeCategory[];
 export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
 
 export interface IMyChallengeProgress {
+  category: string;
   challengeId: string;
   challengeName: string;
-  dayCnt: number;
-  duration: number;
-  status: "SUCCESS" | "NOTHING";
+  days: number;
+  isStampForToday: boolean;
+  remainDays: number;
+}
+
+export interface IMyChallengeProgressResponse {
+  count: number;
+  myChallenge: IMyChallengeProgress[];
 }
 
 export interface IMyChallengeFinish {
   challengeId: string;
   challengeName: string;
   achievement: number;
+}
+
+export interface IMyChallengeFinishResponse {
+  count: number;
+  myChallenge: IMyChallengeFinish[];
 }
 
 export interface IStamp {

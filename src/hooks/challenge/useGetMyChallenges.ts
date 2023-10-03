@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { challengeFetcher } from "src/api/challenge/fetcher";
 import { queryKeys } from "src/api/queryKeys";
-import type { IMyChallengeFinish, IMyChallengeProgress } from "src/interfaces/challenges";
+import type { IMyChallengeFinishResponse, IMyChallengeProgressResponse } from "src/interfaces/challenges";
 
 interface IUseGetChallenges {
   status: "PROGRESS" | "CLOSED";
@@ -12,7 +12,7 @@ export const useGetMyChallenges = ({ status }: IUseGetChallenges) => {
     data: myChallengesData,
     isLoading,
     isSuccess,
-  } = useQuery<IMyChallengeProgress[] | IMyChallengeFinish[]>({
+  } = useQuery<IMyChallengeProgressResponse | IMyChallengeFinishResponse>({
     queryKey: [queryKeys.CHALLENGE, status],
     queryFn: () => challengeFetcher.getMyChallenge(status),
   });
