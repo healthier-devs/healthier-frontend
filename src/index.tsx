@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
 import ReactGA from "react-ga4";
 import { Provider } from "react-redux";
@@ -34,8 +35,10 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <App />
+            <CookiesProvider>
+              <GlobalStyle />
+              <App />
+            </CookiesProvider>
           </ThemeProvider>
         </BrowserRouter>
       </PersistGate>

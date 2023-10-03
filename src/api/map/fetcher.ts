@@ -1,16 +1,7 @@
-import axios, { AxiosResponse } from "axios";
 import { IUserMapResponse, IHospitalDetailInfo } from "src/interfaces/map";
+import { createFetcher } from "..";
 
-const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}/map`,
-  timeout: 15000,
-});
-
-const responseBody = (response: AxiosResponse) => response.data;
-
-export const fetcher = {
-  get: <T>(url: string, params?: object) => instance.get<T>(url, { params }).then(responseBody),
-};
+const fetcher = createFetcher("/map");
 
 export interface IMapBoxRequest {
   userLongitude: string;

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import NavigationBar from "./components/navigationBar";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
@@ -46,8 +47,8 @@ function App() {
             <Route path="/signup/agreement" element={<Pages.TermsAgreement />} />
             <Route path="/signup/email" element={<Pages.Email />} />
             <Route path="/signup/password" element={<Pages.Password />} />
-            <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           </Route>
+          <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
 
           <Route path="/login" element={<Pages.Login />} />
@@ -63,6 +64,7 @@ function App() {
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </ErrorBoundary>
+      <NavigationBar />
     </Container>
   );
 }
@@ -70,8 +72,6 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  display: flex;
-
   width: 100vw;
   @media (min-width: 500px) {
     width: calc(var(--vw, 1vw) * 100);
@@ -79,4 +79,6 @@ const Container = styled.div`
 
   height: 100%;
   margin: 0 auto;
+
+  padding-bottom: 120px;
 `;

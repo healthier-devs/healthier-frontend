@@ -1,7 +1,14 @@
 import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { accountFetcher } from "./fetcher";
-import type { ISignUpRequest, IValidateAccountResponse, IValidatePasswordRequest } from "src/interfaces/account";
+import type {
+  ISignUpRequest,
+  IValidateAccountResponse,
+  IValidatePasswordRequest,
+  ILoginRequest,
+  ILoginResponse,
+  IException,
+} from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
   try {
@@ -50,6 +57,24 @@ export const signup = async (body: ISignUpRequest): Promise<IValidateAccountResp
 
       if (status === StatusCodes.BAD_REQUEST) {
         return err.response.data as IValidateAccountResponse;
+      }
+    }
+
+    throw new Error();
+  }
+};
+
+export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse | IException> => {
+  try {
+    const loginData = await accountFetcher.loginUser(body);
+
+    return loginData;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response) {
+      const { status } = err.response;
+
+      if (status === StatusCodes.UNAUTHORIZED) {
+        return err.response.data as IException;
       }
     }
 
