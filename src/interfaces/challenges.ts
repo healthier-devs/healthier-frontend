@@ -48,8 +48,9 @@ export interface IMyChallengeFinishResponse {
 }
 
 export interface IStamp {
-  dayCnt: number;
-  date: string;
+  id: number;
+  image: string | null;
+  submitTime: string;
   status: TStampStatus;
 }
 
@@ -59,9 +60,8 @@ export interface IStampChartResponse {
   duration: string;
   times: string;
   method: string;
-  revivalCnt: number;
   currentDayCnt: number;
-  stamps: IStamp[];
+  submissions: IStamp[];
 }
 
 export interface IStampBodyRequest {
