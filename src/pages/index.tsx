@@ -1,6 +1,6 @@
 import Appointment from "./appointment";
-import Challenge from "./challenge";
 import ChallengeDetail from "./challenge-detail";
+import ChallengeList from "./challenge-list";
 import ChallengeStamp from "./challenge-stamp";
 import CompleteQR from "./complete-qr";
 import Diagnosis from "./diagnosis";
@@ -43,7 +43,7 @@ export {
   IndexQR,
   ChallengeDetail,
   ChallengeStamp,
-  Challenge,
+  ChallengeList,
   Email,
   Password,
   SignUpError,
