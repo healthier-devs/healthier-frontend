@@ -112,7 +112,7 @@ export const EmptyText = styled.p`
 `;
 
 export const EmptyContainer = styled.ul`
-  height: calc(100% - 20rem);
+  height: calc(100vh - 20rem);
   display: flex;
   justify-content: center;
   align-items: center;
