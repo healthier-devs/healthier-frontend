@@ -50,6 +50,10 @@ function App() {
           <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
 
+          <Route path="/account" element={<Pages.Account />}>
+            <Route index element={<Pages.AccountIndex />} />
+          </Route>
+
           <Route path="/login" element={<Pages.Login />} />
 
           <Route path="/qr" element={<Pages.IndexQR />} />
