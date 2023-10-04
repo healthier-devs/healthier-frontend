@@ -39,7 +39,7 @@ export const SideBar = styled.div`
   }
 `;
 
-export const DiagnosisButton = styled.button`
+export const DiagnosisButton = styled.div`
   background: url("/images/navigation/diagnose.svg");
   position: absolute;
 

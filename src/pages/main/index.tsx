@@ -26,7 +26,7 @@ const MainPage = () => {
         </Container>
       </Layout>
       <Footer />
-      <NavigationBar />
+      <NavigationBar menu="home" />
 
       {isOpenModal && <MainModal ref={modalRef} closeModal={closeModal} />}
     </>
