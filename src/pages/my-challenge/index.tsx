@@ -76,6 +76,7 @@ function ChallengeList() {
             <ChallengeCard
               key={challenge.challengeId}
               name={challenge.challengeName}
+              isSuccessChallenge={challenge.isSuccess}
               percent={challenge.achievement}
               status={`FINISH-${challenge.achievement === 100 ? "SUCCESS" : "FAILURE"}`}
               onClick={() => navigate(`/challenge/${challenge.challengeId}`)}

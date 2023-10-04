@@ -6,13 +6,13 @@ interface IChallengeCardProps extends HTMLAttributes<HTMLDivElement> {
   name: string;
   days?: number;
   remainDays?: number;
+  isSuccessChallenge?: boolean;
   percent?: number;
   status: "PROGRESS-SUCCESS" | "PROGRESS-NOTHING" | "FINISH-SUCCESS" | "FINISH-FAILURE";
 }
 
-function ChallengeCard({ name, days, remainDays, percent, status, onClick }: IChallengeCardProps) {
+function ChallengeCard({ name, days, remainDays, isSuccessChallenge, percent, status, onClick }: IChallengeCardProps) {
   const isProgress = status.startsWith("PROGRESS");
-  const isSuccess = status.endsWith("SUCCESS");
 
   return (
     <Styled.Container onClick={onClick}>
@@ -35,7 +35,9 @@ function ChallengeCard({ name, days, remainDays, percent, status, onClick }: ICh
             )}
           </Styled.Tag>
           <Styled.Description>
-            {isProgress ? `챌린지 완료까지 ${remainDays}일 남았어요` : `${percent}%로 챌린지를 ${isSuccess ? "성공" : "실패"}했어요`}
+            {isProgress
+              ? `챌린지 완료까지 ${remainDays}일 남았어요`
+              : `${percent}%로 챌린지를 ${isSuccessChallenge ? "성공" : "실패"}했어요`}
           </Styled.Description>
         </Styled.TagContainer>
       </Styled.CardContainer>

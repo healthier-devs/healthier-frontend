@@ -40,6 +40,8 @@ export interface IMyChallengeFinish {
   challengeId: string;
   challengeName: string;
   achievement: number;
+  category: string;
+  isSuccess: boolean;
 }
 
 export interface IMyChallengeFinishResponse {
