@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeIcon from "src/assets/icons/navigation/ChallengeIcon";
 import ExploreIcon from "src/assets/icons/navigation/ExploreIcon";
@@ -7,15 +6,10 @@ import MypageIcon from "src/assets/icons/navigation/MypageIcon";
 import FlexBox from "../flexBox";
 import * as Styled from "./index.style";
 
-type TMenu = "home" | "explore" | "diagnosis" | "challenge" | "mypage";
+export type TMenu = "home" | "explore" | "diagnosis" | "challenge" | "account";
 
-export default function NavigationBar() {
+export default function NavigationBar({ menu }: { menu: TMenu }) {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState<TMenu>("home");
-
-  const handleClickMenu = (clickedMenu: TMenu) => {
-    setMenu(clickedMenu);
-  };
 
   return (
     <Styled.Container>
@@ -29,7 +23,6 @@ export default function NavigationBar() {
         <FlexBox style={{ position: "absolute", left: 0, bottom: "30px", width: "100%" }} alignItems="end" justifyContent="space-between">
           <Styled.Button
             onClick={() => {
-              handleClickMenu("home");
               navigate("/");
             }}
           >
@@ -39,7 +32,6 @@ export default function NavigationBar() {
 
           <Styled.Button
             onClick={() => {
-              handleClickMenu("explore");
               navigate("/appointment");
             }}
           >
@@ -50,7 +42,6 @@ export default function NavigationBar() {
           <Styled.Button
             className="center"
             onClick={() => {
-              handleClickMenu("diagnosis");
               navigate("/info");
             }}
           >
@@ -60,8 +51,7 @@ export default function NavigationBar() {
 
           <Styled.Button
             onClick={() => {
-              handleClickMenu("challenge");
-              navigate("/challenge");
+              navigate("/challenge-list");
             }}
           >
             <ChallengeIcon isSelected={menu === "challenge"} />
@@ -69,9 +59,13 @@ export default function NavigationBar() {
             <Styled.Typography isSelected={menu === "challenge"}>건강챌린지</Styled.Typography>
           </Styled.Button>
 
-          <Styled.Button onClick={() => handleClickMenu("mypage")}>
-            <MypageIcon isSelected={menu === "mypage"} />
-            <Styled.Typography isSelected={menu === "mypage"}>마이페이지</Styled.Typography>
+          <Styled.Button
+            onClick={() => {
+              navigate("/account");
+            }}
+          >
+            <MypageIcon isSelected={menu === "account"} />
+            <Styled.Typography isSelected={menu === "account"}>마이페이지</Styled.Typography>
           </Styled.Button>
         </FlexBox>
       </div>
