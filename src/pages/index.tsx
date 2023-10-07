@@ -16,6 +16,7 @@ import Login from "./login";
 import MainPage from "./main";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
+import Onboard from "./onboard";
 import ResultPage from "./result";
 import SignUp from "./signUp";
 import SignUpComplete from "./signUp/complete";
@@ -58,4 +59,5 @@ export {
   Account,
   AccountIndex,
   AccountSettings,
+  Onboard,
 };

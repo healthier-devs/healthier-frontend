@@ -1,17 +1,20 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
-import { useAppDispatch } from "./state";
+import { useAppDispatch, useAppSelector } from "./state";
 import { clearHospitalId } from "./state/diagnoseSlice";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { authenticated } = useAppSelector((state) => state.auth);
+
   const { reset } = useQueryErrorResetBoundary();
   const { validateToken } = useValidateToken();
 
@@ -30,9 +33,17 @@ function App() {
 
   useEffect(() => {
     validateToken();
-  }, [validateToken]);
+  }, []);
 
   useGoogleAnalytics();
+
+  /*
+  [초기진입]
+
+  토큰 인증 되면 -> /
+  토큰 인증 안되면 -> /onboard
+    ㄴ 홈 둘러보기 -> /
+  */
 
   return (
     <Container>
@@ -46,6 +57,7 @@ function App() {
           <Route path="/symptom" element={<Pages.SymptomPage />} />
           <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
           <Route path="/appointment" element={<Pages.Appointment />} />
+          <Route path="/onboard" element={<Pages.Onboard />} />
 
           <Route path="/signup" element={<Pages.SignUp />}>
             <Route index element={<Navigate to="/signup/agreement" replace />} />

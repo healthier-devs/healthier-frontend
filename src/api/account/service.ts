@@ -92,7 +92,7 @@ export const validateToken = async (): Promise<IUserResponse | IException> => {
     if (err instanceof AxiosError && err.response) {
       const { status } = err.response;
 
-      if (status === StatusCodes.UNAUTHORIZED) {
+      if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
         return err.response.data as IException;
       }
     }
