@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import AppleIcon from "src/assets/icons/AppleIcon";
 import KakaoIcon from "src/assets/icons/KakaoIcon";
 import Box from "src/components/box";
@@ -9,6 +10,8 @@ import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 function Onboard() {
+  const navigate = useNavigate();
+
   return (
     <Styled.Container>
       <Styled.Button>홈 둘러보기</Styled.Button>
@@ -25,7 +28,7 @@ function Onboard() {
 
       <Styled.LoginContainer>
         <Box mb="2.4rem">
-          <RoundButton>이메일로 시작하기</RoundButton>
+          <RoundButton onClick={() => navigate("/login")}>이메일로 시작하기</RoundButton>
         </Box>
 
         <Box mb="2.2rem">
@@ -44,7 +47,7 @@ function Onboard() {
 
         <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">
           <Styled.Typography className="description">계정이 없으신가요?</Styled.Typography>
-          <UnderlinedButton text="회원가입하기" />
+          <UnderlinedButton onClick={() => navigate("/signup")} text="회원가입하기" />
         </FlexBox>
       </Styled.LoginContainer>
     </Styled.Container>

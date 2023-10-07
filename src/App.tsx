@@ -6,14 +6,12 @@ import styled from "styled-components";
 import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
-import { useAppDispatch, useAppSelector } from "./state";
+import { useAppDispatch } from "./state";
 import { clearHospitalId } from "./state/diagnoseSlice";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { authenticated } = useAppSelector((state) => state.auth);
 
   const { reset } = useQueryErrorResetBoundary();
   const { validateToken } = useValidateToken();
@@ -36,14 +34,6 @@ function App() {
   }, []);
 
   useGoogleAnalytics();
-
-  /*
-  [초기진입]
-
-  토큰 인증 되면 -> /
-  토큰 인증 안되면 -> /onboard
-    ㄴ 홈 둘러보기 -> /
-  */
 
   return (
     <Container>
