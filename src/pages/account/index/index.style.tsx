@@ -78,10 +78,14 @@ export const ListItem = styled.li`
     font-weight: 200;
     line-height: 140%;
     flex: 1;
+
+    text-align: left;
   }
 
-  .wrap {
-    width: 24px;
-    height: 24px;
+  .button {
+    width: 100%;
+
+    padding-block: 0;
+    padding-inline: 0;
   }
 `;
