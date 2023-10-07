@@ -40,7 +40,14 @@ function ChallengeList() {
 
   return (
     <>
-      <ContentHeader back={true} exit={false} label="건강 챌린지" />
+      <Styled.HeaderContainer>
+        <Styled.LeftButton />
+        <Styled.HeaderTitle>건강 챌린지</Styled.HeaderTitle>
+        <Styled.RightButton onClick={() => navigate("/my-challenge")}>
+          <p>나의 챌린지</p>
+        </Styled.RightButton>
+      </Styled.HeaderContainer>
+
       <Styled.Container>
         <Styled.Categories>
           {challengeCategoryData?.map(({ name, koreanName, imageUrl }) => (
