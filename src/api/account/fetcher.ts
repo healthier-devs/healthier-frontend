@@ -18,10 +18,9 @@ export const accountFetcher = {
     return unauthorizedFetcher.post("/signin", body);
   },
   validateToken() {
-    return fetcher.post("/validate-token", undefined, {
-      headers: {
-        accept: "application/json",
-      },
-    });
+    return fetcher.post("/validate-token", {});
+  },
+  logout() {
+    return fetcher.post("/logout");
   },
 };

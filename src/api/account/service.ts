@@ -8,7 +8,7 @@ import type {
   ILoginRequest,
   ILoginResponse,
   IException,
-  IValidateTokenResponse,
+  IUserResponse,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -83,7 +83,7 @@ export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse | I
   }
 };
 
-export const validateToken = async (): Promise<IValidateTokenResponse | IException> => {
+export const validateToken = async (): Promise<IUserResponse | IException> => {
   try {
     const validationData = await accountFetcher.validateToken();
 
@@ -99,4 +99,10 @@ export const validateToken = async (): Promise<IValidateTokenResponse | IExcepti
 
     throw new Error();
   }
+};
+
+export const logout = async (): Promise<IUserResponse> => {
+  const logoutData = await accountFetcher.logout();
+
+  return logoutData;
 };

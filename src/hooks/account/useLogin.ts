@@ -16,7 +16,8 @@ export const useLogin = () => {
         localStorage.setItem("accessToken", accessToken);
         setCookie("refreshToken", refreshToken, {
           path: "/",
-          secure: true,
+          secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
+          domain: "localhost",
         });
 
         navigate("/");

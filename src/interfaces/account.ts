@@ -45,3 +45,9 @@ export interface IValidateTokenResponse {
   success: boolean;
   timestamp: string;
 }
+
+export interface IUserResponse {
+  data: string;
+  success: boolean;
+  timestamp: string;
+}
