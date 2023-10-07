@@ -23,7 +23,7 @@ const accountItems: IAccountItem[] = [
   },
   {
     label: "환경 설정",
-    path: "",
+    path: "/settings",
   },
   {
     label: "공지사항",
@@ -69,12 +69,12 @@ function AccountIndex() {
           <Styled.List>
             {accountItems.map(({ label, path }) => (
               <Styled.ListItem key={label}>
-                <FlexBox alignItems="center">
-                  <p className="label">{label}</p>
-                  <button className="wrap" onClick={() => navigate(`/account/${path}`)}>
+                <button className="button" onClick={() => navigate(`/account${path}`)}>
+                  <FlexBox alignItems="center">
+                    <p className="label">{label}</p>
                     <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
-                  </button>
-                </FlexBox>
+                  </FlexBox>
+                </button>
               </Styled.ListItem>
             ))}
           </Styled.List>
