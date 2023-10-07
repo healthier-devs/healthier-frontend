@@ -4,6 +4,7 @@ const color = {
   sub_blue_2: "#1a76b7",
   green: "#d2fa64",
   sub_green: "#86af14",
+  secondary_green: "#d2fa64",
   red: "#ff6c45",
   black: "#000000",
   white: "#ffffff",
