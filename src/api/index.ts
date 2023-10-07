@@ -33,9 +33,9 @@ export const createFetcher = (path: string) => {
 
   instance.interceptors.request.use(
     function (config: AxiosRequestConfig) {
-      //const accessToken = localStorage.getItem("accessToken") ?? "";
+      const accessToken = localStorage.getItem("accessToken") ?? "";
 
-      const accessToken = "123";
+      //const accessToken = "123";
 
       (config.headers ?? {}).Authorization = "Bearer " + accessToken;
 
