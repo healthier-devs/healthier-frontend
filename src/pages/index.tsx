@@ -13,6 +13,7 @@ import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
 import MainPage from "./main";
+import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
 import SignUp from "./signUp";
@@ -52,6 +53,7 @@ export {
   TermsAgreement,
   Login,
   SignUpComplete,
+  MyChallenge,
   Account,
   AccountIndex,
 };

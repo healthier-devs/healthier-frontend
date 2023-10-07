@@ -63,6 +63,7 @@ function App() {
           <Route path="/challenge/stamp/:id" element={<Pages.ChallengeStamp />} />
           <Route path="/challenge-list" element={<Pages.ChallengeList />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
+          <Route path="/my-challenge" element={<Pages.MyChallenge />} />
           <Route path="/test" element={<Pages.Test />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
