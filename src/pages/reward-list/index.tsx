@@ -1,18 +1,11 @@
 import ContentHeader from "src/components/contentHeader";
+import RewardCard from "src/components/rewardCard";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 // TODO: api 연동 및 인터페이스 수정
 
-interface IRewardListItem {
-  rewardId: number;
-  giftTitle: string;
-  giftDescription: string;
-  image: string;
-  point: number;
-}
-
-const rewardItems: IRewardListItem[] = [
+const rewardItems = [
   {
     rewardId: 0,
     giftTitle: "배달의 민족",
@@ -94,13 +87,7 @@ function RewardList() {
           {rewardItems
             .filter((item) => item.point === 3000)
             .map((item) => (
-              <Styled.ListItem key={item.rewardId}>
-                <Styled.RewardImage src={item.image} />
-                <Styled.ListItemContent>
-                  <Styled.ListItemTitle>{item.giftTitle}</Styled.ListItemTitle>
-                  <Styled.ListItemPoint>{item.giftDescription} </Styled.ListItemPoint>
-                </Styled.ListItemContent>
-              </Styled.ListItem>
+              <RewardCard key={item.rewardId} item={item} />
             ))}
         </Styled.ListContainer>
 
@@ -109,13 +96,7 @@ function RewardList() {
           {rewardItems
             .filter((item) => item.point === 10000)
             .map((item) => (
-              <Styled.ListItem key={item.rewardId}>
-                <Styled.RewardImage src={item.image} />
-                <Styled.ListItemContent>
-                  <Styled.ListItemTitle>{item.giftTitle}</Styled.ListItemTitle>
-                  <Styled.ListItemPoint>{item.giftDescription} </Styled.ListItemPoint>
-                </Styled.ListItemContent>
-              </Styled.ListItem>
+              <RewardCard key={item.rewardId} item={item} />
             ))}
         </Styled.ListContainer>
       </Styled.Container>

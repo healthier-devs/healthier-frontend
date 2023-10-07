@@ -34,35 +34,3 @@ export const ListContainer = styled.div`
   column-gap: 1.2rem;
   row-gap: 1.6rem;
 `;
-
-export const ListItem = styled.div`
-  height: 16.5rem;
-`;
-
-export const RewardImage = styled.img`
-  width: 16.5rem;
-  height: 10rem;
-  border-radius: 1rem;
-`;
-
-export const ListItemContent = styled.div`
-  margin-top: 1.2rem;
-`;
-
-export const ListItemTitle = styled.p`
-  font-size: 1.3rem;
-  font-weight: 300;
-  line-height: 150%;
-  letter-spacing: -0.03rem;
-
-  color: ${({ theme }) => theme.color.grey_400};
-`;
-
-export const ListItemPoint = styled.p`
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.03rem;
-
-  color: ${({ theme }) => theme.color.grey_200};
-`;
