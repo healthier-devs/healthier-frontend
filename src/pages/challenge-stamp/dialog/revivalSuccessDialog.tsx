@@ -7,7 +7,7 @@ interface IRevivalSuccessDialog {
   closeModal: () => void;
 }
 
-function RevivalSuccessDialog({ modalRef, closeModal }: IRevivalSuccessDialog) {
+export const RevivalSuccessDialog = ({ modalRef, closeModal }: IRevivalSuccessDialog) => {
   return (
     <Dialog
       ref={modalRef}
@@ -24,6 +24,4 @@ function RevivalSuccessDialog({ modalRef, closeModal }: IRevivalSuccessDialog) {
       onClickConfirm={closeModal}
     />
   );
-}
-
-export default RevivalSuccessDialog;
+};

@@ -8,7 +8,7 @@ import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
 import { usePutStampImage } from "src/hooks/challenge/usePutStampImage";
 import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
-import { ForgiveDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
+import { ForgiveDialog, InviteCodeCopyDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 import Toast from "./toast";
@@ -20,6 +20,7 @@ function ChallengeStamp() {
   const revivalTicketDialog = useModal();
   const forgiveDialog = useModal();
   const revivalSuccessDialog = useModal();
+  const inviteCodeDialog = useModal();
 
   const isRevivalDayLine = useRef<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -127,7 +128,7 @@ function ChallengeStamp() {
             </Styled.TopContainer>
 
             <Styled.ContentsContainer>
-              <Styled.BannerContainer>
+              <Styled.BannerContainer onClick={inviteCodeDialog.openModal}>
                 <div className="top-box">
                   <Styled.BannerTitle>친구 초대하기</Styled.BannerTitle>
                   <ChevronRightIcon />
@@ -212,13 +213,14 @@ function ChallengeStamp() {
           onSuccessRevival={revivalSuccessDialog.openModal}
         />
       )}
-
       {forgiveDialog.isOpenModal && (
         <ForgiveDialog id={challengeId} closeModal={forgiveDialog.closeModal} modalRef={forgiveDialog.modalRef} />
       )}
-
       {revivalSuccessDialog.isOpenModal && (
         <RevivalSuccessDialog closeModal={revivalSuccessDialog.closeModal} modalRef={revivalSuccessDialog.modalRef} />
+      )}
+      {inviteCodeDialog.isOpenModal && (
+        <InviteCodeCopyDialog closeModal={inviteCodeDialog.closeModal} modalRef={inviteCodeDialog.modalRef} />
       )}
 
       {toastText && <Toast isVisible={Boolean(toastText)} text={toastText} />}

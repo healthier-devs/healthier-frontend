@@ -1,5 +1,4 @@
-import ForgiveDialog from "./forgiveDialog";
-import RevivalSuccessDialog from "./revivalSuccessDialog";
-import RevivalTicketDialog from "./revivalTicketDialog";
-
-export { ForgiveDialog, RevivalSuccessDialog, RevivalTicketDialog };
+export * from "./forgiveDialog";
+export * from "./inviteCodeCopyDialog";
+export * from "./revivalSuccessDialog";
+export * from "./revivalTicketDialog";

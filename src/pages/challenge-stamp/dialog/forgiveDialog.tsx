@@ -9,7 +9,7 @@ interface IForgiveDialogProps {
   id: number;
 }
 
-function ForgiveDialog({ modalRef, closeModal, id }: IForgiveDialogProps) {
+export const ForgiveDialog = ({ modalRef, closeModal, id }: IForgiveDialogProps) => {
   const navigate = useNavigate();
 
   const { deleteStamp } = useDeleteStampChart({ id, successCallback: () => navigate("/challenge-list") });
@@ -34,6 +34,4 @@ function ForgiveDialog({ modalRef, closeModal, id }: IForgiveDialogProps) {
       onClickCancel={handleForgiveChallenge}
     />
   );
-}
-
-export default ForgiveDialog;
+};

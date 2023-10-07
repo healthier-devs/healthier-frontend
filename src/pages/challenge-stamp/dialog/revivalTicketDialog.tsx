@@ -10,7 +10,7 @@ interface IRevivalTicketDialogProps {
   id: number;
 }
 
-function RevivalTicketDialog({ modalRef, closeModal, onSuccessRevival, id }: IRevivalTicketDialogProps) {
+export const RevivalTicketDialog = ({ modalRef, closeModal, onSuccessRevival, id }: IRevivalTicketDialogProps) => {
   const { patchRevivalTicket } = usePatchRevivalTicket({ id, onSuccessRevival });
 
   const handleClickRevival = () => {
@@ -39,6 +39,4 @@ function RevivalTicketDialog({ modalRef, closeModal, onSuccessRevival, id }: IRe
       onClickConfirm={handleClickRevival}
     />
   );
-}
-
-export default RevivalTicketDialog;
+};
