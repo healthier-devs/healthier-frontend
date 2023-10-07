@@ -54,13 +54,13 @@ export const createFetcher = (path: string) => {
       }
 
       try {
-        const reissued = await axios.post<ILoginResponse, ILoginResponse>(`${process.env.REACT_APP_SERVER_URL}/reissue`, {
+        const { data } = await axios.post<ILoginResponse, { data: ILoginResponse }>(`${process.env.REACT_APP_SERVER_URL}/reissue`, {
           accessToken,
           refreshToken,
         });
 
-        localStorage.setItem("accessToken", reissued.accessToken);
-        setCookie("refreshToken", reissued.refreshToken, {
+        localStorage.setItem("accessToken", data.accessToken);
+        setCookie("refreshToken", data.refreshToken, {
           domain: "localhost",
           secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
         });
