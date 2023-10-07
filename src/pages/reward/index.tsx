@@ -77,7 +77,7 @@ function Reward() {
                     <Styled.CertificatedButton
                       isFinish={challenge.midtermReward}
                       {...(!challenge.midtermReward && {
-                        onClick: () => navigate("/challenge/reward/information"),
+                        onClick: () => navigate("/challenge/reward/list", { state: "midterm" }),
                       })}
                     >
                       {challenge.midtermReward ? "받기 완료" : "리워드 받기"}
@@ -92,7 +92,7 @@ function Reward() {
                     <Styled.CertificatedButton
                       isFinish={challenge.finalReward}
                       {...(!challenge.finalReward && {
-                        onClick: () => navigate("/challenge/reward/information"),
+                        onClick: () => navigate("/challenge/reward/list", { state: "final" }),
                       })}
                     >
                       {challenge.finalReward ? "받기 완료" : "리워드 받기"}
@@ -116,7 +116,7 @@ function Reward() {
           ))}
         </Styled.ListContainer>
 
-        <Styled.ExtraRewardButton onClick={() => navigate("/challenge/reward/list")}>
+        <Styled.ExtraRewardButton onClick={() => navigate("/challenge/reward/list", { state: "all" })}>
           <p>다른 챌린지도 보러가기</p>
           <ChevronRightIcon stroke="#787C83" strokeWidth={2} />
         </Styled.ExtraRewardButton>
