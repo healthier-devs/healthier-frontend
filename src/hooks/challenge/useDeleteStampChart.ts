@@ -2,27 +2,27 @@ import { useMutation } from "@tanstack/react-query";
 import { queryKeys } from "src/api/queryKeys";
 import { stampFetcher } from "src/api/stamp/fetcher";
 
-interface IUsePatchRevivalTicket {
+interface IUseDeleteStampChart {
   id: number;
-  onSuccessRevival: () => void;
+  successCallback: () => void;
 }
 
-export const usePatchRevivalTicket = ({ id, onSuccessRevival }: IUsePatchRevivalTicket) => {
+export const useDeleteStampChart = ({ id, successCallback }: IUseDeleteStampChart) => {
   const {
-    mutate: patchRevivalTicket,
+    mutate: deleteStamp,
     isSuccess,
     isError,
     isPending,
   } = useMutation({
-    mutationFn: () => stampFetcher.reviveStampChart(id),
+    mutationFn: () => stampFetcher.deleteStampChart(id),
     mutationKey: [queryKeys.STAMP, id],
     onSuccess() {
-      onSuccessRevival();
+      successCallback();
     },
   });
 
   return {
-    patchRevivalTicket,
+    deleteStamp,
     isPending,
     isSuccess,
     isError,

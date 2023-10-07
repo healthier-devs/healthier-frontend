@@ -59,7 +59,7 @@ export const RightButton = styled.section`
   height: 3.2rem;
 
   margin-bottom: 0.9rem;
-  margin-right: 1.5rem;
+  margin-right: 2.5rem;
 
   cursor: pointer;
 

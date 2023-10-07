@@ -73,3 +73,7 @@ export interface IStampBodyRequest {
 export interface IStampImagePresignedUrl {
   url: string;
 }
+
+export interface IStampRevivalTicketCountResponse {
+  revivalTicketNum: number;
+}

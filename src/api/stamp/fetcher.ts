@@ -16,6 +16,11 @@ export const stampFetcher = {
   reviveStampChart(id: number) {
     return fetcher.patch(`/revival/${id}`);
   },
+  getRevivalTicketCount() {
+    console.log("ticket 요청");
+
+    return fetcher.get("/revival/tickets");
+  },
   async putStampImage(url: string, file: File) {
     return axios.put(url, file).then(responseBody);
   },

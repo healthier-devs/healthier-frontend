@@ -1,30 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
-import Dialog from "src/components/dialog";
 import RoundButton from "src/components/roundButton";
 import { useGetPresignedUrl } from "src/hooks/challenge/useGetPresignedUrl";
+import { useGetRevivalTicketCount } from "src/hooks/challenge/useGetRevivalTicketCount";
 import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
-import { usePatchRevivalTicket } from "src/hooks/challenge/usePatchRevivalTicket";
 import { usePutStampImage } from "src/hooks/challenge/usePutStampImage";
 import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
+import { ForgiveDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
+import Toast from "./toast";
 
 function ChallengeStamp() {
   const navigate = useNavigate();
   const param = useParams();
 
   const revivalTicketDialog = useModal();
+  const forgiveDialog = useModal();
+  const revivalSuccessDialog = useModal();
 
   const isRevivalDayLine = useRef<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [toastText, setToastText] = useState<ReactNode>("");
 
-  const { stampChartData, refetch, isLoading, isSuccess } = useGetStampChart({ challengeId: parseInt(param.id ?? "0") });
-  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "0") });
+  const challengeId = parseInt(param.id ?? "0");
+
+  const { revivalCount } = useGetRevivalTicketCount();
   const { presignedUrlData } = useGetPresignedUrl();
-  const { putStampImage } = usePutStampImage({ id: parseInt(param.id ?? "0"), url: presignedUrlData?.url ?? "", refetch });
+  const { stampChartData, refetch, isLoading, isSuccess } = useGetStampChart({ challengeId });
+
+  const { putStampImage } = usePutStampImage({ id: challengeId, url: presignedUrlData?.url ?? "", refetch });
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -34,14 +41,34 @@ function ChallengeStamp() {
     }
   }, []);
 
-  const handleClickRevivalTicket = () => {
-    // TODO: 부활티켓이 0개면 모달 내용 다르게
-    revivalTicketDialog.openModal();
-  };
+  useEffect(() => {
+    if (toastText) {
+      setTimeout(() => {
+        setToastText("");
+      }, 5000);
+    }
+  }, [toastText]);
 
-  const handleClickRevival = () => {
-    patchRevivalTicket();
-    revivalTicketDialog.closeModal();
+  const handleClickRevivalTicket = () => {
+    if (!stampChartData?.submissions.some((stamp) => stamp.status === "FAILURE")) {
+      setToastText(
+        <>
+          아직 챌린지 인증 실패한 날이 없어요!
+          <br />
+          추후에 사용해주세요
+        </>
+      );
+    } else if ((revivalCount?.revivalTicketNum ?? 0) === 0) {
+      setToastText(
+        <>
+          아직 보유한 티켓이 없어요!
+          <br />
+          친구 초대하고 부활 티켓을 얻으세요.
+        </>
+      );
+    } else {
+      revivalTicketDialog.openModal();
+    }
   };
 
   const handleClickCertificate = () => {
@@ -75,7 +102,7 @@ function ChallengeStamp() {
                 <Styled.LeftButton onClick={() => navigate(-1)}>
                   <img alt="back" src="/images/header/back.svg" width={32} height={32} />
                 </Styled.LeftButton>
-                <Styled.RightButton onClick={() => navigate(-1)}>관리</Styled.RightButton>
+                <Styled.RightButton onClick={forgiveDialog.openModal}>포기하기</Styled.RightButton>
               </Styled.HeaderContainer>
 
               <Styled.TopContents>
@@ -100,19 +127,15 @@ function ChallengeStamp() {
             </Styled.TopContainer>
 
             <Styled.ContentsContainer>
-              <Styled.BannerContainer onClick={handleClickRevivalTicket}>
+              <Styled.BannerContainer>
                 <div className="top-box">
-                  <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
-                    <Styled.BannerTitle>부활티켓 사용하기</Styled.BannerTitle>
-                    <Styled.BannerDescription style={{ margin: 0 }}>
-                      <span className="highlight">n장</span> 보유중
-                    </Styled.BannerDescription>
-                  </div>
+                  <Styled.BannerTitle>친구 초대하기</Styled.BannerTitle>
                   <ChevronRightIcon />
                 </div>
-                <Styled.BannerDescription>부활티켓을 사용해서 실패한 회차를 복구해보세요!</Styled.BannerDescription>
+                <Styled.BannerDescription>
+                  실패한 회차에 대한 <span style={{ color: theme.color.blue }}>부활권</span>을 얻을 수 있어요!
+                </Styled.BannerDescription>
               </Styled.BannerContainer>
-
               <Styled.StampContainer>
                 {stampChartData &&
                   stampChartData.submissions.map((_, idx) => {
@@ -156,15 +179,20 @@ function ChallengeStamp() {
                     return <></>;
                   })}
               </Styled.StampContainer>
-
-              <Styled.BannerContainer>
+              <Styled.BannerContainer onClick={handleClickRevivalTicket}>
                 <div className="top-box">
-                  <Styled.BannerTitle>친구 초대하기</Styled.BannerTitle>
+                  <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+                    <Styled.BannerTitle>부활티켓 사용하기</Styled.BannerTitle>
+                    <Styled.BannerDescription style={{ margin: 0 }}>
+                      <span className="highlight">{revivalCount?.revivalTicketNum ?? 0}장</span> 보유중
+                    </Styled.BannerDescription>
+                  </div>
                   <ChevronRightIcon />
                 </div>
-                <Styled.BannerDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.BannerDescription>
+                <Styled.BannerDescription>부활티켓을 사용해서 실패한 회차를 복구해보세요!</Styled.BannerDescription>
               </Styled.BannerContainer>
             </Styled.ContentsContainer>
+
             {selectedImage && <img src={selectedImage} alt="선택된 이미지" />}
           </Styled.Container>
 
@@ -177,26 +205,23 @@ function ChallengeStamp() {
       )}
 
       {revivalTicketDialog.isOpenModal && (
-        <Dialog
-          ref={revivalTicketDialog.modalRef}
-          title={
-            <>
-              부활 티켓으로
-              <br />
-              하루를 만회하시겠어요?
-            </>
-          }
-          description={
-            <>
-              <span style={{ color: theme.color.blue }}>1장 당 인증 실패한 하루</span>를 제거할 수 있어요.
-            </>
-          }
-          cancelText="취소"
-          confirmText="네 사용할래요"
-          onClickCancel={revivalTicketDialog.closeModal}
-          onClickConfirm={handleClickRevival}
+        <RevivalTicketDialog
+          id={challengeId}
+          closeModal={revivalTicketDialog.closeModal}
+          modalRef={revivalTicketDialog.modalRef}
+          onSuccessRevival={revivalSuccessDialog.openModal}
         />
       )}
+
+      {forgiveDialog.isOpenModal && (
+        <ForgiveDialog id={challengeId} closeModal={forgiveDialog.closeModal} modalRef={forgiveDialog.modalRef} />
+      )}
+
+      {revivalSuccessDialog.isOpenModal && (
+        <RevivalSuccessDialog closeModal={revivalSuccessDialog.closeModal} modalRef={revivalSuccessDialog.modalRef} />
+      )}
+
+      {toastText && <Toast isVisible={Boolean(toastText)} text={toastText} />}
     </>
   );
 }
