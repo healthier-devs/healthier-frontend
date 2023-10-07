@@ -44,11 +44,15 @@ export const Section = styled.section`
   padding: 0 2rem;
 `;
 
+export const Highlighted = styled.span`
+  color: ${({ theme }) => theme.color.secondary_green};
+`;
+
 export const Typography = styled.p<{
   mt?: string;
   mb?: string;
   color?: "200" | "300" | "500";
-  lineHeight?: "140%" | "150%";
+  lineHeight?: "140%" | "150%" | "160%" | "180%";
   fontSize?: string;
   thickness?: string;
 }>`
@@ -64,6 +68,38 @@ export const Typography = styled.p<{
   color: ${({ color = "200", theme }) =>
     color === "200" ? theme.color.grey_200 : color === "300" ? theme.color.grey_300 : theme.color.grey_500};
   line-height: ${({ lineHeight = "140%" }) => lineHeight};
+  letter-spacing: -0.3px;
+  white-space: pre-wrap;
+  word-break: break-all;
+`;
+
+export const Frame = styled.ul<{
+  px?: string;
+  py?: string;
+  mt?: string;
+  mb?: string;
+}>`
+  padding: ${({ px = "1.6rem", py = "1.6rem" }) => `${py} ${px}`};
+  margin-top: ${({ mt }) => mt};
+  margin-bottom: ${({ mb }) => mb};
+  background-color: ${({ theme }) => theme.color.grey_800};
+  border-radius: 2rem;
+`;
+
+export const FrameText = styled.li<{
+  color: "200" | "300";
+  lineHeight: "150%" | "180%";
+  fontSize: string;
+  fontWeight: string;
+}>`
+  color: ${({ color, theme }) => (color === "200" ? theme.color.grey_200 : theme.color.grey_300)};
+  line-height: ${({ lineHeight }) => lineHeight};
+  font-size: ${({ fontSize }) => fontSize};
+  font-weight: ${({ fontWeight }) => fontWeight};
+  list-style: decimal;
+  list-style-position: inside;
+  text-indent: -1.4rem;
+  padding-left: 1.4rem;
 `;
 
 export const Title = styled(Heading_2)`

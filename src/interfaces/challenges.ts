@@ -1,20 +1,22 @@
 import { CHALLENGE_CATEGORIES } from "src/data/challenge";
 
 export interface IChallenge {
-  id: string;
+  id: number;
   title: string;
   category: string;
   count: number;
-  gift80: number | null;
-  gift90: number | null;
-  gift100: number | null;
+  midtermGift: number;
+  finalGift: number;
   duration: number;
   times: number;
   method: string;
-  detail: string;
   notice: string;
-  image: string;
-  participants: string;
+  basicImage: string;
+  whatContent: string;
+  whyContent: string;
+  tipSubtitle: string;
+  tipContent: string;
+  guide: string;
   status: string;
 }
 

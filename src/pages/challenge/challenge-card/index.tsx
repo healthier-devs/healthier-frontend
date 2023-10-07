@@ -23,7 +23,7 @@ function ChallengeCard({ challenge }: IChallengeCardProps) {
 
       <Styled.DescriptionContainer>
         <Styled.Description>
-          최대 <span className="highlight">{challenge.gift100}원 상당</span>의 리워드 제공
+          최대 <span className="highlight">{challenge.finalGift}원 상당</span>의 리워드 제공
         </Styled.Description>
       </Styled.DescriptionContainer>
     </Styled.Container>

@@ -50,4 +50,7 @@ export const challengeFetcher = {
       day_count: dayCount,
     });
   },
+  getChallengeByID({ challengeID }: { challengeID: number }) {
+    return fetcher.get(`${challengeID}`);
+  },
 };
