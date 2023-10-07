@@ -8,7 +8,7 @@ import RoundButton from "../roundButton";
 import { BottomContainer, BottomButton } from "./index.style";
 
 const BottomBar = ({ curIndex, totalCount, openModal, setLoading, isSaved, resultId }: IBottomBar) => {
-  const { authenticated, accessToken } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleSave = async () => {
@@ -17,7 +17,6 @@ const BottomBar = ({ curIndex, totalCount, openModal, setLoading, isSaved, resul
       setLoading("result");
 
       // 저장 api 호출
-      await Diagnosis.patchDiagnosis({ diagnosis_id: resultId }, accessToken);
 
       const timer = setTimeout(() => {
         navigate("/");
