@@ -64,6 +64,7 @@ function App() {
           <Route path="/challenge-list" element={<Pages.ChallengeList />} />
           <Route path="/challenge/reward" element={<Pages.Reward />} />
           <Route path="/challenge/reward/list" element={<Pages.RewardList />} />
+          <Route path="/challenge/reward/information" element={<Pages.RewardInformation />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
           <Route path="/my-challenge" element={<Pages.MyChallenge />} />
           <Route path="/test" element={<Pages.Test />} />

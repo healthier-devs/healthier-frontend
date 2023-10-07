@@ -74,7 +74,12 @@ function Reward() {
                 <Styled.RewardBox>
                   <Styled.RewardDescription>Midterm 완료 리워드</Styled.RewardDescription>
                   {challenge.midterm ? (
-                    <Styled.CertificatedButton isFinish={challenge.midtermReward}>
+                    <Styled.CertificatedButton
+                      isFinish={challenge.midtermReward}
+                      {...(!challenge.midtermReward && {
+                        onClick: () => navigate("/challenge/reward/information"),
+                      })}
+                    >
                       {challenge.midtermReward ? "받기 완료" : "리워드 받기"}
                     </Styled.CertificatedButton>
                   ) : (
@@ -84,7 +89,12 @@ function Reward() {
                 <Styled.RewardBox>
                   <Styled.RewardDescription>Final 완료 리워드</Styled.RewardDescription>
                   {challenge.final ? (
-                    <Styled.CertificatedButton isFinish={challenge.finalReward}>
+                    <Styled.CertificatedButton
+                      isFinish={challenge.finalReward}
+                      {...(!challenge.finalReward && {
+                        onClick: () => navigate("/challenge/reward/information"),
+                      })}
+                    >
                       {challenge.finalReward ? "받기 완료" : "리워드 받기"}
                     </Styled.CertificatedButton>
                   ) : (
