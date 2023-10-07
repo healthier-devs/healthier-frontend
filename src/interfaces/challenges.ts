@@ -69,3 +69,7 @@ export interface IStampChartResponse {
 export interface IStampBodyRequest {
   id: number;
 }
+
+export interface IStampImagePresignedUrl {
+  url: string;
+}

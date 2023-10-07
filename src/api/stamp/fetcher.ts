@@ -1,16 +1,22 @@
-import { createFetcher } from "..";
-import type { IStampBodyRequest } from "src/interfaces/challenges";
+import axios from "axios";
+import { createFetcher, responseBody } from "..";
 
 const fetcher = createFetcher("/stamp");
 
 export const stampFetcher = {
-  getStampChart(id: string) {
+  getStampChart(id: number) {
     return fetcher.get(`/${id}`);
   },
-  deleteStampChart(id: string) {
+  deleteStampChart(id: number) {
     return fetcher.delete(`/${id}`);
   },
-  reviveStampChart({ id }: IStampBodyRequest) {
+  patchStampChart(id: number, image: string) {
+    return fetcher.patch(`/${id}?image=${image}`);
+  },
+  reviveStampChart(id: number) {
     return fetcher.patch(`/revival/${id}`);
+  },
+  async putStampImage(url: string, file: File) {
+    return axios.put(url, file).then(responseBody);
   },
 };

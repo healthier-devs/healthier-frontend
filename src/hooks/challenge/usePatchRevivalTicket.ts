@@ -13,7 +13,7 @@ export const usePatchRevivalTicket = ({ id }: IUsePatchRevivalTicket) => {
     isError,
     isPending,
   } = useMutation({
-    mutationFn: () => stampFetcher.reviveStampChart({ id }),
+    mutationFn: () => stampFetcher.reviveStampChart(id),
     mutationKey: [queryKeys.STAMP, id],
   });
 

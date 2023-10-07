@@ -3,7 +3,7 @@ import { ILoginResponse } from "src/interfaces/account";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
 
-const responseBody = (response: AxiosResponse) => response.data;
+export const responseBody = (response: AxiosResponse) => response.data;
 
 export const createUnauthorizedFetcher = (path: string) => {
   const instance = axios.create({

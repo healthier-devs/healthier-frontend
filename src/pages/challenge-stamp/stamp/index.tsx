@@ -46,7 +46,13 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
 
       return (
         <Styled.Stamp key={dayCount}>
-          {currentDayCnt === dayCount ? (
+          {stamp.status === "CHECKING" ? (
+            <Styled.CurrentDayStamp>
+              챌린지
+              <br />
+              인증 확인중
+            </Styled.CurrentDayStamp>
+          ) : currentDayCnt === dayCount ? (
             <Styled.CurrentDayStamp>
               챌린지
               <br />

@@ -1,5 +1,10 @@
 import { createFetcher } from "..";
-import type { TChallengeListResponse, TChallengeCategoryListResponse, IMyChallengeProgressResponse } from "src/interfaces/challenges";
+import type {
+  TChallengeListResponse,
+  TChallengeCategoryListResponse,
+  IMyChallengeProgressResponse,
+  IStampImagePresignedUrl,
+} from "src/interfaces/challenges";
 
 const fetcher = createFetcher("/challenges");
 
@@ -12,5 +17,8 @@ export const challengeFetcher = {
   },
   getMyChallenge(status: "PROGRESS" | "CLOSED"): Promise<IMyChallengeProgressResponse> {
     return fetcher.get(`/my-challenges?status=${status}`);
+  },
+  getStampImageUrl(): Promise<IStampImagePresignedUrl> {
+    return fetcher.get("/image");
   },
 };

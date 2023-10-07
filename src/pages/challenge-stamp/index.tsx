@@ -1,10 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import Dialog from "src/components/dialog";
 import RoundButton from "src/components/roundButton";
+import { useGetPresignedUrl } from "src/hooks/challenge/useGetPresignedUrl";
 import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
 import { usePatchRevivalTicket } from "src/hooks/challenge/usePatchRevivalTicket";
+import { usePutStampImage } from "src/hooks/challenge/usePutStampImage";
 import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
@@ -14,12 +16,15 @@ function ChallengeStamp() {
   const navigate = useNavigate();
   const param = useParams();
 
-  const { stampChartData, isLoading, isSuccess } = useGetStampChart({ challengeId: param.id ?? "" });
-  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "0") });
+  const revivalTicketDialog = useModal();
 
   const isRevivalDayLine = useRef<boolean>(true);
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
-  const revivalTicketDialog = useModal();
+  const { stampChartData, refetch, isLoading, isSuccess } = useGetStampChart({ challengeId: parseInt(param.id ?? "0") });
+  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "0") });
+  const { presignedUrlData } = useGetPresignedUrl();
+  const { putStampImage } = usePutStampImage({ id: parseInt(param.id ?? "0"), url: presignedUrlData?.url ?? "", refetch });
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -44,7 +49,20 @@ function ChallengeStamp() {
 
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
+
+    input.onchange = (e) => handleImageChange(e);
     input.click();
+  };
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files?.[0];
+
+    if (file && presignedUrlData?.url) {
+      const imageUrl = URL.createObjectURL(file);
+
+      setSelectedImage(imageUrl);
+      putStampImage({ imageFile: file });
+    }
   };
 
   return (
@@ -147,6 +165,7 @@ function ChallengeStamp() {
                 <Styled.BannerDescription>친구 초대를 하면 부활권을 얻을 수 있어요!</Styled.BannerDescription>
               </Styled.BannerContainer>
             </Styled.ContentsContainer>
+            {selectedImage && <img src={selectedImage} alt="선택된 이미지" />}
           </Styled.Container>
 
           <Styled.CTAContainer>

@@ -4,12 +4,13 @@ import { stampFetcher } from "src/api/stamp/fetcher";
 import type { IStampChartResponse } from "src/interfaces/challenges";
 
 interface IUseGetChallengesProps {
-  challengeId: string;
+  challengeId: number;
 }
 
 export const useGetStampChart = ({ challengeId }: IUseGetChallengesProps) => {
   const {
     data: stampChartData,
+    refetch,
     isLoading,
     isSuccess,
   } = useQuery<IStampChartResponse>({
@@ -19,6 +20,7 @@ export const useGetStampChart = ({ challengeId }: IUseGetChallengesProps) => {
 
   return {
     stampChartData,
+    refetch,
     isLoading,
     isSuccess,
   };
