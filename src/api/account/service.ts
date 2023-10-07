@@ -89,6 +89,8 @@ export const validateToken = async (): Promise<IUserResponse | IException> => {
 
     return validationData;
   } catch (err) {
+    console.log(err);
+    console.log(err instanceof AxiosError);
     if (err instanceof AxiosError && err.response) {
       const { status } = err.response;
 
