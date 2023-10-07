@@ -5,7 +5,7 @@ import { IStampRevivalTicketCountResponse } from "src/interfaces/challenges";
 
 export const useGetRevivalTicketCount = () => {
   const { data: revivalCount, isLoading } = useQuery<IStampRevivalTicketCountResponse>({
-    queryKey: [queryKeys.STAMP],
+    queryKey: [queryKeys.STAMP, "revivalTicket"],
     queryFn: () => stampFetcher.getRevivalTicketCount(),
   });
 

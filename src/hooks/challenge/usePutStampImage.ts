@@ -7,14 +7,15 @@ interface IUsePutStampImage {
   id: number;
   url: string;
   refetch: any;
+  onSuccessImageUpload: () => void;
 }
 
 interface IPutStampProps {
   imageFile: File;
 }
 
-export const usePutStampImage = ({ id, url, refetch }: IUsePutStampImage) => {
-  const { patchStamp } = usePatchStamp({ id, image: url.split("?")[0], refetch });
+export const usePutStampImage = ({ id, url, refetch, onSuccessImageUpload }: IUsePutStampImage) => {
+  const { patchStamp } = usePatchStamp({ id, image: url.split("?")[0], refetch, onSuccessImageUpload });
 
   const {
     mutate: putStampImage,

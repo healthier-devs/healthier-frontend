@@ -20,6 +20,8 @@ export const stampFetcher = {
     return fetcher.get("/revival/tickets");
   },
   async putStampImage(url: string, file: File) {
+    console.log("put stamp image 호출");
+
     return axios.put(url, file).then(responseBody);
   },
 };

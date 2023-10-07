@@ -9,7 +9,7 @@ export const useGetPresignedUrl = () => {
     isLoading,
     isSuccess,
   } = useQuery<IStampImagePresignedUrl>({
-    queryKey: [queryKeys.STAMP],
+    queryKey: [queryKeys.STAMP, "presignedUrl"],
     queryFn: () => challengeFetcher.getStampImageUrl(),
   });
 

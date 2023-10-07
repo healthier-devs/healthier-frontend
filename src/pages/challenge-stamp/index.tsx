@@ -8,7 +8,7 @@ import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
 import { usePutStampImage } from "src/hooks/challenge/usePutStampImage";
 import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
-import { ForgiveDialog, InviteCodeCopyDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
+import { CertificateImageUploadDialog, ForgiveDialog, InviteCodeCopyDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 import Toast from "./toast";
@@ -21,6 +21,7 @@ function ChallengeStamp() {
   const forgiveDialog = useModal();
   const revivalSuccessDialog = useModal();
   const inviteCodeDialog = useModal();
+  const certificateImageUploadDialog = useModal();
 
   const isRevivalDayLine = useRef<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -28,11 +29,16 @@ function ChallengeStamp() {
 
   const challengeId = parseInt(param.id ?? "0");
 
-  const { revivalCount } = useGetRevivalTicketCount();
   const { presignedUrlData } = useGetPresignedUrl();
+  const { revivalCount } = useGetRevivalTicketCount();
   const { stampChartData, refetch, isLoading, isSuccess } = useGetStampChart({ challengeId });
 
-  const { putStampImage } = usePutStampImage({ id: challengeId, url: presignedUrlData?.url ?? "", refetch });
+  const { putStampImage } = usePutStampImage({
+    id: challengeId,
+    url: presignedUrlData?.url ?? "",
+    refetch,
+    onSuccessImageUpload: certificateImageUploadDialog.openModal,
+  });
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -194,6 +200,7 @@ function ChallengeStamp() {
               </Styled.BannerContainer>
             </Styled.ContentsContainer>
 
+            {/* NOTE: 이미지 업로드되는지 디버깅용 */}
             {selectedImage && <img src={selectedImage} alt="선택된 이미지" />}
           </Styled.Container>
 
@@ -221,6 +228,12 @@ function ChallengeStamp() {
       )}
       {inviteCodeDialog.isOpenModal && (
         <InviteCodeCopyDialog closeModal={inviteCodeDialog.closeModal} modalRef={inviteCodeDialog.modalRef} />
+      )}
+      {certificateImageUploadDialog.isOpenModal && (
+        <CertificateImageUploadDialog
+          closeModal={certificateImageUploadDialog.closeModal}
+          modalRef={certificateImageUploadDialog.modalRef}
+        />
       )}
 
       {toastText && <Toast isVisible={Boolean(toastText)} text={toastText} />}

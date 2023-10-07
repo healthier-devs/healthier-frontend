@@ -20,7 +20,7 @@ export const RevivalSuccessDialog = ({ modalRef, closeModal }: IRevivalSuccessDi
         </>
       }
       imageUrl="/images/challenge/revival-ticket.png"
-      singleButtonText={<span style={{ color: theme.color.grey_100 }}>챌린지로 돌아가기</span>}
+      singleButtonText="챌린지로 돌아가기"
       onClickConfirm={closeModal}
     />
   );

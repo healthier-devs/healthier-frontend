@@ -95,7 +95,7 @@ export const SingleButton = styled.button`
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
 
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.grey_100};
 `;
 
 export const DoubleButton = styled.button<{ position: "left" | "right" }>`
