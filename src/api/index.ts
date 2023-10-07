@@ -70,10 +70,11 @@ export const createFetcher = (path: string) => {
         localStorage.setItem("accessToken", reissueResponse.data.accessToken);
         setCookie("refreshToken", reissueResponse.data.refreshToken, {
           domain: "localhost",
+          path: "/",
           secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
         });
 
-        return reissueResponse;
+        return instance.request(_err.config);
       } catch (reissueErr) {
         return Promise.reject(reissueErr);
       }
