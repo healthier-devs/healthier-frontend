@@ -15,7 +15,7 @@ function ChallengeStamp() {
   const param = useParams();
 
   const { stampChartData, isLoading, isSuccess } = useGetStampChart({ challengeId: param.id ?? "" });
-  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "") });
+  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "0") });
 
   const isRevivalDayLine = useRef<boolean>(true);
 
@@ -35,9 +35,16 @@ function ChallengeStamp() {
   };
 
   const handleClickRevival = () => {
-    // 부활티켓 api 연동
     patchRevivalTicket();
     revivalTicketDialog.closeModal();
+  };
+
+  const handleClickCertificate = () => {
+    const input = document.createElement("input");
+
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
   };
 
   return (
@@ -143,7 +150,7 @@ function ChallengeStamp() {
           </Styled.Container>
 
           <Styled.CTAContainer>
-            <RoundButton onClick={() => console.log("챌린지 인증")} style={{ pointerEvents: "auto" }}>
+            <RoundButton onClick={handleClickCertificate} style={{ pointerEvents: "auto" }}>
               오늘의 챌린지 인증하기
             </RoundButton>
           </Styled.CTAContainer>
