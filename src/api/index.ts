@@ -35,8 +35,6 @@ export const createFetcher = (path: string) => {
     function (config: AxiosRequestConfig) {
       const accessToken = localStorage.getItem("accessToken") ?? "";
 
-      //const accessToken = "123";
-
       (config.headers ?? {}).Authorization = "Bearer " + accessToken;
 
       return config;

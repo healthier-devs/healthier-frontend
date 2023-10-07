@@ -13,4 +13,7 @@ export const challengeFetcher = {
   getMyChallenge(status: "PROGRESS" | "CLOSED"): Promise<IMyChallengeProgressResponse> {
     return fetcher.get(`/my-challenges?status=${status}`);
   },
+  getChallengeByID({ challengeID }: { challengeID: number }) {
+    return fetcher.get(`${challengeID}`);
+  },
 };
