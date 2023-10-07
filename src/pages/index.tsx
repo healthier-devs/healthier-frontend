@@ -1,5 +1,6 @@
 import Account from "./account";
 import AccountIndex from "./account/index/index";
+import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeList from "./challenge-list";
@@ -64,4 +65,5 @@ export {
   Reward,
   RewardInformation,
   RewardReception,
+  AccountSettings,
 };
