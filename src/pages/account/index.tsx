@@ -5,6 +5,7 @@ import Layout from "src/components/layout";
 
 const headerMap = {
   account: "마이페이지",
+  settings: "환경 설정",
 } as const;
 
 type TPath = keyof typeof headerMap;

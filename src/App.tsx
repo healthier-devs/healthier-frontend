@@ -58,6 +58,7 @@ function App() {
 
           <Route path="/account" element={<Pages.Account />}>
             <Route index element={<Pages.AccountIndex />} />
+            <Route path="/account/settings" element={<Pages.AccountSettings />} />
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />
