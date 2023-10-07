@@ -1,3 +1,5 @@
+import Account from "./account";
+import AccountIndex from "./account/index/index";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeList from "./challenge-list";
@@ -52,4 +54,6 @@ export {
   Login,
   SignUpComplete,
   MyChallenge,
+  Account,
+  AccountIndex,
 };
