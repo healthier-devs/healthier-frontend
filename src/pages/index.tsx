@@ -19,6 +19,7 @@ import ResultPage from "./result";
 import Reward from "./reward";
 import RewardInformation from "./reward-information";
 import RewardList from "./reward-list";
+import RewardReception from "./reward-reception";
 import SignUp from "./signUp";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
@@ -62,4 +63,5 @@ export {
   RewardList,
   Reward,
   RewardInformation,
+  RewardReception,
 };

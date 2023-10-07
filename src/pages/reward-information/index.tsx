@@ -14,10 +14,18 @@ function RewardInformation() {
   const [isFinishReward, setIsFinishReward] = useState<boolean>(false);
   // TODO: 리워드 받기 후 isFinishReward 토글
 
-  const isValidPhoneNumber = (input: string) => {
+  const isValidPhoneNumber = phoneNumber && !isErrorPhoneNumber;
+
+  const isPhoneNumberPattern = (input: string) => {
     const phoneNumberPattern = /^(\d{3}-\d{4}-\d{4})$/;
 
     return phoneNumberPattern.test(input);
+  };
+
+  const handleReceiveReward = () => {
+    if (isValidPhoneNumber) {
+      setIsFinishReward(true);
+    }
   };
 
   return (
@@ -46,7 +54,7 @@ function RewardInformation() {
                 onChange={(e) => {
                   const formattedPhoneNumber = e.target.value.replace(/[^\d]/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 
-                  if (isValidPhoneNumber(formattedPhoneNumber) || !formattedPhoneNumber) {
+                  if (isPhoneNumberPattern(formattedPhoneNumber) || !formattedPhoneNumber) {
                     setIsErrorPhoneNumber(false);
                   } else {
                     setIsErrorPhoneNumber(true);
@@ -66,7 +74,13 @@ function RewardInformation() {
             </Styled.BottomDescription>
 
             <Styled.BottomCTA>
-              <RoundButton>리워드 받기</RoundButton>
+              <RoundButton
+                backgroundColor={isValidPhoneNumber ? theme.color.blue : theme.color.grey_600}
+                color={isValidPhoneNumber ? theme.color.grey_100 : theme.color.grey_500}
+                onClick={handleReceiveReward}
+              >
+                리워드 받기
+              </RoundButton>
             </Styled.BottomCTA>
           </Styled.Container>
         </>
