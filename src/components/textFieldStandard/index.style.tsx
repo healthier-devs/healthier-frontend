@@ -7,7 +7,7 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ isError: boolean }>`
   padding: 0 0 0.8rem 0;
   font-size: 20px;
   line-height: 1.25em;
@@ -23,7 +23,7 @@ export const Input = styled.input`
   border-radius: 0;
 
   &:focus {
-    border-bottom: 1px solid #5464f2;
+    border-bottom: 1px solid ${({ isError, theme }) => (isError ? theme.color.red : "#5464f2")};
   }
 
   &::placeholder {
@@ -46,4 +46,14 @@ export const Label = styled.label`
   color: ${({ theme }) => theme.color.grey_300};
   font-weight: 300;
   margin-bottom: 1.2rem;
+`;
+
+export const HelperText = styled.p`
+  margin-top: 0.8rem;
+
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: -0.03rem;
+
+  color: ${({ theme }) => theme.color.red_600};
 `;
