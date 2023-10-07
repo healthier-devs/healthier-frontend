@@ -1,7 +1,6 @@
-import { CHALLENGE_CATEGORIES } from "src/data/challenge";
-
 export interface IChallenge {
   id: number;
+<<<<<<< HEAD
   title: string;
   category: string;
   count: number;
@@ -18,31 +17,77 @@ export interface IChallenge {
   tipContent: string;
   guide: string;
   status: string;
+=======
+  name: string;
+  duration: string;
+  times: string;
+  method: string;
+  maximumGift: number;
+>>>>>>> 031bfaa458d66d74cd136d886d829b81effc64da
 }
 
-export type TChallengeListResponse = IChallenge[];
+export type TChallengeListResponse = {
+  data: IChallenge[];
+  total: number;
+};
 
-export type TChallengeCategory = typeof CHALLENGE_CATEGORIES[number];
+export interface TChallengeCategory {
+  name: string;
+  koreanName: string;
+  imageUrl: string;
+}
+
+export type TChallengeCategoryListResponse = TChallengeCategory[];
 
 export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
 
+export interface IMyChallengeProgress {
+  category: string;
+  challengeId: string;
+  challengeName: string;
+  days: number;
+  isStampForToday: boolean;
+  remainDays: number;
+}
+
+export interface IMyChallengeProgressResponse {
+  count: number;
+  myChallenge: IMyChallengeProgress[];
+}
+
+export interface IMyChallengeFinish {
+  challengeId: string;
+  challengeName: string;
+  achievement: number;
+  category: string;
+  isSuccess: boolean;
+}
+
+export interface IMyChallengeFinishResponse {
+  count: number;
+  myChallenge: IMyChallengeFinish[];
+}
+
 export interface IStamp {
-  dayCnt: number;
+  id: number;
+  image: string | null;
+  submitTime: string;
   status: TStampStatus;
 }
 
 export interface IStampChartResponse {
   title: string;
   count: number;
-  duration: number;
-  times: number;
+  duration: string;
+  times: string;
   method: string;
-  revivalCnt: number;
   currentDayCnt: number;
-  stamps: IStamp[];
+  submissions: IStamp[];
 }
 
-export interface IStampChartRequest {
+export interface IStampBodyRequest {
+  image: string;
   userId: string;
   challengeId: string;
+  dayCount: number;
 }

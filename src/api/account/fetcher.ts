@@ -1,11 +1,8 @@
-import axios from "axios";
-import { IValidateAccountResponse, IValidatePasswordRequest, ISignUpRequest } from "src/interfaces/account";
-import { fetcher } from "../";
+import { IValidateAccountResponse, IValidatePasswordRequest, ISignUpRequest, ILoginRequest } from "src/interfaces/account";
+import { createFetcher, createUnauthorizedFetcher } from "../";
 
-export const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URL}`,
-  timeout: 1500,
-});
+const fetcher = createFetcher("");
+const unauthorizedFetcher = createUnauthorizedFetcher("");
 
 export const accountFetcher = {
   validateEmail(email: string): Promise<IValidateAccountResponse> {
@@ -15,6 +12,15 @@ export const accountFetcher = {
     return fetcher.post("/validate-password", body);
   },
   signUpUser(body: ISignUpRequest) {
-    return fetcher.post("", body);
+    return unauthorizedFetcher.post("", body);
+  },
+  loginUser(body: ILoginRequest) {
+    return unauthorizedFetcher.post("/signin", body);
+  },
+  validateToken() {
+    return fetcher.post("/validate-token", {});
+  },
+  logout() {
+    return fetcher.post("/logout");
   },
 };

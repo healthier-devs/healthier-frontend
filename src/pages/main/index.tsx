@@ -1,8 +1,9 @@
+import Footer from "src/components/footer";
 import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
+import NavigationBar from "src/components/navigationBar";
 import imageUrl from "src/data/image_url";
 import useModal from "src/hooks/useModal";
-import BottomButtons from "./bottomButtons";
 import { Title, MainImage, Container } from "./index.style";
 import MainModal from "./mainModal";
 
@@ -24,7 +25,9 @@ const MainPage = () => {
           </MainImage>
         </Container>
       </Layout>
-      <BottomButtons openModal={openModal} />
+      <Footer />
+      <NavigationBar menu="home" />
+
       {isOpenModal && <MainModal ref={modalRef} closeModal={closeModal} />}
     </>
   );

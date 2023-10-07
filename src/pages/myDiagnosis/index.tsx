@@ -7,7 +7,6 @@ import MainHeader from "src/components/mainHeader";
 import RoundButton from "src/components/roundButton";
 import theme from "src/lib/theme";
 import { useAppSelector, useAppDispatch } from "src/state";
-import { DELETE_TOKEN } from "src/state/authSlice";
 import EmptyPage from "./emptyList";
 import { Title, DescriptionBox, List, ButtonBackground } from "./index.style";
 import type { IDiagnoseResult } from "src/interfaces/diagnoseApi/diagnosis";
@@ -17,7 +16,6 @@ const MyDiagnosis = () => {
   const [diagnosisList, setDiagnosisList] = useState([] as IDiagnoseResult[]);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
-  const { accessToken } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {

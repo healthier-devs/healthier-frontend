@@ -24,3 +24,30 @@ export interface ISignUpRequest {
   marketingOptIn: boolean;
   healthInterests: string[];
 }
+
+export interface ILoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface ILoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface IException {
+  code: number;
+  message: string;
+}
+
+export interface IValidateTokenResponse {
+  data: string;
+  success: boolean;
+  timestamp: string;
+}
+
+export interface IUserResponse {
+  data: string;
+  success: boolean;
+  timestamp: string;
+}
