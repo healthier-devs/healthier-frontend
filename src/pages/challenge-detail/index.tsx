@@ -25,7 +25,6 @@ const highlightText = (line: string) => {
 };
 
 const processText = (text: string) => {
-  console.log(text);
   const output: React.ReactNode[] = [];
 
   const sections = text.split("%");
@@ -78,12 +77,6 @@ const ChallengeDetail = () => {
   const handleClickParticipateButton = () => {
     alert("TODO: 참여하기 페이지");
   };
-
-  useEffect(() => {
-    if (!isLoading) {
-      console.log(challengeData);
-    }
-  }, [challengeData]);
 
   return isLoading ? (
     <>Loading</>
