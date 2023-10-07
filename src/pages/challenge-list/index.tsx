@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import { useGetChallengeCategory } from "src/hooks/challenge/useGetChallengeCategory";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
@@ -11,7 +12,9 @@ interface IPageInfo {
   size: number;
 }
 
-function Challenge() {
+function ChallengeList() {
+  const navigate = useNavigate();
+
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: -1, size: 15 });
 
@@ -53,7 +56,7 @@ function Challenge() {
 
         <Styled.CardList>
           {challengesData?.data.map((challenge) => (
-            <ChallengeCard key={challenge.id} challenge={challenge} />
+            <ChallengeCard key={challenge.id} challenge={challenge} onClick={() => navigate(`/challenge/${challenge.id}`)} />
           ))}
           <div ref={ref} />
         </Styled.CardList>
@@ -62,4 +65,4 @@ function Challenge() {
   );
 }
 
-export default Challenge;
+export default ChallengeList;

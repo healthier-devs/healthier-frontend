@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const Categories = styled.ul`
   display: flex;
   gap: 1.6rem;
-  margin: 2rem 2.4rem;
+  padding: 2rem 2.4rem;
   overflow-x: auto;
 `;
 

@@ -56,8 +56,10 @@ const GlobalStyle = createGlobalStyle`
     }
     button{
         font-family: "Spoqa Han Sans";
+        cursor: pointer;
         border: none;
         outline: none;
+        background-color: transparent;
     }
     :root{
         --gradient: radial-gradient(300.02% 130.63% at 164.62% 165.58%, rgba(84, 100, 242, 0.9) 0%, rgba(52, 62, 135, 0) 100%) #131416;
@@ -66,6 +68,13 @@ const GlobalStyle = createGlobalStyle`
     .click-enabler{
         width: 100%;
         pointer-events: auto;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    .click{
+        cursor:pointer;
     }
 `;
 

@@ -1,6 +1,8 @@
+import Account from "./account";
+import AccountIndex from "./account/index/index";
 import Appointment from "./appointment";
-import Challenge from "./challenge";
 import ChallengeDetail from "./challenge-detail";
+import ChallengeList from "./challenge-list";
 import ChallengeStamp from "./challenge-stamp";
 import CompleteQR from "./complete-qr";
 import Diagnosis from "./diagnosis";
@@ -11,6 +13,7 @@ import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
 import MainPage from "./main";
+import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
 import SignUp from "./signUp";
@@ -43,11 +46,14 @@ export {
   IndexQR,
   ChallengeDetail,
   ChallengeStamp,
-  Challenge,
+  ChallengeList,
   Email,
   Password,
   SignUpError,
   TermsAgreement,
   Login,
   SignUpComplete,
+  MyChallenge,
+  Account,
+  AccountIndex,
 };

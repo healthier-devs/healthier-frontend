@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
@@ -11,6 +11,8 @@ function ChallengeStamp() {
   const param = useParams();
 
   const { stampChartData, isLoading, isSuccess } = useGetStampChart({ challengeId: param.id ?? "" });
+
+  const isRevivalDayLine = useRef<boolean>(true);
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -70,21 +72,45 @@ function ChallengeStamp() {
 
               <Styled.StampContainer>
                 {stampChartData &&
-                  stampChartData.stamps.map((_, idx) =>
-                    idx % 3 === 0 ? (
-                      <Styled.StampRow key={`${idx}row`}>
-                        <Stamp
-                          stamps={stampChartData.stamps.slice(idx, idx + 3)}
-                          rowIdx={idx}
-                          duration={duration}
-                          isLast={Math.ceil((stampChartData.stamps.length ?? 1) / 3) === idx / 3 + 1}
-                          currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                        />
-                      </Styled.StampRow>
-                    ) : (
-                      <></>
-                    )
-                  )}
+                  stampChartData.submissions.map((_, idx) => {
+                    if (idx % 3 === 0) {
+                      const isFailureLine = stampChartData.submissions
+                        .slice(idx, idx + 3)
+                        .some((submission) => submission.status === "FAILURE");
+
+                      if (isRevivalDayLine.current && isFailureLine) {
+                        isRevivalDayLine.current = false;
+
+                        return (
+                          <Styled.StampRow key={`${idx}row`}>
+                            <Stamp
+                              stamps={stampChartData.submissions.slice(idx, idx + 3)}
+                              rowIdx={idx}
+                              duration={duration}
+                              isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
+                              currentDayCnt={stampChartData.currentDayCnt ?? 0}
+                              isRevivalDayLine={true}
+                            />
+                          </Styled.StampRow>
+                        );
+                      }
+
+                      return (
+                        <Styled.StampRow key={`${idx}row`}>
+                          <Stamp
+                            stamps={stampChartData.submissions.slice(idx, idx + 3)}
+                            rowIdx={idx}
+                            duration={duration}
+                            isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
+                            currentDayCnt={stampChartData.currentDayCnt ?? 0}
+                            isRevivalDayLine={false}
+                          />
+                        </Styled.StampRow>
+                      );
+                    }
+
+                    return <></>;
+                  })}
               </Styled.StampContainer>
 
               <Styled.BannerContainer>

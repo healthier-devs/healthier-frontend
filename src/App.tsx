@@ -46,9 +46,13 @@ function App() {
             <Route path="/signup/agreement" element={<Pages.TermsAgreement />} />
             <Route path="/signup/email" element={<Pages.Email />} />
             <Route path="/signup/password" element={<Pages.Password />} />
-            <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           </Route>
+          <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
+
+          <Route path="/account" element={<Pages.Account />}>
+            <Route index element={<Pages.AccountIndex />} />
+          </Route>
 
           <Route path="/login" element={<Pages.Login />} />
 
@@ -57,8 +61,9 @@ function App() {
           <Route path="/qr/symptom-type" element={<Pages.SymptomTypeQR />} />
           <Route path="/qr/complete" element={<Pages.CompleteQR />} />
           <Route path="/challenge/stamp/:id" element={<Pages.ChallengeStamp />} />
-          <Route path="/challenge" element={<Pages.Challenge />} />
+          <Route path="/challenge-list" element={<Pages.ChallengeList />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
+          <Route path="/my-challenge" element={<Pages.MyChallenge />} />
           <Route path="/test" element={<Pages.Test />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -70,8 +75,6 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  display: flex;
-
   width: 100vw;
   @media (min-width: 500px) {
     width: calc(var(--vw, 1vw) * 100);
