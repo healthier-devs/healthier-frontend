@@ -1,4 +1,5 @@
 import Account from "./account";
+import AccountAnnouncement from "./account/announcement";
 import AccountIndex from "./account/index/index";
 import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
@@ -58,4 +59,5 @@ export {
   Account,
   AccountIndex,
   AccountSettings,
+  AccountAnnouncement,
 };
