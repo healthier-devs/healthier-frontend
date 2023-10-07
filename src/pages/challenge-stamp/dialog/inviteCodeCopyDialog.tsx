@@ -5,25 +5,32 @@ import theme from "src/lib/theme";
 interface IInviteCodeCopyDialog {
   modalRef: RefObject<HTMLDivElement>;
   closeModal: () => void;
+  copyInviteCode: () => void;
 }
 
-export const InviteCodeCopyDialog = ({ modalRef, closeModal }: IInviteCodeCopyDialog) => {
+export const InviteCodeCopyDialog = ({ modalRef, closeModal, copyInviteCode }: IInviteCodeCopyDialog) => {
   return (
     <Dialog
       ref={modalRef}
-      title="추천코드가 복사되었어요!"
+      title={
+        <>
+          친구 초대하고
+          <br />
+          부활 티켓 얻으세요!
+        </>
+      }
       description={
         <>
-          회원가입 시, 친구가 추천인 코드를
+          친구가 추천인 코드를 입력하면
           <br />
-          입력하면 <span style={{ color: theme.color.blue }}>하루를 만회</span>할 수 있어요.
+          실패한 <span style={{ color: theme.color.blue }}>하루를 만회</span>할 수 있어요.
         </>
       }
       imageUrl="/images/challenge/revival-ticket.png"
       cancelText="취소"
       onClickCancel={closeModal}
-      confirmText="친구 초대할래요"
-      onClickConfirm={closeModal}
+      confirmText="초대 링크 복사하기"
+      onClickConfirm={copyInviteCode}
     />
   );
 };

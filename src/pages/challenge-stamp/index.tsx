@@ -99,6 +99,10 @@ function ChallengeStamp() {
     }
   };
 
+  const copyInviteCode = () => {
+    // TODO: 초대링크 복사 코드
+  };
+
   return (
     <>
       {!isLoading && isSuccess && (
@@ -227,7 +231,11 @@ function ChallengeStamp() {
         <RevivalSuccessDialog closeModal={revivalSuccessDialog.closeModal} modalRef={revivalSuccessDialog.modalRef} />
       )}
       {inviteCodeDialog.isOpenModal && (
-        <InviteCodeCopyDialog closeModal={inviteCodeDialog.closeModal} modalRef={inviteCodeDialog.modalRef} />
+        <InviteCodeCopyDialog
+          closeModal={inviteCodeDialog.closeModal}
+          modalRef={inviteCodeDialog.modalRef}
+          copyInviteCode={copyInviteCode}
+        />
       )}
       {certificateImageUploadDialog.isOpenModal && (
         <CertificateImageUploadDialog
