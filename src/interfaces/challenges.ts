@@ -52,6 +52,7 @@ export interface IMyChallengeFinishResponse {
 export interface IStamp {
   id: number;
   image: string | null;
+  currentDays: number;
   submitTime: string;
   status: TStampStatus;
 }

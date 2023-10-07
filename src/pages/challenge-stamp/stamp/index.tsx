@@ -20,19 +20,17 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
   let isFirstFailure = true;
 
   const stampArr = [
-    ...stamps.map((stamp: IStamp, idx: number) => {
+    ...stamps.map((stamp: IStamp) => {
       const date = new Date(stamp.submitTime);
       const month = date.getMonth() + 1;
       const day = date.getDate();
 
-      const dayCount = rowIdx + idx + 1;
-
       if (stamp.status === "FAILURE" && isFirstFailure && isRevivalDayLine) {
         isFirstFailure = false;
-        const position = getTooltipPosition(dayCount - 1);
+        const position = getTooltipPosition(stamp.currentDays);
 
         return (
-          <Styled.Stamp key={dayCount}>
+          <Styled.Stamp key={stamp.currentDays}>
             <div style={{ position: "relative", left: 0, top: 0 }}>
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
@@ -45,14 +43,14 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
       }
 
       return (
-        <Styled.Stamp key={dayCount}>
+        <Styled.Stamp key={stamp.currentDays}>
           {stamp.status === "CHECKING" ? (
             <Styled.CurrentDayStamp>
               챌린지
               <br />
               인증 확인중
             </Styled.CurrentDayStamp>
-          ) : currentDayCnt === dayCount ? (
+          ) : currentDayCnt === stamp.currentDays ? (
             <Styled.CurrentDayStamp>
               챌린지
               <br />
@@ -61,14 +59,14 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
           ) : stamp.status === "SUCCESS" ? (
             <>
               <img alt="success stamp" src="/images/stamp/success.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
-              <Styled.StatusText status={stamp.status}>{dayCount}일차</Styled.StatusText>
+              <Styled.StatusText status={stamp.status}>{stamp.currentDays}일차</Styled.StatusText>
             </>
           ) : stamp.status === "FAILURE" ? (
             <>
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
             </>
-          ) : duration === dayCount * 2 ? (
+          ) : duration === stamp.currentDays * 2 ? (
             <>
               <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
@@ -77,7 +75,7 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
                 인증
               </Styled.TermText>
             </>
-          ) : duration === dayCount ? (
+          ) : duration === stamp.currentDays ? (
             <>
               <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.TermText>
