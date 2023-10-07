@@ -16,6 +16,7 @@ import MainPage from "./main";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
+import RewardList from "./reward-list";
 import SignUp from "./signUp";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
@@ -56,4 +57,5 @@ export {
   MyChallenge,
   Account,
   AccountIndex,
+  RewardList,
 };

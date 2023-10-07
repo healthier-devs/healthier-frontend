@@ -1,7 +1,8 @@
+import { HTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom";
 import { RootContainer, Container, BackButton, ExitButton } from "./index.style";
 
-export interface IContentHeader {
+export interface IContentHeader extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   back: boolean;
   exit: boolean;
@@ -10,11 +11,11 @@ export interface IContentHeader {
   borderBottom?: boolean;
 }
 
-const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback, borderBottom = true }: IContentHeader) => {
+const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback, borderBottom = true, ...props }: IContentHeader) => {
   const navigate = useNavigate();
 
   return (
-    <RootContainer borderBottom={borderBottom}>
+    <RootContainer borderBottom={borderBottom} {...props}>
       <Container>
         <BackButton visible={back} onClick={() => (backCallback ? backCallback() : navigate(-1))}>
           {back && <img alt="back" src="/images/header/back.svg" width={32} height={32} />}
