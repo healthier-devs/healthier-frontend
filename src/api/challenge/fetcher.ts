@@ -21,4 +21,7 @@ export const challengeFetcher = {
   getStampImageUrl(): Promise<IStampImagePresignedUrl> {
     return fetcher.get("/image");
   },
+  getChallengeByID({ challengeID }: { challengeID: number }) {
+    return fetcher.get(`${challengeID}`);
+  },
 };

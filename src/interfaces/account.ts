@@ -39,3 +39,15 @@ export interface IException {
   code: number;
   message: string;
 }
+
+export interface IValidateTokenResponse {
+  data: string;
+  success: boolean;
+  timestamp: string;
+}
+
+export interface IUserResponse {
+  data: string;
+  success: boolean;
+  timestamp: string;
+}

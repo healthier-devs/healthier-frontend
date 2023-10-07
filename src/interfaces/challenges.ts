@@ -1,10 +1,21 @@
 export interface IChallenge {
   id: number;
-  name: string;
-  duration: string;
-  times: string;
+  title: string;
+  category: string;
+  count: number;
+  midtermGift: number;
+  finalGift: number;
+  duration: number;
+  times: number;
   method: string;
-  maximumGift: number;
+  notice: string;
+  basicImage: string;
+  whatContent: string;
+  whyContent: string;
+  tipSubtitle: string;
+  tipContent: string;
+  guide: string;
+  status: string;
 }
 
 export type TChallengeListResponse = {

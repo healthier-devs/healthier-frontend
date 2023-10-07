@@ -1,31 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthState } from ".";
+import { IAuthState } from ".";
 
 export const TOKEN_TIME_OUT = 600 * 1000;
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   authenticated: false,
-  accessToken: "",
-  expireTime: null,
 };
 
 export const authSlice = createSlice({
   name: "authToken",
   initialState: initialState,
   reducers: {
-    SET_TOKEN: (state: AuthState, action) => {
+    login: (state: IAuthState) => {
       state.authenticated = true;
-      state.accessToken = action.payload;
-      state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
     },
-    DELETE_TOKEN: (state: AuthState) => {
+    logout: (state: IAuthState) => {
       state.authenticated = false;
-      state.accessToken = "";
-      state.expireTime = null;
     },
   },
 });
 
-export const { SET_TOKEN, DELETE_TOKEN } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
@@ -12,6 +13,7 @@ import { handleResizeWindow } from "./utils/window";
 function App() {
   const dispatch = useAppDispatch();
   const { reset } = useQueryErrorResetBoundary();
+  const { validateToken } = useValidateToken();
 
   useEffect(() => {
     handleResizeWindow();
@@ -25,6 +27,10 @@ function App() {
   useEffect(() => {
     dispatch(clearHospitalId());
   }, [dispatch]);
+
+  useEffect(() => {
+    validateToken();
+  }, [validateToken]);
 
   useGoogleAnalytics();
 
@@ -52,6 +58,7 @@ function App() {
 
           <Route path="/account" element={<Pages.Account />}>
             <Route index element={<Pages.AccountIndex />} />
+            <Route path="/account/settings" element={<Pages.AccountSettings />} />
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />
@@ -62,6 +69,10 @@ function App() {
           <Route path="/qr/complete" element={<Pages.CompleteQR />} />
           <Route path="/challenge/stamp/:id" element={<Pages.ChallengeStamp />} />
           <Route path="/challenge-list" element={<Pages.ChallengeList />} />
+          <Route path="/challenge/reward" element={<Pages.Reward />} />
+          <Route path="/challenge/reward/list" element={<Pages.RewardList />} />
+          <Route path="/challenge/reward/reception" element={<Pages.RewardReception />} />
+          <Route path="/challenge/reward/information" element={<Pages.RewardInformation />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
           <Route path="/my-challenge" element={<Pages.MyChallenge />} />
           <Route path="/test" element={<Pages.Test />} />

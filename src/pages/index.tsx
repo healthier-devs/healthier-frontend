@@ -1,5 +1,6 @@
 import Account from "./account";
 import AccountIndex from "./account/index/index";
+import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeList from "./challenge-list";
@@ -16,6 +17,10 @@ import MainPage from "./main";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import ResultPage from "./result";
+import Reward from "./reward";
+import RewardInformation from "./reward-information";
+import RewardList from "./reward-list";
+import RewardReception from "./reward-reception";
 import SignUp from "./signUp";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
@@ -56,4 +61,9 @@ export {
   MyChallenge,
   Account,
   AccountIndex,
+  RewardList,
+  Reward,
+  RewardInformation,
+  RewardReception,
+  AccountSettings,
 };
