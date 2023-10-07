@@ -8,6 +8,7 @@ import type {
   ILoginRequest,
   ILoginResponse,
   IException,
+  IUserResponse,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -80,4 +81,30 @@ export const loginUser = async (body: ILoginRequest): Promise<ILoginResponse | I
 
     throw new Error();
   }
+};
+
+export const validateToken = async (): Promise<IUserResponse | IException> => {
+  try {
+    const validationData = await accountFetcher.validateToken();
+
+    return validationData;
+  } catch (err) {
+    console.log(err);
+    console.log(err instanceof AxiosError);
+    if (err instanceof AxiosError && err.response) {
+      const { status } = err.response;
+
+      if (status === StatusCodes.UNAUTHORIZED) {
+        return err.response.data as IException;
+      }
+    }
+
+    throw new Error();
+  }
+};
+
+export const logout = async (): Promise<IUserResponse> => {
+  const logoutData = await accountFetcher.logout();
+
+  return logoutData;
 };

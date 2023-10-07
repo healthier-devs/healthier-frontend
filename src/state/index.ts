@@ -27,10 +27,8 @@ export interface fillInfoAction {
   interests: number[];
 }
 
-export interface AuthState {
+export interface IAuthState {
   authenticated: boolean;
-  accessToken: string;
-  expireTime: string | null | Date | number;
 }
 
 export interface IDiagnoseState {

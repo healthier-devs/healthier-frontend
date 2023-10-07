@@ -4,7 +4,6 @@ import { Auth } from "src/api/auth";
 import LoginModal from "src/components/loginModal";
 import { IKakaoToken, IMainModal } from "src/interfaces/modal";
 import { useAppDispatch } from "src/state";
-import { SET_TOKEN, DELETE_TOKEN } from "src/state/authSlice";
 import { Title } from "./index.style";
 
 const Kakao = (window as any).Kakao;
@@ -19,9 +18,6 @@ const MainModal = forwardRef<HTMLDivElement, IMainModal>(function MainModal({ cl
         try {
           const headers = await Auth.login(resToken.access_token);
           const token = headers.authorization.slice(7);
-
-          dispatch(DELETE_TOKEN);
-          dispatch(SET_TOKEN(token));
         } catch (error) {
           if ((error as AxiosError).code === "ERR_BAD_REQUEST") {
             alert("이메일 사용 동의가 필요합니다");

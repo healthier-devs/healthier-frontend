@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
@@ -12,6 +13,7 @@ import { handleResizeWindow } from "./utils/window";
 function App() {
   const dispatch = useAppDispatch();
   const { reset } = useQueryErrorResetBoundary();
+  const { validateToken } = useValidateToken();
 
   useEffect(() => {
     handleResizeWindow();
@@ -25,6 +27,10 @@ function App() {
   useEffect(() => {
     dispatch(clearHospitalId());
   }, [dispatch]);
+
+  useEffect(() => {
+    validateToken();
+  }, [validateToken]);
 
   useGoogleAnalytics();
 

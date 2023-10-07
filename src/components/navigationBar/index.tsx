@@ -3,6 +3,7 @@ import ChallengeIcon from "src/assets/icons/navigation/ChallengeIcon";
 import ExploreIcon from "src/assets/icons/navigation/ExploreIcon";
 import HomeIcon from "src/assets/icons/navigation/HomeIcon";
 import MypageIcon from "src/assets/icons/navigation/MypageIcon";
+import { useAppSelector } from "src/state";
 import FlexBox from "../flexBox";
 import * as Styled from "./index.style";
 
@@ -10,6 +11,7 @@ export type TMenu = "home" | "explore" | "diagnosis" | "challenge" | "account";
 
 export default function NavigationBar({ menu }: { menu: TMenu }) {
   const navigate = useNavigate();
+  const { authenticated } = useAppSelector((state) => state.auth);
 
   return (
     <Styled.Container>
@@ -61,7 +63,7 @@ export default function NavigationBar({ menu }: { menu: TMenu }) {
 
           <Styled.Button
             onClick={() => {
-              navigate("/account");
+              authenticated ? navigate("/account") : navigate("/login");
             }}
           >
             <MypageIcon isSelected={menu === "account"} />
