@@ -1,11 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "src/api/account/service";
+import { useAppDispatch } from "src/state";
+import { login as loginAction } from "src/state/authSlice";
 import { setCookie } from "src/utils/cookies";
 import type { ILoginRequest } from "src/interfaces/account";
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { mutate: login } = useMutation({
     mutationFn: (body: ILoginRequest) => loginUser(body),
@@ -19,6 +22,7 @@ export const useLogin = () => {
           secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
           domain: "localhost",
         });
+        dispatch(loginAction());
 
         navigate("/");
 
