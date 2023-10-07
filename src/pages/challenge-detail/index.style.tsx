@@ -121,10 +121,10 @@ export const Chip = styled.div<{ variant: "primary" | "secondary" | "sub" }>`
 `;
 
 export const Button = styled.button`
-  width: 100%;
+  width: calc(100% - 4rem);
   padding: 1.4rem 6.2rem;
 
-  border-radius: 8px;
+  border-radius: 3rem;
   background: ${({ theme }) => theme.color.blue};
 
   font-size: 1.4rem;
@@ -134,5 +134,7 @@ export const Button = styled.button`
 
   cursor: pointer;
 
-  margin-bottom: 3.2rem;
+  position: fixed;
+  bottom: 3.2rem;
+  transform: translateX(2rem);
 `;

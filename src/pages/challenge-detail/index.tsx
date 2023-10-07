@@ -24,8 +24,12 @@ const highlightText = (line: string) => {
   });
 };
 
-const processText = (text: string) => {
+const processText = (text?: string) => {
   const output: React.ReactNode[] = [];
+
+  if (typeof text !== "string") {
+    return output;
+  }
 
   const sections = text.split("%");
 
@@ -78,7 +82,11 @@ const ChallengeDetail = () => {
     alert("TODO: 참여하기 페이지");
   };
 
-  return isLoading ? (
+  useEffect(() => {
+    console.log("challenge", challengeData);
+  }, [isLoading]);
+
+  return isLoading || !challengeData ? (
     <>Loading</>
   ) : (
     <>
@@ -137,8 +145,6 @@ const ChallengeDetail = () => {
           <Styled.Typography fontSize="1.2rem" color="500" mb="3.6rem">
             상품권 제휴사는 금액에 따라 상이하며, 네이버페이/백화점상품권/스타벅스/편의점(CU, GS25, 7-Eleven)/영화관람권 등이 있습니다.
           </Styled.Typography>
-
-          {/* <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button> */}
         </Styled.Section>
 
         <Divider />
@@ -168,6 +174,7 @@ const ChallengeDetail = () => {
         </Styled.Section>
         <ChallengeNotification />
       </Styled.Container>
+      <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
     </>
   );
 };
