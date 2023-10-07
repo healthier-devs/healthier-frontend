@@ -10,20 +10,7 @@ export const stampFetcher = {
   deleteStampChart(id: string) {
     return fetcher.delete(`/${id}`);
   },
-  reviveStampChart({ image, userId, challengeId, dayCount }: IStampBodyRequest) {
-    return fetcher.patch("/revival", {
-      image,
-      user_id: userId,
-      challenge_id: challengeId,
-      day_count: dayCount,
-    });
-  },
-  certificateStamp({ image, userId, challengeId, dayCount }: IStampBodyRequest) {
-    return fetcher.patch("", {
-      image,
-      user_id: userId,
-      challenge_id: challengeId,
-      day_count: dayCount,
-    });
+  reviveStampChart({ id }: IStampBodyRequest) {
+    return fetcher.patch(`/revival/${id}`);
   },
 };

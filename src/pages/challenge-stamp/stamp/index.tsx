@@ -10,12 +10,13 @@ interface IStampProps {
   isLast: boolean;
   currentDayCnt: number;
   isRevivalDayLine: boolean;
+  onClickRevivalTicket?: () => void;
 }
 
 const STAMP_WIDTH = 86;
 const STAMP_HEIGHT = 86;
 
-function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLine }: IStampProps) {
+function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLine, onClickRevivalTicket }: IStampProps) {
   let isFirstFailure = true;
 
   const stampArr = [
@@ -26,7 +27,7 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
 
       const dayCount = rowIdx + idx + 1;
 
-      if (isFirstFailure && isRevivalDayLine) {
+      if (stamp.status === "FAILURE" && isFirstFailure && isRevivalDayLine) {
         isFirstFailure = false;
         const position = getTooltipPosition(dayCount - 1);
 
@@ -35,7 +36,9 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
             <div style={{ position: "relative", left: 0, top: 0 }}>
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
-              <Tooltip position={position}>부활티켓을 사용해보세요</Tooltip>
+              <Tooltip position={position} onClick={onClickRevivalTicket}>
+                부활티켓을 사용해보세요
+              </Tooltip>
             </div>
           </Styled.Stamp>
         );

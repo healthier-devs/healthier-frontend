@@ -75,6 +75,6 @@ export const createFetcher = (path: string) => {
     get: <T>(url: string, params?: object) => instance.get<T>(url, { params }).then(responseBody),
     post: <T>(url: string, body: T) => instance.post<T>(url, body).then(responseBody),
     delete: <T>(url: string, body?: { data: T }) => instance.delete<T>(url, body).then(responseBody),
-    patch: <T>(url: string, body: T) => instance.patch<T>(url, body).then(responseBody),
+    patch: <T>(url: string, body?: T) => instance.patch<T>(url, body).then(responseBody),
   };
 };

@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
+import Dialog from "src/components/dialog";
 import RoundButton from "src/components/roundButton";
 import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
+import { usePatchRevivalTicket } from "src/hooks/challenge/usePatchRevivalTicket";
+import useModal from "src/hooks/useModal";
+import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 
@@ -11,8 +15,11 @@ function ChallengeStamp() {
   const param = useParams();
 
   const { stampChartData, isLoading, isSuccess } = useGetStampChart({ challengeId: param.id ?? "" });
+  const { patchRevivalTicket } = usePatchRevivalTicket({ id: parseInt(param.id ?? "") });
 
   const isRevivalDayLine = useRef<boolean>(true);
+
+  const revivalTicketDialog = useModal();
 
   const duration = parseInt(stampChartData?.duration ?? "0");
 
@@ -21,6 +28,17 @@ function ChallengeStamp() {
       navigate(-1);
     }
   }, []);
+
+  const handleClickRevivalTicket = () => {
+    // TODO: 부활티켓이 0개면 모달 내용 다르게
+    revivalTicketDialog.openModal();
+  };
+
+  const handleClickRevival = () => {
+    // 부활티켓 api 연동
+    patchRevivalTicket();
+    revivalTicketDialog.closeModal();
+  };
 
   return (
     <>
@@ -57,7 +75,7 @@ function ChallengeStamp() {
             </Styled.TopContainer>
 
             <Styled.ContentsContainer>
-              <Styled.BannerContainer>
+              <Styled.BannerContainer onClick={handleClickRevivalTicket}>
                 <div className="top-box">
                   <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
                     <Styled.BannerTitle>부활티켓 사용하기</Styled.BannerTitle>
@@ -90,6 +108,7 @@ function ChallengeStamp() {
                               isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
                               currentDayCnt={stampChartData.currentDayCnt ?? 0}
                               isRevivalDayLine={true}
+                              onClickRevivalTicket={handleClickRevivalTicket}
                             />
                           </Styled.StampRow>
                         );
@@ -124,9 +143,33 @@ function ChallengeStamp() {
           </Styled.Container>
 
           <Styled.CTAContainer>
-            <RoundButton>오늘의 챌린지 인증하기</RoundButton>
+            <RoundButton onClick={() => console.log("챌린지 인증")} style={{ pointerEvents: "auto" }}>
+              오늘의 챌린지 인증하기
+            </RoundButton>
           </Styled.CTAContainer>
         </>
+      )}
+
+      {revivalTicketDialog.isOpenModal && (
+        <Dialog
+          ref={revivalTicketDialog.modalRef}
+          title={
+            <>
+              부활 티켓으로
+              <br />
+              하루를 만회하시겠어요?
+            </>
+          }
+          description={
+            <>
+              <span style={{ color: theme.color.blue }}>1장 당 인증 실패한 하루</span>를 제거할 수 있어요.
+            </>
+          }
+          cancelText="취소"
+          confirmText="네 사용할래요"
+          onClickCancel={revivalTicketDialog.closeModal}
+          onClickConfirm={handleClickRevival}
+        />
       )}
     </>
   );

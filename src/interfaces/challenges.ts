@@ -67,8 +67,5 @@ export interface IStampChartResponse {
 }
 
 export interface IStampBodyRequest {
-  image: string;
-  userId: string;
-  challengeId: string;
-  dayCount: number;
+  id: number;
 }

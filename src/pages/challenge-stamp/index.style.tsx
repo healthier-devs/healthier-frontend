@@ -214,6 +214,7 @@ export const CTAContainer = styled.div`
 
   display: flex;
   align-items: flex-end;
+  pointer-events: none;
 `;
 
 export const StampContainer = styled.div`
