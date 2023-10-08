@@ -18,6 +18,7 @@ export const TextContainer = styled.div`
 `;
 
 export const TitleContainer = styled.div`
+  width: fit-content;
   padding: 4px 6px;
 
   border-radius: 4px;
