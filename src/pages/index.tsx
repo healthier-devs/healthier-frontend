@@ -16,6 +16,7 @@ import Login from "./login";
 import MainPage from "./main";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
+import Onboard from "./onboard";
 import ResultPage from "./result";
 import Reward from "./reward";
 import RewardInformation from "./reward-information";
@@ -66,4 +67,5 @@ export {
   RewardInformation,
   RewardReception,
   AccountSettings,
+  Onboard,
 };

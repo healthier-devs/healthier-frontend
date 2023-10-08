@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
@@ -12,6 +12,7 @@ import { handleResizeWindow } from "./utils/window";
 
 function App() {
   const dispatch = useAppDispatch();
+
   const { reset } = useQueryErrorResetBoundary();
   const { validateToken } = useValidateToken();
 
@@ -30,7 +31,7 @@ function App() {
 
   useEffect(() => {
     validateToken();
-  }, [validateToken]);
+  }, []);
 
   useGoogleAnalytics();
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/symptom" element={<Pages.SymptomPage />} />
           <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
           <Route path="/appointment" element={<Pages.Appointment />} />
+          <Route path="/onboard" element={<Pages.Onboard />} />
 
           <Route path="/signup" element={<Pages.SignUp />}>
             <Route index element={<Navigate to="/signup/agreement" replace />} />
