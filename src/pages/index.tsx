@@ -13,7 +13,7 @@ import IndexQR from "./index-qr";
 import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
-import MainPage from "./main";
+import MainPage from "./main_backup";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import Onboard from "./onboard";
