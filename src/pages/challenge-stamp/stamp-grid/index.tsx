@@ -1,6 +1,6 @@
 import { memo, useRef } from "react";
 import { useEffect } from "react";
-import { IStamp } from "src/interfaces/challenges";
+import { IStamp } from "src/interfaces/stamp";
 import * as Styled from "./index.style";
 import Stamp from "./stamp";
 
