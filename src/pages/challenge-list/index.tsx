@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { useGetChallengeCategory } from "src/hooks/challenge/useGetChallengeCategory";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
+import { IChallenge } from "../../interfaces/challenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
 
@@ -16,6 +17,7 @@ function ChallengeList() {
 
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: -1, size: 15 });
+  const [challengeList, setChallengeList] = useState<IChallenge[]>([]);
 
   const [ref, inView] = useInView();
 
@@ -27,10 +29,18 @@ function ChallengeList() {
   });
 
   useEffect(() => {
+    setChallengeList([]);
+  }, [selectedCategory]);
+  useEffect(() => {
     if (challengeCategoryData && !selectedCategory) {
       setSelectedCategory(challengeCategoryData[0].name);
     }
   }, [challengeCategoryData]);
+  useEffect(() => {
+    if (challengesData) {
+      setChallengeList((prev) => [...prev, ...challengesData.data]);
+    }
+  }, [challengesData]);
   useEffect(() => {
     if (inView) {
       setPageInfo({ ...pageInfo, page: pageInfo.page + 1 });
@@ -61,7 +71,7 @@ function ChallengeList() {
         </Styled.Categories>
 
         <Styled.CardList>
-          {challengesData?.data.map((challenge) => (
+          {challengeList.map((challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} onClick={() => navigate(`/challenge/${challenge.id}`)} />
           ))}
           <div ref={ref} />
