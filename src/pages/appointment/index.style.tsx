@@ -8,6 +8,7 @@ export const Container = styled.div`
 
 export const FilterContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   .sort {
@@ -38,7 +39,7 @@ export const LoadingTitle = styled(Heading_3)`
 export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
   position: absolute;
   left: 50%;
-  bottom: ${({ isBottomSheetOpen }) => (isBottomSheetOpen ? "39rem" : "1.6rem")};
+  bottom: ${({ isBottomSheetOpen }) => (isBottomSheetOpen ? "39rem" : "14.2rem")};
   transform: translate(-50%, 0);
 
   z-index: 1000;
@@ -48,9 +49,9 @@ export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
   justify-content: space-between;
   align-items: center;
 
-  width: 13rem;
+  width: 14rem;
   box-sizing: border-box;
-  padding: 1.2rem 1.4rem;
+  padding: 1.2rem 1.6rem;
 
   background-color: ${({ theme }) => theme.color.grey_850};
   border: 0.1rem solid ${({ theme }) => theme.color.blue};

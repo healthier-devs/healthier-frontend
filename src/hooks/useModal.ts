@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-function useModal() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+function useModal(defaultOpen = false) {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(defaultOpen);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

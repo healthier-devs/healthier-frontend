@@ -83,7 +83,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
         {!isFetching && isSuccess && (
           <>
             <Styled.ContentContainer direction="column" gap={1} align="flex-start">
-              <Styled.Flex gap={1} align="flex-end">
+              <Styled.Flex gap={1} align="flex-end" justify="flex-start">
                 <Styled.Title>{data.name}</Styled.Title>
                 <Styled.Description color={theme.color.grey_400} style={{ whiteSpace: "nowrap" }}>
                   {data.type} | {data.meToHospitalDistance}
@@ -91,7 +91,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               </Styled.Flex>
 
               {data.address && (
-                <Styled.Flex gap={0.6} align="flex-start">
+                <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-position.svg" />
                   <Styled.Description color={theme.color.grey_300}>{data.address}</Styled.Description>
                 </Styled.Flex>
@@ -100,7 +100,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               <Styled.Flex gap={0.6} align="flex-start">
                 <img alt="position" src="/images/doctorAppointment/detail-time.svg" />
                 <Styled.Flex direction="column" align="flex-start">
-                  <Styled.Flex>
+                  <Styled.Flex justify="flex-start">
                     <Styled.Description color={theme.color.grey_300}>
                       <span style={{ color: data.operatingStatus === "OPEN" ? theme.color.green : theme.color.grey_600 }}>
                         {statusMap[data.operatingStatus]}
@@ -133,7 +133,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               </Styled.Flex>
 
               {data.homepage && (
-                <Styled.Flex gap={0.6} align="flex-start">
+                <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-site.svg" />
                   <a href={data.homepage} target="_blank" rel="noreferrer">
                     <Styled.Description color={theme.color.grey_300} style={{ textDecoration: "underline" }}>
@@ -144,7 +144,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               )}
 
               {data.phoneNumber && (
-                <Styled.Flex gap={0.6} align="flex-start">
+                <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-phone.svg" />
                   <Styled.Description color={theme.color.grey_300}>{data.phoneNumber}</Styled.Description>
                 </Styled.Flex>
