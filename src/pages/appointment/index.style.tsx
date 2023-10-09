@@ -8,6 +8,7 @@ export const Container = styled.div`
 
 export const FilterContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   .sort {

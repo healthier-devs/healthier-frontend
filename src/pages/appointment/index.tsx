@@ -285,7 +285,7 @@ const Appointment = () => {
           illustration={<img loading="eager" alt="icon" style={{ width: "26rem", height: "24.8rem" }} src={imageUrl.map_loading} />}
         />
       )}
-      <NavigationBar menu="explore" />
+      {isSettingPosition ? <NavigationBar menu="explore" /> : <></>}
     </>
   );
 };
