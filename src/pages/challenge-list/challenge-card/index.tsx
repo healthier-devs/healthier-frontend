@@ -12,7 +12,7 @@ function ChallengeCard({ challenge, onClick }: IChallengeCardProps) {
     <Styled.Container onClick={onClick}>
       <Styled.CardContainer>
         <Styled.TitleContainer>
-          <Styled.Title>{challenge.title}</Styled.Title>
+          <Styled.Title>{challenge.name}</Styled.Title>
           <ChevronRightIcon stroke="#787C83" strokeWidth={2} />
         </Styled.TitleContainer>
 
@@ -25,7 +25,7 @@ function ChallengeCard({ challenge, onClick }: IChallengeCardProps) {
 
       <Styled.DescriptionContainer>
         <Styled.Description>
-          최대 <span className="highlight">{challenge.finalGift}원 상당</span>의 리워드 제공
+          최대 <span className="highlight">{challenge.maximumGift}원 상당</span>의 리워드 제공
         </Styled.Description>
       </Styled.DescriptionContainer>
     </Styled.Container>

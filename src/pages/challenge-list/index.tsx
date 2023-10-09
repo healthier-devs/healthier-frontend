@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import ContentHeader from "src/components/contentHeader";
 import { useGetChallengeCategory } from "src/hooks/challenge/useGetChallengeCategory";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
 import ChallengeCard from "./challenge-card";
