@@ -66,31 +66,12 @@ function DefaultLogin() {
             </Styled.Box>
           </form>
 
-          <Styled.Box mt="10px">
-            <RoundButton onClick={() => navigate("/")} backgroundColor="#D2FA64" color="#000">
-              로그인 없이 둘러보기
-            </RoundButton>
-          </Styled.Box>
-        </div>
-
-        <div>
-          <Styled.Box mt="5rem">
-            <TextDivider text="또는 SNS 계정으로 시작하기" />
-          </Styled.Box>
-
-          <Styled.Box mt="2.4rem">
-            <Styled.LoginButton mr="16px" className="kakao">
-              <KakaoIcon width={30} height={30} />
-            </Styled.LoginButton>
-
-            <Styled.LoginButton className="apple">
-              <AppleIcon width={30} height={30} />
-            </Styled.LoginButton>
-          </Styled.Box>
-
-          <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">
-            <Styled.Typography>계정이 없으신가요?</Styled.Typography>
-            <UnderlinedButton text="회원가입하기" onClick={() => navigate("/signup")} />
+          <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2.4rem">
+            <Styled.Typography>계정이 생각나지 않으신가요?</Styled.Typography>
+            <Styled.Box>
+              <UnderlinedButton text="아이디 찾기" onClick={() => navigate("/account/find-id")} />
+              <UnderlinedButton text="비밀번호 찾기" onClick={() => navigate("/account/find-pw")} />
+            </Styled.Box>
           </FlexBox>
         </div>
       </Layout>
