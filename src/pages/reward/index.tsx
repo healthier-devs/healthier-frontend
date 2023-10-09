@@ -2,59 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import ContentHeader from "src/components/contentHeader";
 import RewardCard from "src/components/rewardCard";
+import { useGetMyRewardRecords } from "src/hooks/rewards/useGetMyRewardRecords";
+import { useGetRewards } from "src/hooks/rewards/useGetRewards";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
-const rewardItems = [
-  {
-    rewardId: 0,
-    giftTitle: "배달의 민족",
-    giftDescription: "3000원 상품권",
-    image: "",
-    point: 3000,
-  },
-  {
-    rewardId: 1,
-    giftTitle: "배달의 민족",
-    giftDescription: "3000원 상품권",
-    image: "",
-    point: 3000,
-  },
-  {
-    rewardId: 2,
-    giftTitle: "배달의 민족",
-    giftDescription: "3000원 상품권",
-    image: "",
-    point: 3000,
-  },
-  {
-    rewardId: 3,
-    giftTitle: "배달의 민족",
-    giftDescription: "3000원 상품권",
-    image: "",
-    point: 3000,
-  },
-];
-
-const challengeList = [
-  {
-    title: "🛏️ 하루 7시간 수면 달성하기",
-    midterm: true,
-    midtermReward: true,
-    final: true,
-    finalReward: false,
-  },
-  {
-    title: "🛏️ 하루 7시간 수면 달성하기",
-    midterm: false,
-    midtermReward: false,
-    final: false,
-    finalReward: false,
-  },
-];
-
 function Reward() {
   const navigate = useNavigate();
+
+  const { myRewardRecordsData } = useGetMyRewardRecords();
+
+  const { rewardsData: midtermRewards } = useGetRewards({ point: 3000 }); // MIDTERM
+  const { rewardsData: finalRewards } = useGetRewards({ point: 10000 }); // FINAL
+
+  const rewards = [...(midtermRewards ? midtermRewards.slice(0, 2) : []), ...(finalRewards ? finalRewards.slice(0, 2) : [])];
 
   return (
     <>
@@ -67,43 +28,44 @@ function Reward() {
         </Styled.Title>
 
         <Styled.CurrentChallengeList>
-          {challengeList.map((challenge, idx) => (
-            <Styled.CurrentChallengeBox key={idx}>
-              <Styled.ChallengeTitle>{challenge.title}</Styled.ChallengeTitle>
-              <div style={{ marginTop: "1.2rem" }}>
-                <Styled.RewardBox>
-                  <Styled.RewardDescription>Midterm 완료 리워드</Styled.RewardDescription>
-                  {challenge.midterm ? (
-                    <Styled.CertificatedButton
-                      isFinish={challenge.midtermReward}
-                      {...(!challenge.midtermReward && {
-                        onClick: () => navigate("/challenge/reward/list", { state: "midterm" }),
-                      })}
-                    >
-                      {challenge.midtermReward ? "받기 완료" : "리워드 받기"}
-                    </Styled.CertificatedButton>
-                  ) : (
-                    <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
-                  )}
-                </Styled.RewardBox>
-                <Styled.RewardBox>
-                  <Styled.RewardDescription>Final 완료 리워드</Styled.RewardDescription>
-                  {challenge.final ? (
-                    <Styled.CertificatedButton
-                      isFinish={challenge.finalReward}
-                      {...(!challenge.finalReward && {
-                        onClick: () => navigate("/challenge/reward/list", { state: "final" }),
-                      })}
-                    >
-                      {challenge.finalReward ? "받기 완료" : "리워드 받기"}
-                    </Styled.CertificatedButton>
-                  ) : (
-                    <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
-                  )}
-                </Styled.RewardBox>
-              </div>
-            </Styled.CurrentChallengeBox>
-          ))}
+          {myRewardRecordsData &&
+            [].map((challenge: any, idx) => (
+              <Styled.CurrentChallengeBox key={idx}>
+                <Styled.ChallengeTitle>{challenge.title}</Styled.ChallengeTitle>
+                <div style={{ marginTop: "1.2rem" }}>
+                  <Styled.RewardBox>
+                    <Styled.RewardDescription>Midterm 완료 리워드</Styled.RewardDescription>
+                    {challenge.midterm ? (
+                      <Styled.CertificatedButton
+                        isFinish={challenge.midtermReward}
+                        {...(!challenge.midtermReward && {
+                          onClick: () => navigate("/challenge/reward/list", { state: "midterm" }),
+                        })}
+                      >
+                        {challenge.midtermReward ? "받기 완료" : "리워드 받기"}
+                      </Styled.CertificatedButton>
+                    ) : (
+                      <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
+                    )}
+                  </Styled.RewardBox>
+                  <Styled.RewardBox>
+                    <Styled.RewardDescription>Final 완료 리워드</Styled.RewardDescription>
+                    {challenge.final ? (
+                      <Styled.CertificatedButton
+                        isFinish={challenge.finalReward}
+                        {...(!challenge.finalReward && {
+                          onClick: () => navigate("/challenge/reward/list", { state: "final" }),
+                        })}
+                      >
+                        {challenge.finalReward ? "받기 완료" : "리워드 받기"}
+                      </Styled.CertificatedButton>
+                    ) : (
+                      <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
+                    )}
+                  </Styled.RewardBox>
+                </div>
+              </Styled.CurrentChallengeBox>
+            ))}
         </Styled.CurrentChallengeList>
 
         <Styled.SubTitle>
@@ -111,7 +73,7 @@ function Reward() {
           다음과 같은 리워드를 받을 수 있어요!
         </Styled.SubTitle>
         <Styled.ListContainer>
-          {rewardItems.map((item) => (
+          {rewards.map((item) => (
             <RewardCard key={item.rewardId} item={item} />
           ))}
         </Styled.ListContainer>

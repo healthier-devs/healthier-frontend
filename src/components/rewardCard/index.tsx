@@ -1,23 +1,18 @@
 import { HTMLAttributes } from "react";
+import { IRewards } from "src/interfaces/rewards";
 import * as Styled from "./index.style";
 
 export interface IRewardListItem extends HTMLAttributes<HTMLDivElement> {
-  item: {
-    rewardId: number;
-    giftTitle: string;
-    giftDescription: string;
-    image: string;
-    point: number;
-  };
+  item: IRewards;
 }
 
 function RewardCard({ item, ...props }: IRewardListItem) {
   return (
     <Styled.ListItem key={item.rewardId} {...props}>
-      <Styled.RewardImage src={item.image} />
+      <Styled.RewardImage src={item.imageUrl} />
       <Styled.ListItemContent>
-        <Styled.ListItemTitle>{item.giftTitle}</Styled.ListItemTitle>
-        <Styled.ListItemPoint>{item.giftDescription} </Styled.ListItemPoint>
+        <Styled.ListItemTitle>{item.displayName}</Styled.ListItemTitle>
+        <Styled.ListItemPoint>{item.displayName} </Styled.ListItemPoint>
       </Styled.ListItemContent>
     </Styled.ListItem>
   );

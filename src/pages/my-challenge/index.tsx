@@ -34,7 +34,7 @@ function ChallengeList() {
           <img alt="back" src="/images/header/back.svg" width={32} height={32} />
         </Styled.LeftButton>
         <Styled.HeaderTitle>나의 챌린지</Styled.HeaderTitle>
-        <Styled.RightButton onClick={() => navigate(-1)}>
+        <Styled.RightButton onClick={() => navigate("/challenge/reward")}>
           <img alt="gift" src="/images/challenge/gift.png" width={32} height={32} />
         </Styled.RightButton>
       </Styled.HeaderContainer>
