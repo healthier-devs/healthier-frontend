@@ -24,7 +24,6 @@ function ChallengeStamp() {
   const inviteCodeDialog = useModal();
   const certificateImageUploadDialog = useModal();
 
-  const [selectedImage, setSelectedImage] = useState<string>("");
   const [toastText, setToastText] = useState<ReactNode>("");
 
   const challengeId = parseInt(param.id ?? "0");
@@ -83,21 +82,15 @@ function ChallengeStamp() {
     const file = e.target.files?.[0];
 
     if (file && presignedUrlData?.url) {
-      const imageUrl = URL.createObjectURL(file);
-
-      setSelectedImage(imageUrl);
       putStampImage({ imageFile: file });
     }
   };
 
   const handleClickCertificate = () => {
-    const input = document.createElement("input");
+    const imageInput = document.getElementById("certificateImageInput");
 
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-
-    input.onchange = (e) => handleImageChange(e);
-    input.click();
+    imageInput?.click();
+    imageInput?.addEventListener("change", (e) => handleImageChange(e));
   };
 
   const copyInviteCode = () => {
@@ -175,15 +168,13 @@ function ChallengeStamp() {
                 <Styled.BannerDescription>부활티켓을 사용해서 실패한 회차를 복구해보세요!</Styled.BannerDescription>
               </Styled.BannerContainer>
             </Styled.ContentsContainer>
-
-            {/* NOTE: 이미지 업로드되는지 디버깅용 */}
-            {selectedImage && <img src={selectedImage} alt="선택된 이미지" />}
           </Styled.Container>
 
           <Styled.CTAContainer>
             <RoundButton onClick={handleClickCertificate} style={{ pointerEvents: "auto" }}>
               오늘의 챌린지 인증하기
             </RoundButton>
+            <input id="certificateImageInput" type="file" accept="image/*" style={{ display: "none" }} />
           </Styled.CTAContainer>
         </>
       )}
