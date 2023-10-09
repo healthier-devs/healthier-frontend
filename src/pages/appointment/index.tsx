@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { mapFetcher } from "src/api/map/fetcher";
 import ChevronDownIcon from "src/assets/icons/ChevronDownIcon";
@@ -27,6 +27,8 @@ interface ISelectedFilter {
 
 const Appointment = () => {
   const { state } = useLocation();
+
+  const isMounted = useRef<boolean>(false);
 
   const [currentPosition, setCurrentPosition] = useState({
     lat: 0,
@@ -171,6 +173,7 @@ const Appointment = () => {
               setSearchText={setSearchText}
               isSelectedMedicine={isSelectedMedicine}
               setIsSelectedMedicine={setIsSelectedMedicine}
+              isMounted={isMounted}
             />
           )}
 
