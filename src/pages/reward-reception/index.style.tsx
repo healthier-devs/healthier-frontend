@@ -81,7 +81,7 @@ export const DetailText = styled.p`
 
 export const DottedLine = styled.div`
   height: 1px;
-  background-image: ${({ theme }) => `linear-gradient(to right, ${theme.color.grey_500} 33%, transparent 0%)`};
+  background-image: ${({ theme }) => `linear-gradient(to right, ${theme.color.grey_600} 33%, transparent 0%)`};
   background-position: bottom;
   background-size: 6px 8px;
   background-repeat: repeat-x;
