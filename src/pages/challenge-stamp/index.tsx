@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
+import { useGetInvitationCode } from "src/hooks/challenge/useGetInvitationCode";
 import { useGetPresignedUrl } from "src/hooks/challenge/useGetPresignedUrl";
 import { useGetRevivalTicketCount } from "src/hooks/challenge/useGetRevivalTicketCount";
 import { useGetStampChart } from "src/hooks/challenge/useGetStampChart";
@@ -32,6 +33,7 @@ function ChallengeStamp() {
   const { presignedUrlData } = useGetPresignedUrl();
   const { revivalCount } = useGetRevivalTicketCount();
   const { stampChartData, refetch, isLoading, isSuccess } = useGetStampChart({ challengeId });
+  const { invitationCode } = useGetInvitationCode();
 
   const { putStampImage } = usePutStampImage({
     id: challengeId,
@@ -100,7 +102,11 @@ function ChallengeStamp() {
   };
 
   const copyInviteCode = () => {
-    // TODO: 초대링크 복사 코드
+    if (invitationCode?.code) {
+      navigator.clipboard.writeText(invitationCode.code).then(() => {
+        inviteCodeDialog.closeModal();
+      });
+    }
   };
 
   return (
