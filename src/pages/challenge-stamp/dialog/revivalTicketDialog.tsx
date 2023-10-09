@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 import Dialog from "src/components/dialog";
-import { usePatchRevivalTicket } from "src/hooks/challenge/usePatchRevivalTicket";
+import { usePatchRevivalTicket } from "src/hooks/stamp/usePatchRevivalTicket";
 import theme from "src/lib/theme";
 
 interface IRevivalTicketDialogProps {

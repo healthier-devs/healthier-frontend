@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import Tooltip from "src/components/tooltip";
-import { IStamp } from "src/interfaces/challenges";
+import { IStamp } from "src/interfaces/stamp";
 import * as Styled from "./index.style";
 
 interface IStampProps {

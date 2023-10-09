@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 import { useNavigate } from "react-router-dom";
 import Dialog from "src/components/dialog";
-import { useDeleteStampChart } from "src/hooks/challenge/useDeleteStampChart";
+import { useDeleteStampChart } from "src/hooks/stamp/useDeleteStampChart";
 
 interface IForgiveDialogProps {
   modalRef: RefObject<HTMLDivElement>;
