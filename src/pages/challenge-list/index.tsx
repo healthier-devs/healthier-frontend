@@ -16,7 +16,7 @@ function ChallengeList() {
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: -1, size: 15 });
+  const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: 0, size: 15 });
   const [challengeList, setChallengeList] = useState<IChallenge[]>([]);
 
   const [ref, inView] = useInView();
@@ -30,6 +30,7 @@ function ChallengeList() {
 
   useEffect(() => {
     setChallengeList([]);
+    setPageInfo({ page: 0, size: 15 });
   }, [selectedCategory]);
   useEffect(() => {
     if (challengeCategoryData && !selectedCategory) {
@@ -74,7 +75,7 @@ function ChallengeList() {
           {challengeList.map((challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} onClick={() => navigate(`/challenge/${challenge.id}`)} />
           ))}
-          <div ref={ref} />
+          {challengeList.length !== 0 && <div ref={ref} />}
         </Styled.CardList>
       </Styled.Container>
     </>

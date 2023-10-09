@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, MutableRefObject, RefObject, useRef, useState } from "react";
+import { ChangeEvent, Dispatch, MutableRefObject, useRef, useState } from "react";
 import { useEffect } from "react";
 import ChevronLeftIcon from "src/assets/icons/ChevronLeftIcon";
 import useModal from "src/hooks/useModal";
