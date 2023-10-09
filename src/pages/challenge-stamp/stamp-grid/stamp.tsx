@@ -27,7 +27,7 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
 
       if (stamp.status === "FAILURE" && isFirstFailure && isRevivalDayLine) {
         isFirstFailure = false;
-        const position = getTooltipPosition(stamp.currentDays);
+        const position = getTooltipPosition(stamp.currentDays - 1);
 
         return (
           <Styled.Stamp key={stamp.currentDays}>
