@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "src/api/queryKeys";
 import { stampFetcher } from "src/api/stamp/fetcher";
 import type { IStampChartResponse } from "src/interfaces/challenges";
 
@@ -14,7 +13,7 @@ export const useGetStampChart = ({ challengeId }: IUseGetChallengesProps) => {
     isLoading,
     isSuccess,
   } = useQuery<IStampChartResponse>({
-    queryKey: [queryKeys.STAMP, challengeId],
+    queryKey: [challengeId],
     queryFn: () => stampFetcher.getStampChart(challengeId),
   });
 

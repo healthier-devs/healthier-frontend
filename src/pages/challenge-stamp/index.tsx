@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
@@ -11,7 +11,7 @@ import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
 import { CertificateImageUploadDialog, ForgiveDialog, InviteCodeCopyDialog, RevivalSuccessDialog, RevivalTicketDialog } from "./dialog";
 import * as Styled from "./index.style";
-import Stamp from "./stamp";
+import StampGrid from "./stamp-grid";
 import Toast from "./toast";
 
 function ChallengeStamp() {
@@ -24,7 +24,6 @@ function ChallengeStamp() {
   const inviteCodeDialog = useModal();
   const certificateImageUploadDialog = useModal();
 
-  const isRevivalDayLine = useRef<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [toastText, setToastText] = useState<ReactNode>("");
 
@@ -58,7 +57,7 @@ function ChallengeStamp() {
     }
   }, [toastText]);
 
-  const handleClickRevivalTicket = () => {
+  const handleClickRevivalTicket = useCallback(() => {
     if (!stampChartData?.submissions.some((stamp) => stamp.status === "FAILURE")) {
       setToastText(
         <>
@@ -78,17 +77,7 @@ function ChallengeStamp() {
     } else {
       revivalTicketDialog.openModal();
     }
-  };
-
-  const handleClickCertificate = () => {
-    const input = document.createElement("input");
-
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-
-    input.onchange = (e) => handleImageChange(e);
-    input.click();
-  };
+  }, [stampChartData, revivalCount]);
 
   const handleImageChange = (e: any) => {
     const file = e.target.files?.[0];
@@ -99,6 +88,16 @@ function ChallengeStamp() {
       setSelectedImage(imageUrl);
       putStampImage({ imageFile: file });
     }
+  };
+
+  const handleClickCertificate = () => {
+    const input = document.createElement("input");
+
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+
+    input.onchange = (e) => handleImageChange(e);
+    input.click();
   };
 
   const copyInviteCode = () => {
@@ -154,47 +153,14 @@ function ChallengeStamp() {
                 </Styled.BannerDescription>
               </Styled.BannerContainer>
               <Styled.StampContainer>
-                {stampChartData &&
-                  stampChartData.submissions.map((_, idx) => {
-                    if (idx % 3 === 0) {
-                      const isFailureLine = stampChartData.submissions
-                        .slice(idx, idx + 3)
-                        .some((submission) => submission.status === "FAILURE");
-
-                      if (isRevivalDayLine.current && isFailureLine) {
-                        isRevivalDayLine.current = false;
-
-                        return (
-                          <Styled.StampRow key={`${idx}row`}>
-                            <Stamp
-                              stamps={stampChartData.submissions.slice(idx, idx + 3)}
-                              rowIdx={idx}
-                              duration={duration}
-                              isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
-                              currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                              isRevivalDayLine={true}
-                              onClickRevivalTicket={handleClickRevivalTicket}
-                            />
-                          </Styled.StampRow>
-                        );
-                      }
-
-                      return (
-                        <Styled.StampRow key={`${idx}row`}>
-                          <Stamp
-                            stamps={stampChartData.submissions.slice(idx, idx + 3)}
-                            rowIdx={idx}
-                            duration={duration}
-                            isLast={Math.ceil((stampChartData.submissions.length ?? 1) / 3) === idx / 3 + 1}
-                            currentDayCnt={stampChartData.currentDayCnt ?? 0}
-                            isRevivalDayLine={false}
-                          />
-                        </Styled.StampRow>
-                      );
-                    }
-
-                    return <></>;
-                  })}
+                {stampChartData && (
+                  <StampGrid
+                    stampSubmissions={stampChartData.submissions}
+                    duration={duration}
+                    currentDayCnt={stampChartData.currentDayCnt}
+                    handleClickRevivalTicket={handleClickRevivalTicket}
+                  />
+                )}
               </Styled.StampContainer>
               <Styled.BannerContainer onClick={handleClickRevivalTicket}>
                 <div className="top-box">
