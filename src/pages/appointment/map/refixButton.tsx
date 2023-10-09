@@ -31,7 +31,7 @@ const Container = styled.div<{ isBottomSheetOpen: boolean }>`
 
   position: absolute;
   right: 2rem;
-  bottom: ${({ isBottomSheetOpen }) => (isBottomSheetOpen ? "39rem" : "1.6rem")};
+  bottom: ${({ isBottomSheetOpen }) => (isBottomSheetOpen ? "39rem" : "14.2rem")};
 
   display: flex;
   justify-content: center;

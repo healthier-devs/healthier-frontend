@@ -6,6 +6,7 @@ import { mapFetcher } from "src/api/map/fetcher";
 import ChevronDownIcon from "src/assets/icons/ChevronDownIcon";
 import BottomSheet from "src/components/bottomSheet";
 import Loading from "src/components/loading";
+import NavigationBar from "src/components/navigationBar";
 import imageUrl from "src/data/image_url";
 import { IUserMapResponse } from "src/interfaces/map";
 import theme from "src/lib/theme";
@@ -284,6 +285,7 @@ const Appointment = () => {
           illustration={<img loading="eager" alt="icon" style={{ width: "26rem", height: "24.8rem" }} src={imageUrl.map_loading} />}
         />
       )}
+      <NavigationBar menu="explore" />
     </>
   );
 };
