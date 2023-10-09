@@ -14,7 +14,7 @@ function Onboard() {
 
   return (
     <Styled.Container>
-      <Styled.Button>홈 둘러보기</Styled.Button>
+      <Styled.Button onClick={() => navigate("/")}>홈 둘러보기</Styled.Button>
 
       <Styled.LogoContainer>
         <Box mb="2rem">

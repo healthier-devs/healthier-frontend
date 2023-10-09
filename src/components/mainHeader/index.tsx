@@ -2,11 +2,17 @@ import imageUrl from "src/data/image_url";
 import HeaderContainer from "../headerContainer";
 import { Container } from "./index.style";
 
-const MainHeader = () => {
+interface IMainHeader {
+  onClickLogo?: () => void;
+}
+
+const MainHeader = ({ onClickLogo }: IMainHeader) => {
   return (
     <HeaderContainer>
       <Container>
-        <img className="logo" alt="logo" src={imageUrl.logo} height={24} />
+        <div onClick={onClickLogo}>
+          <img className="logo" alt="logo" src={imageUrl.logo} height={24} />
+        </div>
       </Container>
     </HeaderContainer>
   );

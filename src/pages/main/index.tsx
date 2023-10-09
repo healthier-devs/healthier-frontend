@@ -1,36 +1,29 @@
-import Footer from "src/components/footer";
+import { useRef } from "react";
 import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
 import NavigationBar from "src/components/navigationBar";
-import imageUrl from "src/data/image_url";
-import useModal from "src/hooks/useModal";
-import { Title, MainImage, Container } from "./index.style";
-import MainModal from "./mainModal";
+import Advertisement from "./advertisement";
+import Challenges from "./challenges";
+import DiagnosisHistory from "./diagnosis-history";
+import Hospitals from "./hospitals";
+import Symptoms from "./symptoms";
 
-const MainPage = () => {
-  const { isOpenModal, modalRef, openModal, closeModal } = useModal();
+function Main() {
+  const mainRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <MainHeader />
-      <Layout>
-        <Container>
-          <Title>
-            <span className="strong">빠른 증상감별</span>로
-            <br />
-            <span className="strong">예상 질환</span>을 알아보세요!
-          </Title>
-          <MainImage>
-            <img className="image" alt="main" src={imageUrl.main_page}></img>
-          </MainImage>
-        </Container>
+      <MainHeader onClickLogo={() => mainRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} />
+      <Layout padding="5.6rem 0 12rem" ref={mainRef}>
+        <Advertisement />
+        <Symptoms />
+        <Hospitals />
+        <Challenges />
+        <DiagnosisHistory />
       </Layout>
-      <Footer />
       <NavigationBar menu="home" />
-
-      {isOpenModal && <MainModal ref={modalRef} closeModal={closeModal} />}
     </>
   );
-};
+}
 
-export default MainPage;
+export default Main;

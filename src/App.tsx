@@ -39,7 +39,7 @@ function App() {
     <Container>
       <ErrorBoundary FallbackComponent={Pages.Error} onReset={reset}>
         <Routes>
-          <Route path="/" element={<Pages.MainPage />} />
+          <Route path="/" element={<Pages.Main />} />
           <Route path="/info" element={<Pages.Information />} />
           <Route path="/result-list" element={<Pages.DiagnosisList />} />
           <Route path="/result" element={<Pages.ResultPage />} />
