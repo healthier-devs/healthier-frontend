@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
-const responseBody = (response: AxiosResponse | AxiosError) => {
+export const responseBody = (response: AxiosResponse) => {
   if (response instanceof AxiosError) {
     return Promise.reject(response);
   }
@@ -89,6 +89,6 @@ export const createFetcher = (path: string) => {
           return Promise.reject(err);
         }),
     delete: <T>(url: string, body?: { data: T }) => instance.delete<T>(url, body).then(responseBody),
-    patch: <T>(url: string, body: T) => instance.patch<T>(url, body).then(responseBody),
+    patch: <T>(url: string, body?: T) => instance.patch<T>(url, body).then(responseBody),
   };
 };

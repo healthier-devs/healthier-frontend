@@ -1,4 +1,5 @@
 import { forwardRef, ReactNode } from "react";
+import { CSSProperties } from "styled-components";
 import * as Styled from "./index.style";
 
 export interface IDialogProps {
@@ -13,6 +14,7 @@ export interface IDialogProps {
   onClickCancel?: () => void;
   onClickConfirm?: () => void;
   singleButtonText?: ReactNode;
+  imageStyle?: CSSProperties;
 }
 
 const Dialog = forwardRef<HTMLDivElement, IDialogProps>(function Dialog(
@@ -25,6 +27,7 @@ const Dialog = forwardRef<HTMLDivElement, IDialogProps>(function Dialog(
     cancelText = "취소",
     confirmText = "확인",
     singleButtonText = "확인",
+    imageStyle,
     onClickCancel,
     onClickConfirm,
   },
@@ -36,7 +39,7 @@ const Dialog = forwardRef<HTMLDivElement, IDialogProps>(function Dialog(
         <Styled.ContentContainer>
           <Styled.Title>{title}</Styled.Title>
           {description && <Styled.Description>{description}</Styled.Description>}
-          {imageUrl && <Styled.Image src={imageUrl} />}
+          {imageUrl && <Styled.Image src={imageUrl} style={imageStyle} />}
           {subDescription && <Styled.SubDescription>{subDescription}</Styled.SubDescription>}
         </Styled.ContentContainer>
         <Styled.ButtonContainer>
