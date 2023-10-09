@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { mapFetcher } from "src/api/map/fetcher";
 import ChevronDownIcon from "src/assets/icons/ChevronDownIcon";
 import BottomSheet from "src/components/bottomSheet";
 import Loading from "src/components/loading";
+import NavigationBar from "src/components/navigationBar";
 import imageUrl from "src/data/image_url";
 import { IUserMapResponse } from "src/interfaces/map";
 import theme from "src/lib/theme";
@@ -27,6 +28,8 @@ interface ISelectedFilter {
 
 const Appointment = () => {
   const { state } = useLocation();
+
+  const isMounted = useRef<boolean>(false);
 
   const [currentPosition, setCurrentPosition] = useState({
     lat: 0,
@@ -171,6 +174,7 @@ const Appointment = () => {
               setSearchText={setSearchText}
               isSelectedMedicine={isSelectedMedicine}
               setIsSelectedMedicine={setIsSelectedMedicine}
+              isMounted={isMounted}
             />
           )}
 
@@ -281,6 +285,7 @@ const Appointment = () => {
           illustration={<img loading="eager" alt="icon" style={{ width: "26rem", height: "24.8rem" }} src={imageUrl.map_loading} />}
         />
       )}
+      {isSettingPosition ? <NavigationBar menu="explore" /> : <></>}
     </>
   );
 };

@@ -225,10 +225,3 @@ export const StampContainer = styled.div`
   flex-direction: column;
   gap: 5.4rem;
 `;
-
-export const StampRow = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;

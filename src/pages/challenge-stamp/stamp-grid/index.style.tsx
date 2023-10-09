@@ -1,5 +1,12 @@
 import styled, { css } from "styled-components";
 
+export const StampRow = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const CurrentDayStamp = styled.div`
   width: 100%;
   height: 100%;

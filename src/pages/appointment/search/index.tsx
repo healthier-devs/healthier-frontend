@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, useRef, useState } from "react";
+import { ChangeEvent, Dispatch, MutableRefObject, useRef, useState } from "react";
 import { useEffect } from "react";
 import ChevronLeftIcon from "src/assets/icons/ChevronLeftIcon";
 import useModal from "src/hooks/useModal";
@@ -20,6 +20,7 @@ interface ISearchProps {
   setSelectedHospital: Dispatch<string>;
   isSelectedMedicine: boolean;
   setIsSelectedMedicine: Dispatch<boolean>;
+  isMounted: MutableRefObject<boolean>;
 }
 interface ISelectedFilter {
   emergencyNight: boolean;
@@ -36,14 +37,20 @@ const Search = ({
   setSelectedHospital,
   isSelectedMedicine,
   setIsSelectedMedicine,
+  isMounted,
 }: ISearchProps) => {
-  const { isOpenModal, modalRef, closeModal, openModal } = useModal();
+  const { isOpenModal, modalRef, closeModal, openModal } = useModal(isMounted.current ? false : true);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [selectedFilter, setSelectedFilter] = useState<ISelectedFilter>({ emergencyNight: false, nightService: false });
 
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<any>();
 
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    }
+  }, []);
   useEffect(() => {
     if (!inputRef.current) {
       return;
