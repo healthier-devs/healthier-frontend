@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
+import NavigationBar from "src/components/navigationBar";
 import { useGetChallengeCategory } from "src/hooks/challenge/useGetChallengeCategory";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
 import { IChallenge } from "../../interfaces/challenges";
@@ -78,6 +79,8 @@ function ChallengeList() {
           {challengeList.length !== 0 && <div ref={ref} />}
         </Styled.CardList>
       </Styled.Container>
+
+      <NavigationBar menu="challenge" />
     </>
   );
 }
