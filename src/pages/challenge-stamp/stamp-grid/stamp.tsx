@@ -42,8 +42,6 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
         );
       }
 
-      console.log(currentDayCnt, stamp.currentDays, currentDayCnt === stamp.currentDays);
-
       return (
         <Styled.Stamp key={stamp.currentDays}>
           {stamp.status === "CHECKING" ? (
