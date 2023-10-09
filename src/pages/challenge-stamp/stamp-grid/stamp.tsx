@@ -42,6 +42,8 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
         );
       }
 
+      console.log(currentDayCnt, stamp.currentDays, currentDayCnt === stamp.currentDays);
+
       return (
         <Styled.Stamp key={stamp.currentDays}>
           {stamp.status === "CHECKING" ? (
@@ -49,12 +51,6 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
               챌린지
               <br />
               인증 확인중
-            </Styled.CurrentDayStamp>
-          ) : currentDayCnt === stamp.currentDays ? (
-            <Styled.CurrentDayStamp>
-              챌린지
-              <br />
-              인증하기
             </Styled.CurrentDayStamp>
           ) : stamp.status === "SUCCESS" ? (
             <>
@@ -66,6 +62,12 @@ function Stamp({ stamps, rowIdx, duration, isLast, currentDayCnt, isRevivalDayLi
               <img alt="failure stamp" src="/images/stamp/failure.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
               <Styled.StatusText status={stamp.status}>인증실패</Styled.StatusText>
             </>
+          ) : currentDayCnt === stamp.currentDays ? (
+            <Styled.CurrentDayStamp>
+              챌린지
+              <br />
+              인증하기
+            </Styled.CurrentDayStamp>
           ) : duration === stamp.currentDays * 2 ? (
             <>
               <img alt="nothing stamp" src="/images/stamp/mid-final.png" width={STAMP_WIDTH} height={STAMP_HEIGHT} />
