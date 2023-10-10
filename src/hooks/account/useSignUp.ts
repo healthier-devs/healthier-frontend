@@ -3,16 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signup } from "src/api/account/service";
 import type { ISignUpRequest } from "src/interfaces/account";
 
-interface IUseSignUpProps {
-  setValidation: React.Dispatch<
-    React.SetStateAction<{
-      isError: boolean;
-      errorText: string;
-    }>
-  >;
-}
-
-export const useSignUp = ({ setValidation }: IUseSignUpProps) => {
+export const useSignUp = () => {
   const navigate = useNavigate();
 
   const { mutate: signUp } = useMutation({
@@ -23,11 +14,6 @@ export const useSignUp = ({ setValidation }: IUseSignUpProps) => {
 
         return;
       }
-
-      setValidation({
-        isError: true,
-        errorText: data.data,
-      });
     },
   });
 

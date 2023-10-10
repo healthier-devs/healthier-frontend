@@ -16,6 +16,7 @@ function Email() {
 
   const isEnabled = email.length > 0 && !validation.isError;
   const { isAgree } = location.state ?? false;
+  const { marketingOptIn } = location.state as { marketingOptIn: boolean };
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValidation({
@@ -41,8 +42,8 @@ function Email() {
     const { data, success } = await validateEmail(email);
 
     if (success) {
-      navigate("/signup/password", {
-        state: { email },
+      navigate("/signup/step3", {
+        state: { email, marketingOptIn },
       });
 
       return;
