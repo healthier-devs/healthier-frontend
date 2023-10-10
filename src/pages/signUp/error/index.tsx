@@ -19,7 +19,7 @@ function SignUpError() {
 
   return (
     <>
-      <ContentHeader back={false} exit={true} exitCallback={() => navigate("/signup/email")} />
+      <ContentHeader back={false} exit={true} exitCallback={() => navigate("/signup/step1")} />
       <FlexBox flexDirection="column" alignItems="center" style={Styled.containerStyle}>
         <Styled.TitleWrapper>
           <Styled.Title>

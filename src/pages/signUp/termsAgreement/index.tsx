@@ -18,8 +18,8 @@ function TermsAgreement() {
   const isEnabled = necessaries.filter((agree) => agree === true).length === NECESSARY_NUMS;
 
   const handleClickNextButton = () => {
-    navigate("/signup/email", {
-      state: { isAgree: true },
+    navigate("/signup/step2", {
+      state: { isAgree: true, marketingOptIn: optionals[0] },
     });
   };
 
@@ -60,7 +60,7 @@ function TermsAgreement() {
         <Lib.Title text={"헬시어 서비스 이용약관에\n동의해주세요"} />
         <Styled.Box isEnabled={all}>
           <FlexBox alignItems="center" gap="1.6rem">
-            <Lib.Checkbox id="agree-all" checked={all} onClick={handleClickAgreeAll} />
+            <Lib.Checkbox id="agree-all" defaultChecked={all} onClick={handleClickAgreeAll} />
             <Styled.Typography className="body1">전체 동의합니다</Styled.Typography>
           </FlexBox>
         </Styled.Box>
@@ -72,7 +72,7 @@ function TermsAgreement() {
                   <Lib.Checkbox
                     id={`necessary-${idx + 1}`}
                     variant="secondary"
-                    checked={necessaries[idx]}
+                    defaultChecked={necessaries[idx]}
                     onClick={() => handleClickNecessary(idx)}
                   />
                   <Styled.Typography className="body2">{text} (필수)</Styled.Typography>
@@ -88,7 +88,7 @@ function TermsAgreement() {
                   <Lib.Checkbox
                     id={`optional-${idx + 1}`}
                     variant="secondary"
-                    checked={optionals[idx]}
+                    defaultChecked={optionals[idx]}
                     onClick={() => handleClickOptional(idx)}
                   />
                   <Styled.Typography className="body2">{text} (선택)</Styled.Typography>

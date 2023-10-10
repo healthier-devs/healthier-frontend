@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import RemoveIcon from "src/assets/icons/RemoveIcon";
-import { useSignUp } from "src/hooks/account/useSignUp";
-import { generateNickname } from "src/utils/inputUtils";
 import * as Lib from "../lib";
+import type { TAdditionalInformationParam } from "src/interfaces/account";
 
 function Password() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const { email } = location.state ?? "";
+  const { marketingOptIn } = location.state as { marketingOptIn: boolean };
 
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
@@ -18,8 +18,6 @@ function Password() {
     isError: false,
     errorText: "",
   });
-
-  const { signUp } = useSignUp({ setValidation });
 
   const isEnabled = password.length > 0 && password === passwordConfirm;
 
@@ -53,18 +51,14 @@ function Password() {
       return;
     }
 
-    signUp({
+    const state: TAdditionalInformationParam = {
       username: email,
-      name: "홍길동",
-      phoneNumber: "010-1234-5678",
-      gender: "m",
-      birthDate: "1971-01-01",
-      nickname: generateNickname(),
-      marketingOptIn: true,
-      healthInterests: ["미용"],
+      password: password,
       confirmPassword: passwordConfirm,
-      password,
-    });
+      marketingOptIn,
+    };
+
+    navigate("/signup/step4", { state });
   };
 
   useEffect(() => {

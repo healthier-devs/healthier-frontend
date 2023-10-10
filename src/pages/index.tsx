@@ -24,6 +24,7 @@ import RewardInformation from "./reward-information";
 import RewardList from "./reward-list";
 import RewardReception from "./reward-reception";
 import SignUp from "./signUp";
+import SignUpAdditionalInformation from "./signUp/additional-information";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
 import SignUpError from "./signUp/error";
@@ -70,4 +71,5 @@ export {
   AccountSettings,
   Onboard,
   Main,
+  SignUpAdditionalInformation,
 };
