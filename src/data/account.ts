@@ -33,3 +33,5 @@ export const NICKNAME_OBJECTS = [
   "키보드",
   "마우스",
 ];
+
+export const ACCESS_TOKEN_AGE = 60;
