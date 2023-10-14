@@ -9,7 +9,7 @@ export const rewardsFetcher = {
   getMyRewardRecords() {
     return fetcher.get(`/records`);
   },
-  patchRewardStatus(id: number) {
-    return fetcher.patch(`/status/${id}`);
+  patchReward(id: number, body: { rewardId: number; phoneNumber: string }) {
+    return fetcher.patch(`/${id}`, body);
   },
 };

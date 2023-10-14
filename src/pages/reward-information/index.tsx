@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import RoundButton from "src/components/roundButton";
 import TextFieldStandard from "src/components/textFieldStandard";
 import theme from "src/lib/theme";
+import { usePatchReward } from "../../hooks/rewards/usePatchReward";
 import * as Styled from "./index.style";
 import RewardFinish from "./rewardFinish";
 
 function RewardInformation() {
+  const { state } = useLocation();
   const navigate = useNavigate();
+
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isErrorPhoneNumber, setIsErrorPhoneNumber] = useState<boolean>(false);
   const [isFinishReward, setIsFinishReward] = useState<boolean>(false);
-  // TODO: 리워드 받기 후 isFinishReward 토글
+
+  const { patchReward } = usePatchReward({ successCallback: () => setIsFinishReward(true) });
 
   const isValidPhoneNumber = phoneNumber && !isErrorPhoneNumber;
 
@@ -24,7 +28,7 @@ function RewardInformation() {
 
   const handleReceiveReward = () => {
     if (isValidPhoneNumber) {
-      setIsFinishReward(true);
+      patchReward({ userRewardId: state.userRewardId, rewardId: state.rewardId, phoneNumber });
     }
   };
 

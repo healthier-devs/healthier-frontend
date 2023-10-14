@@ -1,23 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import RoundButton from "src/components/roundButton";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
-const rewardDetail = {
-  name: "네이버 페이",
-  description: "10,000원 상품권",
-  validDate: "30일",
-};
-
 function RewardReception() {
+  const { state } = useLocation();
   const navigate = useNavigate();
+
   const [isCheckAgreement, setIsCheckAgreement] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!state) {
+      navigate("/challenge/reward");
+    }
+  }, []);
 
   const handleContinue = () => {
     if (isCheckAgreement) {
-      navigate("/challenge/reward/information");
+      navigate("/challenge/reward/information", { state: { userRewardId: state.userRewardId, rewardId: state.item.rewardId } });
     }
   };
 
@@ -32,12 +34,12 @@ function RewardReception() {
       />
       <Styled.Container>
         <Styled.RewardImageContainer>
-          <Styled.RewardImage src="" />
+          <Styled.RewardImage src={state.item.imageUrl} />
         </Styled.RewardImageContainer>
 
         <Styled.ContentContainer>
-          <Styled.Title>{rewardDetail.name}</Styled.Title>
-          <Styled.Point style={{ marginTop: "0.6rem" }}>{rewardDetail.description}</Styled.Point>
+          <Styled.Title>{state.item.type}</Styled.Title>
+          <Styled.Point style={{ marginTop: "0.6rem" }}>{state.item.name}</Styled.Point>
 
           <Styled.Line />
 
@@ -59,7 +61,7 @@ function RewardReception() {
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>유효기간</Styled.DescriptionText>
             <Styled.DottedLine />
-            <Styled.DetailText>{rewardDetail.validDate}</Styled.DetailText>
+            <Styled.DetailText>30일</Styled.DetailText>
           </Styled.DescriptionBox>
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>상품권 이용 유의사항</Styled.DescriptionText>
