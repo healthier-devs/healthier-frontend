@@ -11,8 +11,8 @@ function RewardCard({ item, ...props }: IRewardListItem) {
     <Styled.ListItem key={item.rewardId} {...props}>
       <Styled.RewardImage src={item.imageUrl} />
       <Styled.ListItemContent>
-        <Styled.ListItemTitle>{item.displayName}</Styled.ListItemTitle>
-        <Styled.ListItemPoint>{item.displayName} </Styled.ListItemPoint>
+        <Styled.ListItemTitle>{item.type}</Styled.ListItemTitle>
+        <Styled.ListItemPoint>{item.name} </Styled.ListItemPoint>
       </Styled.ListItemContent>
     </Styled.ListItem>
   );

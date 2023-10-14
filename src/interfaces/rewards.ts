@@ -1,6 +1,7 @@
 export interface IRewards {
   rewardId: number;
-  displayName: string;
+  type: string;
+  name: string;
   point: number;
   imageUrl: string;
 }
@@ -8,12 +9,21 @@ export interface IRewards {
 export type TRewardsResponse = IRewards[];
 
 export interface IMyRewardRecords {
-  userRewardId: number;
   challengeTitle: string;
-  point: number;
-  rewardId: number;
-  sent: boolean;
-  selected: boolean;
+  midtermReward: {
+    userRewardId: number;
+    point: number;
+    rewardId: number;
+    sent: boolean;
+    selected: boolean;
+  } | null;
+  finalReward: {
+    userRewardId: number;
+    point: number;
+    rewardId: number;
+    sent: boolean;
+    selected: boolean;
+  } | null;
 }
 
 export type TMyRewardRecordsResponse = IMyRewardRecords[];

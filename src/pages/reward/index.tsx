@@ -29,20 +29,20 @@ function Reward() {
 
         <Styled.CurrentChallengeList>
           {myRewardRecordsData &&
-            [].map((challenge: any, idx) => (
+            myRewardRecordsData.map((challenge, idx) => (
               <Styled.CurrentChallengeBox key={idx}>
-                <Styled.ChallengeTitle>{challenge.title}</Styled.ChallengeTitle>
+                <Styled.ChallengeTitle>{challenge.challengeTitle}</Styled.ChallengeTitle>
                 <div style={{ marginTop: "1.2rem" }}>
                   <Styled.RewardBox>
                     <Styled.RewardDescription>Midterm 완료 리워드</Styled.RewardDescription>
-                    {challenge.midterm ? (
+                    {challenge.midtermReward ? (
                       <Styled.CertificatedButton
-                        isFinish={challenge.midtermReward}
-                        {...(!challenge.midtermReward && {
+                        isFinish={challenge.midtermReward.sent}
+                        {...(!challenge.midtermReward.sent && {
                           onClick: () => navigate("/challenge/reward/list", { state: "midterm" }),
                         })}
                       >
-                        {challenge.midtermReward ? "받기 완료" : "리워드 받기"}
+                        {challenge.midtermReward.sent ? "받기 완료" : "리워드 받기"}
                       </Styled.CertificatedButton>
                     ) : (
                       <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
@@ -50,14 +50,14 @@ function Reward() {
                   </Styled.RewardBox>
                   <Styled.RewardBox>
                     <Styled.RewardDescription>Final 완료 리워드</Styled.RewardDescription>
-                    {challenge.final ? (
+                    {challenge.finalReward ? (
                       <Styled.CertificatedButton
-                        isFinish={challenge.finalReward}
-                        {...(!challenge.finalReward && {
+                        isFinish={challenge.finalReward.sent}
+                        {...(!challenge.finalReward.sent && {
                           onClick: () => navigate("/challenge/reward/list", { state: "final" }),
                         })}
                       >
-                        {challenge.finalReward ? "받기 완료" : "리워드 받기"}
+                        {challenge.finalReward.sent ? "받기 완료" : "리워드 받기"}
                       </Styled.CertificatedButton>
                     ) : (
                       <Styled.NotCertificatedText>아직 인증 전이에요</Styled.NotCertificatedText>
