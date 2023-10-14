@@ -5,6 +5,12 @@ import RoundButton from "src/components/roundButton";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
+const rewardDetail = {
+  name: "네이버 페이",
+  description: "10,000원 상품권",
+  validDate: "30일",
+};
+
 function RewardReception() {
   const navigate = useNavigate();
   const [isCheckAgreement, setIsCheckAgreement] = useState<boolean>(false);
@@ -30,8 +36,8 @@ function RewardReception() {
         </Styled.RewardImageContainer>
 
         <Styled.ContentContainer>
-          <Styled.Title>네이버 페이</Styled.Title>
-          <Styled.Point style={{ marginTop: "0.6rem" }}>10,000원 상품권</Styled.Point>
+          <Styled.Title>{rewardDetail.name}</Styled.Title>
+          <Styled.Point style={{ marginTop: "0.6rem" }}>{rewardDetail.description}</Styled.Point>
 
           <Styled.Line />
 
@@ -53,7 +59,7 @@ function RewardReception() {
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>유효기간</Styled.DescriptionText>
             <Styled.DottedLine />
-            <Styled.DetailText>30일</Styled.DetailText>
+            <Styled.DetailText>{rewardDetail.validDate}</Styled.DetailText>
           </Styled.DescriptionBox>
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>상품권 이용 유의사항</Styled.DescriptionText>
