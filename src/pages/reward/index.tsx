@@ -91,7 +91,7 @@ function Reward() {
         </Styled.ListContainer>
 
         <Styled.ExtraRewardButton onClick={() => navigate("/challenge/reward/list", { state: { status: "all" } })}>
-          <p>다른 챌린지도 보러가기</p>
+          <p>리워드 전체보기</p>
           <ChevronRightIcon stroke="#787C83" strokeWidth={2} />
         </Styled.ExtraRewardButton>
       </Styled.Container>
