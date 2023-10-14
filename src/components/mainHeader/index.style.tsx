@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   height: inherit;
 
   display: flex;
@@ -11,5 +11,6 @@ export const Container = styled.section`
 
   .logo {
     margin-top: 1.6rem;
+    cursor: pointer;
   }
 `;

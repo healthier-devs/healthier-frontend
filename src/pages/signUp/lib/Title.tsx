@@ -4,11 +4,12 @@ import styled from "styled-components";
 interface ITitleProps {
   text: string;
   description?: string;
+  mb?: string;
 }
 
-function Title({ text, description }: ITitleProps) {
+function Title({ text, description, mb }: ITitleProps) {
   return (
-    <TitleWrapper>
+    <TitleWrapper mb={mb}>
       <TitleText>{text}</TitleText>
       {description && <Description>{description}</Description>}
     </TitleWrapper>
@@ -17,9 +18,9 @@ function Title({ text, description }: ITitleProps) {
 
 export default Title;
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.div<{ mb?: string }>`
   margin-top: 3.2rem;
-  margin-bottom: 5.4rem;
+  margin-bottom: ${({ mb = "5.4rem" }) => mb};
 `;
 
 const TitleText = styled(Heading_3)`

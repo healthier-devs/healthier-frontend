@@ -7,6 +7,7 @@ interface IStyledFlexBox extends React.HTMLAttributes<HTMLDivElement> {
   gap?: string;
   mt?: string;
   mb?: string;
+  flexWrap?: "wrap" | "no-wrap";
 }
 
 interface IFlexBoxProps extends IStyledFlexBox {
@@ -25,6 +26,7 @@ const StyledFlexBox = styled.div<IStyledFlexBox>`
   flex-direction: ${({ flexDirection = "row" }) => flexDirection};
   justify-content: ${({ justifyContent = "start" }) => justifyContent};
   align-items: ${({ alignItems = "stretch" }) => alignItems};
+  flex-wrap: ${({ flexWrap = "no-wrap" }) => flexWrap};
 
   gap: ${({ gap }) => gap};
 

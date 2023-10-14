@@ -13,7 +13,8 @@ import IndexQR from "./index-qr";
 import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
-import MainPage from "./main";
+import Main from "./main";
+import MainPage from "./main_backup";
 import MyChallenge from "./my-challenge";
 import MyDiagnosis from "./myDiagnosis";
 import Onboard from "./onboard";
@@ -23,6 +24,7 @@ import RewardInformation from "./reward-information";
 import RewardList from "./reward-list";
 import RewardReception from "./reward-reception";
 import SignUp from "./signUp";
+import SignUpAdditionalInformation from "./signUp/additional-information";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
 import SignUpError from "./signUp/error";
@@ -68,4 +70,6 @@ export {
   RewardReception,
   AccountSettings,
   Onboard,
+  Main,
+  SignUpAdditionalInformation,
 };

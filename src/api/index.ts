@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AxiosError } from "axios";
+import { ACCESS_TOKEN_AGE } from "src/data/account";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
@@ -33,7 +34,11 @@ export const createFetcher = (path: string) => {
 
   instance.interceptors.request.use(
     function (config: AxiosRequestConfig) {
-      const accessToken = localStorage.getItem("accessToken") ?? "";
+      const accessToken = getCookie("accessToken");
+
+      if (!accessToken) {
+        return config;
+      }
 
       (config.headers ?? {}).Authorization = "Bearer " + accessToken;
 
@@ -52,7 +57,7 @@ export const createFetcher = (path: string) => {
       const _err = err as unknown as AxiosError;
       const { response: res } = _err;
 
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = getCookie("accessToken");
       const refreshToken = getCookie("refreshToken");
 
       if (!res || res.status !== 401 || !accessToken || !refreshToken) {
@@ -65,7 +70,12 @@ export const createFetcher = (path: string) => {
           refreshToken,
         });
 
-        localStorage.setItem("accessToken", reissueResponse.data.accessToken);
+        setCookie("accessToken", accessToken, {
+          path: "/",
+          secure: false,
+          domain: "localhost",
+          maxAge: ACCESS_TOKEN_AGE,
+        });
         setCookie("refreshToken", reissueResponse.data.refreshToken, {
           domain: "localhost",
           path: "/",

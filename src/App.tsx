@@ -39,7 +39,7 @@ function App() {
     <Container>
       <ErrorBoundary FallbackComponent={Pages.Error} onReset={reset}>
         <Routes>
-          <Route path="/" element={<Pages.MainPage />} />
+          <Route path="/" element={<Pages.Main />} />
           <Route path="/info" element={<Pages.Information />} />
           <Route path="/result-list" element={<Pages.DiagnosisList />} />
           <Route path="/result" element={<Pages.ResultPage />} />
@@ -50,10 +50,11 @@ function App() {
           <Route path="/onboard" element={<Pages.Onboard />} />
 
           <Route path="/signup" element={<Pages.SignUp />}>
-            <Route index element={<Navigate to="/signup/agreement" replace />} />
-            <Route path="/signup/agreement" element={<Pages.TermsAgreement />} />
-            <Route path="/signup/email" element={<Pages.Email />} />
-            <Route path="/signup/password" element={<Pages.Password />} />
+            <Route index element={<Navigate to="/signup/step1" replace />} />
+            <Route path="/signup/step1" element={<Pages.TermsAgreement />} />
+            <Route path="/signup/step2" element={<Pages.Email />} />
+            <Route path="/signup/step3" element={<Pages.Password />} />
+            <Route path="/signup/step4" element={<Pages.SignUpAdditionalInformation />} />
           </Route>
           <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
