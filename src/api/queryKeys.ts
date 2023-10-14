@@ -3,4 +3,5 @@ export const queryKeys = {
   RESULT: "result",
   CHALLENGE: "challenge",
   STAMP: "stamp",
+  REWARDS: "rewards",
 };

@@ -1,17 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import RoundButton from "src/components/roundButton";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 function RewardReception() {
+  const { state } = useLocation();
   const navigate = useNavigate();
+
   const [isCheckAgreement, setIsCheckAgreement] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!state) {
+      navigate("/challenge/reward");
+    }
+  }, []);
 
   const handleContinue = () => {
     if (isCheckAgreement) {
-      navigate("/challenge/reward/information");
+      navigate("/challenge/reward/information", { state: { userRewardId: state.userRewardId, rewardId: state.item.rewardId } });
     }
   };
 
@@ -26,12 +34,12 @@ function RewardReception() {
       />
       <Styled.Container>
         <Styled.RewardImageContainer>
-          <Styled.RewardImage src="" />
+          <Styled.RewardImage src={state.item.imageUrl} />
         </Styled.RewardImageContainer>
 
         <Styled.ContentContainer>
-          <Styled.Title>네이버 페이</Styled.Title>
-          <Styled.Point style={{ marginTop: "0.6rem" }}>10,000원 상품권</Styled.Point>
+          <Styled.Title>{state.item.type}</Styled.Title>
+          <Styled.Point style={{ marginTop: "0.6rem" }}>{state.item.name}</Styled.Point>
 
           <Styled.Line />
 

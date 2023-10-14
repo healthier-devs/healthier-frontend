@@ -5,8 +5,8 @@ export const ListItem = styled.div`
 `;
 
 export const RewardImage = styled.img`
-  width: 16.5rem;
-  height: 10rem;
+  width: 100%;
+  aspect-ratio: 165 / 100;
   border-radius: 1rem;
 `;
 

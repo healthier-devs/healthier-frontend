@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { stampFetcher } from "src/api/stamp/fetcher";
-import type { IStampChartResponse } from "src/interfaces/challenges";
+import type { IStampChartResponse } from "src/interfaces/stamp";
 
 interface IUseGetChallengesProps {
   challengeId: number;
