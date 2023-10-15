@@ -119,3 +119,12 @@ export const EmptyContainer = styled.ul`
   flex-direction: column;
   gap: 3.6rem;
 `;
+
+export const DescriptionText = styled.p`
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 150%;
+  letter-spacing: -0.03rem;
+
+  color: ${({ theme }) => theme.color.grey_600};
+`;
