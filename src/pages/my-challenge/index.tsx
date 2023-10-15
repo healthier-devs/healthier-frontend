@@ -82,12 +82,13 @@ function ChallengeList() {
               onClick={() => navigate(`/challenge/${challenge.challengeId}`)}
             />
           ))}
+          <Styled.DescriptionText>챌린지에 대한 리워드는 선물함에서 확인 가능해요</Styled.DescriptionText>
         </Styled.CardList>
       )}
       {isReadyData && (myChallengesData?.count ?? 0) === 0 && (
         <Styled.EmptyContainer>
           <Styled.EmptyText>
-            아직 도전을 시작한 챌린지가 없어요!
+            아직 {selectedTab === "PROGRESS" ? "도전을 시작한" : "완료한"} 챌린지가 없어요!
             <br />
             함께 챌린지를 살펴볼까요?
           </Styled.EmptyText>
