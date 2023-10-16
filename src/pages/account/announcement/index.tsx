@@ -1,12 +1,15 @@
 import moment from "moment";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetAnnouncements } from "src/hooks/mypage/useGetAnnouncements";
+import { IAnnouncementResponse } from "src/interfaces/mypage";
 import * as Styled from "./index.style";
 
-const AnnouncementItem = ({ id, title, date }: { id: string; title: string; date: string }) => {
+const AnnouncementItem = ({ id, title, date }: { id: number; title: string; date: string }) => {
   const navigate = useNavigate();
 
   return (
-    <Styled.AnnouncementItem onClick={() => navigate(-1)}>
+    <Styled.AnnouncementItem onClick={() => navigate(`/account/announcement/${id}`)}>
       <div className="mainTitle">{title}</div>
       <div className="dateText">{moment(date).format("YYYY. MM. DD")}</div>
     </Styled.AnnouncementItem>
@@ -14,11 +17,20 @@ const AnnouncementItem = ({ id, title, date }: { id: string; title: string; date
 };
 
 const AccountAnnouncement = () => {
-  return (
+  const { isLoading, announcementData } = useGetAnnouncements();
+
+  useEffect(() => {
+    console.log(isLoading, announcementData);
+  }, [isLoading]);
+
+  return isLoading || !announcementData ? (
+    <></>
+  ) : (
     <Styled.Container>
-      <AnnouncementItem id="1" title="[이벤트] 건강챌린지 100% 달성자 룰렛 이벤트" date={new Date().toString()} />
-      <AnnouncementItem id="1" title="[이벤트] 건강챌린지 100% 달성자 룰렛 이벤트" date={new Date().toString()} />
-      <AnnouncementItem id="1" title="[이벤트] 건강챌린지 100% 달성자 룰렛 이벤트" date={new Date().toString()} />
+      {/* 15 announcement per load */}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
     </Styled.Container>
   );
 };
