@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import { ILoginModal } from "src/interfaces/modal";
-import { Title } from "src/pages/main/mainModal/index.style";
+import { Title } from "src/pages/main_backup/mainModal/index.style";
 import { Description } from "src/pages/result/resultModal/index.style";
 import LoginModal from ".";
 

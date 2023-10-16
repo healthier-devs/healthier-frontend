@@ -13,17 +13,20 @@ export interface IValidatePasswordRequest {
 }
 
 export interface ISignUpRequest {
-  username: string;
+  username: string; // 이메일
   password: string;
   confirmPassword: string;
-  name: string;
-  phoneNumber: string;
-  gender: string;
-  birthDate: string;
-  nickname: string;
+  name: string; // 사용자 실명
+  gender: "f" | "m";
+  birthDate: string; // yyyy-mm-dd
   marketingOptIn: boolean;
   healthInterests: string[];
+  invitationCode: string; // 없으면 빈 문자열
 }
+
+export type TAdditionalInformation = Pick<ISignUpRequest, "name" | "gender" | "birthDate" | "healthInterests" | "invitationCode">;
+
+export type TAdditionalInformationParam = Pick<ISignUpRequest, "username" | "password" | "confirmPassword" | "marketingOptIn">;
 
 export interface ILoginRequest {
   username: string;

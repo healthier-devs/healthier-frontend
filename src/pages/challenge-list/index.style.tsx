@@ -1,8 +1,73 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 5.6rem;
   width: 100%;
+`;
+
+export const HeaderContainer = styled.div`
+  width: inherit;
+
+  height: 5.6rem;
+  letter-spacing: 0.015rem;
+
+  background: transparent;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  z-index: 3;
+
+  border-bottom: ${({ theme }) => `0.5px solid ${theme.color.grey_800}`};
+`;
+
+export const LeftButton = styled.div`
+  width: 3.2rem;
+  height: 3.2rem;
+
+  margin-left: 1.5rem;
+  margin-bottom: 0.9rem;
+`;
+
+export const HeaderTitle = styled.div`
+  margin-bottom: 1.8rem;
+
+  font-size: 1.6rem;
+  font-weight: 200;
+  line-height: 120%;
+  letter-spacing: 0.015rem;
+
+  color: ${({ theme }) => theme.color.grey_200};
+`;
+
+export const RightButton = styled.div`
+  width: 3.2rem;
+  height: 3.2rem;
+
+  margin-bottom: 0.9rem;
+  margin-right: 2.3rem;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  p {
+    position: absolute;
+    right: 0;
+
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 120%;
+    letter-spacing: -0.15px;
+
+    color: ${({ theme }) => theme.color.grey_400};
+
+    white-space: nowrap;
+  }
 `;
 
 export const Categories = styled.ul`

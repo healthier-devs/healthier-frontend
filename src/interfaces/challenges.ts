@@ -1,21 +1,10 @@
 export interface IChallenge {
   id: number;
-  title: string;
-  category: string;
-  count: number;
-  midtermGift: number;
-  finalGift: number;
+  name: string;
+  maximumGift: number;
   duration: number;
   times: number;
   method: string;
-  notice: string;
-  basicImage: string;
-  whatContent: string;
-  whyContent: string;
-  tipSubtitle: string;
-  tipContent: string;
-  guide: string;
-  status: string;
 }
 
 export type TChallengeListResponse = {
@@ -30,8 +19,6 @@ export interface TChallengeCategory {
 }
 
 export type TChallengeCategoryListResponse = TChallengeCategory[];
-
-export type TStampStatus = "NOTHING" | "SUCCESS" | "FAILURE" | "CHECKING" | "REVIVAL";
 
 export interface IMyChallengeProgress {
   category: string;
@@ -60,26 +47,6 @@ export interface IMyChallengeFinishResponse {
   myChallenge: IMyChallengeFinish[];
 }
 
-export interface IStamp {
-  id: number;
-  image: string | null;
-  submitTime: string;
-  status: TStampStatus;
-}
-
-export interface IStampChartResponse {
-  title: string;
-  count: number;
-  duration: string;
-  times: string;
-  method: string;
-  currentDayCnt: number;
-  submissions: IStamp[];
-}
-
-export interface IStampBodyRequest {
-  image: string;
-  userId: string;
-  challengeId: string;
-  dayCount: number;
+export interface IStampImagePresignedUrl {
+  url: string;
 }

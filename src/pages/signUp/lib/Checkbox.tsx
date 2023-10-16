@@ -19,12 +19,12 @@ function Icon({ variant, checked }: IIcon) {
   return <IconImage className={variant} src="/images/signup/checkbox_secondary_unselected.svg" />;
 }
 
-function Checkbox({ variant = "primary", checked = false, onClick, id }: ICheckboxProps) {
+function Checkbox({ variant = "primary", defaultChecked = false, onClick, id }: ICheckboxProps) {
   return (
     <div>
-      <Input type="checkbox" onClick={onClick} id={id} checked={checked} />
+      <Input type="checkbox" onClick={onClick} id={id} defaultChecked={defaultChecked} />
       <Label htmlFor={id}>
-        <Icon variant={variant} checked={checked} />
+        <Icon variant={variant} checked={defaultChecked} />
       </Label>
     </div>
   );

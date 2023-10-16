@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
@@ -12,6 +12,7 @@ import { handleResizeWindow } from "./utils/window";
 
 function App() {
   const dispatch = useAppDispatch();
+
   const { reset } = useQueryErrorResetBoundary();
   const { validateToken } = useValidateToken();
 
@@ -30,7 +31,7 @@ function App() {
 
   useEffect(() => {
     validateToken();
-  }, [validateToken]);
+  }, []);
 
   useGoogleAnalytics();
 
@@ -38,7 +39,7 @@ function App() {
     <Container>
       <ErrorBoundary FallbackComponent={Pages.Error} onReset={reset}>
         <Routes>
-          <Route path="/" element={<Pages.MainPage />} />
+          <Route path="/" element={<Pages.Main />} />
           <Route path="/info" element={<Pages.Information />} />
           <Route path="/result-list" element={<Pages.DiagnosisList />} />
           <Route path="/result" element={<Pages.ResultPage />} />
@@ -46,12 +47,14 @@ function App() {
           <Route path="/symptom" element={<Pages.SymptomPage />} />
           <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
           <Route path="/appointment" element={<Pages.Appointment />} />
+          <Route path="/onboard" element={<Pages.Onboard />} />
 
           <Route path="/signup" element={<Pages.SignUp />}>
-            <Route index element={<Navigate to="/signup/agreement" replace />} />
-            <Route path="/signup/agreement" element={<Pages.TermsAgreement />} />
-            <Route path="/signup/email" element={<Pages.Email />} />
-            <Route path="/signup/password" element={<Pages.Password />} />
+            <Route index element={<Navigate to="/signup/step1" replace />} />
+            <Route path="/signup/step1" element={<Pages.TermsAgreement />} />
+            <Route path="/signup/step2" element={<Pages.Email />} />
+            <Route path="/signup/step3" element={<Pages.Password />} />
+            <Route path="/signup/step4" element={<Pages.SignUpAdditionalInformation />} />
           </Route>
           <Route path="/signup/complete" element={<Pages.SignUpComplete />} />
           <Route path="/signup/error" element={<Pages.SignUpError />} />
@@ -71,6 +74,10 @@ function App() {
           <Route path="/qr/complete" element={<Pages.CompleteQR />} />
           <Route path="/challenge/stamp/:id" element={<Pages.ChallengeStamp />} />
           <Route path="/challenge-list" element={<Pages.ChallengeList />} />
+          <Route path="/challenge/reward" element={<Pages.Reward />} />
+          <Route path="/challenge/reward/list" element={<Pages.RewardList />} />
+          <Route path="/challenge/reward/reception" element={<Pages.RewardReception />} />
+          <Route path="/challenge/reward/information" element={<Pages.RewardInformation />} />
           <Route path="/challenge/:id" element={<Pages.ChallengeDetail />} />
           <Route path="/my-challenge" element={<Pages.MyChallenge />} />
           <Route path="/test" element={<Pages.Test />} />

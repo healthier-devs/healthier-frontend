@@ -1,29 +1,25 @@
-import { createFetcher } from "..";
-import type { IStampBodyRequest } from "src/interfaces/challenges";
+import axios from "axios";
+import { createFetcher, responseBody } from "..";
 
 const fetcher = createFetcher("/stamp");
 
 export const stampFetcher = {
-  getStampChart(id: string) {
+  getStampChart(id: number) {
     return fetcher.get(`/${id}`);
   },
-  deleteStampChart(id: string) {
+  deleteStampChart(id: number) {
     return fetcher.delete(`/${id}`);
   },
-  reviveStampChart({ image, userId, challengeId, dayCount }: IStampBodyRequest) {
-    return fetcher.patch("/revival", {
-      image,
-      user_id: userId,
-      challenge_id: challengeId,
-      day_count: dayCount,
-    });
+  patchStampChart(id: number, image: string) {
+    return fetcher.patch(`/${id}?image=${image}`);
   },
-  certificateStamp({ image, userId, challengeId, dayCount }: IStampBodyRequest) {
-    return fetcher.patch("", {
-      image,
-      user_id: userId,
-      challenge_id: challengeId,
-      day_count: dayCount,
-    });
+  reviveStampChart(id: number) {
+    return fetcher.patch(`/revival/${id}`);
+  },
+  getRevivalTicketCount() {
+    return fetcher.get("/revival/tickets");
+  },
+  async putStampImage(url: string, file: File) {
+    return axios.put(url, file).then(responseBody);
   },
 };

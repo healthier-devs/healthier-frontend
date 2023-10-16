@@ -8,18 +8,32 @@ export interface ITextFieldStandardProps extends React.HTMLAttributes<HTMLInputE
   type?: TTextFieldStandardType;
   value: string | number;
   name?: string;
+  isError?: boolean;
+  errorHelperText?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextFieldStandard = forwardRef<HTMLInputElement, ITextFieldStandardProps>(function TextFieldStandard(
-  { label, placeholder, type = "text", value, name, onChange, style },
+  { label, placeholder, type = "text", isError = false, errorHelperText = "", value, name, onChange, style },
   ref
 ) {
   return (
-    <Styled.Container>
-      {label && <Styled.Label>{label}</Styled.Label>}
-      <Styled.Input type={type} value={value} name={name} placeholder={placeholder} onChange={onChange} ref={ref} style={style} />
-    </Styled.Container>
+    <>
+      <Styled.Container>
+        {label && <Styled.Label>{label}</Styled.Label>}
+        <Styled.Input
+          type={type}
+          value={value}
+          name={name}
+          placeholder={placeholder}
+          onChange={onChange}
+          ref={ref}
+          style={style}
+          isError={isError}
+        />
+      </Styled.Container>
+      {isError && <Styled.HelperText>{errorHelperText}</Styled.HelperText>}
+    </>
   );
 });
 

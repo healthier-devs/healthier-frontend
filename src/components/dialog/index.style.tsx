@@ -55,7 +55,7 @@ export const Description = styled.h3`
   margin-top: 0.8rem;
 
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
@@ -95,7 +95,7 @@ export const SingleButton = styled.button`
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
 
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.grey_100};
 `;
 
 export const DoubleButton = styled.button<{ position: "left" | "right" }>`
