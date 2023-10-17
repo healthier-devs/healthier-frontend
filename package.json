@@ -29,6 +29,7 @@
     "lamina": "^1.1.20",
     "leaflet": "^1.7.1",
     "mapbox-gl": "^2.0.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-calendar": "^4.2.1",
     "react-cookie": "^6.1.1",

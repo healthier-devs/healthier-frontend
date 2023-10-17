@@ -5,13 +5,24 @@ import Layout from "src/components/layout";
 
 const headerMap = {
   account: "마이페이지",
+  announcement: "공지 사항",
   settings: "환경 설정",
 } as const;
 
 type TPath = keyof typeof headerMap;
 
 function Account() {
-  const [path] = window.location.pathname.split("/").slice(-1);
+  const pathSegments = window.location.pathname.split("/").filter((segment) => segment);
+  let path;
+
+  if (pathSegments.length % 2 === 0) {
+    // If even, take the last segment
+    path = pathSegments[pathSegments.length - 1];
+  } else {
+    // If odd, take the second last segment (ignoring the ID)
+    path = pathSegments[pathSegments.length - 2];
+  }
+
   const navigate = useNavigate();
 
   return (

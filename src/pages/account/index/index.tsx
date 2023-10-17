@@ -22,12 +22,12 @@ const accountItems: IAccountItem[] = [
     path: "",
   },
   {
-    label: "환경 설정",
+    label: "환경설정",
     path: "/settings",
   },
   {
     label: "공지사항",
-    path: "",
+    path: "/announcement",
   },
   {
     label: "1:1 문의",

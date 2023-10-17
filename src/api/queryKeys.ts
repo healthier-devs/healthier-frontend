@@ -3,5 +3,6 @@ export const queryKeys = {
   RESULT: "result",
   CHALLENGE: "challenge",
   STAMP: "stamp",
+  MYPAGE: "mypage",
   REWARDS: "rewards",
 };

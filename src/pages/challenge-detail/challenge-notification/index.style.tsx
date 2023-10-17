@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.color.grey_800};
-  padding: 3.2rem 2.4rem 8rem;
+  padding: 3.2rem 2.4rem 9rem;
   .mainTitle {
     font-size: 1.6rem;
     line-height: 160%;
