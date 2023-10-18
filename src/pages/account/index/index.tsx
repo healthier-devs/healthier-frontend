@@ -15,7 +15,7 @@ interface IAccountItem {
 const accountItems: IAccountItem[] = [
   {
     label: "나의 건강 기록장",
-    path: "",
+    path: "/diagRecord",
   },
   {
     label: "선물함 바로가기",
