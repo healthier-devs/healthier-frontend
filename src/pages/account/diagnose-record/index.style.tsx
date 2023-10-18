@@ -84,3 +84,11 @@ export const Chip = styled.div`
   color: ${({ theme }) => theme.color.sub_blue};
   font-weight: 200;
 `;
+
+export const BottomShadowArea = styled.div`
+  height: 13rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: linear-gradient(0deg, #131416 46.82%, rgba(19, 20, 22, 0) 100%);
+`;
