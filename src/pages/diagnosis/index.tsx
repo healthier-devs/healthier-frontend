@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import NoteWithMagnifier from "src/assets/images/NoteWithMagnifier";
 import ContentHeader from "src/components/contentHeader";
@@ -11,7 +12,16 @@ const Diagnosis = () => {
   const navigate = useNavigate();
   const { state } = useLocation() as { state: TSymptomType };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const { isLoading, curQuestion, selectedAnswer, setSelectedAnswer, handleNext, handleBack } = useDiagnosis(state);
+
+  useEffect(() => {
+    if (!containerRef.current) {
+      return;
+    }
+    containerRef.current.scrollTo({ top: 0 });
+  }, [curQuestion]);
 
   return (
     <>
@@ -24,7 +34,7 @@ const Diagnosis = () => {
         <>
           <ContentHeader back={true} backCallback={handleBack} exit={true} exitCallback={() => navigate("/")} label="감별 진단" />
           <Styled.Layout>
-            <Styled.Container>
+            <Styled.Container ref={containerRef}>
               <Styled.TitleContainer>
                 <Styled.Question>
                   {curQuestion.question.split("\\n").map((text: string, idx: number) => (
