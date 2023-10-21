@@ -1,5 +1,14 @@
-import { Heading_3, Body_1, Body_3 } from "src/lib/fontStyle";
+import { Heading_3 } from "src/lib/fontStyle";
 import styled from "styled-components";
+
+// NOTE: Layout 공통 컴포넌트를 사용하면 상하 스크롤이 생기는 문제
+export const Layout = styled.main`
+  width: 100%;
+  height: 100%;
+
+  padding: 5.6rem 0 0 0;
+  box-sizing: border-box;
+`;
 
 export const Container = styled.section`
   height: 100%;

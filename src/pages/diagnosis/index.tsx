@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import NoteWithMagnifier from "src/assets/images/NoteWithMagnifier";
 import ContentHeader from "src/components/contentHeader";
-import Layout from "src/components/layout";
 import Loading from "src/components/loading";
 import useDiagnosis from "src/hooks/diagnose/useDiagnosis";
 import AnswerButtons from "./answerButtons";
@@ -24,7 +23,7 @@ const Diagnosis = () => {
       ) : (
         <>
           <ContentHeader back={true} backCallback={handleBack} exit={true} exitCallback={() => navigate("/")} label="감별 진단" />
-          <Layout>
+          <Styled.Layout>
             <Styled.Container>
               <Styled.TitleContainer>
                 <Styled.Question>
@@ -42,7 +41,7 @@ const Diagnosis = () => {
                 handleNext={handleNext}
               />
             </Styled.Container>
-          </Layout>
+          </Styled.Layout>
         </>
       )}
     </>
