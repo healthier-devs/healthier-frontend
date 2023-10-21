@@ -9,13 +9,23 @@ export interface IContentHeader extends HTMLAttributes<HTMLDivElement> {
   backCallback?: () => void;
   exitCallback?: () => void;
   borderBottom?: boolean;
+  backgroundTransparent?: boolean;
 }
 
-const ContentHeader = ({ label = "", back, exit, backCallback, exitCallback, borderBottom = true, ...props }: IContentHeader) => {
+const ContentHeader = ({
+  label = "",
+  back,
+  exit,
+  backCallback,
+  exitCallback,
+  borderBottom = true,
+  backgroundTransparent = true,
+  ...props
+}: IContentHeader) => {
   const navigate = useNavigate();
 
   return (
-    <RootContainer borderBottom={borderBottom} {...props}>
+    <RootContainer borderBottom={borderBottom} isTransparent={backgroundTransparent} {...props}>
       <Container>
         <BackButton visible={back} onClick={() => (backCallback ? backCallback() : navigate(-1))}>
           {back && <img alt="back" src="/images/header/back.svg" width={32} height={32} />}

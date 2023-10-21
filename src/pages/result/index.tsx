@@ -62,6 +62,7 @@ const ResultPage = () => {
                 onActiveIndexChange={({ activeIndex }) => {
                   setPage(activeIndex + 1);
                 }}
+                autoHeight={true}
               >
                 <SwiperSlide>
                   <CoverPage data={resultData} />
