@@ -9,6 +9,7 @@ import type {
   ILoginResponse,
   IException,
   IUserResponse,
+  ISendVerificationCode,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -105,4 +106,13 @@ export const logout = async (): Promise<IUserResponse> => {
   const logoutData = await accountFetcher.logout();
 
   return logoutData;
+};
+
+export const sendVerificationCode = async (body: ISendVerificationCode): Promise<{ code: string }> => {
+  const { data } = await accountFetcher.sendVerificationCode(body);
+  const tokens = data.split(" ");
+
+  return {
+    code: tokens[tokens.length - 1],
+  };
 };

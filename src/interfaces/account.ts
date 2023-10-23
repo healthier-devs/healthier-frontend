@@ -54,3 +54,7 @@ export interface IUserResponse {
   success: boolean;
   timestamp: string;
 }
+
+export interface ISendVerificationCode {
+  email: string;
+}
