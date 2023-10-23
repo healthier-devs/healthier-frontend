@@ -7,6 +7,7 @@ const headerMap = {
   account: "마이페이지",
   announcement: "공지 사항",
   settings: "환경 설정",
+  edit: "프로필 수정",
 } as const;
 
 type TPath = keyof typeof headerMap;

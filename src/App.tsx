@@ -64,6 +64,7 @@ function App() {
             <Route path="/account/announcement" element={<Pages.AccountAnnouncement />} />
             <Route path="/account/announcement/:id" element={<Pages.AnnouncementDetail />} />
             <Route path="/account/settings" element={<Pages.AccountSettings />} />
+            <Route path="/account/edit" element={<Pages.AccountEdit />} />
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />

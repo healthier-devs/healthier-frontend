@@ -57,7 +57,7 @@ function AccountIndex() {
                 <Styled.Interests>영양제, 운동, 수면</Styled.Interests>
               </Styled.UserInfoWrapper>
 
-              <Styled.EditProfileButton>프로필 수정</Styled.EditProfileButton>
+              <Styled.EditProfileButton onClick={() => navigate("/account/edit")}>프로필 수정</Styled.EditProfileButton>
             </FlexBox>
           </Box>
           <Styled.EditHealthInfoButton>건강정보 수정하기</Styled.EditHealthInfoButton>
