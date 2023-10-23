@@ -1,4 +1,10 @@
-import { IValidateAccountResponse, IValidatePasswordRequest, ISignUpRequest, ILoginRequest } from "src/interfaces/account";
+import {
+  IValidateAccountResponse,
+  IValidatePasswordRequest,
+  ISignUpRequest,
+  ILoginRequest,
+  ISendVerificationCode,
+} from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
 const fetcher = createFetcher("");
@@ -22,5 +28,8 @@ export const accountFetcher = {
   },
   logout() {
     return fetcher.post("/logout");
+  },
+  sendVerificationCode(body: ISendVerificationCode) {
+    return unauthorizedFetcher.post("/send-verification-code", body);
   },
 };

@@ -82,14 +82,17 @@ function Password() {
             placeholder="비밀번호를 형식에 맞춰 입력해주세요"
             isError={validation.isError}
             errorText={validation.errorText}
-            icon={<RemoveIcon />}
-            onClickIcon={() => {
-              setPassword("");
-              setValidation({
-                isError: false,
-                errorText: "",
-              });
-            }}
+            adornment={
+              <Lib.RemoveButton
+                onClick={() => {
+                  setPassword("");
+                  setValidation({
+                    isError: false,
+                    errorText: "",
+                  });
+                }}
+              />
+            }
             tabIndex={1}
           />
           <Lib.TextField
@@ -101,8 +104,7 @@ function Password() {
             placeholder="입력한 비밀번호를 다시 입력해주세요"
             isError={passwordConfirm.length > 0 && password !== passwordConfirm}
             errorText={"잘못 입력하셨습니다. 다시 입력해 주세요."}
-            icon={<RemoveIcon />}
-            onClickIcon={() => setPasswordConfirm("")}
+            adornment={<Lib.RemoveButton onClick={() => setPasswordConfirm("")} />}
             containerStyle={{ marginTop: "3.6rem" }}
             tabIndex={2}
           />

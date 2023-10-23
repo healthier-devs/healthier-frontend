@@ -9,8 +9,7 @@ interface ITextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   errorText?: string;
   placeholder?: string;
   type?: "text" | "email" | "password" | "number";
-  icon?: React.ReactNode;
-  onClickIcon?: () => void;
+  adornment?: React.ReactNode;
   containerStyle?: React.CSSProperties;
 }
 
@@ -19,12 +18,11 @@ function TextField({
   value,
   onChange,
   isError = false,
-  errorText,
+  errorText = "",
   label = "",
   placeholder = "",
   type = "text",
-  icon,
-  onClickIcon,
+  adornment,
   containerStyle,
   ...props
 }: ITextFieldProps) {
@@ -43,18 +41,21 @@ function TextField({
           maxLength={500}
           {...props}
         />
-        {icon && (
-          <IconButton type="button" onClick={onClickIcon}>
-            {icon}
-          </IconButton>
-        )}
+        {adornment && <IconButton>{adornment}</IconButton>}
       </Container>
-      {isError && <ErrorText>{errorText}</ErrorText>}
+      <ErrorTextWrapper isError={isError}>
+        <ErrorText>{errorText}</ErrorText>
+      </ErrorTextWrapper>
     </div>
   );
 }
 
 export default TextField;
+
+const ErrorTextWrapper = styled.div<{ isError: boolean }>`
+  display: ${({ isError }) => (isError ? "block" : "hidden")};
+  height: 13px;
+`;
 
 const Label = styled.label`
   display: block;
@@ -102,14 +103,8 @@ const Container = styled.div`
   position: relative;
 `;
 
-const IconButton = styled.button`
+const IconButton = styled.div`
   position: absolute;
   bottom: 6px;
   right: 0;
-
-  background: transparent;
-
-  padding: 0 0 0 6px;
-
-  cursor: pointer;
 `;
