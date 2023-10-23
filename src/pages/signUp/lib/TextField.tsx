@@ -53,7 +53,7 @@ function TextField({
 export default TextField;
 
 const ErrorTextWrapper = styled.div<{ isError: boolean }>`
-  display: ${({ isError }) => (isError ? "block" : "hidden")};
+  visibility: ${({ isError }) => (isError ? "visible" : "hidden")};
   height: 13px;
 `;
 

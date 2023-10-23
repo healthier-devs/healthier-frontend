@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
-import RemoveIcon from "src/assets/icons/RemoveIcon";
 import * as Lib from "../lib";
 import type { TAdditionalInformationParam } from "src/interfaces/account";
 
@@ -103,7 +102,7 @@ function Password() {
             id="password-confirm"
             placeholder="입력한 비밀번호를 다시 입력해주세요"
             isError={passwordConfirm.length > 0 && password !== passwordConfirm}
-            errorText={"잘못 입력하셨습니다. 다시 입력해 주세요."}
+            errorText="잘못 입력하셨습니다. 다시 입력해 주세요."
             adornment={<Lib.RemoveButton onClick={() => setPasswordConfirm("")} />}
             containerStyle={{ marginTop: "3.6rem" }}
             tabIndex={2}

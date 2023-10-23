@@ -99,7 +99,7 @@ function Email() {
 
   const handleClickNextButton = async () => {
     navigate("/signup/step3", {
-      state: { email, marketingOptIn },
+      state: { email: email.value, marketingOptIn },
     });
   };
 
