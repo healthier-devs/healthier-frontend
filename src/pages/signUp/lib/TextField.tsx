@@ -11,6 +11,7 @@ interface ITextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   type?: "text" | "email" | "password" | "number";
   adornment?: React.ReactNode;
   containerStyle?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 function TextField({
@@ -24,6 +25,7 @@ function TextField({
   type = "text",
   adornment,
   containerStyle,
+  disabled = false,
   ...props
 }: ITextFieldProps) {
   return (
@@ -39,6 +41,7 @@ function TextField({
           type={type}
           autoComplete={type === "password" ? "off" : "on"}
           maxLength={500}
+          disabled={disabled}
           {...props}
         />
         {adornment && <IconButton>{adornment}</IconButton>}
@@ -67,12 +70,12 @@ const Label = styled.label`
   line-height: 150%;
 `;
 
-const Input = styled.input<{ isError: boolean }>`
+const Input = styled.input<{ isError: boolean; disabled: boolean }>`
   width: 100%;
   padding: 0 3rem 0.8rem 0;
   box-sizing: border-box;
 
-  color: ${({ theme }) => theme.color.grey_400};
+  color: ${({ theme, disabled }) => (disabled ? theme.color.grey_600 : theme.color.grey_400)};
   font-size: 1.6rem;
   font-weight: 200;
 

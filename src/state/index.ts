@@ -29,6 +29,7 @@ export interface fillInfoAction {
 
 export interface IAuthState {
   authenticated: boolean;
+  email: string;
 }
 
 export interface IDiagnoseState {
