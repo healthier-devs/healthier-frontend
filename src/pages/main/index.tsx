@@ -3,7 +3,7 @@ import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
 import NavigationBar from "src/components/navigationBar";
 import { useAppSelector } from "src/state";
-import Advertisement from "./advertisement";
+// import Advertisement from "./advertisement";
 import Challenges from "./challenges";
 import DiagnosisHistory from "./diagnosis-history";
 import Hospitals from "./hospitals";
@@ -17,7 +17,7 @@ function Main() {
     <>
       <MainHeader onClickLogo={() => mainRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} />
       <Layout padding="5.6rem 0 12rem" ref={mainRef}>
-        <Advertisement />
+        {/* <Advertisement /> */}
         <Symptoms {...auth} />
         <Hospitals />
         <Challenges {...auth} />
