@@ -5,9 +5,10 @@ import type { IMyChallengeFinishResponse, IMyChallengeProgressResponse } from "s
 
 interface IUseGetChallenges {
   status: "PROGRESS" | "CLOSED";
+  authenticated: boolean;
 }
 
-export const useGetMyChallenges = ({ status }: IUseGetChallenges) => {
+export const useGetMyChallenges = ({ status, authenticated }: IUseGetChallenges) => {
   const {
     data: myChallengesData,
     isLoading,
@@ -15,6 +16,7 @@ export const useGetMyChallenges = ({ status }: IUseGetChallenges) => {
   } = useQuery<IMyChallengeProgressResponse | IMyChallengeFinishResponse>({
     queryKey: [queryKeys.CHALLENGE, status],
     queryFn: () => challengeFetcher.getMyChallenge(status),
+    enabled: authenticated,
   });
 
   return {

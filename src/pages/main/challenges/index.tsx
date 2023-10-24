@@ -1,13 +1,16 @@
 import FlexBox from "src/components/flexBox";
 import { useGetMyChallenges } from "src/hooks/challenge/useGetMyChallenges";
 import { IMyChallengeProgress } from "src/interfaces/challenges";
+import { useAppSelector } from "src/state";
 import { Box } from "../index.style";
 import StartContents from "../lib/StartContents";
 import Title from "../lib/Title";
 import * as Styled from "./index.style";
 
 function Challenges() {
-  const { myChallengesData, isLoading } = useGetMyChallenges({ status: "PROGRESS" });
+  const { authenticated } = useAppSelector((state) => state.auth);
+
+  const { myChallengesData, isLoading } = useGetMyChallenges({ status: "PROGRESS", authenticated });
 
   return (
     <Box>
