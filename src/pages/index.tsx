@@ -2,6 +2,7 @@ import Account from "./account";
 import AccountAnnouncement from "./account/announcement";
 import AnnouncementDetail from "./account/announcement/announcement-detail";
 import AccountEdit from "./account/edit";
+import AccountResetPassword from "./account/edit/reset-password";
 import AccountIndex from "./account/index/index";
 import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
@@ -78,4 +79,5 @@ export {
   Main,
   SignUpAdditionalInformation,
   AccountEdit,
+  AccountResetPassword,
 };

@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AppleIcon from "src/assets/icons/AppleIcon";
-import KakaoIcon from "src/assets/icons/KakaoIcon";
 import FlexBox from "src/components/flexBox";
 import Layout from "src/components/layout";
 import MainHeader from "src/components/mainHeader";
 import RoundButton from "src/components/roundButton";
-import TextDivider from "src/components/textDivider";
 import UnderlinedButton from "src/components/underlinedButton";
 import { useLogin } from "src/hooks/account/useLogin";
 import * as Styled from "./index.style";

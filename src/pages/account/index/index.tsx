@@ -4,6 +4,7 @@ import Box from "src/components/box";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import NavigationBar from "src/components/navigationBar";
+import { useValidateToken } from "src/hooks/account/useValidateToken";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
@@ -37,6 +38,7 @@ const accountItems: IAccountItem[] = [
 
 function AccountIndex() {
   const navigate = useNavigate();
+  const { validateToken } = useValidateToken();
 
   return (
     <>
@@ -60,7 +62,7 @@ function AccountIndex() {
               <Styled.EditProfileButton onClick={() => navigate("/account/edit")}>프로필 수정</Styled.EditProfileButton>
             </FlexBox>
           </Box>
-          <Styled.EditHealthInfoButton>건강정보 수정하기</Styled.EditHealthInfoButton>
+          <Styled.EditHealthInfoButton onClick={() => validateToken()}>건강정보 수정하기</Styled.EditHealthInfoButton>
         </Box>
 
         <Divider />

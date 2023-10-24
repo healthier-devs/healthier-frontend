@@ -4,6 +4,7 @@ import {
   ISignUpRequest,
   ILoginRequest,
   ISendVerificationCode,
+  IResetPassword,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -12,10 +13,10 @@ const unauthorizedFetcher = createUnauthorizedFetcher("");
 
 export const accountFetcher = {
   validateEmail(email: string): Promise<IValidateAccountResponse> {
-    return fetcher.get(`/validate-email/${email}`);
+    return unauthorizedFetcher.get(`/validate-email/${email}`);
   },
   validatePassword(body: IValidatePasswordRequest) {
-    return fetcher.post("/validate-password", body);
+    return unauthorizedFetcher.post("/validate-password", body);
   },
   signUpUser(body: ISignUpRequest) {
     return unauthorizedFetcher.post("", body);
@@ -31,5 +32,8 @@ export const accountFetcher = {
   },
   sendVerificationCode(body: ISendVerificationCode) {
     return unauthorizedFetcher.post("/send-verification-code", body);
+  },
+  resetPassword({ userEmail, body }: IResetPassword) {
+    return fetcher.put(`/${userEmail}/reset-password`, body);
   },
 };
