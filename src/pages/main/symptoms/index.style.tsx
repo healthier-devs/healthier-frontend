@@ -6,7 +6,7 @@ export const BannerContainer = styled.div<{ image: string }>`
   height: 140px;
 
   border-radius: 8px;
-
+  background: ${({ theme }) => theme.color.blue};
   background-image: url(${({ image }) => image});
   background-size: cover;
 `;
