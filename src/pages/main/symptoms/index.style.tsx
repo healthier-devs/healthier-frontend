@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export const BannerContainer = styled.div`
+export const BannerContainer = styled.div<{ image: string }>`
   position: relative;
 
-  width: 100%;
   height: 140px;
 
   border-radius: 8px;
 
-  background: ${({ theme }) => theme.color.blue};
+  background-image: url(${({ image }) => image});
+  background-size: cover;
 `;
 
 export const TextContainer = styled.div`

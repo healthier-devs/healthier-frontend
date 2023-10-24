@@ -6,4 +6,5 @@ export const queryKeys = {
   MYPAGE: "mypage",
   REWARDS: "rewards",
   ADVERTISEMENT: "advertisement",
+  STATISTICS: "statistics",
 };
