@@ -1,16 +1,20 @@
+import { Link } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
 import { useGetMyChallenges } from "src/hooks/challenge/useGetMyChallenges";
-import { IMyChallengeProgress } from "src/interfaces/challenges";
-import { useAppSelector } from "src/state";
+import { IMyChallengeProgress, IMyChallengeProgressResponse } from "src/interfaces/challenges";
 import { Box } from "../index.style";
 import StartContents from "../lib/StartContents";
 import Title from "../lib/Title";
 import * as Styled from "./index.style";
+import type { IAuthState } from "src/state";
 
-function Challenges() {
-  const { authenticated } = useAppSelector((state) => state.auth);
+const DEFAULT_MY_CHALLENGES_DATA: IMyChallengeProgressResponse = {
+  count: 0,
+  myChallenge: [],
+};
 
-  const { myChallengesData, isLoading } = useGetMyChallenges({ status: "PROGRESS", authenticated });
+function Challenges({ authenticated }: IAuthState) {
+  const { myChallengesData = DEFAULT_MY_CHALLENGES_DATA, isLoading } = useGetMyChallenges({ status: "PROGRESS", authenticated });
 
   return (
     <Box>
@@ -24,26 +28,28 @@ function Challenges() {
           ></StartContents>
         ) : (
           (myChallengesData.myChallenge as IMyChallengeProgress[]).map((challenge) => (
-            <FlexBox key={challenge.challengeId} flexDirection="column" gap="12px">
-              <div>
-                <Styled.Typography className="grey-300">
-                  아직 <span className="highlight">오늘의 챌린지</span>를 인증하지 않았어요!
-                </Styled.Typography>
-              </div>
-              <Styled.Card>
-                <FlexBox alignItems="center" gap="8px" mb="12px">
-                  <Styled.CardTitle>{challenge.challengeName}</Styled.CardTitle>
-                </FlexBox>
-                <FlexBox alignItems="center" gap="6px">
-                  <Styled.DayChip>
-                    <span className="chip-text highlight">{challenge.days}일</span>
-                    <span className="chip-text">째 도전</span>
-                  </Styled.DayChip>
+            <Link to={`/challenge/${challenge.challengeId}`} key={challenge.challengeId}>
+              <FlexBox flexDirection="column" gap="12px">
+                <div>
+                  <Styled.Typography className="grey-300">
+                    아직 <span className="highlight">오늘의 챌린지</span>를 인증하지 않았어요!
+                  </Styled.Typography>
+                </div>
+                <Styled.Card>
+                  <FlexBox alignItems="center" gap="8px" mb="12px">
+                    <Styled.CardTitle>{challenge.challengeName}</Styled.CardTitle>
+                  </FlexBox>
+                  <FlexBox alignItems="center" gap="6px">
+                    <Styled.DayChip>
+                      <span className="chip-text highlight">{challenge.days}일</span>
+                      <span className="chip-text">째 도전</span>
+                    </Styled.DayChip>
 
-                  <Styled.Typography className="grey-400">챌린지 완료까지 {challenge.remainDays}일 남았어요</Styled.Typography>
-                </FlexBox>
-              </Styled.Card>
-            </FlexBox>
+                    <Styled.Typography className="grey-400">챌린지 완료까지 {challenge.remainDays}일 남았어요</Styled.Typography>
+                  </FlexBox>
+                </Styled.Card>
+              </FlexBox>
+            </Link>
           ))
         )
       ) : (
