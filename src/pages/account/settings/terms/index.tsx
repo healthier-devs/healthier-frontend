@@ -1,0 +1,37 @@
+import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
+import FlexBox from "src/components/flexBox";
+import theme from "src/lib/theme";
+import * as Styled from "../index.style";
+
+function Terms() {
+  return (
+    <Styled.Box padding="2.4rem">
+      <Styled.Box mb="1.6rem">
+        <Styled.Typography className="title-1">약관 및 처리방침</Styled.Typography>
+      </Styled.Box>
+
+      <Styled.Box mb="1.8rem">
+        <FlexBox alignItems="center" justifyContent="space-between" className="click">
+          <Styled.Typography className="title-2">서비스 이용약관</Styled.Typography>
+          <ChevronRightIcon stroke={theme.color.grey_500} strokeWidth={2} width={24} height={24} />
+        </FlexBox>
+      </Styled.Box>
+
+      <Styled.Box mb="1.8rem">
+        <FlexBox alignItems="center" justifyContent="space-between" className="click">
+          <Styled.Typography className="title-2">개인정보 처리방침</Styled.Typography>
+          <ChevronRightIcon stroke={theme.color.grey_500} strokeWidth={2} width={24} height={24} />
+        </FlexBox>
+      </Styled.Box>
+
+      <Styled.Box>
+        <FlexBox alignItems="center" justifyContent="space-between" className="click">
+          <Styled.Typography className="title-2">위치정보 이용 약관</Styled.Typography>
+          <ChevronRightIcon stroke={theme.color.grey_500} strokeWidth={2} width={24} height={24} />
+        </FlexBox>
+      </Styled.Box>
+    </Styled.Box>
+  );
+}
+
+export default Terms;
