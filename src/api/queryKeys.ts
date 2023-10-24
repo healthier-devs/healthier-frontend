@@ -7,4 +7,5 @@ export const queryKeys = {
   REWARDS: "rewards",
   ADVERTISEMENT: "advertisement",
   STATISTICS: "statistics",
+  DIAGNOSIS_RECORDS: "diagnosisRecords",
 };

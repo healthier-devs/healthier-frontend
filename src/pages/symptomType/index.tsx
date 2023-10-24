@@ -20,9 +20,9 @@ const SymptomTypePage = () => {
   const { modalRef, isOpenModal, closeModal } = useModal();
 
   useEffect(() => {
-    if (!state) {
-      navigate("/");
-    }
+    // if (!state) {
+    //   navigate("/");
+    // }
     if (!isOpenModal) {
       setSelect(-1);
     }
