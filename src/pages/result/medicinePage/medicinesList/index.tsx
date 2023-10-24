@@ -14,7 +14,7 @@ function MedicinesList({ medicines, selectedIdx, handleClickMedicine }: IMedicin
         {medicines.map((medicine, idx) => (
           <Styled.Item key={medicine.name} isSelected={idx === selectedIdx} onClick={() => handleClickMedicine(idx)}>
             <Styled.ImgWrapper className="background">
-              <Styled.Img className="img" src={medicine.img} alt="pill" />
+              <Styled.Img className="img" src={`images/diagnosis/PILL_${idx + 1}.svg`} alt="pill" />
             </Styled.ImgWrapper>
 
             <span className="label">{medicine.name}</span>

@@ -32,7 +32,7 @@ export const Item = styled.li<{ isSelected: boolean }>`
   }
 
   .img {
-    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.9)};
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
   }
 `;
 

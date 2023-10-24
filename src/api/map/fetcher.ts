@@ -1,7 +1,7 @@
 import { IUserMapResponse, IHospitalDetailInfo } from "src/interfaces/map";
-import { createFetcher } from "..";
+import { createUnauthorizedFetcher } from "..";
 
-const fetcher = createFetcher("/map");
+const fetcher = createUnauthorizedFetcher("/map");
 
 export interface IMapBoxRequest {
   userLongitude: string;

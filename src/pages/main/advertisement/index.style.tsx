@@ -29,6 +29,11 @@ export const ImageContainer = styled.div`
   background: ${({ theme }) => theme.color.grey_800};
 `;
 
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Description = styled.p`
   color: ${({ theme }) => theme.color.grey_400};
 

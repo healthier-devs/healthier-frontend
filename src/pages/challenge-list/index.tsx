@@ -61,10 +61,10 @@ function ChallengeList() {
 
       <Styled.Container>
         <Styled.Categories>
-          {challengeCategoryData?.map(({ name, koreanName, imageUrl }) => (
+          {challengeCategoryData?.map(({ name, koreanName }, index) => (
             <Styled.Item key={name} isSelected={name === selectedCategory} onClick={() => setSelectedCategory(name)}>
               <Styled.ImgWrapper className="background">
-                <Styled.Img className="img" src={imageUrl} alt="challenge-icon" />
+                <Styled.Img className="img" src={`/images/challenge/${name}.svg`} alt="challenge-icon" />
               </Styled.ImgWrapper>
 
               <span className="label">{koreanName}</span>

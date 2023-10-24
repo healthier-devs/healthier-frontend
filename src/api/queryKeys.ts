@@ -5,4 +5,7 @@ export const queryKeys = {
   STAMP: "stamp",
   MYPAGE: "mypage",
   REWARDS: "rewards",
+  ADVERTISEMENT: "advertisement",
+  STATISTICS: "statistics",
+  DIAGNOSIS_RECORDS: "diagnosisRecords",
 };
