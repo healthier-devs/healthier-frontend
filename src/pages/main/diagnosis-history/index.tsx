@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import FlexBox from "src/components/flexBox";
 import { useGetRecords } from "src/hooks/diagnosis/useGetRecords";
@@ -19,7 +20,7 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
   return (
     <Box>
       <Title text="🗂 나의 건강기록장" />
-      {recordsData.total === 0 ? (
+      {recordsData.total !== 0 ? (
         <StartContents
           text={"증상 감별 내역이 없어요.\n빠른 증상감별로 예상질환을 확인해보세요!"}
           buttonText="증상 감별하러 가기"
@@ -27,17 +28,28 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
         />
       ) : (
         /* TODO: 건강 기록 API 연결 */
-        <Card>
-          <FlexBox alignItems="center" justifyContent="space-between" mb="12px">
-            <CardTitle>7월 26일 기록</CardTitle>
-            <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
-          </FlexBox>
-          <FlexBox gap="6px">
-            <Styled.Chip>갑상선 기능 항진증</Styled.Chip>
-            <Styled.Chip>안양 부동시</Styled.Chip>
-            <Styled.Chip>검사</Styled.Chip>
-          </FlexBox>
-        </Card>
+        <>
+          <Card>
+            <FlexBox alignItems="center" justifyContent="space-between" mb="12px">
+              <CardTitle>7월 26일 기록</CardTitle>
+              <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
+            </FlexBox>
+            <FlexBox gap="6px">
+              <Styled.Chip>갑상선 기능 항진증</Styled.Chip>
+              <Styled.Chip>안양 부동시</Styled.Chip>
+              <Styled.Chip>검사</Styled.Chip>
+            </FlexBox>
+          </Card>
+          {/* TODO: 마이페이지 건강 기록장 path 연결 필요 */}
+          <Link to="/account">
+            <Styled.Box>
+              <FlexBox alignItems="center" justifyContent="space-between">
+                <p className="view-history">이전 기록 보러 가기</p>
+                <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
+              </FlexBox>
+            </Styled.Box>
+          </Link>
+        </>
       )}
     </Box>
   );
