@@ -1,6 +1,7 @@
 import Account from "./account";
 import AccountAnnouncement from "./account/announcement";
 import AnnouncementDetail from "./account/announcement/announcement-detail";
+import DiagnoseRecord from "./account/diagnose-record";
 import AccountEdit from "./account/edit";
 import AccountResetPassword from "./account/edit/reset-password";
 import AccountIndex from "./account/index/index";
@@ -78,6 +79,7 @@ export {
   Onboard,
   Main,
   SignUpAdditionalInformation,
+  DiagnoseRecord,
   AccountEdit,
   AccountResetPassword,
 };

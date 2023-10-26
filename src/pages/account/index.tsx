@@ -5,6 +5,7 @@ import Layout from "src/components/layout";
 
 const headerMap = {
   account: "마이페이지",
+  diagRecord: "나의 건강 기록장",
   announcement: "공지 사항",
   settings: "환경 설정",
   edit: "프로필 수정",
