@@ -61,7 +61,7 @@ function RewardReception() {
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>유효기간</Styled.DescriptionText>
             <Styled.DottedLine />
-            <Styled.DetailText>30일</Styled.DetailText>
+            <Styled.DetailText>{state.item.duration}일</Styled.DetailText>
           </Styled.DescriptionBox>
           <Styled.DescriptionBox>
             <Styled.DescriptionText style={{ color: theme.color.grey_300 }}>상품권 이용 유의사항</Styled.DescriptionText>

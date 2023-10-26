@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { useValidateToken } from "./hooks/account/useValidateToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     validateToken();
-  }, []);
+  }, [validateToken]);
 
   useGoogleAnalytics();
 
@@ -65,6 +65,8 @@ function App() {
             <Route path="/account/diagRecord" element={<Pages.DiagnoseRecord />} />
             <Route path="/account/announcement/:id" element={<Pages.AnnouncementDetail />} />
             <Route path="/account/settings" element={<Pages.AccountSettings />} />
+            <Route path="/account/edit" element={<Pages.AccountEdit />} />
+            <Route path="/account/edit/password" element={<Pages.AccountResetPassword />} />
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />

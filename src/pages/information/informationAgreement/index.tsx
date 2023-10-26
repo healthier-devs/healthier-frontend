@@ -7,7 +7,13 @@ import { Container, Contents, Prefix, AgreementItem, Text, Table, Reference } fr
 const InformationAgreement = ({ agreementDetail, setAgreementDetail }: IAgreementComponentProps) => {
   return (
     <>
-      <ContentHeader back={false} exit={true} exitCallback={() => setAgreementDetail(0)} label="개인정보 처리 방침" />
+      <ContentHeader
+        back={false}
+        exit={true}
+        exitCallback={() => setAgreementDetail(0)}
+        label="개인정보 처리 방침"
+        backgroundTransparent={false}
+      />
       <Container agreementDetail={agreementDetail}>
         <Title text="개인정보 처리방침" />
         <Contents>

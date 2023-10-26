@@ -20,9 +20,9 @@ const SymptomTypePage = () => {
   const { modalRef, isOpenModal, closeModal } = useModal();
 
   useEffect(() => {
-    if (!state) {
-      navigate("/");
-    }
+    // if (!state) {
+    //   navigate("/");
+    // }
     if (!isOpenModal) {
       setSelect(-1);
     }
@@ -36,7 +36,15 @@ const SymptomTypePage = () => {
 
   return (
     <>
-      <ContentHeader back={true} backCallback={() => navigate(-1)} exit={true} exitCallback={() => navigate("/")} label="증상 유형 선택" />
+      <ContentHeader
+        back={true}
+        backCallback={() => navigate(-1)}
+        exit={true}
+        exitCallback={() => navigate("/")}
+        label="증상 유형 선택"
+        backgroundTransparent={false}
+      />
+      <Styled.Background />
       <Layout>
         {isOpenModal && <SymptomTypeModal ref={modalRef} closeModal={closeModal} select={select} />}
 

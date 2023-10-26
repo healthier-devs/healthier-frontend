@@ -1,9 +1,9 @@
 import { SYMPTOMS_TYPES_MAP } from "src/data/symptom_type";
 import { IQuestionResponse, IPostAnswersBody, IDiagnoseResponse } from "src/interfaces/diagnoseApi/diagnosis";
 import { TSymptomType } from "src/interfaces/symptomPage";
-import { createFetcher } from "..";
+import { createUnauthorizedFetcher } from "..";
 
-const fetcher = createFetcher("/diagnose");
+const fetcher = createUnauthorizedFetcher("/diagnose");
 
 export const diagnosisFetcher = {
   getQuestions(diagnosisType: TSymptomType, gender: string): Promise<IQuestionResponse> {

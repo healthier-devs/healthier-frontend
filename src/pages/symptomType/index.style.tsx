@@ -4,8 +4,6 @@ import styled from "styled-components";
 export const Container = styled.section`
   height: calc(100%);
 
-  background: radial-gradient(300.02% 130.63% at 164.62% 165.58%, rgba(84, 100, 242, 0.9) 0%, rgba(52, 62, 135, 0) 100%) #131416;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +12,18 @@ export const Container = styled.section`
   &::-webkit-scrollbar {
     display: none !important;
   }
+`;
+
+export const Background = styled.section`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(300.02% 130.63% at 164.62% 165.58%, rgba(84, 100, 242, 0.9) 0%, rgba(52, 62, 135, 0) 100%) #131416;
 `;
 
 export const Title = styled(Heading_3)`
@@ -61,6 +71,6 @@ export const NextButtonContainer = styled.div`
   bottom: 0;
   padding: 0rem 2rem 3.4rem 2rem;
 
-  background: linear-gradient(180deg, rgba(38, 43, 85, 0) 0%, #262c56 78.13%, #282e5b 100%);
+  background: linear-gradient(180deg, rgba(38, 43, 85, 0) 0%, #262c56 78.12%, #282e5b 100%);
   pointer-events: none;
 `;

@@ -32,7 +32,13 @@ const DiagnosisList = () => {
 
   return (
     <>
-      <ContentHeader back={true} exit={true} backCallback={() => navigate(-1)} exitCallback={() => navigate("/")} />
+      <ContentHeader
+        back={true}
+        exit={true}
+        backCallback={() => navigate(-1)}
+        exitCallback={() => navigate("/")}
+        backgroundTransparent={false}
+      />
       <Layout padding="5.6rem 2.4rem 8rem" style={{ height: "fit-content" }}>
         <Styled.Title padding="2rem 0 1.6rem 0">
           {"가장 가능성 높은 질환은\n"}
