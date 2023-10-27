@@ -25,4 +25,7 @@ export const challengeFetcher = {
   getChallengeByID({ challengeID }: { challengeID: number }) {
     return unauthorizedFetcher.get(`${challengeID}`);
   },
+  postChallengeJoin({ challengeId, isToday }: { challengeId: number; isToday: number }) {
+    return fetcher.post(`/join/${challengeId}?isToday=${isToday}`);
+  },
 };

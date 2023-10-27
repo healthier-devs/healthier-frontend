@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
+import Dialog from "src/components/dialog";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import { useGetChallengeById } from "src/hooks/challenge/useGetChallengeById";
+import { usePostChallengeJoin } from "src/hooks/challenge/usePostChallengeJoin";
+import useModal from "src/hooks/useModal";
+import theme from "src/lib/theme";
 import ChallengeDescription from "./challenge-description";
+import ChallengeModal from "./challenge-modal";
 import ChallengeNotification from "./challenge-notification";
 import * as Styled from "./index.style";
 
@@ -77,14 +82,46 @@ const ChallengeDetail = () => {
   const { id = "" }: IQueryID = useParams();
   const challengeID = Number(id);
 
+  const {
+    modalRef: confirmDialogRef,
+    isOpenModal: confirmDialogIsOpen,
+    closeModal: confirmDialogClose,
+    openModal: confirmDialogOpen,
+  } = useModal();
+  const {
+    modalRef: todayJoinModalRef,
+    isOpenModal: todayJoinModalIsOpen,
+    closeModal: todayJoinModalClose,
+    openModal: todayJoinModalOpen,
+  } = useModal();
+  const {
+    modalRef: nextDayJoinModalRef,
+    isOpenModal: nextDayJoinModalIsOpen,
+    closeModal: nextDayJoinModalClose,
+    openModal: nextDayJoinModalOpen,
+  } = useModal();
+
+  const { postChallengeJoin } = usePostChallengeJoin({ challengeId: challengeID });
+
+  const navigate = useNavigate();
+
   const { isLoading, challengeData } = useGetChallengeById(challengeID);
+
   const handleClickParticipateButton = () => {
-    alert("TODO: 참여하기 페이지");
+    confirmDialogOpen();
   };
 
-  useEffect(() => {
-    console.log("challenge", challengeData);
-  }, [isLoading]);
+  const handleTodayJoin = () => {
+    postChallengeJoin({ isToday: 0 });
+    confirmDialogClose();
+    todayJoinModalOpen();
+  };
+
+  const handleNextDayJoin = () => {
+    postChallengeJoin({ isToday: 1 });
+    confirmDialogClose();
+    nextDayJoinModalOpen();
+  };
 
   return isLoading || !challengeData ? (
     <>Loading</>
@@ -175,6 +212,59 @@ const ChallengeDetail = () => {
         <ChallengeNotification />
       </Styled.Container>
       <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
+
+      {confirmDialogIsOpen && (
+        <Dialog
+          ref={confirmDialogRef}
+          title="챌린지를 오늘부터 시작할까요?"
+          description={
+            <>
+              챌린지 인증은 <span style={{ color: theme.color.blue }}>당일 12시 마감</span>이에요
+            </>
+          }
+          cancelText="내일부터 할래요"
+          confirmText="네, 오늘부터 할래요"
+          onClickCancel={handleNextDayJoin}
+          onClickConfirm={handleTodayJoin}
+        />
+      )}
+
+      {todayJoinModalIsOpen && (
+        <ChallengeModal
+          ref={todayJoinModalRef}
+          title="챌린지를 시작했어요!"
+          description="챌린지는 최대 3개까지 참여 가능해요"
+          subDescription="나의 챌린지 현황"
+          cancelText="다른 챌린지 둘러보기"
+          confirmText="챌린지 인증 하러 가기"
+          onClickCancel={() => {
+            todayJoinModalClose();
+            navigate(`/challenge-list`);
+          }}
+          onClickConfirm={() => {
+            todayJoinModalClose();
+            navigate(`/challenge/stamp/${challengeID}`);
+          }}
+        />
+      )}
+      {nextDayJoinModalIsOpen && (
+        <ChallengeModal
+          ref={nextDayJoinModalRef}
+          title="내일부터 챌린지를 함께해요!"
+          description="챌린지는 최대 3개까지 참여 가능해요"
+          subDescription="나의 챌린지 현황"
+          cancelText="홈으로 돌아가기"
+          confirmText="다른 챌린지 둘러보기"
+          onClickCancel={() => {
+            nextDayJoinModalClose();
+            navigate(`/`);
+          }}
+          onClickConfirm={() => {
+            nextDayJoinModalClose();
+            navigate(`/challenge-list`);
+          }}
+        />
+      )}
     </>
   );
 };
