@@ -107,6 +107,8 @@ export const Title = styled(Heading_2)`
 
   margin-top: 1rem;
   margin-bottom: 1rem;
+
+  text-align: center;
 `;
 
 export const Chip = styled.div<{ variant: "primary" | "secondary" | "sub" }>`
