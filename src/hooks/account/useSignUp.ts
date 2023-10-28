@@ -5,12 +5,16 @@ import type { ISignUpRequest } from "src/interfaces/account";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
-
   const { mutate: signUp } = useMutation({
     mutationFn: (body: ISignUpRequest) => signup(body),
-    onSuccess(data) {
+    onSuccess(data, variables) {
       if (data.success) {
-        navigate("/signup/complete");
+        navigate("/signup/complete", {
+          state: {
+            username: variables.username,
+            password: variables.password,
+          },
+        });
 
         return;
       }

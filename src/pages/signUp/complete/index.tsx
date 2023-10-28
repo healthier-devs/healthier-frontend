@@ -1,10 +1,27 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
+import { useLogin } from "src/hooks/account/useLogin";
 import { NextButton } from "../lib";
 import * as Styled from "./index.style";
+import type { ILoginRequest } from "src/interfaces/account";
 
 function SignUpComplete() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  const { login } = useLogin();
+
+  useEffect(() => {
+    if ("username" in state && "password" in state) {
+      const { username, password } = state as ILoginRequest;
+
+      login({
+        username,
+        password,
+      });
+    }
+  }, [state, login]);
 
   return (
     <Styled.Container>
