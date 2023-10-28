@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import FlexBox from "src/components/flexBox";
@@ -8,6 +9,7 @@ import { Box } from "../index.style";
 import StartContents from "../lib/StartContents";
 import Title from "../lib/Title";
 import * as Styled from "./index.style";
+import type { IDiagnosisRecord } from "src/interfaces/diagnoseApi/records";
 import type { IAuthState } from "src/state";
 
 function DiagnosisHistory({ authenticated }: IAuthState) {
@@ -16,6 +18,24 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
     size: 15,
     authenticated,
   });
+  const [record, setRecord] = useState<IDiagnosisRecord>({
+    createdAt: "",
+    dxList: [],
+  });
+
+  useEffect(() => {
+    if (recordsData.total === 0) {
+      return;
+    }
+
+    const latestMonthData = recordsData.data[0].records;
+    const { createdAt, dxList } = latestMonthData[latestMonthData.length - 1];
+
+    setRecord({
+      createdAt: new Date(createdAt).getMonth() + 1 + "월 " + new Date(createdAt).getDate() + "일",
+      dxList,
+    });
+  }, [recordsData]);
 
   return (
     <Box>
@@ -27,17 +47,16 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
           buttonHref={authenticated ? "/symptom-type" : "/info"}
         />
       ) : (
-        /* TODO: 건강 기록 API 연결 */
         <>
           <Card>
             <FlexBox alignItems="center" justifyContent="space-between" mb="12px">
-              <CardTitle>7월 26일 기록</CardTitle>
+              <CardTitle>{record.createdAt} 기록</CardTitle>
               <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
             </FlexBox>
             <FlexBox gap="6px">
-              <Styled.Chip>갑상선 기능 항진증</Styled.Chip>
-              <Styled.Chip>안양 부동시</Styled.Chip>
-              <Styled.Chip>검사</Styled.Chip>
+              {record.dxList.map(({ dxId, dxName }) => (
+                <Styled.Chip key={dxId}>{dxName}</Styled.Chip>
+              ))}
             </FlexBox>
           </Card>
           {/* TODO: 마이페이지 건강 기록장 path 연결 필요 */}

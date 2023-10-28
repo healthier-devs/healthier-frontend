@@ -6,7 +6,7 @@ import type { IAuthState } from "src/state";
 
 const DEFAULT_RECORDS_DATA: IDiagnosisRecordsResponse = {
   total: 0,
-  data: {},
+  data: [],
 };
 
 export const useGetRecords = ({ page, size, authenticated }: IDiagnosisRecordsRequest & Pick<IAuthState, "authenticated">) => {
