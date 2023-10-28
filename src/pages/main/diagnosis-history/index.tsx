@@ -13,22 +13,19 @@ import type { IDiagnosisRecord } from "src/interfaces/diagnoseApi/records";
 import type { IAuthState } from "src/state";
 
 function DiagnosisHistory({ authenticated }: IAuthState) {
-  const { recordsData } = useGetRecords({
-    page: 0,
-    size: 15,
-    authenticated,
-  });
+  const { recordsData } = useGetRecords({ size: 15, authenticated });
+
   const [record, setRecord] = useState<IDiagnosisRecord>({
     createdAt: "",
     dxList: [],
   });
 
   useEffect(() => {
-    if (recordsData.total === 0) {
+    if (recordsData.length === 0 || recordsData[0].total === 0) {
       return;
     }
 
-    const latestMonthData = recordsData.data[0].records;
+    const latestMonthData = recordsData[0].data[0].records;
     const { createdAt, dxList } = latestMonthData[latestMonthData.length - 1];
 
     setRecord({
@@ -40,7 +37,7 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
   return (
     <Box>
       <Title text="🗂 나의 건강기록장" />
-      {recordsData.total === 0 ? (
+      {recordsData.length === 0 ? (
         <StartContents
           text={"증상 감별 내역이 없어요.\n빠른 증상감별로 예상질환을 확인해보세요!"}
           buttonText="증상 감별하러 가기"
@@ -59,7 +56,6 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
               ))}
             </FlexBox>
           </Card>
-          {/* TODO: 마이페이지 건강 기록장 path 연결 필요 */}
           <Link to="/account">
             <Styled.Box>
               <FlexBox alignItems="center" justifyContent="space-between">

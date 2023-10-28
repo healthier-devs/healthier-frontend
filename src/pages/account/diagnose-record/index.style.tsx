@@ -73,6 +73,7 @@ export const DiagnoseCard = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     gap: 0.6rem;
+    flex-wrap: wrap;
   }
 `;
 
