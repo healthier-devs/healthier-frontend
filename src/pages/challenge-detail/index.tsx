@@ -8,6 +8,7 @@ import { useGetChallengeById } from "src/hooks/challenge/useGetChallengeById";
 import { usePostChallengeJoin } from "src/hooks/challenge/usePostChallengeJoin";
 import useModal from "src/hooks/useModal";
 import theme from "src/lib/theme";
+import { useAppSelector } from "src/state";
 import ChallengeDescription from "./challenge-description";
 import ChallengeModal from "./challenge-modal";
 import ChallengeNotification from "./challenge-notification";
@@ -101,6 +102,8 @@ const ChallengeDetail = () => {
     openModal: nextDayJoinModalOpen,
   } = useModal();
 
+  const { authenticated } = useAppSelector((state) => state.auth);
+
   const { postChallengeJoin } = usePostChallengeJoin({ challengeId: challengeID });
 
   const navigate = useNavigate();
@@ -112,15 +115,19 @@ const ChallengeDetail = () => {
   };
 
   const handleTodayJoin = () => {
-    postChallengeJoin({ isToday: 0 });
-    confirmDialogClose();
-    todayJoinModalOpen();
+    if (authenticated) {
+      postChallengeJoin({ isToday: 0 });
+      confirmDialogClose();
+      todayJoinModalOpen();
+    }
   };
 
   const handleNextDayJoin = () => {
-    postChallengeJoin({ isToday: 1 });
-    confirmDialogClose();
-    nextDayJoinModalOpen();
+    if (authenticated) {
+      postChallengeJoin({ isToday: 1 });
+      confirmDialogClose();
+      nextDayJoinModalOpen();
+    }
   };
 
   return isLoading || !challengeData ? (
