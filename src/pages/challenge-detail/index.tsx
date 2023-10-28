@@ -218,7 +218,9 @@ const ChallengeDetail = () => {
         </Styled.Section>
         <ChallengeNotification />
       </Styled.Container>
-      <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
+      <Styled.ButtonWrapper>
+        <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
+      </Styled.ButtonWrapper>
 
       {confirmDialogIsOpen && (
         <Dialog
