@@ -4,6 +4,11 @@ import { queryKeys } from "src/api/queryKeys";
 import type { IDiagnosisRecordsResponse } from "src/interfaces/diagnoseApi/records";
 import type { IAuthState } from "src/state";
 
+const DEFAULT_RECORDS_DATA: IDiagnosisRecordsResponse = {
+  data: [],
+  total: 0,
+};
+
 export const useGetRecords = ({ size, authenticated }: { size: number } & Pick<IAuthState, "authenticated">) => {
   const {
     data: recordsData,
@@ -24,7 +29,7 @@ export const useGetRecords = ({ size, authenticated }: { size: number } & Pick<I
   });
 
   return {
-    recordsData: recordsData?.pages ?? [],
+    recordsData: recordsData?.pages ?? [DEFAULT_RECORDS_DATA],
     fetchNextPage,
     hasNextPage,
   };
