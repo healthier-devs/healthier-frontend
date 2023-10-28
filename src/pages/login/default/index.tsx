@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
 import Layout from "src/components/layout";
@@ -10,7 +10,7 @@ import * as Styled from "./index.style";
 
 function DefaultLogin() {
   const navigate = useNavigate();
-  const { login } = useLogin();
+  const { login, isSuccess } = useLogin();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -34,6 +34,12 @@ function DefaultLogin() {
       password,
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <>
