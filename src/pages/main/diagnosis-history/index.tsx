@@ -56,7 +56,7 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
               ))}
             </FlexBox>
           </Card>
-          <Link to="/account">
+          <Link to="/account/diagRecord">
             <Styled.Box>
               <FlexBox alignItems="center" justifyContent="space-between">
                 <p className="view-history">이전 기록 보러 가기</p>
