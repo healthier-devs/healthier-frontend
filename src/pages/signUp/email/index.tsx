@@ -52,9 +52,9 @@ function Email() {
     const { data, success } = await validateEmail(email.value);
 
     if (success) {
-      setEmail({ ...email, isVerified: true });
       const codeData = await sendVerificationCode({ email: email.value });
 
+      setEmail({ ...email, isVerified: true });
       serverCode.current = codeData.code;
       setCodeTimer();
 

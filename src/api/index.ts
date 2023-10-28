@@ -3,6 +3,8 @@ import { AxiosError } from "axios";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
+const FETCHER_TIME_OUT = 7500;
+
 export const responseBody = (response: AxiosResponse) => {
   if (response instanceof AxiosError) {
     return Promise.reject(response);
@@ -14,7 +16,7 @@ export const responseBody = (response: AxiosResponse) => {
 export const createUnauthorizedFetcher = (path: string) => {
   const instance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_URL}${path}`,
-    timeout: 1500,
+    timeout: FETCHER_TIME_OUT,
   });
 
   return {
@@ -28,7 +30,7 @@ export const createUnauthorizedFetcher = (path: string) => {
 export const createFetcher = (path: string) => {
   const instance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_URL}${path}`,
-    timeout: 1500,
+    timeout: FETCHER_TIME_OUT,
   });
 
   instance.interceptors.request.use(
