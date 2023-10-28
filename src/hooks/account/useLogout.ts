@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { logout as logoutAPI } from "src/api/account/service";
 import { useAppDispatch } from "src/state";
@@ -8,6 +9,7 @@ import { removeCookie } from "src/utils/cookies";
 export const useLogout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate: logout } = useMutation({
     mutationFn: () => logoutAPI(),
@@ -16,6 +18,7 @@ export const useLogout = () => {
       removeCookie("accessToken");
       removeCookie("refreshToken");
       dispatch(logoutAction());
+      queryClient.clear();
 
       navigate("/");
     },

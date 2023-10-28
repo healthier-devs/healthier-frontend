@@ -3,7 +3,22 @@ export interface IDiagnosisRecordsRequest {
   size: number;
 }
 
+interface IDX {
+  dxId: number;
+  dxName: string;
+}
+
+export interface IDiagnosisRecord {
+  createdAt: string;
+  dxList: IDX[];
+}
+
+export interface IDiagnosisRecords {
+  month: string;
+  records: IDiagnosisRecord[];
+}
+
 export interface IDiagnosisRecordsResponse {
-  data: any;
+  data: IDiagnosisRecords[];
   total: number;
 }

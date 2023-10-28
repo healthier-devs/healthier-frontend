@@ -122,8 +122,16 @@ export const Chip = styled.div<{ variant: "primary" | "secondary" | "sub" }>`
   background-color: ${({ variant }) => (variant === "primary" ? "#E6FAAF26" : variant === "secondary" ? "#5464F233" : "#23272E")};
 `;
 
+export const ButtonWrapper = styled.div`
+  width: inherit;
+  padding: 2rem;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+`;
+
 export const Button = styled.button`
-  width: calc(100% - 4rem);
+  width: 100%;
   padding: 1.4rem 6.2rem;
 
   border-radius: 3rem;
@@ -135,8 +143,4 @@ export const Button = styled.button`
   line-height: 150%;
 
   cursor: pointer;
-
-  position: fixed;
-  bottom: 3.2rem;
-  transform: translateX(2rem);
 `;
