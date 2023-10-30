@@ -31,6 +31,21 @@ const AccountAnnouncement = () => {
       {announcementData.data.map((data: IAnnouncementResponse) => (
         <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
       ))}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
+      {announcementData.data.map((data: IAnnouncementResponse) => (
+        <AnnouncementItem key={data.id} id={data.id} title={data.title} date={data.modifiedAt} />
+      ))}
     </Styled.Container>
   );
 };
