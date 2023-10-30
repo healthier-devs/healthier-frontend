@@ -35,3 +35,8 @@ export const NICKNAME_OBJECTS = [
 ];
 
 export const ACCESS_TOKEN_AGE = 60;
+
+export const VERIFICATION_CODE_LENGTH = 6;
+
+export const VERIFICATION_CODE_AGE = 180;
+export const VERIFICATION_CODE_EXPIRED = 999;

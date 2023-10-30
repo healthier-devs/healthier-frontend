@@ -1,8 +1,9 @@
 import axios from "axios";
 import { AxiosError } from "axios";
-import { ACCESS_TOKEN_AGE } from "src/data/account";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
+
+const FETCHER_TIME_OUT = 7500;
 
 export const responseBody = (response: AxiosResponse) => {
   if (response instanceof AxiosError) {
@@ -15,7 +16,7 @@ export const responseBody = (response: AxiosResponse) => {
 export const createUnauthorizedFetcher = (path: string) => {
   const instance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_URL}${path}`,
-    timeout: 1500,
+    timeout: FETCHER_TIME_OUT,
   });
 
   return {
@@ -29,16 +30,12 @@ export const createUnauthorizedFetcher = (path: string) => {
 export const createFetcher = (path: string) => {
   const instance = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_URL}${path}`,
-    timeout: 1500,
+    timeout: FETCHER_TIME_OUT,
   });
 
   instance.interceptors.request.use(
     function (config: AxiosRequestConfig) {
       const accessToken = getCookie("accessToken");
-
-      if (!accessToken) {
-        return config;
-      }
 
       (config.headers ?? {}).Authorization = "Bearer " + accessToken;
 
@@ -63,18 +60,16 @@ export const createFetcher = (path: string) => {
       if (!res || res.status !== 401 || !accessToken || !refreshToken) {
         return Promise.reject(_err);
       }
-
       try {
         const reissueResponse = await axios.post(`${process.env.REACT_APP_SERVER_URL}/reissue`, {
           accessToken,
           refreshToken,
         });
 
-        setCookie("accessToken", accessToken, {
+        setCookie("accessToken", reissueResponse.data.accessToken, {
           path: "/",
           secure: false,
           domain: "localhost",
-          maxAge: ACCESS_TOKEN_AGE,
         });
         setCookie("refreshToken", reissueResponse.data.refreshToken, {
           domain: "localhost",
@@ -100,5 +95,6 @@ export const createFetcher = (path: string) => {
         }),
     delete: <T>(url: string, body?: { data: T }) => instance.delete<T>(url, body).then(responseBody),
     patch: <T>(url: string, body?: T) => instance.patch<T>(url, body).then(responseBody),
+    put: <T>(url: string, body?: T) => instance.put<T>(url, body).then(responseBody),
   };
 };

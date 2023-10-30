@@ -54,3 +54,13 @@ export interface IUserResponse {
   success: boolean;
   timestamp: string;
 }
+
+export interface ISendVerificationCode {
+  email: string;
+}
+
+export type TResetPasswordBody = Omit<IValidatePasswordRequest, "email">;
+export interface IResetPassword {
+  userEmail: string;
+  body: TResetPasswordBody;
+}

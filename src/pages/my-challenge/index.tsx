@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RoundButton from "src/components/roundButton";
 import { useGetMyChallenges } from "src/hooks/challenge/useGetMyChallenges";
+import { useAppSelector } from "src/state";
 import { IMyChallengeProgress, IMyChallengeFinish } from "../../interfaces/challenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
@@ -12,12 +13,14 @@ type TTabType = "PROGRESS" | "CLOSED";
 
 function ChallengeList() {
   const navigate = useNavigate();
+  const { authenticated } = useAppSelector((state) => state.auth);
 
   const [selectedTab, setSelectedTab] = useState<TTabType>("PROGRESS");
   const [progressChallengeCount, setProgressChallengeCount] = useState<number>(0);
 
   const { myChallengesData, isLoading, isSuccess } = useGetMyChallenges({
     status: selectedTab,
+    authenticated,
   });
   const isReadyData = !isLoading && isSuccess;
 

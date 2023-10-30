@@ -20,6 +20,13 @@ export const Typography = styled.p`
     line-height: 150%;
   }
 
+  &.title-3 {
+    color: ${({ theme }) => theme.color.grey_300};
+    font-size: 1.4rem;
+    font-weight: 200;
+    line-height: 140%;
+  }
+
   &.description {
     color: ${({ theme }) => theme.color.grey_400};
     font-size: 1.4rem;

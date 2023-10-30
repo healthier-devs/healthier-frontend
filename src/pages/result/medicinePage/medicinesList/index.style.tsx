@@ -12,7 +12,6 @@ export const Item = styled.li<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  justify-content: space-between;
   align-items: center;
 
   cursor: pointer;
@@ -24,6 +23,8 @@ export const Item = styled.li<{ isSelected: boolean }>`
     letter-spacing: -0.5px;
 
     color: ${({ theme, isSelected }) => (isSelected ? theme.color.grey_300 : theme.color.grey_600)};
+
+    text-align: center;
   }
 
   .background {
@@ -31,7 +32,7 @@ export const Item = styled.li<{ isSelected: boolean }>`
   }
 
   .img {
-    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.9)};
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
   }
 `;
 

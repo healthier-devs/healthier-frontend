@@ -9,9 +9,9 @@ interface ITextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   errorText?: string;
   placeholder?: string;
   type?: "text" | "email" | "password" | "number";
-  icon?: React.ReactNode;
-  onClickIcon?: () => void;
+  adornment?: React.ReactNode;
   containerStyle?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 function TextField({
@@ -19,13 +19,13 @@ function TextField({
   value,
   onChange,
   isError = false,
-  errorText,
+  errorText = "",
   label = "",
   placeholder = "",
   type = "text",
-  icon,
-  onClickIcon,
+  adornment,
   containerStyle,
+  disabled = false,
   ...props
 }: ITextFieldProps) {
   return (
@@ -41,20 +41,24 @@ function TextField({
           type={type}
           autoComplete={type === "password" ? "off" : "on"}
           maxLength={500}
+          disabled={disabled}
           {...props}
         />
-        {icon && (
-          <IconButton type="button" onClick={onClickIcon}>
-            {icon}
-          </IconButton>
-        )}
+        {adornment && <IconButton>{adornment}</IconButton>}
       </Container>
-      {isError && <ErrorText>{errorText}</ErrorText>}
+      <ErrorTextWrapper isError={isError}>
+        <ErrorText>{errorText}</ErrorText>
+      </ErrorTextWrapper>
     </div>
   );
 }
 
 export default TextField;
+
+const ErrorTextWrapper = styled.div<{ isError: boolean }>`
+  visibility: ${({ isError }) => (isError ? "visible" : "hidden")};
+  height: 13px;
+`;
 
 const Label = styled.label`
   display: block;
@@ -66,12 +70,12 @@ const Label = styled.label`
   line-height: 150%;
 `;
 
-const Input = styled.input<{ isError: boolean }>`
+const Input = styled.input<{ isError: boolean; disabled: boolean }>`
   width: 100%;
   padding: 0 3rem 0.8rem 0;
   box-sizing: border-box;
 
-  color: ${({ theme }) => theme.color.grey_400};
+  color: ${({ theme, disabled }) => (disabled ? theme.color.grey_600 : theme.color.grey_400)};
   font-size: 1.6rem;
   font-weight: 200;
 
@@ -102,14 +106,8 @@ const Container = styled.div`
   position: relative;
 `;
 
-const IconButton = styled.button`
+const IconButton = styled.div`
   position: absolute;
   bottom: 6px;
   right: 0;
-
-  background: transparent;
-
-  padding: 0 0 0 6px;
-
-  cursor: pointer;
 `;

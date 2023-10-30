@@ -4,6 +4,7 @@ export interface IRewards {
   name: string;
   point: number;
   imageUrl: string;
+  duration: number;
 }
 
 export type TRewardsResponse = IRewards[];

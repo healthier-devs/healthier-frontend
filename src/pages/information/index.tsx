@@ -53,7 +53,7 @@ const Information = () => {
     <>
       {agreementDetail === 0 ? (
         <>
-          <ContentHeader back={false} exit={true} exitCallback={() => navigate("/")} label="정보 수집" />
+          <ContentHeader back={false} exit={true} exitCallback={() => navigate("/")} label="정보 수집" backgroundTransparent={false} />
 
           <Layout>
             <section style={{ padding: "0 2.4rem 12rem 2.4rem" }}>

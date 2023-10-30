@@ -14,7 +14,11 @@ export const useValidateToken = () => {
 
         return;
       }
-      dispatch(login());
+      dispatch(
+        login({
+          email: "",
+        })
+      );
     },
   });
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RootContainer = styled.header<{ borderBottom: boolean }>`
+export const RootContainer = styled.header<{ borderBottom: boolean; isTransparent: boolean }>`
   position: fixed;
   width: inherit;
   top: 0;
@@ -10,7 +10,7 @@ export const RootContainer = styled.header<{ borderBottom: boolean }>`
 
   border-bottom: ${({ theme, borderBottom }) => (borderBottom ? `0.5px solid ${theme.color.grey_800}` : "none")};
 
-  background: transparent;
+  background: ${({ isTransparent, theme }) => (isTransparent ? "transparent" : theme.color.grey_900)};
 
   z-index: 3;
 `;

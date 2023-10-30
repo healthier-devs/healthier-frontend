@@ -19,10 +19,10 @@ export const Container = styled.button<{
   cursor: pointer;
 `;
 
-export const ButtonText = styled.section<{ color: string }>`
+export const ButtonText = styled.section<{ color: string; fontSize: number }>`
   color: ${({ color }) => color};
 
-  font-size: 1.6rem;
+  font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: 300;
   line-height: 150%;
 
