@@ -15,7 +15,7 @@ export const useGetRecords = ({ size, authenticated }: { size: number } & Pick<I
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: [queryKeys, size],
+    queryKey: [queryKeys.DIAGNOSIS_RECORDS, size],
     queryFn: ({ pageParam = 0 }) => diagnosisFetcher.getRecords({ page: pageParam as number, size }),
     getNextPageParam: (lastPage: IDiagnosisRecordsResponse, _, lastPageParam) => {
       if (lastPage.total === 0) {

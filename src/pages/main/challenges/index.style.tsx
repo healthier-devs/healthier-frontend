@@ -27,6 +27,7 @@ export const Card = styled.div`
   border-radius: 8px;
 
   background: ${({ theme }) => theme.color.grey_850};
+  cursor: pointer;
 `;
 
 export const CardTitle = styled.p`

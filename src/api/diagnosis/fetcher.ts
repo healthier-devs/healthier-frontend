@@ -1,5 +1,9 @@
 import { createFetcher, createUnauthorizedFetcher } from "..";
-import type { IDiagnosisRecordsResponse, IDiagnosisRecordsRequest } from "src/interfaces/diagnoseApi/records";
+import type {
+  IDiagnosisRecordsResponse,
+  IDiagnosisRecordsRequest,
+  IDiagnosisRecordDetailResponse,
+} from "src/interfaces/diagnoseApi/records";
 import type { IDDXResultResponse } from "src/interfaces/diagnoseApi/result";
 import type { IDiagnosisStatisticsResponse } from "src/interfaces/diagnoseApi/statistics";
 
@@ -15,5 +19,8 @@ export const diagnosisFetcher = {
   },
   getRecords({ page, size }: IDiagnosisRecordsRequest): Promise<IDiagnosisRecordsResponse> {
     return fetcher.get(`/records?page=${page}&size=${size}`);
+  },
+  getRecordDetail(dxRecordId: string): Promise<IDiagnosisRecordDetailResponse> {
+    return fetcher.get(`/records/${dxRecordId}`);
   },
 };
