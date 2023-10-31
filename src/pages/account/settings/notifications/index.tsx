@@ -1,11 +1,14 @@
 import { useState } from "react";
 import FlexBox from "src/components/flexBox";
 import Switch from "src/components/switch";
+import { useGetNotiSubscribed } from "src/hooks/account/useGetNotiSubscribed";
 import * as Styled from "../index.style";
 
 function Notifications() {
-  const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(false);
-  const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(false);
+  const { notiSubscribedData } = useGetNotiSubscribed();
+
+  const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(notiSubscribedData.push);
+  const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(notiSubscribedData.marketing);
 
   return (
     <Styled.Box padding="3.2rem 2.4rem 2.4rem">

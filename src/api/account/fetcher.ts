@@ -5,6 +5,7 @@ import {
   ILoginRequest,
   ISendVerificationCode,
   IResetPassword,
+  INotificationSubscribedResponse,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -35,5 +36,11 @@ export const accountFetcher = {
   },
   resetPassword({ userEmail, body }: IResetPassword) {
     return fetcher.put(`/${userEmail}/reset-password`, body);
+  },
+  getIsMarketingSubscribed(): Promise<INotificationSubscribedResponse> {
+    return fetcher.get("/marketing");
+  },
+  getIsNotificationSubscribed(): Promise<INotificationSubscribedResponse> {
+    return fetcher.get("/push");
   },
 };

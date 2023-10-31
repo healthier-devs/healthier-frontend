@@ -64,3 +64,7 @@ export interface IResetPassword {
   userEmail: string;
   body: TResetPasswordBody;
 }
+
+export interface INotificationSubscribedResponse {
+  status: boolean;
+}

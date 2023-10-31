@@ -8,4 +8,6 @@ export const queryKeys = {
   ADVERTISEMENT: "advertisement",
   STATISTICS: "statistics",
   DIAGNOSIS_RECORDS: "diagnosisRecords",
+  ACCOUNT: "account",
+  NOTIFICATION_SUBSCRIBED: "notificationSubscribed",
 };
