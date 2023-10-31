@@ -10,8 +10,14 @@ const DEFAULT_NOTI_SUBSCRIBED_DATA = {
 export const useGetNotiSubscribed = () => {
   const { data: notiSubscribedData } = useQueries({
     queries: [
-      { queryKey: [queryKeys.ACCOUNT, queryKeys.NOTIFICATION_SUBSCRIBED], queryFn: () => accountFetcher.getIsNotificationSubscribed() },
-      { queryKey: [queryKeys.ACCOUNT, queryKeys.NOTIFICATION_SUBSCRIBED], queryFn: () => accountFetcher.getIsMarketingSubscribed() },
+      {
+        queryKey: [queryKeys.ACCOUNT, queryKeys.PUSH_SUBSCRIBED],
+        queryFn: () => accountFetcher.getIsNotificationSubscribed(),
+      },
+      {
+        queryKey: [queryKeys.ACCOUNT, queryKeys.MARKETING_SUBSCRIBED],
+        queryFn: () => accountFetcher.getIsMarketingSubscribed(),
+      },
     ],
     combine: (results) => {
       const [pushData, marketingData] = results;

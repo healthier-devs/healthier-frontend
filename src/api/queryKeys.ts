@@ -9,5 +9,6 @@ export const queryKeys = {
   STATISTICS: "statistics",
   DIAGNOSIS_RECORDS: "diagnosisRecords",
   ACCOUNT: "account",
-  NOTIFICATION_SUBSCRIBED: "notificationSubscribed",
+  MARKETING_SUBSCRIBED: "marketingSubscribed",
+  PUSH_SUBSCRIBED: "pushSubscribed",
 };

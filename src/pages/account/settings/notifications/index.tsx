@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FlexBox from "src/components/flexBox";
 import Switch from "src/components/switch";
 import { useGetNotiSubscribed } from "src/hooks/account/useGetNotiSubscribed";
+import { useUpdateMarketingSubscribed } from "src/hooks/account/useUpdateMarketingSubscribed";
 import { useAppSelector } from "src/state";
 import * as Styled from "../index.style";
 
@@ -11,6 +12,23 @@ function Notifications() {
 
   const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(notiSubscribedData.push);
   const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(notiSubscribedData.marketing);
+  const { updateMarketingSubscribed } = useUpdateMarketingSubscribed({ setIsMarketingNotiChecked });
+
+  const handleChangeMarketingSubscribed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { checked },
+    } = e;
+
+    updateMarketingSubscribed({
+      userEmail: email,
+      subscribed: checked,
+    });
+  };
+
+  useEffect(() => {
+    setIsMarketingNotiChecked(notiSubscribedData.marketing);
+    setIsPushNotiChecked(notiSubscribedData.push);
+  }, [notiSubscribedData]);
 
   return (
     <Styled.Box padding="3.2rem 2.4rem 2.4rem">
@@ -29,7 +47,11 @@ function Notifications() {
       <Styled.Box>
         <FlexBox alignItems="center" justifyContent="space-between" mb="4px">
           <Styled.Typography className="title-2">마케팅 알림 동의</Styled.Typography>
-          <Switch checked={isMarketingNotiChecked} onClick={() => setIsMarketingNotiChecked(!isMarketingNotiChecked)} />
+          <Switch
+            checked={isMarketingNotiChecked}
+            // onClick={() => setIsMarketingNotiChecked(!isMarketingNotiChecked)}
+            onChange={handleChangeMarketingSubscribed}
+          />
         </FlexBox>
         <Styled.Typography className="description">마케팅 정보 수신에 동의해요</Styled.Typography>
       </Styled.Box>

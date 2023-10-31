@@ -68,3 +68,8 @@ export interface IResetPassword {
 export interface INotificationSubscribedResponse {
   status: boolean;
 }
+
+export interface IUpdateMarketingSubscribedRequest {
+  userEmail: string;
+  subscribed: boolean;
+}
