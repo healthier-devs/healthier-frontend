@@ -8,4 +8,7 @@ export const queryKeys = {
   ADVERTISEMENT: "advertisement",
   STATISTICS: "statistics",
   DIAGNOSIS_RECORDS: "diagnosisRecords",
+  ACCOUNT: "account",
+  MARKETING_SUBSCRIBED: "marketingSubscribed",
+  PUSH_SUBSCRIBED: "pushSubscribed",
 };
