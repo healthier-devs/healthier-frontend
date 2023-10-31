@@ -9,12 +9,15 @@ const initialState: IAuthState = {
 };
 
 export const authSlice = createSlice({
-  name: "authToken",
+  name: "auth",
   initialState: initialState,
   reducers: {
-    login: (state: IAuthState, action: PayloadAction<{ email: string }>) => {
+    login: (state: IAuthState, action: PayloadAction<{ email: string | null }>) => {
       state.authenticated = true;
-      state.email = action.payload.email ?? "";
+
+      if (action.payload.email) {
+        state.email = action.payload.email;
+      }
     },
     logout: (state: IAuthState) => {
       state.authenticated = false;

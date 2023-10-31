@@ -16,7 +16,7 @@ export const useValidateToken = () => {
       }
       dispatch(
         login({
-          email: "",
+          email: null,
         })
       );
     },

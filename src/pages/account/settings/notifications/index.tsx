@@ -2,10 +2,12 @@ import { useState } from "react";
 import FlexBox from "src/components/flexBox";
 import Switch from "src/components/switch";
 import { useGetNotiSubscribed } from "src/hooks/account/useGetNotiSubscribed";
+import { useAppSelector } from "src/state";
 import * as Styled from "../index.style";
 
 function Notifications() {
   const { notiSubscribedData } = useGetNotiSubscribed();
+  const { email } = useAppSelector((state) => state.auth);
 
   const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(notiSubscribedData.push);
   const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(notiSubscribedData.marketing);
