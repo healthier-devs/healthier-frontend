@@ -8,6 +8,7 @@ import { useAppSelector } from "src/state";
 import * as Styled from "./index.style";
 
 const DiagnoseRecord = () => {
+  const navigate = useNavigate();
   const { authenticated } = useAppSelector((state) => state.auth);
 
   const [intersectionRef, inView] = useInView();
@@ -37,8 +38,15 @@ const DiagnoseRecord = () => {
                     <Styled.Typography className="highlight">{records.length}개</Styled.Typography>의 기록
                   </Styled.Typography>
                 </Styled.MonthTitle>
-                {records.map(({ createdAt, dxList }) => (
-                  <Styled.DiagnoseCard key={createdAt}>
+                {records.map(({ createdAt, dxList, dxRecordId }) => (
+                  <Styled.DiagnoseCard
+                    key={createdAt}
+                    onClick={() =>
+                      navigate("/result-list", {
+                        state: { dxRecordId },
+                      })
+                    }
+                  >
                     <div className="topArea">
                       <Styled.Typography className="cardMainText">
                         {new Date(createdAt).getMonth() + 1}월 {new Date(createdAt).getDate()}일 증상 감별 내역
