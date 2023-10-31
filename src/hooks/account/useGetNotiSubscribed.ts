@@ -11,11 +11,11 @@ export const useGetNotiSubscribed = () => {
   const { data: notiSubscribedData } = useQueries({
     queries: [
       {
-        queryKey: [queryKeys.ACCOUNT, queryKeys.PUSH_SUBSCRIBED],
+        queryKey: [queryKeys.PUSH_SUBSCRIBED],
         queryFn: () => accountFetcher.getIsNotificationSubscribed(),
       },
       {
-        queryKey: [queryKeys.ACCOUNT, queryKeys.MARKETING_SUBSCRIBED],
+        queryKey: [queryKeys.MARKETING_SUBSCRIBED],
         queryFn: () => accountFetcher.getIsMarketingSubscribed(),
       },
     ],
