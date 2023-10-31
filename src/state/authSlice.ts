@@ -21,6 +21,7 @@ export const authSlice = createSlice({
     },
     logout: (state: IAuthState) => {
       state.authenticated = false;
+      state.email = "";
     },
   },
 });
