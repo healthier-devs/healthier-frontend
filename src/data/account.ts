@@ -34,9 +34,21 @@ export const NICKNAME_OBJECTS = [
   "마우스",
 ];
 
-export const ACCESS_TOKEN_AGE = 60;
+export const ACCESS_TOKEN_AGE = 604800;
+export const REFRESH_TOKEN_AGE = ACCESS_TOKEN_AGE * 2;
 
 export const VERIFICATION_CODE_LENGTH = 6;
 
 export const VERIFICATION_CODE_AGE = 180;
 export const VERIFICATION_CODE_EXPIRED = 999;
+
+export const DEVELOPMENT_SET_COOKIE_OPTIONS = {
+  path: "/",
+  domain: "localhost",
+  secure: false,
+};
+
+export const DEPLOYMENT_SET_COOKIE_OPTIONS = {
+  path: "/",
+  secure: true,
+};

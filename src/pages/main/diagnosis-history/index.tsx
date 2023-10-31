@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import FlexBox from "src/components/flexBox";
 import { useGetRecords } from "src/hooks/diagnosis/useGetRecords";
@@ -13,11 +14,13 @@ import type { IDiagnosisRecord } from "src/interfaces/diagnoseApi/records";
 import type { IAuthState } from "src/state";
 
 function DiagnosisHistory({ authenticated }: IAuthState) {
+  const navigate = useNavigate();
   const { recordsData } = useGetRecords({ size: 15, authenticated });
 
   const [record, setRecord] = useState<IDiagnosisRecord>({
     createdAt: "",
     dxList: [],
+    dxRecordId: "",
   });
 
   useEffect(() => {
@@ -26,11 +29,12 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
     }
 
     const latestMonthData = recordsData[0].data[0].records;
-    const { createdAt, dxList } = latestMonthData[latestMonthData.length - 1];
+    const { createdAt, dxList, dxRecordId } = latestMonthData[latestMonthData.length - 1];
 
     setRecord({
       createdAt: new Date(createdAt).getMonth() + 1 + "월 " + new Date(createdAt).getDate() + "일",
       dxList,
+      dxRecordId,
     });
   }, [recordsData]);
 
@@ -45,7 +49,15 @@ function DiagnosisHistory({ authenticated }: IAuthState) {
         />
       ) : (
         <>
-          <Card>
+          <Card
+            onClick={() =>
+              navigate("/result-list", {
+                state: {
+                  dxRecordId: record.dxRecordId,
+                },
+              })
+            }
+          >
             <FlexBox alignItems="center" justifyContent="space-between" mb="12px">
               <CardTitle>{record.createdAt} 기록</CardTitle>
               <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
