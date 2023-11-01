@@ -37,17 +37,17 @@ function SignUp() {
       )}
       {exitDialog.isOpenModal && (
         <Dialog
-          ref={backDialog.modalRef}
+          ref={exitDialog.modalRef}
           title="회원가입을 중단하실건가요?"
           description="진행 중인 내용은 저장되지 않습니다."
-          onClickCancel={backDialog.closeModal}
+          onClickCancel={() => exitDialog.closeModal()}
           onClickConfirm={() => {
-            backDialog.closeModal();
+            exitDialog.closeModal();
             navigate("/");
           }}
         />
       )}
-      <ContentHeader back exit backCallback={handleClickBackButton} exitCallback={exitDialog.openModal}></ContentHeader>
+      <ContentHeader back exit backCallback={handleClickBackButton} exitCallback={() => exitDialog.openModal()}></ContentHeader>
       <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>
