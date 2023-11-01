@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import Box from "src/components/box";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import NavigationBar from "src/components/navigationBar";
+import { useUserData } from "src/hooks/account/useUserData";
 import { useValidateToken } from "src/hooks/account/useValidateToken";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
@@ -39,8 +41,9 @@ const accountItems: IAccountItem[] = [
 function AccountIndex() {
   const navigate = useNavigate();
   const { validateToken } = useValidateToken();
+  const { userData, isLoading } = useUserData();
 
-  return (
+  return !isLoading ? (
     <>
       <div>
         <Box style={{ padding: "3.2rem 2.4rem 2.4rem 2.4rem" }}>
@@ -50,13 +53,18 @@ function AccountIndex() {
 
               <Styled.UserInfoWrapper>
                 <FlexBox alignItems="center" mb="8px" gap="8px">
-                  <Styled.Username>정설아</Styled.Username>
+                  <Styled.Username>{userData.name}</Styled.Username>
                   <Styled.Tag>
-                    <span className="label">26세・여</span>
+                    <span className="label">
+                      {userData.age}세 ・ {userData.gender === "m" ? "남" : "여"}
+                    </span>
                   </Styled.Tag>
                 </FlexBox>
-
-                <Styled.Interests>영양제, 운동, 수면</Styled.Interests>
+                {userData.healthInterests.length > 0 ? (
+                  <Styled.Interests>{userData.healthInterests.join(", ")}</Styled.Interests>
+                ) : (
+                  <Styled.Interests>관심정보가 없습니다.</Styled.Interests>
+                )}
               </Styled.UserInfoWrapper>
 
               <Styled.EditProfileButton onClick={() => navigate("/account/edit")}>프로필 수정</Styled.EditProfileButton>
@@ -84,6 +92,8 @@ function AccountIndex() {
       </div>
       <NavigationBar menu="account" />
     </>
+  ) : (
+    <>Loading</>
   );
 }
 
