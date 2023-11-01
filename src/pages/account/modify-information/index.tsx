@@ -20,15 +20,13 @@ const ModifyInformation = () => {
 
   const healthInformation: IHealthInformation = healthInformationData as IHealthInformation;
 
-  useEffect(() => {
-    console.log(healthInformation);
-  }, [isLoading]);
-
   const handleDrinkingAmt = (drinkingAmount: string) => {
     //
   };
 
-  return (
+  return isLoading ? (
+    <></>
+  ) : (
     <Styled.Container>
       <Styled.Header>
         정확한 증상 감별을 위해
