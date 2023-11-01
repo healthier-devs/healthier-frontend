@@ -1,26 +1,36 @@
 import { useEffect, useState } from "react";
-import { mypageFetcher } from "src/api/mypage/fetcher";
 import FlexBox from "src/components/flexBox";
 import Switch from "src/components/switch";
-import { useGetAlarmStatus } from "src/hooks/mypage/useGetAlarmStatus";
-import { usePostAlarmStatus } from "src/hooks/mypage/usePostAlarmStatus";
+import { useGetNotiSubscribed } from "src/hooks/account/useGetNotiSubscribed";
+import { useUpdateMarketingSubscribed } from "src/hooks/account/useUpdateMarketingSubscribed";
+import { useAppSelector } from "src/state";
 import * as Styled from "../index.style";
 
 function Notifications() {
-  const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(false);
-  const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(false);
-  const { alarmStatusData, isLoading } = useGetAlarmStatus();
+  const { notiSubscribedData } = useGetNotiSubscribed();
+  const { email } = useAppSelector((state) => state.auth);
 
-  const { postAlarmStatus } = usePostAlarmStatus({
-    userEmail: "moonki0623@naver.com",
-    marketingData: isLoading ? false : !alarmStatusData?.marketing.status,
-  });
+  const [isPushNotiChecked, setIsPushNotiChecked] = useState<boolean>(notiSubscribedData.push);
+  const [isMarketingNotiChecked, setIsMarketingNotiChecked] = useState<boolean>(notiSubscribedData.marketing);
+  const { updateMarketingSubscribed } = useUpdateMarketingSubscribed({ setIsMarketingNotiChecked });
+
+  const handleChangeMarketingSubscribed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { checked },
+    } = e;
+
+    updateMarketingSubscribed({
+      userEmail: email,
+      subscribed: checked,
+    });
+  };
 
   useEffect(() => {
-    console.log(alarmStatusData);
-  }, [isLoading]);
+    setIsMarketingNotiChecked(notiSubscribedData.marketing);
+    setIsPushNotiChecked(notiSubscribedData.push);
+  }, [notiSubscribedData]);
 
-  return isLoading ? (
+  return (
     <Styled.Box padding="3.2rem 2.4rem 2.4rem">
       <Styled.Box mb="1.6rem">
         <Styled.Typography className="title-1">앱 푸시 알림 설정</Styled.Typography>
@@ -37,29 +47,11 @@ function Notifications() {
       <Styled.Box>
         <FlexBox alignItems="center" justifyContent="space-between" mb="4px">
           <Styled.Typography className="title-2">마케팅 알림 동의</Styled.Typography>
-          <Switch checked={false} />
-        </FlexBox>
-        <Styled.Typography className="description">마케팅 정보 수신에 동의해요</Styled.Typography>
-      </Styled.Box>
-    </Styled.Box>
-  ) : (
-    <Styled.Box padding="3.2rem 2.4rem 2.4rem">
-      <Styled.Box mb="1.6rem">
-        <Styled.Typography className="title-1">앱 푸시 알림 설정</Styled.Typography>
-      </Styled.Box>
-
-      <Styled.Box mb="1.8rem">
-        <FlexBox alignItems="center" justifyContent="space-between" mb="4px">
-          <Styled.Typography className="title-2">앱 푸시 알림 동의</Styled.Typography>
-          <Switch checked={alarmStatusData?.push.status} onClick={() => setIsPushNotiChecked(!isPushNotiChecked)} />
-        </FlexBox>
-        <Styled.Typography className="description">서비스와 관련된 모든 알림을 수신해요</Styled.Typography>
-      </Styled.Box>
-
-      <Styled.Box>
-        <FlexBox alignItems="center" justifyContent="space-between" mb="4px">
-          <Styled.Typography className="title-2">마케팅 알림 동의</Styled.Typography>
-          <Switch checked={alarmStatusData?.marketing.status} onClick={() => postAlarmStatus()} />
+          <Switch
+            checked={isMarketingNotiChecked}
+            // onClick={() => setIsMarketingNotiChecked(!isMarketingNotiChecked)}
+            onChange={handleChangeMarketingSubscribed}
+          />
         </FlexBox>
         <Styled.Typography className="description">마케팅 정보 수신에 동의해요</Styled.Typography>
       </Styled.Box>

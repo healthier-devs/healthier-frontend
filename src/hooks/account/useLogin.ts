@@ -1,5 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginUser } from "src/api/account/service";
+import { DEVELOPMENT_SET_COOKIE_OPTIONS, DEPLOYMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
 import { useAppDispatch } from "src/state";
 import { login as loginAction } from "src/state/authSlice";
 import { setCookie } from "src/utils/cookies";
@@ -7,6 +8,7 @@ import type { ILoginRequest } from "src/interfaces/account";
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
 
   const { mutate: login, isSuccess } = useMutation({
     mutationFn: (body: ILoginRequest) => loginUser(body),
@@ -15,15 +17,14 @@ export const useLogin = () => {
         const { accessToken, refreshToken } = data;
 
         setCookie("accessToken", accessToken, {
-          path: "/",
-          secure: false,
-          domain: "localhost",
+          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+          maxAge: ACCESS_TOKEN_AGE,
         });
         setCookie("refreshToken", refreshToken, {
-          path: "/",
-          secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
-          domain: "localhost",
+          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+          maxAge: REFRESH_TOKEN_AGE,
         });
+        queryClient.clear();
         dispatch(
           loginAction({
             email: body.username,

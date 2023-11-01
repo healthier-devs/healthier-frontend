@@ -10,7 +10,7 @@ export const Container = styled.div<{ mb?: string }>`
 
 export const Button = styled.button`
   height: 60px;
-  width: 100%;
+  width: 0;
 
   border-radius: 8px;
   background: ${({ theme }) => theme.color.grey_750};
@@ -19,4 +19,11 @@ export const Button = styled.button`
   font-size: 14px;
   font-weight: 200;
   line-height: 150%;
+
+  flex: 1 1 0;
+
+  & span {
+    display: block;
+    width: auto;
+  }
 `;

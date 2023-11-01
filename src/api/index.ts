@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AxiosError } from "axios";
+import { DEVELOPMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
@@ -67,14 +68,12 @@ export const createFetcher = (path: string) => {
         });
 
         setCookie("accessToken", reissueResponse.data.accessToken, {
-          path: "/",
-          secure: false,
-          domain: "localhost",
+          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+          maxAge: ACCESS_TOKEN_AGE,
         });
         setCookie("refreshToken", reissueResponse.data.refreshToken, {
-          domain: "localhost",
-          path: "/",
-          secure: false, // TODO: 배포 시에는 HTTPS 설정을 위해 true로 변경
+          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+          maxAge: REFRESH_TOKEN_AGE,
         });
 
         return instance.request(_err.config);

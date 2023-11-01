@@ -5,7 +5,7 @@ type TRemoveButton = React.HTMLAttributes<HTMLButtonElement>;
 
 function RemoveButton({ onClick }: TRemoveButton) {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} type="button">
       <RemoveIcon />
     </Button>
   );

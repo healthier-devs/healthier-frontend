@@ -70,11 +70,8 @@ function DefaultLogin() {
           </form>
 
           <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2.4rem">
-            <Styled.Typography>계정이 생각나지 않으신가요?</Styled.Typography>
-            <Styled.Box>
-              <UnderlinedButton text="아이디 찾기" onClick={() => navigate("/account/find-id")} />
-              <UnderlinedButton text="비밀번호 찾기" onClick={() => navigate("/account/find-pw")} />
-            </Styled.Box>
+            <UnderlinedButton text="아이디 찾기" onClick={() => navigate("/account/find-id")} />
+            <UnderlinedButton text="비밀번호 찾기" onClick={() => navigate("/account/find-pw")} />
           </FlexBox>
         </div>
       </Layout>

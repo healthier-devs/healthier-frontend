@@ -65,6 +65,7 @@ export const DiagnoseCard = styled(Box)`
   gap: 1.2rem;
   border-radius: 0.8rem;
   background-color: ${({ theme }) => theme.color.grey_850};
+  cursor: pointer;
   .topArea {
     display: flex;
     flex-direction: row;
