@@ -29,7 +29,7 @@ function Account() {
 
   return (
     <>
-      <ContentHeader back backCallback={() => navigate(-1)} exit={false} label={headerMap[path as TPath]} />
+      <ContentHeader back backgroundTransparent={false} backCallback={() => navigate(-1)} exit={false} label={headerMap[path as TPath]} />
       <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>
