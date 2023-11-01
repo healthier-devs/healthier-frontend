@@ -19,4 +19,7 @@ export const mypageFetcher = {
   setMarketingData(userEmail: string, marketingData: boolean) {
     return fetcher.post(`/${userEmail}/marketing?subscribed=${marketingData}`);
   },
+  getHealthInfo() {
+    return fetcher.get("/health-information");
+  },
 };

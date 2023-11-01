@@ -70,7 +70,7 @@ function AccountIndex() {
               <Styled.EditProfileButton onClick={() => navigate("/account/edit")}>프로필 수정</Styled.EditProfileButton>
             </FlexBox>
           </Box>
-          <Styled.EditHealthInfoButton onClick={() => validateToken()}>건강정보 수정하기</Styled.EditHealthInfoButton>
+          <Styled.EditHealthInfoButton onClick={() => navigate(`/account/healthInfoModify`)}>건강정보 수정하기</Styled.EditHealthInfoButton>
         </Box>
 
         <Divider />
