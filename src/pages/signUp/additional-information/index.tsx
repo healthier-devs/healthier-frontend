@@ -6,6 +6,7 @@ import { MONTH_TO_DATES, MONTHS } from "src/data/dates";
 import { HEALTH_INTERESTS } from "src/data/interest";
 import { useSignUp } from "src/hooks/account/useSignUp";
 import { Box } from "src/lib/layoutStyle";
+import { formatBirth } from "src/utils/diagnosisHook";
 import { makeYears } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 import * as Styled from "./index.style";
@@ -72,7 +73,7 @@ function AdditionalInformation() {
       return;
     }
 
-    signUp({ ...prevInfo, ...info, birthDate: `${birthDate.year}-${birthDate.month}-${birthDate.date}` });
+    signUp({ ...prevInfo, ...info, birthDate: formatBirth(birthDate) });
   };
 
   return (

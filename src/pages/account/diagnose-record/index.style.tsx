@@ -1,3 +1,4 @@
+import Box from "src/components/box";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -48,6 +49,7 @@ export const MonthWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 10rem;
 `;
 export const MonthTitle = styled.div`
   display: flex;
@@ -56,7 +58,7 @@ export const MonthTitle = styled.div`
   margin-bottom: 0.6rem;
 `;
 
-export const DiagnoseCard = styled.div`
+export const DiagnoseCard = styled(Box)`
   display: flex;
   flex-direction: column;
   padding: 20px 18px;

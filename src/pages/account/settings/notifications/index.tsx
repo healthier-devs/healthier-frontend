@@ -39,7 +39,7 @@ function Notifications() {
       <Styled.Box mb="1.8rem">
         <FlexBox alignItems="center" justifyContent="space-between" mb="4px">
           <Styled.Typography className="title-2">앱 푸시 알림 동의</Styled.Typography>
-          <Switch checked={isPushNotiChecked} onClick={() => setIsPushNotiChecked(!isPushNotiChecked)} />
+          <Switch checked={false} />
         </FlexBox>
         <Styled.Typography className="description">서비스와 관련된 모든 알림을 수신해요</Styled.Typography>
       </Styled.Box>

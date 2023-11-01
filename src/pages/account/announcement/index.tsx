@@ -19,10 +19,6 @@ const AnnouncementItem = ({ id, title, date }: { id: number; title: string; date
 const AccountAnnouncement = () => {
   const { isLoading, announcementData } = useGetAnnouncements();
 
-  useEffect(() => {
-    console.log(isLoading, announcementData);
-  }, [isLoading]);
-
   return isLoading || !announcementData ? (
     <></>
   ) : (

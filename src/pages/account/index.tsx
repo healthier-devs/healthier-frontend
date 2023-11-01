@@ -9,6 +9,7 @@ const headerMap = {
   announcement: "공지 사항",
   settings: "환경 설정",
   edit: "프로필 수정",
+  healthInfoModify: "건강정보 수정",
 } as const;
 
 type TPath = keyof typeof headerMap;
@@ -29,7 +30,7 @@ function Account() {
 
   return (
     <>
-      <ContentHeader back backCallback={() => navigate(-1)} exit={false} label={headerMap[path as TPath]} />
+      <ContentHeader back backgroundTransparent={false} backCallback={() => navigate(-1)} exit={false} label={headerMap[path as TPath]} />
       <Layout style={{ width: "inherit" }}>
         <Outlet />
       </Layout>

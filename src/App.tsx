@@ -67,6 +67,7 @@ function App() {
             <Route path="/account/settings" element={<Pages.AccountSettings />} />
             <Route path="/account/edit" element={<Pages.AccountEdit />} />
             <Route path="/account/edit/password" element={<Pages.AccountResetPassword />} />
+            <Route path="/account/healthInfoModify" element={<Pages.ModifyInformation />} />
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />

@@ -39,6 +39,9 @@ export const accountFetcher = {
   resetPassword({ userEmail, body }: IResetPassword) {
     return fetcher.put(`/${userEmail}/reset-password`, body);
   },
+  getUserData() {
+    return fetcher.get("/me");
+  },
   getIsMarketingSubscribed(): Promise<INotificationSubscribedResponse> {
     return fetcher.get("/marketing");
   },

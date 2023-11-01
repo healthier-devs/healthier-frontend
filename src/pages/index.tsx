@@ -5,6 +5,7 @@ import DiagnoseRecord from "./account/diagnose-record";
 import AccountEdit from "./account/edit";
 import AccountResetPassword from "./account/edit/reset-password";
 import AccountIndex from "./account/index/index";
+import ModifyInformation from "./account/modify-information";
 import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
@@ -82,4 +83,5 @@ export {
   DiagnoseRecord,
   AccountEdit,
   AccountResetPassword,
+  ModifyInformation,
 };
