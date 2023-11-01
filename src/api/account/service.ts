@@ -147,3 +147,21 @@ export const resetPassword = async (resetPasswordParam: IResetPassword): Promise
     throw new Error();
   }
 };
+
+export const getUserData = async () => {
+  try {
+    const userData = await accountFetcher.getUserData();
+
+    return userData;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response) {
+      const { status } = err.response;
+
+      if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
+        return err.response.data as IException;
+      }
+    }
+
+    throw new Error();
+  }
+};
