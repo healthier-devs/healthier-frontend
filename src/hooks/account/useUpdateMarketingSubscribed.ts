@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { accountFetcher } from "src/api/account/fetcher";
 import { queryKeys } from "src/api/queryKeys";
-import type { IUpdateMarketingSubscribedRequest } from "src/interfaces/account";
+import type { IUpdateNotiRequest } from "src/interfaces/account";
 
 interface IUseUpdateMarketingSubscribed {
   setIsMarketingNotiChecked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +10,7 @@ interface IUseUpdateMarketingSubscribed {
 export const useUpdateMarketingSubscribed = ({ setIsMarketingNotiChecked }: IUseUpdateMarketingSubscribed) => {
   const queryClient = useQueryClient();
   const { mutate: updateMarketingSubscribed } = useMutation({
-    mutationFn: (request: IUpdateMarketingSubscribedRequest) => accountFetcher.updateMarketingSubscribed(request),
+    mutationFn: (request: IUpdateNotiRequest) => accountFetcher.updateMarketingSubscribed(request),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [queryKeys.MARKETING_SUBSCRIBED] });
       setIsMarketingNotiChecked((isChecked) => !isChecked);
