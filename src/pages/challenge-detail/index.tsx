@@ -109,6 +109,8 @@ const ChallengeDetail = () => {
   const navigate = useNavigate();
 
   const { isLoading, challengeData } = useGetChallengeById(challengeID);
+  const challenge = challengeData ? challengeData.challenge : null;
+  const participationStatus = challengeData ? challengeData.participationStatus : false;
 
   const handleClickParticipateButton = () => {
     confirmDialogOpen();
@@ -130,7 +132,7 @@ const ChallengeDetail = () => {
     }
   };
 
-  return isLoading || !challengeData ? (
+  return isLoading || !challenge ? (
     <>Loading</>
   ) : (
     <>
@@ -138,9 +140,9 @@ const ChallengeDetail = () => {
       <Styled.Container>
         <Styled.Image
           src={`${
-            challengeData.basicImage === "s3_url"
+            challenge.basicImage === "s3_url"
               ? "https://images.unsplash.com/photo-1607077792448-17b60bcca65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3456&q=80"
-              : challengeData.basicImage
+              : challenge.basicImage
           }`}
         >
           <Styled.ImageShadow />
@@ -150,23 +152,23 @@ const ChallengeDetail = () => {
           <FlexBox flexDirection="column" mt="4rem" mb="3.2rem" alignItems="center">
             <Styled.Typography>
               <span className="highlight">
-                {challengeData.category === "SLEEP"
+                {challenge.category === "SLEEP"
                   ? "수면"
-                  : challengeData.category === "DIET"
+                  : challenge.category === "DIET"
                   ? "식습관"
-                  : challengeData.category === "SUPPLEENT"
+                  : challenge.category === "SUPPLEENT"
                   ? "영양제"
                   : "운동"}{" "}
                 챌린지
               </span>
             </Styled.Typography>
 
-            <Styled.Title>{challengeData.title}</Styled.Title>
+            <Styled.Title>{challenge.title}</Styled.Title>
 
             <FlexBox flexDirection="row" gap="1rem">
-              <Styled.Chip variant="sub">{challengeData.times}</Styled.Chip>
-              <Styled.Chip variant="sub">{challengeData.duration}</Styled.Chip>
-              <Styled.Chip variant="sub">{challengeData.method}</Styled.Chip>
+              <Styled.Chip variant="sub">{challenge.times}</Styled.Chip>
+              <Styled.Chip variant="sub">{challenge.duration}</Styled.Chip>
+              <Styled.Chip variant="sub">{challenge.method}</Styled.Chip>
             </FlexBox>
           </FlexBox>
 
@@ -174,14 +176,14 @@ const ChallengeDetail = () => {
             <FlexBox gap="1.2rem" alignItems="center">
               <Styled.Chip variant="secondary">Midterm 보상</Styled.Chip>
               <Styled.Typography color="300" lineHeight="150%">
-                {challengeData.midtermGift / 1000}천원 상품권
+                {challenge.midtermGift / 1000}천원 상품권
               </Styled.Typography>
             </FlexBox>
 
             <FlexBox gap="1.2rem" alignItems="center">
               <Styled.Chip variant="secondary">Final 보상</Styled.Chip>
               <Styled.Typography color="300" lineHeight="150%">
-                {challengeData.finalGift / 10000}만원 상품권
+                {challenge.finalGift / 10000}만원 상품권
               </Styled.Typography>
             </FlexBox>
           </FlexBox>
@@ -196,30 +198,32 @@ const ChallengeDetail = () => {
         <Styled.Section>
           <ChallengeDescription highlight="WHAT : " title="무엇을 하는 챌린지인가요?">
             <Styled.Typography color="300" lineHeight="150%">
-              {challengeData.whatContent}
+              {challenge.whatContent}
             </Styled.Typography>
           </ChallengeDescription>
           <ChallengeDescription highlight="WHY : " title="왜 이 챌린지를 해야하나요?">
-            {processText(challengeData.whyContent)}
+            {processText(challenge.whyContent)}
           </ChallengeDescription>
 
-          <ChallengeDescription highlight="TIP : " title={`${challengeData.tipSubtitle}`}>
+          <ChallengeDescription highlight="TIP : " title={`${challenge.tipSubtitle}`}>
             <Styled.Typography color="300" lineHeight="150%">
-              {processText(challengeData.tipContent)}
+              {processText(challenge.tipContent)}
             </Styled.Typography>
           </ChallengeDescription>
         </Styled.Section>
         <Styled.Section>
           <ChallengeDescription highlight="인증 가이드">
             <Styled.Typography color="200" lineHeight="150%" mb="12rem">
-              {challengeData.guide}
+              {challenge.guide}
             </Styled.Typography>
           </ChallengeDescription>
         </Styled.Section>
         <ChallengeNotification />
       </Styled.Container>
       <Styled.ButtonWrapper>
-        <Styled.Button onClick={handleClickParticipateButton}>참여하기</Styled.Button>
+        <Styled.Button onClick={handleClickParticipateButton} canJoin={participationStatus}>
+          참여하기
+        </Styled.Button>
       </Styled.ButtonWrapper>
 
       {confirmDialogIsOpen && (
