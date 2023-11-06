@@ -79,7 +79,7 @@ function AdditionalInformation() {
   return (
     <>
       <Styled.Container>
-        <Lib.Title text="추가 정보를 수집할게요" description="기본 정보와 추천인 코드를 입력해주세요" mb="4rem" />
+        <Lib.Title text="필수 정보를 입력해 주세요" description="기본 정보와 추천인 코드를 입력해주세요" mb="4rem" />
 
         <Box mb="3.2rem">
           <Box mb="8px">
