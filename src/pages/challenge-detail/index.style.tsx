@@ -130,15 +130,15 @@ export const ButtonWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ canJoin: boolean }>`
   width: 100%;
   padding: 1.4rem 6.2rem;
 
   border-radius: 3rem;
-  background: ${({ theme }) => theme.color.blue};
+  background: ${({ theme, canJoin }) => (canJoin ? theme.color.blue : theme.color.grey_600)};
 
   font-size: 1.4rem;
-  color: ${({ theme }) => theme.color.grey_100};
+  color: ${({ theme, canJoin }) => (canJoin ? theme.color.grey_100 : theme.color.grey_500)};
   font-weight: 300;
   line-height: 150%;
 
