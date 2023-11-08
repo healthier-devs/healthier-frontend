@@ -30,6 +30,8 @@ function ChallengeList() {
     }
   }, [selectedTab, isReadyData, myChallengesData]);
 
+  console.log(myChallengesData?.myChallenge);
+
   return (
     <div>
       <Styled.HeaderContainer>
@@ -88,7 +90,7 @@ function ChallengeList() {
           <Styled.DescriptionText>챌린지에 대한 리워드는 선물함에서 확인 가능해요</Styled.DescriptionText>
         </Styled.CardList>
       )}
-      {isReadyData && (myChallengesData?.count ?? 0) === 0 && (
+      {(!authenticated || (isReadyData && (myChallengesData?.count ?? 0) === 0)) && (
         <Styled.EmptyContainer>
           <Styled.EmptyText>
             아직 {selectedTab === "PROGRESS" ? "도전을 시작한" : "완료한"} 챌린지가 없어요!

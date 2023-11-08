@@ -135,7 +135,7 @@ const ChallengeDetail = () => {
   };
 
   return isLoading || !challenge ? (
-    <>Loading</>
+    <></>
   ) : (
     <>
       <ContentHeader back={true} exit={false} borderBottom={false} />
