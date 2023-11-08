@@ -5,7 +5,6 @@ import Layout from "src/components/layout";
 import { DENTAL_SYMPTOMS } from "src/data/symptom_type";
 import { useAppDispatch } from "src/state";
 import { setCategory } from "src/state/diagnoseSlice";
-import { Title } from "../symptomType/index.style";
 import * as Styled from "./index.style";
 import type { TDentalSymptomType } from "src/interfaces/symptomPage";
 
@@ -45,7 +44,6 @@ function SymptomTypeQR() {
     <>
       <ContentHeader back={true} backCallback={() => navigate(-1)} label="문진" exit={true} exitCallback={() => navigate("/")} />
       <Layout padding="0 2rem 12rem 2rem" style={{ background: "var(--gradient)" }}>
-        <Title>{"증상 부위를\n선택해주세요"}</Title>
         <Styled.Container>
           {DENTAL_SYMPTOMS.map((symptom) => (
             <Styled.Button
