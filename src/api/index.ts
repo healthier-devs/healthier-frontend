@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AxiosError } from "axios";
-import { DEVELOPMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
+import { DEVELOPMENT_SET_COOKIE_OPTIONS, DEPLOYMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
 import { setCookie, getCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
