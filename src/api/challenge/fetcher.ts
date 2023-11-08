@@ -24,7 +24,7 @@ export const challengeFetcher = {
     return fetcher.get("/image");
   },
   getChallengeByID({ challengeID }: { challengeID: number }): Promise<IChallengeDetailResponse> {
-    return unauthorizedFetcher.get(`${challengeID}`);
+    return fetcher.get(`${challengeID}`);
   },
   postChallengeJoin({ challengeId, isToday }: { challengeId: number; isToday: number }) {
     return fetcher.post(`/join/${challengeId}?isToday=${isToday}`);

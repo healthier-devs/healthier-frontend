@@ -110,11 +110,13 @@ const ChallengeDetail = () => {
 
   const { isLoading, challengeData } = useGetChallengeById(challengeID);
   const challenge = challengeData ? challengeData.challenge : null;
-  const canParticipate = challengeData ? challengeData.participationStatus : false;
+  const canParticipate = challengeData ? !challengeData.participationStatus : true;
 
   const handleClickParticipateButton = () => {
     if (canParticipate) {
       confirmDialogOpen();
+    } else {
+      navigate(`/challenge/stamp/${id}`);
     }
   };
 
@@ -223,9 +225,7 @@ const ChallengeDetail = () => {
         <ChallengeNotification />
       </Styled.Container>
       <Styled.ButtonWrapper>
-        <Styled.Button onClick={handleClickParticipateButton} canJoin={canParticipate}>
-          참여하기
-        </Styled.Button>
+        <Styled.Button onClick={handleClickParticipateButton}>{canParticipate ? "참여하기" : "인증하기"}</Styled.Button>
       </Styled.ButtonWrapper>
 
       {confirmDialogIsOpen && (

@@ -132,15 +132,15 @@ export const ButtonWrapper = styled.div`
   background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.12%, #131416 100%);
 `;
 
-export const Button = styled.button<{ canJoin: boolean }>`
+export const Button = styled.button`
   width: 100%;
   padding: 1.4rem 6.2rem;
 
   border-radius: 3rem;
-  background: ${({ theme, canJoin }) => (canJoin ? theme.color.blue : theme.color.grey_600)};
+  background: ${({ theme }) => theme.color.blue};
 
   font-size: 1.4rem;
-  color: ${({ theme, canJoin }) => (canJoin ? theme.color.grey_100 : theme.color.grey_500)};
+  color: ${({ theme }) => theme.color.grey_100};
   font-weight: 300;
   line-height: 150%;
 
