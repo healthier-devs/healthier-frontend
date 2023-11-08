@@ -75,22 +75,28 @@ type TStomachDiagnosesType = { category: "배" } & TDiagnoseTypeBase;
 type TPelvisDiagnoseType = { category: "골반" } & TDiagnoseTypeBase;
 type TArmLegDiagnoseType = { category: "팔다리" } & TDiagnoseTypeBase;
 
-export type TDiagnoseType =
-  | TSkinDiagnoseType
-  | TWholeBodyDiagnoseType
-  | THeadDiagnoseType
-  | TMentalDiagnoseType
-  | TNoseDiagnoseType
-  | TNeckDiagnoseType
-  | TBackDiagnosesType
-  | TChestDiagnoseType
-  | TStomachDiagnosesType
-  | TPelvisDiagnoseType
-  | TArmLegDiagnoseType;
+// | TSkinDiagnoseType
+// | TWholeBodyDiagnoseType
+// | THeadDiagnoseType
+// | TMentalDiagnoseType
+// | TNoseDiagnoseType
+// | TNeckDiagnoseType
+// | TBackDiagnosesType
+// | TChestDiagnoseType
+// | TStomachDiagnosesType
+// | TPelvisDiagnoseType
+// | TArmLegDiagnoseType;
 
 export type TSymptomType = {
   engName: string;
   korName: string;
 };
 
-export type TDiagnoseCategory = TDiagnoseType["category"];
+export type TDiagnoseCategory = "피부" | "전신" | "머리" | "정신" | "코" | "목" | "등/허리" | "가슴" | "배" | "골반" | "팔다리";
+
+export type TDiagnoseType = {
+  [key in TDiagnoseCategory]: {
+    symptoms: TSymptomType[];
+    imagePath: string;
+  };
+};

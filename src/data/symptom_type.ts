@@ -102,65 +102,63 @@ export const ARM_LEG_SYMPTOMS: TSymptomType[] = [
   },
 ];
 
-export const DIAGNOSE_TYPES: TDiagnoseType[] = [
-  {
-    category: "피부",
+export const DIAGNOSE_TYPES: TDiagnoseType = {
+  피부: {
     symptoms: SKIN_SYMPTOMS,
+    imagePath: "symptoms/skin.png",
   },
-  {
-    category: "전신",
+  전신: {
     symptoms: WHOLE_BODY_SYMPTOMS,
+    imagePath: "symptom/whole_body.png",
   },
-  {
-    category: "머리",
+  머리: {
     symptoms: HEAD_SYMPTOMS,
+    imagePath: "symptom/head.png",
   },
-  {
-    category: "정신",
+  정신: {
     symptoms: MENTAL_SYMPTOMS,
+    imagePath: "symptom/mental.png",
   },
-  {
-    category: "코",
+  코: {
     symptoms: NOSE_SYMPTOMS,
+    imagePath: "symptom/nose.png",
   },
-  {
-    category: "목",
+  목: {
     symptoms: NECK_SYMPTOMS,
+    imagePath: "symptom/neck.png",
   },
-  {
-    category: "등/허리",
+  "등/허리": {
     symptoms: BACK_SYMPTOMS,
+    imagePath: "symptom/back.png",
   },
-  {
-    category: "가슴",
-    symptoms: CHEST_SYMPTOMS,
-  },
-  {
-    category: "배",
+  배: {
     symptoms: STOMACH_SYMPTOMS,
+    imagePath: "symptom/stomach.png",
   },
-  {
-    category: "골반",
+  골반: {
     symptoms: PELVIS_SYMPTOMS,
+    imagePath: "symptom/pelvis.png",
   },
-  {
-    category: "팔다리",
+  팔다리: {
     symptoms: ARM_LEG_SYMPTOMS,
+    imagePath: "symptom/arm_leg.png",
   },
-];
-
-export const DIAGNOSE_IMAGE_PATH: { [x in TDiagnoseCategory]: string } = {
-  피부: "symptom/skin.png",
-  전신: "symptom/whole_body.png",
-  머리: "symptom/head.png",
-  정신: "symptom/mental.png",
-  코: "symptom/nose.png",
-  목: "symptom/neck.png",
-  "등/허리": "symptom/back.png",
-  가슴: "symptom/chest.png",
-  배: "symptom/stomach.png",
-  골반: "symptom/pelvis.png",
-  팔다리: "symptom/arm_leg.png",
+  가슴: {
+    symptoms: CHEST_SYMPTOMS,
+    imagePath: "symptoms/chest.png",
+  },
 };
 
-export const DIAGNOSE_CATEGORIES: TDiagnoseCategory[] = DIAGNOSE_TYPES.map(({ category }) => category);
+export const DIAGNOSE_CATEGORIES: TDiagnoseCategory[] = [
+  "피부",
+  "전신",
+  "머리",
+  "정신",
+  "코",
+  "목",
+  "등/허리",
+  "가슴",
+  "배",
+  "골반",
+  "팔다리",
+];

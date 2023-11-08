@@ -1,10 +1,7 @@
 import Body from "./Body";
 import Categories from "./Categories";
+import Styles from "./styles";
+import SymptomsModal from "./SymptomsModal";
 import Title from "./Title";
 
-const LAYOUT_STYLE: React.CSSProperties = {
-  minHeight: "100%",
-  background: "var(--gradient)",
-};
-
-export { Title, Categories, Body, LAYOUT_STYLE };
+export { Title, Categories, Body, SymptomsModal, Styles };

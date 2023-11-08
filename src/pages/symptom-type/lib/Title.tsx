@@ -26,4 +26,5 @@ const H1 = styled.h1`
   font-weight: 300;
 
   white-space: pre-line;
+  height: 68px;
 `;

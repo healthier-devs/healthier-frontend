@@ -9,9 +9,10 @@ interface ICategories {
   selectedCategory: TDiagnoseCategory | null;
   handleClickCategory: (c: TDiagnoseCategory) => void;
   handleRemoveCategory: () => void;
+  showSymptomModal: boolean;
 }
 
-function Categories({ selectedCategory, handleClickCategory, handleRemoveCategory }: ICategories) {
+function Categories({ selectedCategory, showSymptomModal, handleClickCategory, handleRemoveCategory }: ICategories) {
   return selectedCategory === null ? (
     <Container>
       <div className="wrapper">
@@ -23,13 +24,15 @@ function Categories({ selectedCategory, handleClickCategory, handleRemoveCategor
       </div>
     </Container>
   ) : (
-    <FlexBox justifyContent="center">
-      <Chip className="chip__selected">
-        {selectedCategory}
-        <RemoveButton onClick={handleRemoveCategory}>
-          <XIcon width={20} height={20} stroke={colors.color.blue} />
-        </RemoveButton>
-      </Chip>
+    <FlexBox justifyContent="center" style={{ height: "38px" }}>
+      {!showSymptomModal && (
+        <Chip className="chip__selected">
+          {selectedCategory}
+          <RemoveButton onClick={handleRemoveCategory}>
+            <XIcon width={20} height={20} stroke={colors.color.blue} />
+          </RemoveButton>
+        </Chip>
+      )}
     </FlexBox>
   );
 }
