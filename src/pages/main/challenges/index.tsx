@@ -29,7 +29,7 @@ function Challenges({ authenticated }: IAuthState) {
         ) : (
           (myChallengesData.myChallenge as IMyChallengeProgress[]).map((challenge) => (
             <Link to={`/challenge/${challenge.challengeId}`} key={challenge.challengeId}>
-              <FlexBox flexDirection="column" gap="12px">
+              <FlexBox flexDirection="column" gap="12px" mt="12px">
                 <div>
                   <Styled.Typography className="grey-300">
                     아직 <span className="highlight">오늘의 챌린지</span>를 인증하지 않았어요!
