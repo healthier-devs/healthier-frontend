@@ -40,7 +40,6 @@ const accountItems: IAccountItem[] = [
 
 function AccountIndex() {
   const navigate = useNavigate();
-  const { validateToken } = useValidateToken();
   const { userData, isLoading } = useUserData();
 
   return !isLoading ? (
@@ -49,8 +48,6 @@ function AccountIndex() {
         <Box style={{ padding: "3.2rem 2.4rem 2.4rem 2.4rem" }}>
           <Box mb="3rem">
             <FlexBox gap="12px" alignItems="start">
-              <Styled.UserImage src="/images/account/user.svg" />
-
               <Styled.UserInfoWrapper>
                 <FlexBox alignItems="center" mb="8px" gap="8px">
                   <Styled.Username>{userData.name}</Styled.Username>
