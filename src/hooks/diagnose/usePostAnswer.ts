@@ -6,7 +6,6 @@ import { useAppDispatch } from "src/state";
 import { clearHospitalId } from "src/state/diagnoseSlice";
 import { usePostSoap } from "./usePostSoap";
 import type { IPostAnswersBody } from "src/interfaces/diagnoseApi/diagnosis";
-import type { TSymptomType } from "src/interfaces/symptomPage";
 
 interface IUsePostAnswer extends IPostAnswersBody {
   diagnoseType: string;
@@ -17,14 +16,19 @@ export const usePostAnswer = ({ diagnoseType, user, answers }: IUsePostAnswer) =
   const dispatch = useAppDispatch();
 
   const { hospitalId } = useAppSelector((appState) => appState.diagnose);
+  const { authenticated } = useAppSelector((appState) => appState.auth);
 
   const { postSoap } = usePostSoap({ hospitalId });
 
   const { mutate: postAnswer, isPending } = useMutation({
     mutationFn: () =>
-      diagnosisFetcher.postAnswers(diagnoseType, {
-        user,
-        answers,
+      diagnosisFetcher.postAnswers({
+        diagnosisType: diagnoseType,
+        postAnswersBody: {
+          user,
+          answers,
+        },
+        authenticated,
       }),
     onSuccess(data) {
       if (hospitalId) {

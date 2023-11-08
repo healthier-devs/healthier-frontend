@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DIAGNOSE_TYPES } from "src/data/symptom_type";
 import type { TDiagnoseCategory, TSymptomType } from "src/interfaces/symptomPage";
 
 const useSymptomPage = () => {
+  const navigate = useNavigate();
+
   const [category, setCategory] = useState<TDiagnoseCategory | null>(null);
   const [symptoms, setSymptoms] = useState<TSymptomType[]>([]);
   const [selectedSymptom, setSelectedSymptom] = useState<TSymptomType | null>(null);
   const [showSymptomModal, setShowSymptomModal] = useState<boolean>(false);
+  const isNextButtonEnabled = showSymptomModal ? selectedSymptom !== null : category !== null;
 
   const clearSelectedCategory = () => {
     setCategory(null);
@@ -31,13 +35,18 @@ const useSymptomPage = () => {
 
   const handleClickNext = () => {
     if (showSymptomModal) {
+      navigate("/diagnosis", {
+        state: {
+          symptom: selectedSymptom,
+        },
+      });
+    }
+    if (category) {
+      setSymptoms(DIAGNOSE_TYPES[category].symptoms);
+      setShowSymptomModal(true);
+
       return;
     }
-    if (category === null) {
-      return;
-    }
-    setSymptoms(DIAGNOSE_TYPES[category].symptoms);
-    setShowSymptomModal(true);
   };
 
   const handleClickBackdrop = () => {
@@ -59,8 +68,6 @@ const useSymptomPage = () => {
       setSelectedSymptom(s);
     }
   };
-
-  const isNextButtonEnabled = showSymptomModal ? selectedSymptom !== null : category !== null;
 
   return {
     category,

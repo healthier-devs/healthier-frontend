@@ -38,7 +38,9 @@ export const createFetcher = (path: string) => {
     function (config: AxiosRequestConfig) {
       const accessToken = getCookie("accessToken");
 
-      (config.headers ?? {}).Authorization = "Bearer " + accessToken;
+      if (accessToken) {
+        (config.headers ?? {}).Authorization = "Bearer " + accessToken;
+      }
 
       return config;
     },

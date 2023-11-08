@@ -1,7 +1,7 @@
 import type { TSymptomType, TDiagnoseType, TDiagnoseCategory } from "src/interfaces/symptomPage";
 
 export const SKIN_SYMPTOMS: TSymptomType[] = [
-  { engName: "RASH", korName: "피부발진" },
+  //{ engName: "RASH", korName: "피부발진" },
   { engName: "JAUNDICE", korName: "황달" },
 ];
 
@@ -10,16 +10,15 @@ export const WHOLE_BODY_SYMPTOMS: TSymptomType[] = [
   { engName: "BRUISE", korName: "멍듦" },
   { engName: "FATIGUE", korName: "피로" },
   { engName: "WEIGHTLOSS", korName: "체중 감소" },
-  { engName: "WEIGHTGAIN", korName: "체중 증가/비만" },
 ];
 
 export const HEAD_SYMPTOMS: TSymptomType[] = [
-  { engName: "HEADACHE", korName: "두통" },
-  { engName: "SYNCOPE", korName: "실신" },
-  { engName: "DIZZINESS", korName: "어지러움" },
+  //{ engName: "HEADACHE", korName: "두통" },
+  //{ engName: "SYNCOPE", korName: "실신" },
+  //{ engName: "DIZZINESS", korName: "어지러움" },
   { engName: "VOMIT", korName: "구토" },
-  { engName: "SEIZURE", korName: "경련" },
-  { engName: "CONSCIOUSNESS", korName: "의식 장애" },
+  //{ engName: "SEIZURE", korName: "경련" },
+  //{ engName: "CONSCIOUSNESS", korName: "의식 장애" },
 ];
 
 export const MENTAL_SYMPTOMS: TSymptomType[] = [
@@ -32,9 +31,9 @@ export const MENTAL_SYMPTOMS: TSymptomType[] = [
 export const NOSE_SYMPTOMS: TSymptomType[] = [{ engName: "RHINORRHEA", korName: "콧물/코막힘" }];
 
 export const NECK_SYMPTOMS: TSymptomType[] = [
-  { engName: "COUGH", korName: "기침" },
+  //{ engName: "COUGH", korName: "기침" },
   { engName: "HEMATEMESIS", korName: "피를 토함" },
-  { engName: "NECKPAIN", korName: "목 통증" },
+  //{ engName: "NECKPAIN", korName: "목 통증" },
 ];
 export const BACK_SYMPTOMS: TSymptomType[] = [{ engName: "BACKPAIN", korName: "등/허리 통증" }];
 
@@ -105,60 +104,64 @@ export const ARM_LEG_SYMPTOMS: TSymptomType[] = [
 export const DIAGNOSE_TYPES: TDiagnoseType = {
   피부: {
     symptoms: SKIN_SYMPTOMS,
-    imagePath: "symptoms/skin.png",
+    imagePath: "symptom/skin.png",
   },
-  전신: {
-    symptoms: WHOLE_BODY_SYMPTOMS,
-    imagePath: "symptom/whole_body.png",
-  },
+  // 전신: {
+  //   symptoms: WHOLE_BODY_SYMPTOMS,
+  //   imagePath: "symptom/whole_body.png",
+  // },
   머리: {
     symptoms: HEAD_SYMPTOMS,
     imagePath: "symptom/head.png",
   },
-  정신: {
-    symptoms: MENTAL_SYMPTOMS,
-    imagePath: "symptom/mental.png",
-  },
-  코: {
-    symptoms: NOSE_SYMPTOMS,
-    imagePath: "symptom/nose.png",
-  },
+  // 정신: {
+  //   symptoms: MENTAL_SYMPTOMS,
+  //   imagePath: "symptom/mental.png",
+  // },
+  // 코: {
+  //   symptoms: NOSE_SYMPTOMS,
+  //   imagePath: "symptom/nose.png",
+  // },
   목: {
     symptoms: NECK_SYMPTOMS,
     imagePath: "symptom/neck.png",
   },
-  "등/허리": {
-    symptoms: BACK_SYMPTOMS,
-    imagePath: "symptom/back.png",
-  },
+  // "등/허리": {
+  //   symptoms: BACK_SYMPTOMS,
+  //   imagePath: "symptom/back.png",
+  // },
   배: {
     symptoms: STOMACH_SYMPTOMS,
     imagePath: "symptom/stomach.png",
   },
-  골반: {
-    symptoms: PELVIS_SYMPTOMS,
-    imagePath: "symptom/pelvis.png",
-  },
-  팔다리: {
-    symptoms: ARM_LEG_SYMPTOMS,
-    imagePath: "symptom/arm_leg.png",
-  },
-  가슴: {
-    symptoms: CHEST_SYMPTOMS,
-    imagePath: "symptoms/chest.png",
-  },
+  // 골반: {
+  //   symptoms: PELVIS_SYMPTOMS,
+  //   imagePath: "symptom/pelvis.png",
+  // },
+  // 팔다리: {
+  //   symptoms: ARM_LEG_SYMPTOMS,
+  //   imagePath: "symptom/arm_leg.png",
+  // },
+  // 가슴: {
+  //   symptoms: CHEST_SYMPTOMS,
+  //   imagePath: "symptoms/chest.png",
+  // },
 };
 
 export const DIAGNOSE_CATEGORIES: TDiagnoseCategory[] = [
   "피부",
-  "전신",
   "머리",
-  "정신",
-  "코",
+  // "정신",
+  // "코",
   "목",
-  "등/허리",
-  "가슴",
+  // "등/허리",
+  // "가슴",
   "배",
-  "골반",
-  "팔다리",
+  // "골반",
+  // "팔다리",
 ];
+
+export const SYMPTOM_TYPES = DIAGNOSE_CATEGORIES.reduce(
+  (symptoms: TSymptomType[], category) => [...symptoms, ...DIAGNOSE_TYPES[category].symptoms],
+  []
+);

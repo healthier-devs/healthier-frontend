@@ -1,6 +1,5 @@
 import { LayerProps } from "lamina/types";
 import { Abstract, LayerMaterial } from "lamina/vanilla";
-import { DIAGNOSE_TYPES } from "src/data/symptom_type";
 import { Vector3 } from "three";
 
 export interface IOverlayProps {
@@ -55,44 +54,25 @@ export enum BodyPart {
   BACKNECK = "BACKNECK",
 }
 
-// 피부, 전신, 머리, 정신, 코, 목, 등/허리, 가슴, 배, 골반, 팔다리
-
-type TDiagnoseTypeBase = {
-  symptoms: TSymptomType[];
-};
-type TSkinDiagnoseType = {
-  category: "피부";
-} & TDiagnoseTypeBase;
-
-type TWholeBodyDiagnoseType = { category: "전신" } & TDiagnoseTypeBase;
-type THeadDiagnoseType = { category: "머리" } & TDiagnoseTypeBase;
-type TMentalDiagnoseType = { category: "정신" } & TDiagnoseTypeBase;
-type TNoseDiagnoseType = { category: "코" } & TDiagnoseTypeBase;
-type TNeckDiagnoseType = { category: "목" } & TDiagnoseTypeBase;
-type TBackDiagnosesType = { category: "등/허리" } & TDiagnoseTypeBase;
-type TChestDiagnoseType = { category: "가슴" } & TDiagnoseTypeBase;
-type TStomachDiagnosesType = { category: "배" } & TDiagnoseTypeBase;
-type TPelvisDiagnoseType = { category: "골반" } & TDiagnoseTypeBase;
-type TArmLegDiagnoseType = { category: "팔다리" } & TDiagnoseTypeBase;
-
-// | TSkinDiagnoseType
-// | TWholeBodyDiagnoseType
-// | THeadDiagnoseType
-// | TMentalDiagnoseType
-// | TNoseDiagnoseType
-// | TNeckDiagnoseType
-// | TBackDiagnosesType
-// | TChestDiagnoseType
-// | TStomachDiagnosesType
-// | TPelvisDiagnoseType
-// | TArmLegDiagnoseType;
-
 export type TSymptomType = {
   engName: string;
   korName: string;
 };
 
-export type TDiagnoseCategory = "피부" | "전신" | "머리" | "정신" | "코" | "목" | "등/허리" | "가슴" | "배" | "골반" | "팔다리";
+export type TDiagnoseCategory =
+  | "피부"
+  //| "전신"
+  | "머리"
+  // | "정신"
+  // | "코"
+  | "목"
+  //| "등/허리"
+  //| "가슴"
+  | "배";
+//| "골반"
+//| "팔다리";
+
+//export type TDiagnoseCategory = "피부" | "배" | "r";
 
 export type TDiagnoseType = {
   [key in TDiagnoseCategory]: {
