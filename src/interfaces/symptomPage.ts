@@ -55,10 +55,6 @@ export enum BodyPart {
   BACKNECK = "BACKNECK",
 }
 
-// export type TSymptomType = typeof SYMPTOM_TYPES[number];
-// export type TDentalSymptomType = typeof DENTAL_SYMPTOMS[number];
-// type TDigestiveSymptomType = typeof DIGESTIVE_SYMPTOMS[number];
-
 // 피부, 전신, 머리, 정신, 코, 목, 등/허리, 가슴, 배, 골반, 팔다리
 
 type TDiagnoseTypeBase = {

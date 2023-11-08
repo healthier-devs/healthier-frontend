@@ -1,4 +1,4 @@
-import type { TSymptomType, TDiagnoseType } from "src/interfaces/symptomPage";
+import type { TSymptomType, TDiagnoseType, TDiagnoseCategory } from "src/interfaces/symptomPage";
 
 export const SKIN_SYMPTOMS: TSymptomType[] = [
   { engName: "RASH", korName: "피부발진" },
@@ -148,3 +148,19 @@ export const DIAGNOSE_TYPES: TDiagnoseType[] = [
     symptoms: ARM_LEG_SYMPTOMS,
   },
 ];
+
+export const DIAGNOSE_IMAGE_PATH: { [x in TDiagnoseCategory]: string } = {
+  피부: "symptom/skin.png",
+  전신: "symptom/whole_body.png",
+  머리: "symptom/head.png",
+  정신: "symptom/mental.png",
+  코: "symptom/nose.png",
+  목: "symptom/neck.png",
+  "등/허리": "symptom/back.png",
+  가슴: "symptom/chest.png",
+  배: "symptom/stomach.png",
+  골반: "symptom/pelvis.png",
+  팔다리: "symptom/arm_leg.png",
+};
+
+export const DIAGNOSE_CATEGORIES: TDiagnoseCategory[] = DIAGNOSE_TYPES.map(({ category }) => category);

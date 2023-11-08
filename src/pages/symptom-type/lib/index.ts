@@ -1,3 +1,4 @@
+import Categories from "./Categories";
 import Title from "./Title";
 
 const LAYOUT_STYLE: React.CSSProperties = {
@@ -5,4 +6,4 @@ const LAYOUT_STYLE: React.CSSProperties = {
   background: "var(--gradient)",
 };
 
-export { Title, LAYOUT_STYLE };
+export { Title, Categories, LAYOUT_STYLE };
