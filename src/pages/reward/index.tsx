@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
-import ContentHeader from "src/components/contentHeader";
 import RewardCard from "src/components/rewardCard";
 import { useGetMyRewardRecords } from "src/hooks/rewards/useGetMyRewardRecords";
 import { useGetRewards } from "src/hooks/rewards/useGetRewards";
-import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 function Reward() {
@@ -19,7 +17,6 @@ function Reward() {
 
   return (
     <>
-      <ContentHeader back={true} exit={false} label="리워드" style={{ backgroundColor: theme.color.grey_900 }} />
       <Styled.Container>
         <Styled.Title>
           챌린지 인증을 통해
