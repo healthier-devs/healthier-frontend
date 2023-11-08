@@ -16,7 +16,7 @@ export const ListItemContent = styled.div`
 
 export const ListItemTitle = styled.p`
   font-size: 1.3rem;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
@@ -25,7 +25,7 @@ export const ListItemTitle = styled.p`
 
 export const ListItemPoint = styled.p`
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
