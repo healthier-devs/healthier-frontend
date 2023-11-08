@@ -128,6 +128,8 @@ export const ButtonWrapper = styled.div`
   position: fixed;
   bottom: 0;
   box-sizing: border-box;
+
+  background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.12%, #131416 100%);
 `;
 
 export const Button = styled.button<{ canJoin: boolean }>`
