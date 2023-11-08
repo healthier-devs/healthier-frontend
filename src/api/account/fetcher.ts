@@ -8,6 +8,7 @@ import {
   INotificationSubscribedResponse,
   IUpdateNotiRequest,
   IUserResponse,
+  IUserInfo,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -39,7 +40,7 @@ export const accountFetcher = {
   resetPassword({ userEmail, body }: IResetPassword) {
     return fetcher.put(`/${userEmail}/reset-password`, body);
   },
-  getUserData() {
+  getUserData(): Promise<IUserInfo> {
     return fetcher.get("/me");
   },
   getIsNotificationSubscribed(): Promise<INotificationSubscribedResponse> {
