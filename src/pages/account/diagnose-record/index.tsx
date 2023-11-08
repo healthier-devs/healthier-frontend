@@ -21,8 +21,6 @@ const DiagnoseRecord = () => {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  console.log(recordsData);
-
   return (
     <>
       <Styled.Container>

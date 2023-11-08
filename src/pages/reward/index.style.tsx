@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 5.6rem;
   width: 100%;
 
   padding: 4rem 2.4rem;
@@ -10,7 +9,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   font-size: 2.4rem;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 140%;
   letter-spacing: -0.03rem;
 
@@ -44,9 +43,11 @@ export const ExtraRewardButton = styled.div`
   display: flex;
   justify-content: space-between;
 
+  margin-top: 1rem;
+
   p {
     font-size: 1.6rem;
-    font-weight: 500;
+    font-weight: 300;
     line-height: 150%;
     letter-spacing: -0.03rem;
     color: ${({ theme }) => theme.color.grey_200};
@@ -90,7 +91,7 @@ export const RewardBox = styled.div`
 
 export const RewardDescription = styled.p`
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 200;
   line-height: 130%;
   letter-spacing: -0.05rem;
 
@@ -99,7 +100,7 @@ export const RewardDescription = styled.p`
 
 export const NotCertificatedText = styled.p`
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 200;
   line-height: 130%;
   letter-spacing: -0.05rem;
 

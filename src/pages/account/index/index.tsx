@@ -19,8 +19,8 @@ const accountItems: IAccountItem[] = [
     path: "/diagRecord",
   },
   {
-    label: "선물함 바로가기",
-    path: "",
+    label: "리워드 바로가기",
+    path: "/reward",
   },
   {
     label: "환경설정",

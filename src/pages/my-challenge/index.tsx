@@ -30,8 +30,6 @@ function ChallengeList() {
     }
   }, [selectedTab, isReadyData, myChallengesData]);
 
-  console.log(myChallengesData?.myChallenge);
-
   return (
     <div>
       <Styled.HeaderContainer>
@@ -39,7 +37,7 @@ function ChallengeList() {
           <img alt="back" src="/images/header/back.svg" width={32} height={32} />
         </Styled.LeftButton>
         <Styled.HeaderTitle>나의 챌린지</Styled.HeaderTitle>
-        <Styled.RightButton onClick={() => navigate("/challenge/reward")}>
+        <Styled.RightButton onClick={() => navigate("/account/reward")}>
           <img alt="gift" src="/images/challenge/gift.png" width={32} height={32} />
         </Styled.RightButton>
       </Styled.HeaderContainer>
