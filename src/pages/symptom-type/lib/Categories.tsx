@@ -24,7 +24,7 @@ function Categories({ selectedCategory, showSymptomModal, handleClickCategory, h
       </div>
     </Container>
   ) : (
-    <FlexBox justifyContent="center" style={{ height: "38px" }}>
+    <FlexBox justifyContent="center" alignItems="center" style={{ height: "41px" }}>
       {!showSymptomModal && (
         <Chip className="chip__selected">
           {selectedCategory}
@@ -50,6 +50,7 @@ const Container = styled.div`
   .wrapper {
     width: 100%;
     display: inline-block;
+    text-align: center;
 
     overflow-x: scroll;
     &::-webkit-scrollbar {
@@ -83,6 +84,7 @@ const Chip = styled.div`
 
   &.chip__selected {
     background: ${({ theme }) => theme.color.sub_blue};
+
     border: 1px solid ${({ theme }) => theme.color.sub_blue};
     color: ${({ theme }) => theme.color.blue};
     font-weight: 300;
