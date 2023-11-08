@@ -1,6 +1,6 @@
 import { LayerProps } from "lamina/types";
 import { Abstract, LayerMaterial } from "lamina/vanilla";
-import { DENTAL_SYMPTOMS, DIGESTIVE_SYMPTOMS, SYMPTOM_TYPES } from "src/data/symptom_type";
+import { DIAGNOSE_TYPES } from "src/data/symptom_type";
 import { Vector3 } from "three";
 
 export interface IOverlayProps {
@@ -55,19 +55,46 @@ export enum BodyPart {
   BACKNECK = "BACKNECK",
 }
 
-export type TSymptomType = typeof SYMPTOM_TYPES[number];
-export type TDentalSymptomType = typeof DENTAL_SYMPTOMS[number];
-type TDigestiveSymptomType = typeof DIGESTIVE_SYMPTOMS[number];
+// export type TSymptomType = typeof SYMPTOM_TYPES[number];
+// export type TDentalSymptomType = typeof DENTAL_SYMPTOMS[number];
+// type TDigestiveSymptomType = typeof DIGESTIVE_SYMPTOMS[number];
 
-type TDentalDiagnoseType = {
-  category: "치과";
-  symptoms: TDentalSymptomType[];
+// 피부, 전신, 머리, 정신, 코, 목, 등/허리, 가슴, 배, 골반, 팔다리
+
+type TDiagnoseTypeBase = {
+  symptoms: TSymptomType[];
+};
+type TSkinDiagnoseType = {
+  category: "피부";
+} & TDiagnoseTypeBase;
+
+type TWholeBodyDiagnoseType = { category: "전신" } & TDiagnoseTypeBase;
+type THeadDiagnoseType = { category: "머리" } & TDiagnoseTypeBase;
+type TMentalDiagnoseType = { category: "정신" } & TDiagnoseTypeBase;
+type TNoseDiagnoseType = { category: "코" } & TDiagnoseTypeBase;
+type TNeckDiagnoseType = { category: "목" } & TDiagnoseTypeBase;
+type TBackDiagnosesType = { category: "등/허리" } & TDiagnoseTypeBase;
+type TChestDiagnoseType = { category: "가슴" } & TDiagnoseTypeBase;
+type TStomachDiagnosesType = { category: "배" } & TDiagnoseTypeBase;
+type TPelvisDiagnoseType = { category: "골반" } & TDiagnoseTypeBase;
+type TArmLegDiagnoseType = { category: "팔다리" } & TDiagnoseTypeBase;
+
+export type TDiagnoseType =
+  | TSkinDiagnoseType
+  | TWholeBodyDiagnoseType
+  | THeadDiagnoseType
+  | TMentalDiagnoseType
+  | TNoseDiagnoseType
+  | TNeckDiagnoseType
+  | TBackDiagnosesType
+  | TChestDiagnoseType
+  | TStomachDiagnosesType
+  | TPelvisDiagnoseType
+  | TArmLegDiagnoseType;
+
+export type TSymptomType = {
+  engName: string;
+  korName: string;
 };
 
-type TDigestiveDiagnoseType = {
-  category: "소화기 내과";
-  symptoms: TDigestiveSymptomType[];
-};
-
-export type TDiagnoseType = TDentalDiagnoseType | TDigestiveDiagnoseType;
 export type TDiagnoseCategory = TDiagnoseType["category"];

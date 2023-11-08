@@ -8,7 +8,7 @@ import { useGetQuestions } from "./useGetQuestions";
 import { usePostAnswer } from "./usePostAnswer";
 import type { TSymptomType } from "src/interfaces/symptomPage";
 
-function useDiagnosis(state: TSymptomType) {
+function useDiagnosis(state: string) {
   const navigate = useNavigate();
   const {
     gender,

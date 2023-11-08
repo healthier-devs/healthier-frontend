@@ -6,7 +6,7 @@ import type { TSymptomType } from "src/interfaces/symptomPage";
 
 interface IUseGetQuestions {
   gender: string;
-  state: TSymptomType;
+  state: string;
 }
 
 export const useGetQuestions = ({ gender, state }: IUseGetQuestions) => {

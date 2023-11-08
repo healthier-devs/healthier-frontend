@@ -9,7 +9,7 @@ import type { IPostAnswersBody } from "src/interfaces/diagnoseApi/diagnosis";
 import type { TSymptomType } from "src/interfaces/symptomPage";
 
 interface IUsePostAnswer extends IPostAnswersBody {
-  diagnoseType: TSymptomType;
+  diagnoseType: string;
 }
 
 export const usePostAnswer = ({ diagnoseType, user, answers }: IUsePostAnswer) => {

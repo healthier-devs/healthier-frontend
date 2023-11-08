@@ -10,7 +10,7 @@ import type { TSymptomType } from "src/interfaces/symptomPage";
 
 const Diagnosis = () => {
   const navigate = useNavigate();
-  const { state } = useLocation() as { state: TSymptomType };
+  const { state } = useLocation() as { state: string };
 
   const containerRef = useRef<HTMLDivElement>(null);
 

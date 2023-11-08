@@ -38,7 +38,7 @@ import Password from "./signUp/password";
 import TermsAgreement from "./signUp/termsAgreement";
 import SymptomPage from "./symptom";
 import SymptomTypeQR from "./symptom-qr";
-import SymptomTypePage from "./symptomType";
+import SymptomTypePage from "./symptom-type";
 import Test from "./test";
 
 export {

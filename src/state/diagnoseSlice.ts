@@ -3,7 +3,7 @@ import { IDiagnoseState } from "./index";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IDiagnoseState = {
-  category: "소화기 내과",
+  category: "피부",
   hospitalId: "",
 };
 
