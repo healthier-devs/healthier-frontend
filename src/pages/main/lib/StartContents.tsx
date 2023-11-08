@@ -25,7 +25,7 @@ function StartContents({ text, buttonText, buttonHref }: IStartContents) {
 export default StartContents;
 
 const Box = styled.div`
-  margin-top: 2px;
+  padding-top: 2px;
 
   padding: 20px;
   border-radius: 16px;

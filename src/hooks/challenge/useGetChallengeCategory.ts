@@ -9,7 +9,7 @@ export const useGetChallengeCategory = () => {
     isLoading,
     isSuccess,
   } = useQuery<TChallengeCategoryListResponse>({
-    queryKey: [queryKeys.CHALLENGE],
+    queryKey: [queryKeys.CHALLENGE, "list"],
     queryFn: () => challengeFetcher.getChallengeCategory(),
   });
 
