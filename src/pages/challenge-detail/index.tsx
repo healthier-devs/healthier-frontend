@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import Dialog from "src/components/dialog";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
+import Modal from "src/components/navigationBar/modal";
 import { useGetChallengeById } from "src/hooks/challenge/useGetChallengeById";
 import { usePostChallengeJoin } from "src/hooks/challenge/usePostChallengeJoin";
 import useModal from "src/hooks/useModal";
@@ -111,8 +112,14 @@ const ChallengeDetail = () => {
   const { isLoading, challengeData } = useGetChallengeById(challengeID);
   const challenge = challengeData ? challengeData.challenge : null;
   const canParticipate = challengeData ? !challengeData.participationStatus : true;
+  const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
 
   const handleClickParticipateButton = () => {
+    if (!authenticated) {
+      setLoginModalOpen(true);
+
+      return;
+    }
     if (canParticipate) {
       confirmDialogOpen();
     } else {
@@ -121,19 +128,27 @@ const ChallengeDetail = () => {
   };
 
   const handleTodayJoin = () => {
-    if (authenticated) {
-      postChallengeJoin({ isToday: 0 });
+    if (!authenticated) {
       confirmDialogClose();
-      todayJoinModalOpen();
+
+      return;
     }
+
+    postChallengeJoin({ isToday: 0 });
+    confirmDialogClose();
+    todayJoinModalOpen();
   };
 
   const handleNextDayJoin = () => {
-    if (authenticated) {
-      postChallengeJoin({ isToday: 1 });
+    if (!authenticated) {
       confirmDialogClose();
-      nextDayJoinModalOpen();
+
+      return;
     }
+
+    postChallengeJoin({ isToday: 1 });
+    confirmDialogClose();
+    nextDayJoinModalOpen();
   };
 
   return isLoading || !challenge ? (
@@ -141,6 +156,15 @@ const ChallengeDetail = () => {
   ) : (
     <>
       <ContentHeader back={true} exit={false} borderBottom={false} />
+      {loginModalOpen && (
+        <Modal
+          onClickBackDrop={() => setLoginModalOpen(false)}
+          onClickConfirm={() => {
+            setLoginModalOpen(false);
+            navigate("/onboard");
+          }}
+        />
+      )}
       <Styled.Container>
         <Styled.Image
           src={`${
