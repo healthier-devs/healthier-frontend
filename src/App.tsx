@@ -8,6 +8,7 @@ import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
 import { clearHospitalId } from "./state/diagnoseSlice";
+import { getCookie } from "./utils/cookies";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    validateToken();
+    getCookie("accessToken") && validateToken();
   }, [validateToken]);
 
   useGoogleAnalytics();
