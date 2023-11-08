@@ -73,3 +73,11 @@ export interface INotificationSubscribedResponse {
 export interface IUpdateNotiRequest {
   subscribed: boolean;
 }
+
+export interface IUserInfo {
+  name: string;
+  username: string;
+  gender: string;
+  age: number;
+  healthInterests: string[];
+}
