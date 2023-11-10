@@ -183,9 +183,7 @@ const ChallengeDetail = () => {
           </ChallengeDescription>
 
           <ChallengeDescription highlight="TIP : " title={`${challenge.tipSubtitle}`}>
-            <Styled.Typography color="300" lineHeight="150%">
-              {processText(challenge.tipContent)}
-            </Styled.Typography>
+            {processText(challenge.tipContent)}
           </ChallengeDescription>
         </Styled.Section>
         <Styled.Section>
