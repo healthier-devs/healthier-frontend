@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import Dialog from "src/components/dialog";
@@ -14,71 +14,11 @@ import ChallengeDescription from "./challenge-description";
 import ChallengeModal from "./challenge-modal";
 import ChallengeNotification from "./challenge-notification";
 import * as Styled from "./index.style";
+import { processText } from "./text-decoration";
 
 interface IQueryID {
   id?: string;
 }
-
-const highlightText = (line: string) => {
-  const parts = line.split("^");
-
-  return parts.map((part, pIndex) => {
-    if (pIndex % 2 === 1) {
-      return <Styled.Highlighted key={pIndex}>{part}</Styled.Highlighted>;
-    } else {
-      return part;
-    }
-  });
-};
-
-const processText = (text?: string) => {
-  const output: React.ReactNode[] = [];
-
-  if (typeof text !== "string") {
-    return output;
-  }
-
-  const sections = text.split("%");
-
-  sections.forEach((section) => {
-    if (section.includes("&")) {
-      const listItems = section.split("&")[1].split("\n");
-      const frame = (
-        <Styled.Frame key={section} mb="1.2rem" px="1.6rem">
-          {listItems.map((item, index) => (
-            <Styled.FrameText key={index} color="200" lineHeight="180%" fontSize="1.4rem" fontWeight="200">
-              {item.split("^").map((part, pIndex) => {
-                if (pIndex % 2 === 1) {
-                  return <Styled.Highlighted key={pIndex}>{part}</Styled.Highlighted>;
-                } else {
-                  return part;
-                }
-              })}
-            </Styled.FrameText>
-          ))}
-        </Styled.Frame>
-      );
-
-      output.push(frame);
-    } else {
-      const lines = section.split("\n");
-      const typography = (
-        <Styled.Typography key={section} lineHeight="160%" color="300" mb="1.2rem">
-          {lines.map((line, index) => (
-            <React.Fragment key={index}>
-              {highlightText(line)}
-              {index !== lines.length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </Styled.Typography>
-      );
-
-      output.push(typography);
-    }
-  });
-
-  return output;
-};
 
 const ChallengeDetail = () => {
   const { id = "" }: IQueryID = useParams();
@@ -111,7 +51,7 @@ const ChallengeDetail = () => {
 
   const { challengeData } = useGetChallengeById(challengeID);
   const { challenge } = challengeData;
-  const canParticipate = challengeData ? !challengeData.participationStatus : true;
+  const canParticipate = !challengeData.challengeRetryBlocked && !challengeData.participationStatus;
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
 
   const handleClickParticipateButton = () => {
@@ -122,7 +62,7 @@ const ChallengeDetail = () => {
     }
     if (canParticipate) {
       confirmDialogOpen();
-    } else {
+    } else if (challengeData.participationStatus) {
       navigate(`/challenge/stamp/${id}`);
     }
   };
@@ -149,6 +89,17 @@ const ChallengeDetail = () => {
     postChallengeJoin({ isToday: 1 });
     confirmDialogClose();
     nextDayJoinModalOpen();
+  };
+
+  const processButtonText = () => {
+    if (challengeData.challengeRetryBlocked) {
+      return "참여 불가";
+    }
+    if (challengeData.participationStatus) {
+      return "인증하기";
+    }
+
+    return "참여하기";
   };
 
   return (
@@ -247,7 +198,9 @@ const ChallengeDetail = () => {
         <ChallengeNotification />
       </Styled.Container>
       <Styled.ButtonWrapper>
-        <Styled.Button onClick={handleClickParticipateButton}>{canParticipate ? "참여하기" : "인증하기"}</Styled.Button>
+        <Styled.Button onClick={handleClickParticipateButton} isEnabled={!challengeData.challengeRetryBlocked}>
+          {processButtonText()}
+        </Styled.Button>
       </Styled.ButtonWrapper>
 
       {confirmDialogIsOpen && (

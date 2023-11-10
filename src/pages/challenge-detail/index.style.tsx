@@ -132,15 +132,15 @@ export const ButtonWrapper = styled.div`
   background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.12%, #131416 100%);
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ isEnabled: boolean }>`
   width: 100%;
   padding: 1.4rem 6.2rem;
 
   border-radius: 3rem;
-  background: ${({ theme }) => theme.color.blue};
+  background: ${({ theme, isEnabled }) => (isEnabled ? theme.color.blue : theme.color.grey_650)};
 
   font-size: 1.4rem;
-  color: ${({ theme }) => theme.color.grey_100};
+  color: ${({ theme, isEnabled }) => (isEnabled ? theme.color.grey_100 : theme.color.grey_500)};
   font-weight: 300;
   line-height: 150%;
 

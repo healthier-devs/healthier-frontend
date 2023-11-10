@@ -5,6 +5,7 @@ import type { IChallengeDetailResponse } from "src/interfaces/challenges";
 
 const DEFAULT_CHALLENGE_DETAIL_DATA: IChallengeDetailResponse = {
   participationStatus: false,
+  challengeRetryBlocked: false,
   challenge: {
     id: 0,
     title: "",

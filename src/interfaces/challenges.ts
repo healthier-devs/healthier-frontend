@@ -9,6 +9,7 @@ export interface IChallenge {
 
 export interface IChallengeDetailResponse {
   participationStatus: boolean;
+  challengeRetryBlocked: boolean;
   challenge: {
     id: number;
     title: string;
