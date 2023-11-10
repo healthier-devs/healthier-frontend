@@ -109,8 +109,8 @@ const ChallengeDetail = () => {
 
   const navigate = useNavigate();
 
-  const { isLoading, challengeData } = useGetChallengeById(challengeID);
-  const challenge = challengeData ? challengeData.challenge : null;
+  const { challengeData } = useGetChallengeById(challengeID);
+  const { challenge } = challengeData;
   const canParticipate = challengeData ? !challengeData.participationStatus : true;
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
 
@@ -151,9 +151,7 @@ const ChallengeDetail = () => {
     nextDayJoinModalOpen();
   };
 
-  return isLoading || !challenge ? (
-    <></>
-  ) : (
+  return (
     <>
       <ContentHeader back={true} exit={false} borderBottom={false} />
       {loginModalOpen && (
