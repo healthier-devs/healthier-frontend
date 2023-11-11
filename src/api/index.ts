@@ -1,7 +1,8 @@
 import axios from "axios";
 import { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
 import { DEVELOPMENT_SET_COOKIE_OPTIONS, DEPLOYMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
-import { setCookie, getCookie } from "src/utils/cookies";
+import { setCookie, getCookie, removeCookie } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
 const FETCHER_TIME_OUT = 7500;
@@ -80,6 +81,17 @@ export const createFetcher = (path: string) => {
 
         return instance.request(_err.config);
       } catch (reissueErr) {
+        if (reissueErr instanceof AxiosError && reissueErr.response) {
+          const { status } = reissueErr.response;
+
+          if (status === StatusCodes.UNAUTHORIZED) {
+            removeCookie("accessToken");
+            removeCookie("refreshToken");
+
+            return;
+          }
+        }
+
         return Promise.reject(reissueErr);
       }
     }
