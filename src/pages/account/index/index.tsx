@@ -93,7 +93,7 @@ function AccountIndex() {
       <NavigationBar menu="account" />
     </>
   ) : (
-    <>Loading</>
+    <></>
   );
 }
 
