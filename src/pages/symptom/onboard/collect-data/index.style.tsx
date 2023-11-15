@@ -3,12 +3,30 @@ import styled from "styled-components";
 export const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
+  margin-top: 5.6rem;
   padding: 3.2rem 2.4rem;
   display: flex;
   flex-direction: column;
   gap: 4.2rem;
 `;
 
+export const Navigation = styled.div`
+  height: 9.6rem;
+  display: flex;
+  align-items: end;
+  text-align: center;
+  & > span {
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    color: ${({ theme }) => theme.color.grey_200};
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 200;
+    line-height: 120%;
+    letter-spacing: 0.15px;
+  }
+`;
 export const Header = styled.h1`
   width: 100%;
   color: ${({ theme }) => theme.color.grey_200};

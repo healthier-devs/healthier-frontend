@@ -68,7 +68,7 @@ export default function NavigationBar({ menu }: { menu: TMenu }) {
             <Styled.Button
               className="center"
               onClick={() => {
-                navigate(authenticated ? "symptom-type" : "/info");
+                navigate(authenticated ? "symptom-onboard" : "/info");
               }}
             >
               <Styled.DiagnosisButton />
