@@ -38,6 +38,8 @@ import Password from "./signUp/password";
 import TermsAgreement from "./signUp/termsAgreement";
 import SymptomPage from "./symptom";
 import SymptomTypeQR from "./symptom-qr";
+import SymptomOnboard from "./symptom/onboard";
+import CollectInformation from "./symptom/onboard/collect-data";
 import SymptomTypePage from "./symptomType";
 import Test from "./test";
 
@@ -84,4 +86,6 @@ export {
   AccountEdit,
   AccountResetPassword,
   ModifyInformation,
+  SymptomOnboard,
+  CollectInformation,
 };

@@ -45,6 +45,8 @@ function App() {
           <Route path="/result" element={<Pages.ResultPage />} />
           <Route path="/diagnosis" element={<Pages.Diagnosis />} />
           <Route path="/symptom" element={<Pages.SymptomPage />} />
+          <Route path="/symptom-onboard" element={<Pages.SymptomOnboard />} />
+          <Route path="/collect-symptom" element={<Pages.CollectInformation />} />
           <Route path="/symptom-type" element={<Pages.SymptomTypePage />} />
           <Route path="/appointment" element={<Pages.Appointment />} />
           <Route path="/onboard" element={<Pages.Onboard />} />
