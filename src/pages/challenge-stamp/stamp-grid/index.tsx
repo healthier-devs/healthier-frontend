@@ -56,7 +56,7 @@ function StampGrid({ stampSubmissions, duration, currentDayCnt, handleClickReviv
           );
         }
 
-        return <></>;
+        return <div style={{ display: "none" }} key={idx}></div>;
       })}
     </>
   );

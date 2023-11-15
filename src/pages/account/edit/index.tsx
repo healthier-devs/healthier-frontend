@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import Divider from "src/components/divider";
@@ -9,19 +8,19 @@ import * as Lib from "../../signUp/lib";
 import { Box, Typography } from "../settings/index.style";
 
 function Edit() {
-  const { userData, isLoading } = useUserData();
+  const { userData } = useUserData();
 
-  return !isLoading ? (
+  return (
     <div>
       <Box padding="3.2rem 2.4rem 0">
         <Box mb="4rem">
           <Lib.TextField id="account-id" label="이름" value={userData.name} disabled />
         </Box>
-        <Box mb="4rem">
+        {/* <Box mb="4rem">
           <Lib.TextField id="account-phone-number" label="전화번호" value="010-1234-5678" disabled />
-        </Box>
+        </Box> */}
         <Box>
-          <Lib.TextField id="account-email" label="이메일" value="healthier@email.com" disabled />
+          <Lib.TextField id="account-email" label="이메일" value={userData.username} disabled />
         </Box>
       </Box>
       <Divider />
@@ -34,8 +33,6 @@ function Edit() {
         </Link>
       </Box>
     </div>
-  ) : (
-    <>Loading...</>
   );
 }
 

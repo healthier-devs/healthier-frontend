@@ -37,7 +37,7 @@ function ChallengeList() {
           <img alt="back" src="/images/header/back.svg" width={32} height={32} />
         </Styled.LeftButton>
         <Styled.HeaderTitle>나의 챌린지</Styled.HeaderTitle>
-        <Styled.RightButton onClick={() => navigate("/challenge/reward")}>
+        <Styled.RightButton onClick={() => navigate("/account/reward")}>
           <img alt="gift" src="/images/challenge/gift.png" width={32} height={32} />
         </Styled.RightButton>
       </Styled.HeaderContainer>
@@ -88,7 +88,7 @@ function ChallengeList() {
           <Styled.DescriptionText>챌린지에 대한 리워드는 선물함에서 확인 가능해요</Styled.DescriptionText>
         </Styled.CardList>
       )}
-      {isReadyData && (myChallengesData?.count ?? 0) === 0 && (
+      {(!authenticated || (isReadyData && (myChallengesData?.count ?? 0) === 0)) && (
         <Styled.EmptyContainer>
           <Styled.EmptyText>
             아직 {selectedTab === "PROGRESS" ? "도전을 시작한" : "완료한"} 챌린지가 없어요!

@@ -4,6 +4,7 @@ import type {
   TChallengeCategoryListResponse,
   IMyChallengeProgressResponse,
   IStampImagePresignedUrl,
+  IChallengeDetailResponse,
 } from "src/interfaces/challenges";
 
 const fetcher = createFetcher("/challenges");
@@ -22,8 +23,8 @@ export const challengeFetcher = {
   getStampImageUrl(): Promise<IStampImagePresignedUrl> {
     return fetcher.get("/image");
   },
-  getChallengeByID({ challengeID }: { challengeID: number }) {
-    return unauthorizedFetcher.get(`${challengeID}`);
+  getChallengeByID({ challengeID }: { challengeID: number }): Promise<IChallengeDetailResponse> {
+    return fetcher.get(`${challengeID}`);
   },
   postChallengeJoin({ challengeId, isToday }: { challengeId: number; isToday: number }) {
     return fetcher.post(`/join/${challengeId}?isToday=${isToday}`);

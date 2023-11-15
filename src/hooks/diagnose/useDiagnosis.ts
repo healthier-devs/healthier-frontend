@@ -8,13 +8,15 @@ import { useGetQuestions } from "./useGetQuestions";
 import { usePostAnswer } from "./usePostAnswer";
 import type { TSymptomType } from "src/interfaces/symptomPage";
 
-function useDiagnosis(state: TSymptomType) {
+function useDiagnosis(symptom: TSymptomType) {
   const navigate = useNavigate();
   const {
     gender,
     name,
     birth: { year, month, date },
   } = useAppSelector((appState) => appState.user);
+
+  const SYMPTOM_NAME = symptom.engName.toLowerCase();
 
   const [curQuestion, setCurQuestion] = useState<IQuestion | null>(INITIAL_QUESTION);
   const [selectedAnswer, setSelectedAnswer] = useState<ISelectedAnswer>(INITIAL_ANSWER);
@@ -23,18 +25,18 @@ function useDiagnosis(state: TSymptomType) {
   const questionHistory = useRef<IQuestion[]>([]);
   const answers = useRef<IAnswer[]>([]);
 
-  const { questionsData, isLoading } = useGetQuestions({ gender, state });
+  const { questionsData, isLoading } = useGetQuestions({ gender, state: SYMPTOM_NAME });
   const { postAnswer, isPending } = usePostAnswer({
-    diagnoseType: state,
+    diagnoseType: SYMPTOM_NAME,
     user: { name, gender, birth_date: formatBirth({ year, month, date }) },
     answers: answers.current,
   });
 
   useEffect(() => {
-    if (!state) {
+    if (!symptom) {
       navigate("/");
     }
-  }, [navigate, state]);
+  }, [navigate, symptom]);
 
   useEffect(() => {
     if (!questionsData) {

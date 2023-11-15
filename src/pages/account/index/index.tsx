@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import Box from "src/components/box";
@@ -6,7 +5,6 @@ import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import NavigationBar from "src/components/navigationBar";
 import { useUserData } from "src/hooks/account/useUserData";
-import { useValidateToken } from "src/hooks/account/useValidateToken";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
@@ -21,8 +19,8 @@ const accountItems: IAccountItem[] = [
     path: "/diagRecord",
   },
   {
-    label: "선물함 바로가기",
-    path: "",
+    label: "리워드 바로가기",
+    path: "/reward",
   },
   {
     label: "환경설정",
@@ -40,17 +38,14 @@ const accountItems: IAccountItem[] = [
 
 function AccountIndex() {
   const navigate = useNavigate();
-  const { validateToken } = useValidateToken();
-  const { userData, isLoading } = useUserData();
+  const { userData } = useUserData();
 
-  return !isLoading ? (
+  return (
     <>
       <div>
         <Box style={{ padding: "3.2rem 2.4rem 2.4rem 2.4rem" }}>
           <Box mb="3rem">
             <FlexBox gap="12px" alignItems="start">
-              <Styled.UserImage src="/images/account/user.svg" />
-
               <Styled.UserInfoWrapper>
                 <FlexBox alignItems="center" mb="8px" gap="8px">
                   <Styled.Username>{userData.name}</Styled.Username>
@@ -92,8 +87,6 @@ function AccountIndex() {
       </div>
       <NavigationBar menu="account" />
     </>
-  ) : (
-    <></>
   );
 }
 

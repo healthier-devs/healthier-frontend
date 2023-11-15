@@ -66,10 +66,18 @@ export interface IResetPassword {
 }
 
 export interface INotificationSubscribedResponse {
-  status: boolean;
+  marketing: boolean;
+  pushNotification: boolean;
 }
 
-export interface IUpdateMarketingSubscribedRequest {
-  userEmail: string;
+export interface IUpdateNotiRequest {
   subscribed: boolean;
+}
+
+export interface IUserInfo {
+  name: string;
+  username: string;
+  gender: string;
+  age: number;
+  healthInterests: string[];
 }

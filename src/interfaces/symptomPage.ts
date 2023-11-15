@@ -1,6 +1,5 @@
 import { LayerProps } from "lamina/types";
 import { Abstract, LayerMaterial } from "lamina/vanilla";
-import { DENTAL_SYMPTOMS, DIGESTIVE_SYMPTOMS, SYMPTOM_TYPES } from "src/data/symptom_type";
 import { Vector3 } from "three";
 
 export interface IOverlayProps {
@@ -55,19 +54,29 @@ export enum BodyPart {
   BACKNECK = "BACKNECK",
 }
 
-export type TSymptomType = typeof SYMPTOM_TYPES[number];
-export type TDentalSymptomType = typeof DENTAL_SYMPTOMS[number];
-type TDigestiveSymptomType = typeof DIGESTIVE_SYMPTOMS[number];
-
-type TDentalDiagnoseType = {
-  category: "치과";
-  symptoms: TDentalSymptomType[];
+export type TSymptomType = {
+  engName: string;
+  korName: string;
 };
 
-type TDigestiveDiagnoseType = {
-  category: "소화기 내과";
-  symptoms: TDigestiveSymptomType[];
-};
+export type TDiagnoseCategory =
+  | "피부"
+  //| "전신"
+  | "머리"
+  // | "정신"
+  // | "코"
+  | "목"
+  //| "등/허리"
+  //| "가슴"
+  | "배";
+//| "골반"
+//| "팔다리";
 
-export type TDiagnoseType = TDentalDiagnoseType | TDigestiveDiagnoseType;
-export type TDiagnoseCategory = TDiagnoseType["category"];
+//export type TDiagnoseCategory = "피부" | "배" | "r";
+
+export type TDiagnoseType = {
+  [key in TDiagnoseCategory]: {
+    symptoms: TSymptomType[];
+    imagePath: string;
+  };
+};

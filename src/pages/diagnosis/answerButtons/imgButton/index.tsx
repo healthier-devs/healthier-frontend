@@ -6,7 +6,7 @@ import type { IAnswerButtonProps } from "src/interfaces/diagnosisPage";
 function ImgButton(props: IAnswerButtonProps) {
   const { category } = useAppSelector((appState) => appState.diagnose);
 
-  if (category === "소화기 내과") {
+  if (category === "배") {
     return <DigestiveImgButton {...props} />;
   }
 

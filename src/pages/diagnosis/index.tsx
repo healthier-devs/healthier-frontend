@@ -10,11 +10,13 @@ import type { TSymptomType } from "src/interfaces/symptomPage";
 
 const Diagnosis = () => {
   const navigate = useNavigate();
-  const { state } = useLocation() as { state: TSymptomType };
+  const {
+    state: { symptom },
+  } = useLocation() as { state: { symptom: TSymptomType } };
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { isLoading, curQuestion, selectedAnswer, setSelectedAnswer, handleNext, handleBack } = useDiagnosis(state);
+  const { isLoading, curQuestion, selectedAnswer, setSelectedAnswer, handleNext, handleBack } = useDiagnosis(symptom);
 
   useEffect(() => {
     if (!containerRef.current) {

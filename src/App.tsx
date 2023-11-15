@@ -8,6 +8,7 @@ import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { useAppDispatch } from "./state";
 import { clearHospitalId } from "./state/diagnoseSlice";
+import { getCookie } from "./utils/cookies";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
   const { reset } = useQueryErrorResetBoundary();
   const { validateToken } = useValidateToken();
+  const accessToken = getCookie("accessToken");
 
   useEffect(() => {
     handleResizeWindow();
@@ -30,8 +32,8 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    validateToken();
-  }, [validateToken]);
+    accessToken && validateToken();
+  }, [validateToken, accessToken]);
 
   useGoogleAnalytics();
 
@@ -65,6 +67,7 @@ function App() {
             <Route index element={<Pages.AccountIndex />} />
             <Route path="/account/announcement" element={<Pages.AccountAnnouncement />} />
             <Route path="/account/diagRecord" element={<Pages.DiagnoseRecord />} />
+            <Route path="/account/reward" element={<Pages.Reward />} />
             <Route path="/account/announcement/:id" element={<Pages.AnnouncementDetail />} />
             <Route path="/account/settings" element={<Pages.AccountSettings />} />
             <Route path="/account/edit" element={<Pages.AccountEdit />} />
