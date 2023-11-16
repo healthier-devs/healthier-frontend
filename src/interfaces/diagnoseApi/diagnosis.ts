@@ -109,6 +109,7 @@ export interface IDiagnoseResponse {
   username: string;
   unknown_cause: boolean;
   diagnosis: IDiagnoseResult[];
+  dx_id: string;
 }
 
 export interface IDiagnoseAnswers {
