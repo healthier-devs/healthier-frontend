@@ -1,4 +1,4 @@
-//import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,8 +11,6 @@ import * as Styled from "./index.style";
 import type { FallbackProps } from "react-error-boundary";
 
 export default function Error({ error, resetErrorBoundary }: FallbackProps) {
-  const { status } = error.response;
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -26,11 +24,15 @@ export default function Error({ error, resetErrorBoundary }: FallbackProps) {
   }, [location.pathname, resetErrorBoundary]);
 
   useEffect(() => {
-    if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
-      dispatch(logout());
-      navigate("/login");
+    if (error instanceof AxiosError && error.response) {
+      const { status } = error.response;
+
+      if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
+        dispatch(logout());
+        navigate("/login");
+      }
     }
-  }, [status, navigate, dispatch]);
+  }, [error, navigate, dispatch]);
 
   const handleClickRetryButton = () => {
     resetErrorBoundary();
