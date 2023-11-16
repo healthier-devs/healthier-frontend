@@ -69,7 +69,7 @@ const DiagnosisList = () => {
         </Styled.Title>
 
         {mostLikelyResult && <DiagnosisCard isSquare={true} result={mostLikelyResult} handleNavigate={handleNavigate} />}
-        {extraResults && (
+        {extraResults.length > 0 && (
           <>
             <Styled.ExtraResultsTitle padding="4rem 0 1.6rem">가능성 높은{"\n"}추가 질환을 알려드려요</Styled.ExtraResultsTitle>
             {extraResults.map((extraResult) => (
