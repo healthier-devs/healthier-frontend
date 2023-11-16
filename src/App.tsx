@@ -3,20 +3,18 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import { useValidateToken } from "./hooks/account/useValidateToken";
+import { useAutoLogin } from "./hooks/account/useAutoLogin";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
-import { useAppDispatch } from "./state";
-import { clearHospitalId } from "./state/diagnoseSlice";
 import { getCookie } from "./utils/cookies";
 import { handleResizeWindow } from "./utils/window";
 
 function App() {
-  const dispatch = useAppDispatch();
-
   const { reset } = useQueryErrorResetBoundary();
-  const { validateToken } = useValidateToken();
   const accessToken = getCookie("accessToken");
+
+  useAutoLogin(accessToken);
+  useGoogleAnalytics();
 
   useEffect(() => {
     handleResizeWindow();
@@ -26,16 +24,6 @@ function App() {
       window.removeEventListener("resize", handleResizeWindow);
     };
   }, []);
-
-  useEffect(() => {
-    dispatch(clearHospitalId());
-  }, [dispatch]);
-
-  useEffect(() => {
-    accessToken && validateToken();
-  }, [validateToken, accessToken]);
-
-  useGoogleAnalytics();
 
   return (
     <Container>

@@ -11,13 +11,15 @@ const DEFAULT_USER_DATA: IUserInfo = {
   healthInterests: [],
 };
 
-export const useUserData = () => {
-  const { data: userData } = useQuery({
+export const useUserData = (isEnabled?: boolean) => {
+  const { data: userData, isSuccess } = useQuery({
     queryKey: [queryKeys.MYPAGE, "userData"],
     queryFn: () => accountFetcher.getUserData(),
+    enabled: isEnabled ?? true,
   });
 
   return {
+    isSuccess,
     userData: userData ?? DEFAULT_USER_DATA,
   };
 };

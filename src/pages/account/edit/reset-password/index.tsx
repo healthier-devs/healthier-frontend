@@ -4,7 +4,7 @@ import * as Lib from "src/pages/signUp/lib";
 import { useAppSelector } from "src/state";
 
 function ResetPassword() {
-  const { email } = useAppSelector((state) => state.auth);
+  const { email } = useAppSelector((state) => state.user);
 
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");

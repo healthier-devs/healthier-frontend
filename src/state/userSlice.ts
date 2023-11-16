@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BodyPart } from "src/interfaces/symptomPage";
-import { UserState, fillInfoAction, IQRInfoAction } from "./index";
+import { UserState, ISetNonmemberAction, IQRInfoAction } from "./index";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { IUserInfo } from "src/interfaces/account";
 
 const initialState: UserState = {
-  id: 0,
   name: "",
   email: "",
   gender: "",
@@ -13,7 +13,9 @@ const initialState: UserState = {
     month: 0,
     date: 0,
   },
-  interests: [],
+  healthInterests: [],
+  age: 0,
+
   site: [],
 };
 
@@ -21,10 +23,16 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userSubmit: (state, action: PayloadAction<fillInfoAction>) => {
+    setMemberInfo: (state, action: PayloadAction<IUserInfo>) => {
+      state.name = action.payload.name;
+      state.email = action.payload.username;
+      state.gender = action.payload.gender;
+      state.age = action.payload.age;
+      state.healthInterests = [...action.payload.healthInterests];
+    },
+    setNonmemberInfo: (state, action: PayloadAction<ISetNonmemberAction>) => {
       state.gender = action.payload.gender;
       state.birth = action.payload.birth;
-      state.interests = [...action.payload.interests];
     },
     setSite: (state, action: PayloadAction<BodyPart[]>) => {
       state.site = action.payload;
@@ -40,5 +48,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { userSubmit, setSite, setQRInformation, clearUserName } = userSlice.actions;
+export const { setMemberInfo, setNonmemberInfo, setSite, setQRInformation, clearUserName } = userSlice.actions;
 export default userSlice.reducer;

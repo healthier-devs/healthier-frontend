@@ -6,13 +6,12 @@ import RoundButton from "src/components/roundButton";
 import { IAgreement } from "src/interfaces/informationPage";
 import theme from "src/lib/theme";
 import { useAppDispatch, useAppSelector } from "src/state";
-import { userSubmit } from "src/state/userSlice";
+import { setNonmemberInfo } from "src/state/userSlice";
 import Agreement from "./agreement";
 import Gender from "./gender";
 import { Title, ButtonBackground } from "./index.style";
 import InformationAgreement from "./informationAgreement";
 import MemberAgreement from "./memberAgreement";
-import Tags from "./tags";
 import YearPicker from "./yearPicker";
 
 const Information = () => {
@@ -20,7 +19,6 @@ const Information = () => {
 
   const [active, setActive] = useState(false);
   const [year, setYear] = useState(defaultState.birth.year);
-  const [interests, setInterests] = useState(defaultState.interests);
   const [gender, setGender] = useState(defaultState.gender);
   const [agree, setAgree] = useState<IAgreement>({ member: false, information: false });
   const [agreementDetail, setAgreementDetail] = useState(0);
@@ -38,14 +36,14 @@ const Information = () => {
     } else {
       setActive(false);
     }
-  }, [year, interests, gender, agree]);
+  }, [year, gender, agree]);
 
   const handleProceed = () => {
     if (!active) {
       return;
     }
 
-    dispatch(userSubmit({ gender, birth: { year, month: 0, date: 0 }, interests }));
+    dispatch(setNonmemberInfo({ gender, birth: { year, month: 0, date: 0 } }));
     navigate("/symptom-type", { state: "info" });
   };
 
@@ -63,7 +61,6 @@ const Information = () => {
               </Title>
               <YearPicker year={year} setYear={setYear} />
               <Gender gender={gender} setGender={setGender} />
-              <Tags interests={interests} setInterests={setInterests} />
               <Agreement agree={agree} setAgree={setAgree} setAgreementDetail={setAgreementDetail} />
             </section>
             <ButtonBackground className="button-box" onClick={handleProceed}>

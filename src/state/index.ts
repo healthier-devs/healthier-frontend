@@ -12,24 +12,23 @@ export const useAppSelector: TypedUseSelectorHook<TRootState> = useSelector;
 ////////////////////////////////
 
 export interface UserState {
-  id: number;
   name: string;
   email: string;
   gender: string;
   birth: IBirth;
-  interests: number[];
+  healthInterests: string[];
+  age: number;
+
   site: BodyPart[];
 }
 
-export interface fillInfoAction {
+export interface ISetNonmemberAction {
   gender: string;
   birth: IBirth;
-  interests: number[];
 }
 
 export interface IAuthState {
   authenticated: boolean;
-  email: string;
 }
 
 export interface IDiagnoseState {
