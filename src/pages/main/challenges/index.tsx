@@ -13,7 +13,7 @@ const DEFAULT_MY_CHALLENGES_DATA: IMyChallengeProgressResponse = {
   myChallenge: [],
 };
 
-function Challenges({ authenticated }: IAuthState) {
+function Challenges({ authenticated }: Pick<IAuthState, "authenticated">) {
   const { myChallengesData = DEFAULT_MY_CHALLENGES_DATA, isLoading } = useGetMyChallenges({ status: "PROGRESS", authenticated });
 
   return (

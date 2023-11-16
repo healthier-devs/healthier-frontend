@@ -4,7 +4,7 @@ import Title from "../lib/Title";
 import * as Styled from "./index.style";
 import type { IAuthState } from "src/state";
 
-function Symptoms({ authenticated }: IAuthState) {
+function Symptoms({ authenticated }: Pick<IAuthState, "authenticated">) {
   const { statisticsData } = useGetStatistics({ authenticated });
 
   return (

@@ -11,17 +11,17 @@ import Symptoms from "./symptoms";
 
 function Main() {
   const mainRef = useRef<HTMLDivElement>(null);
-  const { auth } = useAppSelector((state) => state);
+  const { authenticated } = useAppSelector((state) => state.auth);
 
   return (
     <>
       <MainHeader onClickLogo={() => mainRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} />
       <Layout padding="5.6rem 0 12rem" ref={mainRef}>
         {/* <Advertisement /> */}
-        <Symptoms {...auth} />
+        <Symptoms authenticated={authenticated} />
         <Hospitals />
-        <Challenges {...auth} />
-        <DiagnosisHistory {...auth} />
+        <Challenges authenticated={authenticated} />
+        <DiagnosisHistory authenticated={authenticated} />
       </Layout>
       <NavigationBar menu="home" />
     </>

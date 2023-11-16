@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { logout as logoutAPI } from "src/api/account/service";
 import { useAppDispatch } from "src/state";
 import { logout as logoutAction } from "src/state/authSlice";
-import { removeCookie } from "src/utils/cookies";
+import { removeToken } from "src/utils/cookies";
 
 export const useLogout = () => {
   const dispatch = useAppDispatch();
@@ -14,11 +14,11 @@ export const useLogout = () => {
   const { mutate: logout } = useMutation({
     mutationFn: () => logoutAPI(),
     onSuccess() {
-      alert("로그아웃이 완료되었습니다.");
-      removeCookie("accessToken");
-      removeCookie("refreshToken");
       dispatch(logoutAction());
+      removeToken();
       queryClient.clear();
+
+      alert("로그아웃이 완료되었습니다.");
 
       navigate("/");
     },

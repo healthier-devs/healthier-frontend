@@ -18,11 +18,16 @@ export const removeCookie = (name: string) => {
 
 export const saveToken = ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {
   setCookie("accessToken", accessToken, {
-    ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+    ...DEPLOYMENT_SET_COOKIE_OPTIONS,
     maxAge: ACCESS_TOKEN_AGE,
   });
   setCookie("refreshToken", refreshToken, {
-    ...DEVELOPMENT_SET_COOKIE_OPTIONS,
+    ...DEPLOYMENT_SET_COOKIE_OPTIONS,
     maxAge: REFRESH_TOKEN_AGE,
   });
+};
+
+export const removeToken = () => {
+  removeCookie("accessToken");
+  removeCookie("refreshToken");
 };

@@ -13,7 +13,7 @@ import * as Styled from "./index.style";
 import type { IDiagnosisRecord } from "src/interfaces/diagnoseApi/records";
 import type { IAuthState } from "src/state";
 
-function DiagnosisHistory({ authenticated }: IAuthState) {
+function DiagnosisHistory({ authenticated }: Pick<IAuthState, "authenticated">) {
   const navigate = useNavigate();
   const { recordsData } = useGetRecords({ size: 15, authenticated });
 
