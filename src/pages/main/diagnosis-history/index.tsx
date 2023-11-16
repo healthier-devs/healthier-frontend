@@ -62,7 +62,7 @@ function DiagnosisHistory({ authenticated }: Pick<IAuthState, "authenticated">) 
               <CardTitle>{record.createdAt} 기록</CardTitle>
               <ChevronRightIcon width={24} height={24} strokeWidth={2} stroke={theme.color.grey_500} />
             </FlexBox>
-            <FlexBox gap="6px">
+            <FlexBox gap="6px" flexWrap="wrap">
               {record.dxList.map(({ dxId, dxName }) => (
                 <Styled.Chip key={dxId}>{dxName}</Styled.Chip>
               ))}
