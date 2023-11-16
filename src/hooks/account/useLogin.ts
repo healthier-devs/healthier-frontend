@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "src/api/account/service";
 import { DEVELOPMENT_SET_COOKIE_OPTIONS, DEPLOYMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
 import { useAppDispatch } from "src/state";
@@ -8,12 +9,13 @@ import type { ILoginRequest } from "src/interfaces/account";
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { mutate: login, isSuccess } = useMutation({
     mutationFn: (body: ILoginRequest) => loginUser(body),
     onSuccess(data, body) {
-      if ("accessToken" in data && "refreshToken" in data) {
+      if (data && "accessToken" in data && "refreshToken" in data) {
         const { accessToken, refreshToken } = data;
 
         setCookie("accessToken", accessToken, {
@@ -30,6 +32,7 @@ export const useLogin = () => {
             email: body.username,
           })
         );
+        navigate("/");
 
         return;
       }
