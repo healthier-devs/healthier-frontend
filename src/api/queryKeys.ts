@@ -11,4 +11,5 @@ export const queryKeys = {
   ACCOUNT: "account",
   MARKETING_SUBSCRIBED: "marketingSubscribed",
   PUSH_SUBSCRIBED: "pushSubscribed",
+  INQUIRY: "inquiry",
 };

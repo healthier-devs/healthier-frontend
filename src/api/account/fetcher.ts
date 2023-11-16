@@ -9,6 +9,7 @@ import {
   IUpdateNotiRequest,
   IUserResponse,
   IUserInfo,
+  IInquiry,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -51,5 +52,11 @@ export const accountFetcher = {
   },
   updatePushSubscribed({ subscribed }: IUpdateNotiRequest): Promise<IUserResponse> {
     return fetcher.patch("/push-notification", { subscribed });
+  },
+  postInquiry(body: IInquiry) {
+    return fetcher.post("/inquiry", body);
+  },
+  getImageRoute() {
+    return unauthorizedFetcher.get("/inquiry/image");
   },
 };
