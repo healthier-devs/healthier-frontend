@@ -27,7 +27,7 @@ const ResultPage = () => {
 
   const [page, setPage] = useState<number>(1);
   const { resultData, isLoading } = useGetDDXResult(Number(dx_id));
-  const pageCount = useRef<number>(INITIAL_PAGE_COUNT);
+  const [pageCount, setPageCount] = useState<number>(INITIAL_PAGE_COUNT);
 
   useEffect(() => {
     if (!resultData) {
@@ -36,8 +36,7 @@ const ResultPage = () => {
 
     const { lifestyleHabits, medicines, examinationTreatments } = resultData;
 
-    pageCount.current =
-      INITIAL_PAGE_COUNT - Number(!lifestyleHabits.length) - Number(!medicines.length) - Number(!examinationTreatments.length);
+    setPageCount(INITIAL_PAGE_COUNT - Number(!lifestyleHabits.length) - Number(!medicines.length) - Number(!examinationTreatments.length));
   }, [resultData]);
 
   return isLoading ? (
@@ -87,7 +86,7 @@ const ResultPage = () => {
                 )}
               </Swiper>
             </Styled.SwiperContainer>
-            <Pagination page={page} setPage={setPage} count={pageCount.current} departments={resultData.medicalDepartments} />
+            <Pagination page={page} setPage={setPage} count={pageCount} departments={resultData.medicalDepartments} />
           </>
         )}
       </Styled.Container>
