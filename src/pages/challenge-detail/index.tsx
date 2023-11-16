@@ -153,14 +153,16 @@ const ChallengeDetail = () => {
             <FlexBox gap="1.2rem" alignItems="center">
               <Styled.Chip variant="secondary">Midterm 보상</Styled.Chip>
               <Styled.Typography color="300" lineHeight="150%">
-                {challenge.midtermGift / 1000}천원 상품권
+                {challenge.midtermGift >= 10000
+                  ? challenge.midtermGift / 10000 + "만원 상품권"
+                  : challenge.midtermGift / 1000 + "천원 상품권"}
               </Styled.Typography>
             </FlexBox>
 
             <FlexBox gap="1.2rem" alignItems="center">
               <Styled.Chip variant="secondary">Final 보상</Styled.Chip>
               <Styled.Typography color="300" lineHeight="150%">
-                {challenge.finalGift / 10000}만원 상품권
+                {challenge.finalGift >= 10000 ? challenge.finalGift / 10000 + "만원 상품권" : challenge.finalGift / 1000 + "천원 상품권"}
               </Styled.Typography>
             </FlexBox>
           </FlexBox>
@@ -188,11 +190,29 @@ const ChallengeDetail = () => {
         </Styled.Section>
         <Styled.Section>
           <ChallengeDescription highlight="인증 가이드">
-            <Styled.Typography color="200" lineHeight="150%" mb="12rem">
-              {challenge.guide}
+            <Styled.Typography color="200" lineHeight="150%" mb="2rem">
+              {processText(challenge.guide)}
             </Styled.Typography>
           </ChallengeDescription>
         </Styled.Section>
+        {challenge.successImage1 && (
+          <Styled.Section>
+            <Styled.GuideImgSection>
+              <div className="title success">⭕️ 인증 성공 예시</div>
+              <div className="content">
+                <img className="imgArea" src={challenge.successImage1} alt="success-image1" />
+                <img className="imgArea" src={challenge.successImage2} alt="success-image2" />
+              </div>
+            </Styled.GuideImgSection>
+            <Styled.GuideImgSection>
+              <div className="title fail">❌️ 인증 실패 예시</div>
+              <div className="content">
+                <img className="imgArea" src={challenge.failImage1} alt="fail-image1" />
+                <img className="imgArea" src={challenge.failImage2} alt="fail-image2" />
+              </div>
+            </Styled.GuideImgSection>
+          </Styled.Section>
+        )}
         <ChallengeNotification />
       </Styled.Container>
       <Styled.ButtonWrapper>

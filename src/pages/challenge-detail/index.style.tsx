@@ -44,6 +44,15 @@ export const Section = styled.section`
   padding: 0 2rem;
 `;
 
+export const SubText = styled.div`
+  color: ${({ theme }) => theme.color.grey_400};
+  font-size: 1.2rem;
+  font-weight: 200;
+  line-height: 150%;
+  letter-spacing: -0.3px;
+  margin-left: 1rem;
+`;
+
 export const Highlighted = styled.span`
   color: ${({ theme }) => theme.color.secondary_green};
 `;
@@ -145,4 +154,44 @@ export const Button = styled.button<{ isEnabled: boolean }>`
   line-height: 150%;
 
   cursor: pointer;
+`;
+
+export const GuideImgSection = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.color.grey_800};
+  .title {
+    padding: 1.2rem 1.6rem;
+    color: ${({ theme }) => theme.color.grey_200};
+    font-family: Spoqa Han Sans Neo;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.3px;
+    border-radius: 2rem 2rem 0 0;
+  }
+  .success {
+    background-color: rgba(84, 100, 242, 0.24);
+  }
+  .fail {
+    background: rgba(255, 108, 69, 0.24);
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 1.6rem;
+    width: 100%;
+    padding: 1.6rem;
+    overflow-x: scroll;
+    box-sizing: border-box;
+  }
+  .imgArea {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1.2rem;
+    background-color: ${({ theme }) => theme.color.grey_600};
+    flex-shrink: 0;
+  }
 `;
