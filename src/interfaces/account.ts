@@ -81,3 +81,10 @@ export interface IUserInfo {
   age: number;
   healthInterests: string[];
 }
+
+export interface IInquiry {
+  category: string;
+  title: string;
+  content: string;
+  images: any[];
+}

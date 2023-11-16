@@ -11,6 +11,7 @@ const headerMap = {
   edit: "프로필 수정",
   healthInfoModify: "건강정보 수정",
   reward: "리워드",
+  inquiry: "1:1 문의",
 } as const;
 
 type TPath = keyof typeof headerMap;

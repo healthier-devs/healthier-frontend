@@ -25,3 +25,9 @@ export const AnnouncementItem = styled.div`
     line-height: 150%;
   }
 `;
+
+export const ObservedDiv = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: red;
+`;

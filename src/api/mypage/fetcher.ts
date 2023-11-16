@@ -1,11 +1,12 @@
+import { IHealthInformation, IUseGetAnnouncements } from "src/interfaces/mypage";
 import { createFetcher } from "..";
 
 // const fetcher = createFetcher("/notices");
 const fetcher = createFetcher("/");
 
 export const mypageFetcher = {
-  getAllAnnouncement() {
-    return fetcher.get("/notices?page=0&size=15");
+  getAllAnnouncement({ pageInfo }: IUseGetAnnouncements) {
+    return fetcher.get(`/notices?page=${pageInfo.page}&size=10`);
   },
   getAnnouncementById(id: string) {
     return fetcher.get(`/notices/${id}`);
@@ -21,5 +22,8 @@ export const mypageFetcher = {
   },
   getHealthInfo() {
     return fetcher.get("/health-information");
+  },
+  setHealthInformation(healthData: IHealthInformation) {
+    return fetcher.put("/health-information", healthData);
   },
 };

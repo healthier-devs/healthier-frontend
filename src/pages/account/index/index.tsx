@@ -32,7 +32,7 @@ const accountItems: IAccountItem[] = [
   },
   {
     label: "1:1 문의",
-    path: "",
+    path: "/inquiry",
   },
 ];
 

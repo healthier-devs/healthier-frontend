@@ -5,6 +5,7 @@ import DiagnoseRecord from "./account/diagnose-record";
 import AccountEdit from "./account/edit";
 import AccountResetPassword from "./account/edit/reset-password";
 import AccountIndex from "./account/index/index";
+import Inquiry from "./account/inquiry";
 import ModifyInformation from "./account/modify-information";
 import AccountSettings from "./account/settings";
 import Appointment from "./appointment";
@@ -39,6 +40,8 @@ import TermsAgreement from "./signUp/termsAgreement";
 import SymptomPage from "./symptom";
 import SymptomTypeQR from "./symptom-qr";
 import SymptomTypePage from "./symptom-type";
+import SymptomOnboard from "./symptom/onboard";
+import CollectInformation from "./symptom/onboard/collect-data";
 import Test from "./test";
 
 export {
@@ -84,4 +87,7 @@ export {
   AccountEdit,
   AccountResetPassword,
   ModifyInformation,
+  SymptomOnboard,
+  CollectInformation,
+  Inquiry,
 };
