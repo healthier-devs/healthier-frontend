@@ -61,6 +61,7 @@ export const TypicalSymptom = styled.p`
 export const Name = styled(Heading_1)`
   color: ${({ theme }) => theme.color.grey_100};
   margin-bottom: 1.6rem;
+  text-align: center;
 `;
 
 export const NecessaryMeasures = styled.p`
