@@ -9,7 +9,7 @@ interface IMedicineDetailProps {
 
 const MedicineDetail = ({ medicine }: IMedicineDetailProps) => {
   const { sideEffects, dosageUsage, efficacyEffectiveness, ingredient, types, caution } = medicine;
-  const cautionTexts = caution.split("^");
+  const cautionTexts = (caution ?? "").split("^");
 
   return (
     <>
@@ -35,13 +35,14 @@ const MedicineDetail = ({ medicine }: IMedicineDetailProps) => {
           <Chips labels={dosageUsage} />
         </Contents>
       )}
-      <Contents>
-        <p className="sub-title">복용 시 주의하세요</p>
-        {cautionTexts.map((cautionText, index) => (
-          <Description key={cautionText} text={cautionText} className={index % 2 === 1 ? "highlight" : ""} />
-        ))}
-      </Contents>
-
+      {caution && (
+        <Contents>
+          <p className="sub-title">복용 시 주의하세요</p>
+          {cautionTexts.map((cautionText, index) => (
+            <Description key={cautionText} text={cautionText} className={index % 2 === 1 ? "highlight" : ""} />
+          ))}
+        </Contents>
+      )}
       <Contents>
         <p className="sub-title mb-8">부작용</p>
         <Chips labels={sideEffects} />
