@@ -1,8 +1,7 @@
 import axios from "axios";
 import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { DEVELOPMENT_SET_COOKIE_OPTIONS, DEPLOYMENT_SET_COOKIE_OPTIONS, ACCESS_TOKEN_AGE, REFRESH_TOKEN_AGE } from "src/data/account";
-import { setCookie, getCookie, removeCookie } from "src/utils/cookies";
+import { getCookie, removeCookie, saveToken } from "src/utils/cookies";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
 const FETCHER_TIME_OUT = 7500;
@@ -70,13 +69,9 @@ export const createFetcher = (path: string) => {
           refreshToken,
         });
 
-        setCookie("accessToken", reissueResponse.data.accessToken, {
-          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
-          maxAge: ACCESS_TOKEN_AGE,
-        });
-        setCookie("refreshToken", reissueResponse.data.refreshToken, {
-          ...DEVELOPMENT_SET_COOKIE_OPTIONS,
-          maxAge: REFRESH_TOKEN_AGE,
+        saveToken({
+          accessToken: reissueResponse.data.accessToken,
+          refreshToken: reissueResponse.data.refreshToken,
         });
 
         return instance.request(_err.config);
