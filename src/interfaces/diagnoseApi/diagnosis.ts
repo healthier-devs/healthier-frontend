@@ -106,7 +106,8 @@ export interface IDiagnoseResult {
 }
 
 export interface IDiagnoseResponse {
-  user_id: string;
+  username: string;
+  unknown_cause: boolean;
   diagnosis: IDiagnoseResult[];
 }
 
