@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DIAGNOSE_TYPES } from "src/data/symptom_type";
+import { useAppDispatch } from "src/state";
+import { setCategory as setCategoryAction } from "src/state/diagnoseSlice";
 import type { TDiagnoseCategory, TSymptomType } from "src/interfaces/symptomPage";
 
 const useSymptomPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [category, setCategory] = useState<TDiagnoseCategory | null>(null);
   const [symptoms, setSymptoms] = useState<TSymptomType[]>([]);
@@ -27,6 +30,11 @@ const useSymptomPage = () => {
 
   const handleClickCategory = (c: TDiagnoseCategory) => {
     setCategory(c);
+    dispatch(
+      setCategoryAction({
+        category: c,
+      })
+    );
   };
 
   const handleRemoveCategory = () => {
