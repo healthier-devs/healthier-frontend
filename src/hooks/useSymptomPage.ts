@@ -44,7 +44,7 @@ const useSymptomPage = () => {
   };
 
   const handleClickNext = () => {
-    if (showSymptomModal) {
+    if (selectedSymptom) {
       navigate("/diagnosis", {
         state: {
           symptom: selectedSymptom,
