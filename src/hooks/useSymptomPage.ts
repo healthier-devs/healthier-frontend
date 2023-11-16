@@ -23,8 +23,10 @@ const useSymptomPage = () => {
   const handleClickBack = () => {
     if (showSymptomModal) {
       handleClickBackdrop();
-    } else {
+    } else if (category) {
       clearSelectedCategory();
+    } else {
+      navigate(-1);
     }
   };
 
