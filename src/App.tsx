@@ -69,6 +69,7 @@ function App() {
             <Route path="/account/diagRecord" element={<Pages.DiagnoseRecord />} />
             <Route path="/account/reward" element={<Pages.Reward />} />
             <Route path="/account/announcement/:id" element={<Pages.AnnouncementDetail />} />
+            <Route path="/account/inquiry" element={<Pages.Inquiry />} />
             <Route path="/account/settings" element={<Pages.AccountSettings />} />
             <Route path="/account/edit" element={<Pages.AccountEdit />} />
             <Route path="/account/edit/password" element={<Pages.AccountResetPassword />} />
