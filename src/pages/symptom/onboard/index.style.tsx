@@ -64,4 +64,8 @@ export const CardArea = styled.div`
       letter-spacing: -0.3px;
     }
   }
+
+  .symptom__button {
+    cursor: pointer;
+  }
 `;
