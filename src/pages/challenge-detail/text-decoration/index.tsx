@@ -27,17 +27,35 @@ export const processText = (text?: string) => {
       const listItems = section.split("&")[1].split("\n");
       const frame = (
         <Styled.Frame key={section} mb="1.2rem" px="1.6rem">
-          {listItems.map((item, index) => (
-            <Styled.FrameText key={index} color="200" lineHeight="180%" fontSize="1.4rem" fontWeight="200">
-              {item.split("^").map((part, pIndex) => {
-                if (pIndex % 2 === 1) {
-                  return <Styled.Highlighted key={pIndex}>{part}</Styled.Highlighted>;
-                } else {
-                  return part;
-                }
-              })}
-            </Styled.FrameText>
-          ))}
+          {listItems.map((item, index) => {
+            if (item.includes("$")) {
+              const parts = item.split("$");
+
+              return (
+                <Styled.FrameText key={index} color="200" lineHeight="180%" fontSize="1.4rem" fontWeight="200">
+                  {parts.map((part, pIndex) => {
+                    if (pIndex % 2 === 1) {
+                      return <Styled.SubText key={pIndex}>{part}</Styled.SubText>;
+                    } else {
+                      return part;
+                    }
+                  })}
+                </Styled.FrameText>
+              );
+            }
+
+            return (
+              <Styled.FrameText key={index} color="200" lineHeight="180%" fontSize="1.4rem" fontWeight="200">
+                {item.split("^").map((part, pIndex) => {
+                  if (pIndex % 2 === 1) {
+                    return <Styled.Highlighted key={pIndex}>{part}</Styled.Highlighted>;
+                  } else {
+                    return part;
+                  }
+                })}
+              </Styled.FrameText>
+            );
+          })}
         </Styled.Frame>
       );
 
