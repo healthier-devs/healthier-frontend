@@ -7,7 +7,7 @@ export const Container = styled.section<{ severity: TSeverity; isSquare: boolean
   width: 100%;
   //height: ${({ isSquare }) => (isSquare ? "calc(var(--vw, 1vw) * 100 - 4.8rem)" : "16rem")};
   padding-top: ${({ isSquare }) => (isSquare ? "100%" : "50%")};
-  background: ${({ theme, severity }) => (severity === 0 ? theme.color.blue_300 : severity === 1 ? theme.color.blue_500 : "#2745A9")};
+  background: ${({ theme, severity }) => (severity === 1 ? theme.color.blue_300 : severity === 2 ? theme.color.blue_500 : "#2745A9")};
   background-size: cover;
   border-radius: 0.8rem;
 
@@ -60,8 +60,8 @@ export const Title = styled(Heading_5)<{ severity: TSeverity }>`
 
 export const Chip = styled.div<{ severity: TSeverity }>`
   background-color: ${({ theme, severity }) =>
-    severity === 0 ? theme.color.blue : severity === 1 ? theme.color.blue_700 : theme.color.sub_blue};
-  color: ${({ theme, severity }) => (severity === 2 ? theme.color.blue : theme.color.grey_100)};
+    severity === 1 ? theme.color.blue : severity === 2 ? theme.color.blue_700 : theme.color.sub_blue};
+  color: ${({ theme, severity }) => (severity === 3 ? theme.color.blue : theme.color.grey_100)};
 
   font-weight: 300;
   font-size: 1.3rem;

@@ -21,12 +21,7 @@ const DiagnosisCard = ({ isSquare = false, result, handleNavigate }: IDiagnosisC
   const { severity, dx_name, dx_id, img_url } = result;
 
   return (
-    <Styled.Container
-      isSquare={isSquare}
-      severity={severity}
-      onClick={() => handleNavigate(dx_id)}
-      imgsrc={img_url + (severity + 1) + ".png"}
-    >
+    <Styled.Container isSquare={isSquare} severity={severity} onClick={() => handleNavigate(dx_id)} imgsrc={img_url + severity + ".png"}>
       {isSquare && <Styled.IllustrationShadow />}
       <Styled.Box isDate={null}>
         <Styled.TitleWrapper>
