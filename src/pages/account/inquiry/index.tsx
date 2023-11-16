@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { accountFetcher } from "src/api/account/fetcher";
 import CheckIcon from "src/assets/icons/CheckIcon";
+import XIcon from "src/assets/icons/XIcon";
 import FileSelectorImg from "src/assets/images/FileSelector.png";
 import { usePostInquiry } from "src/hooks/account/usePostInquiry";
 import * as Styled from "./index.style";
@@ -133,7 +134,7 @@ const Inquiry = () => {
               <>
                 <input type="file" multiple={true} id="fileSelector" onChange={handleChangeImg} />
                 <label className="fileSelector" htmlFor="fileSelector">
-                  <img src={FileSelectorImg} alt="fileSelector" />
+                  <img src={FileSelectorImg} alt="fileSelector" className="fileSelectorIcon" />
                 </label>
                 {fileList.length > 0 && (
                   <div className="filePreviewContainer">
@@ -141,7 +142,7 @@ const Inquiry = () => {
                       <div key={index} className="filePreview">
                         <img className="fileImg" src={URL.createObjectURL(file)} alt={`file-preview-${index}`} />
                         <button className="deleteButton" onClick={() => handleDeleteFile(index)}>
-                          X
+                          <XIcon width={10} height={10} strokeWidth={3} />
                         </button>
                       </div>
                     ))}

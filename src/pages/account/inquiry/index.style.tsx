@@ -94,10 +94,15 @@ export const InquiryPicture = styled.div`
   #fileSelector {
     display: none;
   }
+  .fileSelectorIcon {
+    cursor: pointer;
+  }
   .fileImg {
     width: 6.4rem;
     height: 6.4rem;
     border-radius: 8px;
+
+    object-fit: cover;
   }
   .filePreviewContainer {
     display: flex;
@@ -108,9 +113,18 @@ export const InquiryPicture = styled.div`
     position: relative;
   }
   .deleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     top: 0.4rem;
     right: 0.4rem;
+
+    width: 16px;
+    height: 16px;
+    padding: 0;
+
     background-color: ${({ theme }) => theme.color.grey_800};
     border-radius: 50%;
     color: ${({ theme }) => theme.color.grey_300};
@@ -130,7 +144,6 @@ export const Notifier = styled.div`
   font-weight: 200;
   line-height: 150%; /* 21px */
   letter-spacing: -0.3px;
-
   .blue {
     color: ${({ theme }) => theme.color.blue_500};
   }
@@ -155,7 +168,7 @@ export const InquiryCategoryModal = styled.div`
   position: absolute;
   box-sizing: border-box;
   bottom: 0;
-  width: 100%;
+  width: inherit;
   height: 53rem;
   padding: 3.2rem 2.4rem;
   background-color: ${({ theme }) => theme.color.grey_700};
@@ -194,6 +207,8 @@ export const InquiryCategoryModal = styled.div`
     font-weight: 400;
     line-height: normal;
     justify-content: space-between;
+
+    cursor: pointer;
   }
   .selected {
     color: ${({ theme }) => theme.color.white};
