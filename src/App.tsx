@@ -13,8 +13,8 @@ function App() {
   const { reset } = useQueryErrorResetBoundary();
   const accessToken = getCookie("accessToken");
 
-  useAutoLogin(accessToken);
   useGoogleAnalytics();
+  useAutoLogin(accessToken);
 
   useEffect(() => {
     handleResizeWindow();

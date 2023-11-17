@@ -1,23 +1,29 @@
 import { useEffect } from "react";
+import { getUserData } from "src/api/account/service";
 import { useAppDispatch } from "src/state";
 import { login, logout } from "src/state/authSlice";
 import { setMemberInfo } from "src/state/userSlice";
-import { useUserData } from "./useUserData";
+import { removeToken } from "src/utils/cookies";
 
 export const useAutoLogin = (accessToken: unknown) => {
-  const { userData, isSuccess } = useUserData(accessToken ? true : false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isSuccess) {
-      if ("message" in userData && "code" in userData) {
+    if (!accessToken) {
+      return;
+    }
+
+    (async () => {
+      const userData = await getUserData();
+
+      if ("code" in userData && "message" in userData) {
         dispatch(logout());
+        removeToken();
 
         return;
       }
-
       dispatch(login());
       dispatch(setMemberInfo(userData));
-    }
-  }, [userData, isSuccess, dispatch]);
+    })();
+  }, [accessToken, dispatch]);
 };
