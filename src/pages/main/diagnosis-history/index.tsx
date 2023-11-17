@@ -24,7 +24,7 @@ function DiagnosisHistory({ authenticated }: Pick<IAuthState, "authenticated">) 
   });
 
   useEffect(() => {
-    if (recordsData.length === 0 || recordsData[0].total === 0) {
+    if (!authenticated || recordsData.length === 0 || recordsData[0].total === 0) {
       return;
     }
 
@@ -36,7 +36,7 @@ function DiagnosisHistory({ authenticated }: Pick<IAuthState, "authenticated">) 
       dxList,
       dxRecordId,
     });
-  }, [recordsData]);
+  }, [recordsData, authenticated]);
 
   return (
     <Box>
