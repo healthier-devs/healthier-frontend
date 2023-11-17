@@ -21,6 +21,7 @@ const queryClient = new QueryClient({
     queries: {
       throwOnError: true,
       retry: 0,
+      refetchOnWindowFocus: false,
     },
     mutations: {
       throwOnError: true,
