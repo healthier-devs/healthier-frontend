@@ -31,10 +31,12 @@ export default function Error({ error, resetErrorBoundary }: FallbackProps) {
       if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
         removeToken();
         dispatch(logout());
-        navigate("/login");
+        resetErrorBoundary();
+
+        location.pathname !== "/" && navigate("/login");
       }
     }
-  }, [error, navigate, dispatch]);
+  }, [error, location.pathname, navigate, dispatch, resetErrorBoundary]);
 
   const handleClickRetryButton = () => {
     resetErrorBoundary();
