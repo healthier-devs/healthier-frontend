@@ -30,18 +30,18 @@ const queryClient = new QueryClient({
 });
 
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <CookiesProvider>
-              <GlobalStyle />
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CookiesProvider>
+            <GlobalStyle />
+            <QueryClientProvider client={queryClient}>
               <App />
-            </CookiesProvider>
-          </ThemeProvider>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </QueryClientProvider>
+            </QueryClientProvider>
+          </CookiesProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );
