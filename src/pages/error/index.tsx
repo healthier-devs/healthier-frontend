@@ -7,6 +7,7 @@ import ContentHeader from "src/components/contentHeader";
 import RoundButton from "src/components/roundButton";
 import { useAppDispatch } from "src/state";
 import { logout } from "src/state/authSlice";
+import { removeToken } from "src/utils/cookies";
 import * as Styled from "./index.style";
 import type { FallbackProps } from "react-error-boundary";
 
@@ -28,6 +29,7 @@ export default function Error({ error, resetErrorBoundary }: FallbackProps) {
       const { status } = error.response;
 
       if (status === StatusCodes.UNAUTHORIZED || status === StatusCodes.FORBIDDEN) {
+        removeToken();
         dispatch(logout());
         navigate("/login");
       }
