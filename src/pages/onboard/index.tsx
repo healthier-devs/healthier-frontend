@@ -12,6 +12,10 @@ import * as Styled from "./index.style";
 function Onboard() {
   const navigate = useNavigate();
 
+  const handleKakaoLogin = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=3283547109c01f4b0151d37037f15752&response_type=code&redirect_uri=${window.location.origin}/kakaoCallback`;
+  };
+
   return (
     <Styled.Container>
       <Styled.Button onClick={() => navigate("/")}>홈 둘러보기</Styled.Button>
@@ -36,7 +40,7 @@ function Onboard() {
         </Box>
 
         <FlexBox gap="1.6rem" justifyContent="center" alignItems="center" mb="2rem">
-          <Styled.LoginButton className="kakao">
+          <Styled.LoginButton className="kakao" onClick={handleKakaoLogin}>
             <KakaoIcon width={30} height={30} />
           </Styled.LoginButton>
 
