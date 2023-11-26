@@ -6,11 +6,13 @@ import FlexBox from "src/components/flexBox";
 import RoundButton from "src/components/roundButton";
 import TextDivider from "src/components/textDivider";
 import UnderlinedButton from "src/components/underlinedButton";
+import { useAppleLogin } from "src/hooks/account/useAppleLogin";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 function Onboard() {
   const navigate = useNavigate();
+  const { handleClickAppleLogin } = useAppleLogin();
 
   return (
     <Styled.Container>
@@ -40,7 +42,7 @@ function Onboard() {
             <KakaoIcon width={30} height={30} />
           </Styled.LoginButton>
 
-          <Styled.LoginButton className="apple">
+          <Styled.LoginButton className="apple" onClick={handleClickAppleLogin}>
             <AppleIcon width={30} height={30} />
           </Styled.LoginButton>
         </FlexBox>
