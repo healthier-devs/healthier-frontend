@@ -11,6 +11,10 @@ import type {
   IUserResponse,
   ISendVerificationCode,
   IResetPassword,
+  TAppleSignUpRequest,
+  TKakaoSignUpRequest,
+  TJoinType,
+  TSignUp,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -49,11 +53,21 @@ export const validatePassword = async (body: IValidatePasswordRequest) => {
   }
 };
 
-export const signup = async (body: ISignUpRequest): Promise<IValidateAccountResponse> => {
+export const signup = async ({ type, body }: TSignUp): Promise<IValidateAccountResponse> => {
   try {
-    const signupData = await accountFetcher.signUpUser(body);
+    if (type === "apple") {
+      const signupData = await accountFetcher.signUpApple(body);
 
-    return signupData;
+      return signupData;
+    } else if (type === "local") {
+      const signupData = await accountFetcher.signUpUser(body);
+
+      return signupData;
+    } else {
+      const signupData = await accountFetcher.signUpKakao(body);
+
+      return signupData;
+    }
   } catch (err) {
     if (err instanceof AxiosError && err.response) {
       const { status } = err.response;

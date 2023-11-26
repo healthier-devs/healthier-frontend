@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { validatePassword } from "src/api/account/service";
 import * as Lib from "../lib";
-import type { TAdditionalInformationParam } from "src/interfaces/account";
+import type { TLocalJoin } from "src/interfaces/account";
 
 function Password() {
   const location = useLocation();
@@ -50,11 +50,14 @@ function Password() {
       return;
     }
 
-    const state: TAdditionalInformationParam = {
-      username: email,
-      password: password,
-      confirmPassword: passwordConfirm,
-      marketingOptIn,
+    const state: TLocalJoin = {
+      type: "local",
+      user: {
+        username: email,
+        password: password,
+        confirmPassword: passwordConfirm,
+        marketingOptIn,
+      },
     };
 
     navigate("/signup/step4", { state });

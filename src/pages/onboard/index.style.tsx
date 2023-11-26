@@ -18,6 +18,8 @@ export const Button = styled.button`
   font-size: 1.4rem;
   font-weight: 200;
   line-height: 150%;
+
+  padding: 0;
 `;
 
 export const Logo = styled.img`
