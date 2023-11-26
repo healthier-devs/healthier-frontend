@@ -25,7 +25,9 @@ const DiagnosisCard = ({ isSquare = false, result, handleNavigate }: IDiagnosisC
       {isSquare && <Styled.IllustrationShadow />}
       <Styled.Box isDate={null}>
         <Styled.TitleWrapper>
-          <Styled.Title severity={severity}>{dx_name}</Styled.Title>
+          <Styled.Title severity={severity} isSquare={isSquare}>
+            {dx_name}
+          </Styled.Title>
         </Styled.TitleWrapper>
         <Styled.Chip severity={severity}>{SEVERITY_TYPES[severity]}</Styled.Chip>
       </Styled.Box>

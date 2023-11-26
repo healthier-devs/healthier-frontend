@@ -48,8 +48,9 @@ export const TitleWrapper = styled.div`
   margin-bottom: 0.6rem;
 `;
 
-export const Title = styled(Heading_5)<{ severity: TSeverity }>`
-  color: ${({ theme, severity }) => (severity === 1 ? theme.color.blue_800 : theme.color.grey_200)};
+export const Title = styled(Heading_5)<{ severity: TSeverity; isSquare?: boolean }>`
+  color: ${({ theme, severity, isSquare = false }) =>
+    isSquare ? theme.color.grey_200 : severity === 1 ? theme.color.blue_800 : theme.color.grey_200};
 
   width: 12rem;
 
@@ -75,9 +76,9 @@ export const Chip = styled.div<{ severity: TSeverity }>`
 export const IllustrationShadow = styled.div`
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
 
-  height: 100%;
+  height: 80%;
   width: 100%;
 
   background: linear-gradient(180deg, rgba(19, 20, 22, 0.35) 0%, rgba(19, 20, 22, 0) 100%);
