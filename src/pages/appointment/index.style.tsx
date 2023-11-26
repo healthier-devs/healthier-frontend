@@ -14,7 +14,7 @@ export const FilterContainer = styled.div`
   .sort {
     font-size: 1.4rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 150%;
     letter-spacing: -0.03rem;
     color: ${({ theme }) => theme.color.grey_500};
