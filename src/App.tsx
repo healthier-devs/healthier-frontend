@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAutoLogin } from "./hooks/account/useAutoLogin";
+import { useFCMToken } from "./hooks/account/useFCMToken";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import * as Pages from "./pages";
 import { getCookie } from "./utils/cookies";
@@ -15,6 +16,7 @@ function App() {
 
   useGoogleAnalytics();
   useAutoLogin(accessToken);
+  useFCMToken();
 
   useEffect(() => {
     handleResizeWindow();

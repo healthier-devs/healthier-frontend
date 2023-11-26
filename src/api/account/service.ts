@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
+import { IS_TOKEN_CREATED } from "src/data/account";
 import { accountFetcher } from "./fetcher";
 import type {
   IValidateAccountResponse,
@@ -174,6 +175,15 @@ export const getUserData = async () => {
       }
     }
 
+    throw new Error();
+  }
+};
+
+export const createFCMToken = async (fcmToken: string) => {
+  try {
+    await accountFetcher.postFCMToken(fcmToken);
+    localStorage.setItem(IS_TOKEN_CREATED, "true");
+  } catch (err) {
     throw new Error();
   }
 };

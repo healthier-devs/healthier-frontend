@@ -75,4 +75,10 @@ export const accountFetcher = {
   authorizeApple(code: string): Promise<IVerifyAppleCodeResponse> {
     return unauthorizedFetcher.get(`/auth/apple?code=${code}`);
   },
+  postFCMToken(fcmToken: string): Promise<IValidateAccountResponse> {
+    return fetcher.post("/fcmtoken", { fcmToken });
+  },
+  getFCMToken() {
+    return fetcher.get("/fcmtoken");
+  },
 };

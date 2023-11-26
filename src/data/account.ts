@@ -52,3 +52,6 @@ export const DEPLOYMENT_SET_COOKIE_OPTIONS = {
   path: "/",
   secure: true,
 };
+
+export const IS_TOKEN_CREATED = "isTokenCreated";
+export const FCM_TOKEN = "fcmToken";
