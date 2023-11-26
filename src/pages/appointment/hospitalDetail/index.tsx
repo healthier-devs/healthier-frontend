@@ -138,7 +138,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                 <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-site.svg" />
                   <a href={data.homepage} target="_blank" rel="noreferrer">
-                    <Styled.Description color={theme.color.grey_300} style={{ textDecoration: "underline" }}>
+                    <Styled.Description color={theme.color.grey_400} style={{ textDecoration: "underline" }}>
                       {data.homepage}
                     </Styled.Description>
                   </a>
@@ -148,7 +148,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               {data.phoneNumber && (
                 <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-phone.svg" />
-                  <Styled.Description color={theme.color.grey_300}>{data.phoneNumber}</Styled.Description>
+                  <Styled.Description color={theme.color.grey_400}>{data.phoneNumber}</Styled.Description>
                 </Styled.Flex>
               )}
 
