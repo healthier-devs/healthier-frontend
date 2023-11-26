@@ -3,12 +3,14 @@ import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import RewardCard from "src/components/rewardCard";
 import { useGetMyRewardRecords } from "src/hooks/rewards/useGetMyRewardRecords";
 import { useGetRewards } from "src/hooks/rewards/useGetRewards";
+import { useAppSelector } from "src/state";
 import * as Styled from "./index.style";
 
 function Reward() {
   const navigate = useNavigate();
+  const { authenticated } = useAppSelector((state) => state.auth);
 
-  const { myRewardRecordsData } = useGetMyRewardRecords();
+  const { myRewardRecordsData } = useGetMyRewardRecords({ authenticated });
 
   const { rewardsData: midtermRewards } = useGetRewards({ point: 3000 }); // MIDTERM
   const { rewardsData: finalRewards } = useGetRewards({ point: 10000 }); // FINAL

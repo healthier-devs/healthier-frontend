@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  z-index: 10000;
+  z-index: 9999;
   position: absolute;
   left: 2rem;
   top: 4.8rem;

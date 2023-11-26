@@ -19,7 +19,14 @@ function Symptoms({ authenticated }: Pick<IAuthState, "authenticated">) {
       <Styled.BannerContainer image={statisticsData.image ?? ""}>
         <Styled.TextContainer>
           <Styled.TitleContainer>
-            <span className="title">{authenticated ? statisticsData?.name : "로그인 후 확인 가능"}</span>
+            <span
+              className="title"
+              onClick={() => {
+                location.href = `tel:02-111-1111`;
+              }}
+            >
+              {authenticated ? statisticsData?.name : "로그인 후 확인 가능"}
+            </span>
           </Styled.TitleContainer>
 
           <Styled.Description>
