@@ -154,7 +154,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                 {...(!data.phoneNumber && { style: { backgroundColor: theme.color.grey_650, color: theme.color.grey_500 } })}
                 onClick={() => {
                   if (data.phoneNumber) {
-                    location.href = "tel:" + data.phoneNumber;
+                    location.href = `tel:${data.phoneNumber}`;
                   }
                 }}
               >
