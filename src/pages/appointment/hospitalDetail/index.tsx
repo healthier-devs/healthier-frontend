@@ -70,7 +70,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
 
       scheduleArr.push({
         day: scheduleMap[scheduleKey],
-        time: `${data.schedule[scheduleKey].start ?? "00:00"} ~ ${data.schedule[scheduleKey].end ?? "00:00"}`,
+        time: `${data.schedule[scheduleKey].start || "00:00"} ~ ${data.schedule[scheduleKey].end || "00:00"}`,
       });
     }
 
@@ -106,7 +106,9 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                         {statusMap[data.operatingStatus]}
                       </span>
                       {data.operatingStatus !== "UNKNOWN" &&
-                        ` ・ ${data.schedule[convertWeekDay()].start ?? "00:00"} ~ ${data.schedule[convertWeekDay()].end ?? "00:00"}`}
+                        data.schedule[convertWeekDay()].start &&
+                        data.schedule[convertWeekDay()].start &&
+                        ` ・ ${data.schedule[convertWeekDay()].start} ~ ${data.schedule[convertWeekDay()].end}`}
                     </Styled.Description>
                     <img
                       alt="dropdown"
