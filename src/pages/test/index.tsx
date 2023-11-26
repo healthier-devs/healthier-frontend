@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { validateToken, logout } from "src/api/account/service";
 import * as Styled from "./index.style";
 
 function Test() {
+  const navigate = useNavigate();
   const handleClickTokenTest = async () => {
     const data = await validateToken();
 
@@ -29,6 +31,17 @@ function Test() {
       </Styled.Button>
 
       <Styled.Button onClick={handleClickLogout}>로그아웃</Styled.Button>
+      <Styled.Button
+        onClick={() =>
+          navigate("/login", {
+            state: {
+              type: "apple",
+            },
+          })
+        }
+      >
+        중복 가입
+      </Styled.Button>
     </Styled.Container>
   );
 }
