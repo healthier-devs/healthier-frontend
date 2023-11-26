@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NextButtonContainer = styled.div`
-  width: calc(var(--vw, 1vw) * 100);
+  width: inherit;
 
   display: flex;
   justify-content: center;

@@ -15,27 +15,31 @@ function Pagination({ page, count, departments }: IPaginationProps) {
   return (
     <Styled.RootContainer>
       {page === count ? (
-        <RoundButton
-          onClick={() =>
-            navigate("/appointment", {
-              state: {
-                departments,
-              },
-            })
-          }
-        >
-          병원 예약하기
-        </RoundButton>
+        <Styled.ReserveButtonWrapper>
+          <RoundButton
+            onClick={() =>
+              navigate("/appointment", {
+                state: {
+                  departments,
+                },
+              })
+            }
+          >
+            병원 예약하기
+          </RoundButton>
+        </Styled.ReserveButtonWrapper>
       ) : (
-        <Styled.ButtonsContainer>
-          {[1, 2, 3, 4, 5].slice(0, count).map((index) => (
-            <Styled.ButtonWrapper key={index}>
-              <Styled.Button isSelected={page === index}>
-                <span>{index}</span>
-              </Styled.Button>
-            </Styled.ButtonWrapper>
-          ))}
-        </Styled.ButtonsContainer>
+        <Styled.PaginationWrapper>
+          <Styled.ButtonsContainer>
+            {[1, 2, 3, 4, 5].slice(0, count).map((index) => (
+              <Styled.ButtonWrapper key={index}>
+                <Styled.Button isSelected={page === index}>
+                  <span>{index}</span>
+                </Styled.Button>
+              </Styled.ButtonWrapper>
+            ))}
+          </Styled.ButtonsContainer>
+        </Styled.PaginationWrapper>
       )}
     </Styled.RootContainer>
   );

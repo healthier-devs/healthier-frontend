@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // NOTE: Layout 공통 컴포넌트를 사용하면 상하 스크롤이 생기는 문제
 export const Layout = styled.main`
-  width: 100%;
+  width: inherit;
   height: 100%;
 
   padding: 5.6rem 0 0 0;
@@ -12,6 +12,7 @@ export const Layout = styled.main`
 
 export const Container = styled.section`
   height: 100%;
+  width: inherit;
   background: radial-gradient(300.02% 130.63% at 164.62% 165.58%, rgba(84, 100, 242, 0.9) 0%, rgba(52, 62, 135, 0) 100%) #131416;
   background-attachment: fixed;
 
