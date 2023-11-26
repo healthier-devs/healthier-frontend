@@ -13,7 +13,7 @@ function Symptoms({ authenticated }: Pick<IAuthState, "authenticated">) {
         text={
           authenticated
             ? `🤒 ${statisticsData.ageGroup} 헬시언들은\n다음 증상이 많아요 `
-            : "🤒 로그인하면 내가 유의해야 하는 질명을 맞춤으로 알려 줘요"
+            : "🤒 로그인하면 내가 유의해야 하는 질병을 맞춤으로 알려 줘요"
         }
       />
       <Styled.BannerContainer image={statisticsData.image ?? ""}>
