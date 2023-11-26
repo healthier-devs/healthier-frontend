@@ -2,7 +2,6 @@ import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { accountFetcher } from "./fetcher";
 import type {
-  ISignUpRequest,
   IValidateAccountResponse,
   IValidatePasswordRequest,
   ILoginRequest,
@@ -11,9 +10,6 @@ import type {
   IUserResponse,
   ISendVerificationCode,
   IResetPassword,
-  TAppleSignUpRequest,
-  TKakaoSignUpRequest,
-  TJoinType,
   TSignUp,
 } from "src/interfaces/account";
 
@@ -53,10 +49,12 @@ export const validatePassword = async (body: IValidatePasswordRequest) => {
   }
 };
 
-export const signup = async ({ type, body }: TSignUp): Promise<IValidateAccountResponse> => {
+export const signup = async (signupParam: TSignUp): Promise<IValidateAccountResponse> => {
+  const { type, body } = signupParam;
+
   try {
     if (type === "apple") {
-      const signupData = await accountFetcher.signUpApple(body);
+      const signupData = await accountFetcher.signUpApple(body, signupParam.accessToken);
 
       return signupData;
     } else if (type === "local") {

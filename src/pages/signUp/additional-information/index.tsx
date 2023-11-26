@@ -18,6 +18,7 @@ const YEARS = makeYears();
 
 function AdditionalInformation() {
   const prevState = useLocation().state as TAdditionalInformationParam;
+
   const { signUp } = useSignUp();
   const { signUpApple } = useAppleSignUp();
 
@@ -32,9 +33,12 @@ function AdditionalInformation() {
 
     if (prevState.type === "apple") {
       signUpApple({
-        ...info,
-        birthDate: formatBirth(birthDate),
-        marketingOptIn: prevState.user.marketingOptIn,
+        body: {
+          ...info,
+          birthDate: formatBirth(birthDate),
+          marketingOptIn: prevState.user.marketingOptIn,
+        },
+        accessToken: prevState.accessToken,
       });
     } else if (prevState.type === "kakao") {
       //

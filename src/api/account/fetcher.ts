@@ -29,8 +29,12 @@ export const accountFetcher = {
   signUpUser(body: ISignUpRequest) {
     return unauthorizedFetcher.post("", body);
   },
-  signUpApple(body: TAppleSignUpRequest) {
-    return unauthorizedFetcher.post("/auth/apple/additional-information", body);
+  signUpApple(body: TAppleSignUpRequest, accessToken: string) {
+    return unauthorizedFetcher.post("/auth/apple/additional-information", body, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
   signUpKakao(body: TKakaoSignUpRequest) {
     return unauthorizedFetcher.post("/auth/kakao/additional-information", body);

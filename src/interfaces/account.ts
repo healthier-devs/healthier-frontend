@@ -32,6 +32,7 @@ export type TAdditionalInformation = Pick<ISignUpRequest, "name" | "gender" | "b
 export type TSocialJoin = {
   type: "kakao" | "apple";
   user: Pick<ISignUpRequest, "marketingOptIn">;
+  accessToken: string;
 };
 
 export type TLocalJoin = {
@@ -42,11 +43,13 @@ export type TLocalJoin = {
 export type TAppleSignUp = {
   type: "apple";
   body: TAppleSignUpRequest;
+  accessToken: string;
 };
 
 export type TKakaoSignUp = {
   type: "kakao";
   body: TKakaoSignUpRequest;
+  accessToken: string;
 };
 export type TLocalSignUp = {
   type: "local";

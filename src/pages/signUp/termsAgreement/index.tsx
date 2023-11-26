@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
 import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
 import * as Lib from "../lib";
@@ -12,6 +11,8 @@ const TERMS_NUM = NECESSARY_NUMS + OPTIONAL_NUMS;
 
 function TermsAgreement() {
   const navigate = useNavigate();
+  const accessToken = useLocation().state.accessToken ?? "";
+
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
 
@@ -29,6 +30,7 @@ function TermsAgreement() {
           user: {
             marketingOptIn: optionals[0],
           },
+          accessToken,
         },
       });
     } else {
