@@ -59,4 +59,7 @@ export const accountFetcher = {
   getImageRoute() {
     return unauthorizedFetcher.get("/inquiry/image");
   },
+  authorizeApple(code: string) {
+    return unauthorizedFetcher.get(`/auth/apple?code=${code}`);
+  },
 };
