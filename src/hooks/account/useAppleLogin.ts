@@ -19,15 +19,12 @@ export const useAppleLogin = () => {
       scope: process.env.REACT_APP_APPLE_SCOPES,
       redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
       state: process.env.REACT_APP_APPLE_STATE,
-      usePopup: false,
+      usePopup: true,
     });
 
-    document.addEventListener("AppleIDSignInOnSuccess", async (event: any) => {
-      const { code } = (event as IAppleAuthorizationSuccess).detail.authorization;
-
+    const verifyAppleAuthCode = async (code: string) => {
       const { hasAdditionalInformation, accessToken, refreshToken } = await accountFetcher.authorizeApple(code);
 
-      alert("called2");
       if (hasAdditionalInformation) {
         navigate("/signup/step1?type=social");
 
@@ -39,6 +36,12 @@ export const useAppleLogin = () => {
 
       queryClient.clear();
       navigate("/");
+    };
+
+    document.addEventListener("AppleIDSignInOnSuccess", (event: any) => {
+      const { code } = (event as IAppleAuthorizationSuccess).detail.authorization;
+
+      verifyAppleAuthCode(code);
     });
 
     document.addEventListener("AppleIDSignInOnFailure", (event: any) => {
