@@ -33,6 +33,7 @@ export type TSocialJoin = {
   type: "kakao" | "apple";
   user: Pick<ISignUpRequest, "marketingOptIn">;
   accessToken: string;
+  refreshToken: string;
 };
 
 export type TLocalJoin = {
@@ -49,7 +50,6 @@ export type TAppleSignUp = {
 export type TKakaoSignUp = {
   type: "kakao";
   body: TKakaoSignUpRequest;
-  accessToken: string;
 };
 export type TLocalSignUp = {
   type: "local";

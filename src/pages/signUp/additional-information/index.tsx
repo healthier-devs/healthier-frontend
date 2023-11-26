@@ -39,6 +39,7 @@ function AdditionalInformation() {
           marketingOptIn: prevState.user.marketingOptIn,
         },
         accessToken: prevState.accessToken,
+        refreshToken: prevState.refreshToken,
       });
     } else if (prevState.type === "kakao") {
       //

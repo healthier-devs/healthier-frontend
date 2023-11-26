@@ -21,40 +21,49 @@ export const useAppleLogin = () => {
       state: process.env.REACT_APP_APPLE_STATE,
       usePopup: true,
     });
+    const handleAppleSignInSuccess = (event: any) => {
+      const verifyAppleAuthCode = async (code: string) => {
+        const { hasAdditionalInformation, accessToken, refreshToken } = await accountFetcher.authorizeApple(code);
 
-    const verifyAppleAuthCode = async (code: string) => {
-      const { hasAdditionalInformation, accessToken, refreshToken } = await accountFetcher.authorizeApple(code);
+        if (!hasAdditionalInformation) {
+          navigate("/signup/step1?type=social", {
+            state: {
+              accessToken,
+              refreshToken,
+            },
+          });
 
-      if (!hasAdditionalInformation) {
-        navigate("/signup/step1?type=social", {
-          state: {
-            accessToken,
-          },
-        });
+          return;
+        }
 
-        return;
-      }
+        saveToken({ accessToken, refreshToken });
+        dispatch(loginAction());
 
-      saveToken({ accessToken, refreshToken });
-      dispatch(loginAction());
+        queryClient.clear();
+        navigate("/");
+      };
 
-      queryClient.clear();
-      navigate("/");
-    };
-
-    document.addEventListener("AppleIDSignInOnSuccess", (event: any) => {
       const { code } = (event as IAppleAuthorizationSuccess).detail.authorization;
 
       verifyAppleAuthCode(code);
-    });
+    };
 
-    document.addEventListener("AppleIDSignInOnFailure", (event: any) => {
+    const handleAppleSignOnFailure = (event: any) => {
       const { error } = (event as IAppleAuthorizationError).detail;
 
       if (error === "popup_closed_by_user") {
         return;
       }
       alert("문제가 발생했습니다. 처음부터 다시 시도해 주세요.");
-    });
+    };
+
+    document.addEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
+
+    document.addEventListener("AppleIDSignInOnFailure", handleAppleSignOnFailure);
+
+    return () => {
+      document.removeEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
+      document.removeEventListener("AppleIDSignInOnFailure", handleAppleSignOnFailure);
+    };
   }, [navigate, dispatch, queryClient]);
 };
