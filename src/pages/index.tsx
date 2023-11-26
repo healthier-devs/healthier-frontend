@@ -32,6 +32,7 @@ import RewardList from "./reward-list";
 import RewardReception from "./reward-reception";
 import SignUp from "./signUp";
 import SignUpAdditionalInformation from "./signUp/additional-information";
+import Authorization from "./signUp/authorization";
 import SignUpComplete from "./signUp/complete";
 import Email from "./signUp/email";
 import SignUpError from "./signUp/error";
@@ -45,6 +46,7 @@ import CollectInformation from "./symptom/onboard/collect-data";
 import Test from "./test";
 
 export {
+  Authorization,
   Diagnosis,
   MyDiagnosis,
   Information,
