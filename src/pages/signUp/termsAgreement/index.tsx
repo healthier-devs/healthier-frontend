@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
 import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
 import * as Lib from "../lib";
@@ -11,6 +11,12 @@ const TERMS_NUM = NECESSARY_NUMS + OPTIONAL_NUMS;
 
 function TermsAgreement() {
   const navigate = useNavigate();
+  const accessToken = useLocation().state.accessToken ?? "";
+  const refreshToken = useLocation().state.refreshToken ?? "";
+
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+
   const [all, setAll] = useState<boolean>(false);
   const [necessaries, setNecessaries] = useState<boolean[]>(Array.from({ length: NECESSARY_NUMS }, () => false));
   const [optionals, setOptionals] = useState<boolean[]>(Array.from({ length: OPTIONAL_NUMS }, () => false));
@@ -18,9 +24,22 @@ function TermsAgreement() {
   const isEnabled = necessaries.filter((agree) => agree === true).length === NECESSARY_NUMS;
 
   const handleClickNextButton = () => {
-    navigate("/signup/step2", {
-      state: { isAgree: true, marketingOptIn: optionals[0] },
-    });
+    if (type === "social") {
+      navigate("/signup/step4", {
+        state: {
+          type: "apple",
+          user: {
+            marketingOptIn: optionals[0],
+          },
+          accessToken,
+          refreshToken,
+        },
+      });
+    } else {
+      navigate("/signup/step2", {
+        state: { isAgree: true, marketingOptIn: optionals[0] },
+      });
+    }
   };
 
   const handleClickAgreeAll = () => {

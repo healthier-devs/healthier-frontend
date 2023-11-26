@@ -1,79 +1,51 @@
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Dropdown from "src/components/dropdown";
 import FlexBox from "src/components/flexBox";
 import { MONTH_TO_DATES, MONTHS } from "src/data/dates";
 import { HEALTH_INTERESTS } from "src/data/interest";
+import { useAdditionalInfo } from "src/hooks/account/useAdditionalInfo";
+import { useAppleSignUp } from "src/hooks/account/useAppleSignUp";
 import { useSignUp } from "src/hooks/account/useSignUp";
 import { Box } from "src/lib/layoutStyle";
 import { formatBirth } from "src/utils/diagnosisHook";
 import { makeYears } from "src/utils/inputUtils";
 import * as Lib from "../lib";
 import * as Styled from "./index.style";
-import type { TAdditionalInformation, TAdditionalInformationParam } from "src/interfaces/account";
+import type { TAdditionalInformationParam } from "src/interfaces/account";
 import type { TMonth } from "src/interfaces/informationQRPage";
 
 const YEARS = makeYears();
-const MAX_HEALTH_INTERESTS_COUNT = 3;
 
 function AdditionalInformation() {
+  const prevState = useLocation().state as TAdditionalInformationParam;
+
   const { signUp } = useSignUp();
+  const { signUpApple } = useAppleSignUp();
 
-  const [info, setInfo] = useState<Omit<TAdditionalInformation, "birthDate">>({
-    name: "",
-    gender: "m",
-    healthInterests: [],
-    invitationCode: "",
-  });
-  const [birthDate, setBirthDate] = useState<{
-    year: number;
-    month: number;
-    date: number;
-  }>({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    date: new Date().getDate(),
-  });
+  const { info, birthDate, handleChangeName, handleChangeInviCode, handleChangeBirthDate, handleClickGender, handleClickHealthInterest } =
+    useAdditionalInfo();
 
-  const prevInfo = useLocation().state as TAdditionalInformationParam;
   const isNextButtonEnabled = info.name !== "";
-
-  const handleChangeBirthDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setBirthDate({ ...birthDate, [name]: Number(value.slice(0, -1)) });
-  };
-
-  const handleClickGender = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = e.currentTarget;
-
-    setInfo({ ...info, [name]: value });
-  };
-
-  const handleClickHealthInterest = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { dataset } = e.currentTarget;
-
-    const { interest } = dataset as { interest: string };
-
-    if (info.healthInterests.includes(interest)) {
-      setInfo((infoParam) => ({ ...infoParam, healthInterests: infoParam.healthInterests.filter((hi) => hi !== interest) }));
-
-      return;
-    }
-
-    if (info.healthInterests.length === MAX_HEALTH_INTERESTS_COUNT) {
-      return;
-    }
-
-    setInfo((infoParam) => ({ ...infoParam, healthInterests: [...infoParam.healthInterests, interest] }));
-  };
-
   const handleClickNextButton = () => {
     if (!isNextButtonEnabled) {
       return;
     }
 
-    signUp({ ...prevInfo, ...info, birthDate: formatBirth(birthDate) });
+    if (prevState.type === "apple") {
+      signUpApple({
+        body: {
+          ...info,
+          birthDate: formatBirth(birthDate),
+          marketingOptIn: prevState.user.marketingOptIn,
+        },
+        accessToken: prevState.accessToken,
+        refreshToken: prevState.refreshToken,
+      });
+    } else if (prevState.type === "kakao") {
+      //
+    } else if (prevState.type === "local") {
+      signUp({ ...prevState.user, ...info, birthDate: formatBirth(birthDate) });
+    }
   };
 
   return (
@@ -85,14 +57,7 @@ function AdditionalInformation() {
           <Box mb="8px">
             <Styled.Label>이름</Styled.Label>
           </Box>
-          <Styled.TextField
-            type="text"
-            placeholder="이름을 입력해주세요"
-            value={info.name}
-            onChange={(e) => {
-              setInfo({ ...info, name: e.target.value });
-            }}
-          />
+          <Styled.TextField type="text" placeholder="이름을 입력해주세요" value={info.name} onChange={handleChangeName} />
         </Box>
 
         <Box mb="3.2rem">
@@ -178,9 +143,7 @@ function AdditionalInformation() {
             type="text"
             placeholder="추천인코드를 입력해주세요"
             value={info.invitationCode}
-            onChange={(e) => {
-              setInfo({ ...info, invitationCode: e.target.value });
-            }}
+            onChange={handleChangeInviCode}
           />
         </Box>
       </Styled.Container>

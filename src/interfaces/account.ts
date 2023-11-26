@@ -24,9 +24,43 @@ export interface ISignUpRequest {
   invitationCode: string; // 없으면 빈 문자열
 }
 
+export type TAppleSignUpRequest = Omit<ISignUpRequest, "username" | "password" | "confirmPassword">;
+export type TKakaoSignUpRequest = Omit<ISignUpRequest, "username" | "password" | "confirmPassword" | "name" | "gender" | "birthDate">;
+
 export type TAdditionalInformation = Pick<ISignUpRequest, "name" | "gender" | "birthDate" | "healthInterests" | "invitationCode">;
 
-export type TAdditionalInformationParam = Pick<ISignUpRequest, "username" | "password" | "confirmPassword" | "marketingOptIn">;
+export type TSocialJoin = {
+  type: "kakao" | "apple";
+  user: Pick<ISignUpRequest, "marketingOptIn">;
+  accessToken: string;
+  refreshToken: string;
+};
+
+export type TLocalJoin = {
+  type: "local";
+  user: Pick<ISignUpRequest, "username" | "password" | "confirmPassword" | "marketingOptIn">;
+};
+
+export type TAppleSignUp = {
+  type: "apple";
+  body: TAppleSignUpRequest;
+  accessToken: string;
+};
+
+export type TKakaoSignUp = {
+  type: "kakao";
+  body: TKakaoSignUpRequest;
+};
+export type TLocalSignUp = {
+  type: "local";
+  body: ISignUpRequest;
+};
+
+export type TSignUp = TAppleSignUp | TKakaoSignUp | TLocalSignUp;
+
+export type TAdditionalInformationParam = TSocialJoin | TLocalJoin;
+
+export type TJoinType = TAdditionalInformationParam["type"];
 
 export interface ILoginRequest {
   username: string;
@@ -87,4 +121,26 @@ export interface IInquiry {
   title: string;
   content: string;
   images: any[];
+}
+
+export interface IAppleAuthorizationSuccess {
+  detail: {
+    authorization: {
+      code: string;
+      id_token: string;
+      state: string;
+    };
+  };
+}
+
+export interface IAppleAuthorizationError {
+  detail: {
+    error: string;
+  };
+}
+
+export interface IVerifyAppleCodeResponse {
+  accessToken: string;
+  refreshToken: string;
+  hasAdditionalInformation: boolean;
 }

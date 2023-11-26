@@ -2,7 +2,6 @@ import { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { accountFetcher } from "./fetcher";
 import type {
-  ISignUpRequest,
   IValidateAccountResponse,
   IValidatePasswordRequest,
   ILoginRequest,
@@ -11,6 +10,7 @@ import type {
   IUserResponse,
   ISendVerificationCode,
   IResetPassword,
+  TSignUp,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -49,11 +49,23 @@ export const validatePassword = async (body: IValidatePasswordRequest) => {
   }
 };
 
-export const signup = async (body: ISignUpRequest): Promise<IValidateAccountResponse> => {
-  try {
-    const signupData = await accountFetcher.signUpUser(body);
+export const signup = async (signupParam: TSignUp): Promise<IValidateAccountResponse> => {
+  const { type, body } = signupParam;
 
-    return signupData;
+  try {
+    if (type === "apple") {
+      const signupData = await accountFetcher.signUpApple(body, signupParam.accessToken);
+
+      return signupData;
+    } else if (type === "local") {
+      const signupData = await accountFetcher.signUpUser(body);
+
+      return signupData;
+    } else {
+      const signupData = await accountFetcher.signUpKakao(body);
+
+      return signupData;
+    }
   } catch (err) {
     if (err instanceof AxiosError && err.response) {
       const { status } = err.response;

@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import AppleIcon from "src/assets/icons/AppleIcon";
 import KakaoIcon from "src/assets/icons/KakaoIcon";
 import Box from "src/components/box";
 import FlexBox from "src/components/flexBox";
 import RoundButton from "src/components/roundButton";
 import TextDivider from "src/components/textDivider";
 import UnderlinedButton from "src/components/underlinedButton";
+import { useAppleLogin } from "src/hooks/account/useAppleLogin";
 import theme from "src/lib/theme";
 import * as Styled from "./index.style";
 
 function Onboard() {
   const navigate = useNavigate();
+
+  useAppleLogin();
 
   return (
     <Styled.Container>
@@ -40,9 +42,16 @@ function Onboard() {
             <KakaoIcon width={30} height={30} />
           </Styled.LoginButton>
 
-          <Styled.LoginButton className="apple">
-            <AppleIcon width={30} height={30} />
-          </Styled.LoginButton>
+          <div
+            id="appleid-signin"
+            className="signin-button"
+            data-mode="logo-only"
+            data-color="white"
+            data-border="true"
+            data-type="sign in"
+            data-border-radius="50"
+            style={{ width: "56px", cursor: "pointer" }}
+          ></div>
         </FlexBox>
 
         <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">
