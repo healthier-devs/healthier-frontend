@@ -11,8 +11,8 @@ const TERMS_NUM = NECESSARY_NUMS + OPTIONAL_NUMS;
 
 function TermsAgreement() {
   const navigate = useNavigate();
-  const accessToken = useLocation().state.accessToken ?? "";
-  const refreshToken = useLocation().state.refreshToken ?? "";
+  const accessToken = useLocation().state?.accessToken ?? "";
+  const refreshToken = useLocation().state?.refreshToken ?? "";
 
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
