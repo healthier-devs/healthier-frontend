@@ -2,19 +2,19 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 15.8rem);
+  height: calc(100vh - 11.8rem);
   position: absolute;
   z-index: 5000;
 
   background-color: ${({ theme }) => theme.color.grey_900};
-  padding-top: 15.8rem;
+  padding-top: 11.8rem;
 `;
 
 export const Container = styled.div`
   z-index: 9999;
   position: absolute;
   left: 2rem;
-  top: 4.8rem;
+  top: 0.8rem;
   width: calc(100% - 4rem);
 `;
 
@@ -36,15 +36,15 @@ export const Input = styled.input`
   width: 100%;
   box-sizing: border-box;
 
-  color: ${({ theme }) => theme.color.grey_200};
+  color: ${({ theme }) => theme.color.grey_400};
   font-size: 1.6rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
   ::placeholder {
-    color: ${({ theme }) => theme.color.grey_400};
+    color: ${({ theme }) => theme.color.grey_600};
   }
 `;
 

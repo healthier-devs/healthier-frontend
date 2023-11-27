@@ -51,13 +51,13 @@ export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
 
   width: 14rem;
   box-sizing: border-box;
-  padding: 1.2rem 1.6rem;
+  padding: 1.1rem 1.6rem;
 
   background-color: ${({ theme }) => theme.color.grey_850};
   border: 0.1rem solid ${({ theme }) => theme.color.blue};
   border-radius: 6rem;
 
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-style: normal;
   font-weight: 500;
   line-height: 130%;
@@ -68,7 +68,7 @@ export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
 export const BackButton = styled.div`
   position: absolute;
   left: 1.6rem;
-  top: 4.8rem;
+  top: 1.2rem;
 
   display: flex;
   justify-content: center;
