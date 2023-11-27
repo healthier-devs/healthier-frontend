@@ -17,6 +17,8 @@ export const Container = styled.button<{
   border-radius: 3rem;
   box-sizing: border-box;
   cursor: pointer;
+
+  pointer-events: auto;
 `;
 
 export const ButtonText = styled.section<{ color: string; fontSize: number }>`

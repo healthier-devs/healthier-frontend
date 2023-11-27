@@ -3,9 +3,11 @@ import { useState } from "react";
 import CheckIcon from "src/assets/icons/CheckIcon";
 import BottomSheet from "src/components/bottomSheet";
 import Box from "src/components/box";
+import Dialog from "src/components/dialog";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import { DATA_DELETION_TERM, SIGNOUT_TERM, SIGNOUT_REASONS } from "src/data/member_agreement";
+import useModal from "src/hooks/useModal";
 import { Checkbox, NextButton } from "src/pages/signUp/lib";
 import { RootContainer, Container, Title, TitleWrapper, Typography, List, Button } from "./index.style";
 
@@ -13,10 +15,20 @@ function SignOut() {
   const [signoutAgreed, setSignoutAgreed] = useState<boolean>(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signoutReasonIdx, setSignoutReasonIdx] = useState<number | null>(null);
+  const { isOpenModal: isDialogOpen, modalRef: dialogRef, closeModal: closeDialog, openModal: openDialog } = useModal();
+
+  const isNextButtonEnabled = signoutAgreed && signoutReasonIdx !== null;
 
   const handleClickReasonItem = (reasonIdx: number) => {
     setSignoutReasonIdx(reasonIdx);
     setIsBottomSheetOpen(false);
+  };
+
+  const handleClickNextButton = () => {
+    if (!isNextButtonEnabled) {
+      return;
+    }
+    openDialog();
   };
 
   return (
@@ -94,7 +106,15 @@ function SignOut() {
         </List>
       </BottomSheet>
 
-      <NextButton isEnabled={signoutAgreed && signoutReasonIdx !== null} onClick={() => null} isGradient />
+      {isDialogOpen && (
+        <Dialog
+          ref={dialogRef}
+          title="정말 탈퇴하시겠습니까?"
+          description={"탈퇴 후 14일간 재가입이 제한되며,\n동일 계정으로 가입이 불가합니다"}
+          onClickCancel={closeDialog}
+        />
+      )}
+      <NextButton isEnabled={isNextButtonEnabled} onClick={handleClickNextButton} isGradient />
     </RootContainer>
   );
 }
