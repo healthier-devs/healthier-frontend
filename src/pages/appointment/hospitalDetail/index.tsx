@@ -106,6 +106,8 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                         {statusMap[data.operatingStatus]}
                       </span>
                       {data.operatingStatus !== "UNKNOWN" &&
+                        data.schedule[convertWeekDay()].start &&
+                        data.schedule[convertWeekDay()].end &&
                         ` ・ ${data.schedule[convertWeekDay()].start ?? "00:00"} ~ ${data.schedule[convertWeekDay()].end ?? "00:00"}`}
                     </Styled.Description>
                     <img
