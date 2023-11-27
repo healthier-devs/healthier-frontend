@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import FlexBox from "src/components/flexBox";
-import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
+import { NECESSARY_AGREEMENTS } from "src/data/member_agreement";
 import theme from "src/lib/theme";
 import * as Styled from "../index.style";
 
