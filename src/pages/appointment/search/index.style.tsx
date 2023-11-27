@@ -2,19 +2,19 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 15.8rem);
+  height: calc(100vh - 11.8rem);
   position: absolute;
   z-index: 5000;
 
   background-color: ${({ theme }) => theme.color.grey_900};
-  padding-top: 15.8rem;
+  padding-top: 11.8rem;
 `;
 
 export const Container = styled.div`
   z-index: 9999;
   position: absolute;
   left: 2rem;
-  top: 4.8rem;
+  top: 0.8rem;
   width: calc(100% - 4rem);
 `;
 

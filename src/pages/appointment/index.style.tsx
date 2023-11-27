@@ -68,7 +68,7 @@ export const MoreSearchContainer = styled.div<{ isBottomSheetOpen: boolean }>`
 export const BackButton = styled.div`
   position: absolute;
   left: 1.6rem;
-  top: 4.8rem;
+  top: 1.2rem;
 
   display: flex;
   justify-content: center;
