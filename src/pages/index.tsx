@@ -8,6 +8,7 @@ import AccountIndex from "./account/index/index";
 import Inquiry from "./account/inquiry";
 import ModifyInformation from "./account/modify-information";
 import AccountSettings from "./account/settings";
+import SignOut from "./account/sign-out";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeList from "./challenge-list";
@@ -92,4 +93,5 @@ export {
   SymptomOnboard,
   CollectInformation,
   Inquiry,
+  SignOut,
 };
