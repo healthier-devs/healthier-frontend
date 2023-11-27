@@ -36,15 +36,15 @@ export const Input = styled.input`
   width: 100%;
   box-sizing: border-box;
 
-  color: ${({ theme }) => theme.color.grey_200};
+  color: ${({ theme }) => theme.color.grey_400};
   font-size: 1.6rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
   ::placeholder {
-    color: ${({ theme }) => theme.color.grey_400};
+    color: ${({ theme }) => theme.color.grey_600};
   }
 `;
 
