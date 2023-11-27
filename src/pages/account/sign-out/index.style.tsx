@@ -33,7 +33,12 @@ export const RootContainer = styled.div`
 `;
 
 export const List = styled.ul`
-  padding-inline-start: 20px;
+  list-style-type: none;
+  padding-inline-start: 0;
+
+  &.signout__term__list {
+    padding-inline-start: 20px;
+  }
 
   .signout__term__desc {
     color: ${({ theme }) => theme.color.grey_300};
@@ -42,6 +47,14 @@ export const List = styled.ul`
     font-weight: 400;
     line-height: 150%;
     list-style: disc;
+  }
+
+  .signout__reason {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    cursor: pointer;
   }
 `;
 
@@ -54,7 +67,7 @@ export const Typography = styled.p`
     line-height: 150%;
   }
 
-  &.signout__reason {
+  &.signout__reason__select {
     color: ${({ theme }) => theme.color.grey_400};
     font-family: Spoqa Han Sans Neo;
     font-size: 16px;
@@ -68,6 +81,22 @@ export const Typography = styled.p`
     font-family: Spoqa Han Sans Neo;
     font-size: 16px;
     font-weight: 500;
+  }
+
+  &.signout__reason__desc {
+    color: ${({ theme }) => theme.color.grey_400};
+    font-family: Spoqa Han Sans Neo;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  &.reason__item__selected {
+    color: ${({ theme }) => theme.color.grey_200};
+    font-weight: 500;
+  }
+
+  &.reason__selected {
+    color: ${({ theme }) => theme.color.blue_500};
+    font-weight: 700;
   }
 `;
 
