@@ -7,7 +7,7 @@ import * as Styled from "./index.style";
 import LoginButton from "./LoginButton";
 
 interface IExistingAccountProps {
-  type: string;
+  type: "KAKAO" | "APPLE" | "DEFAULT";
 }
 
 function ExistingAccount({ type }: IExistingAccountProps) {
@@ -34,8 +34,8 @@ function ExistingAccount({ type }: IExistingAccountProps) {
         </Styled.TitleWrapper>
 
         <FlexBox flexDirection="column" gap="1.2rem" style={{ flex: 1 }}>
-          {type === "kakao" && <LoginButton type="kakao" onClick={handleClickKakaoButton} />}
-          {type === "apple" && (
+          {type === "KAKAO" && <LoginButton type="kakao" onClick={handleClickKakaoButton} />}
+          {type === "APPLE" && (
             <AppleLogin
               clientId={process.env.REACT_APP_APPLE_CLIENT_ID!}
               redirectURI={process.env.REACT_APP_APPLE_REDIRECT_URI!}
@@ -53,7 +53,7 @@ function ExistingAccount({ type }: IExistingAccountProps) {
               }}
             />
           )}
-          {type === "local" && <LoginButton type="local" onClick={handleClickLocalButton} />}
+          {type === "DEFAULT" && <LoginButton type="local" onClick={handleClickLocalButton} />}
         </FlexBox>
 
         <Styled.ResetPasswordContainer>

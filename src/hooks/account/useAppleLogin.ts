@@ -23,13 +23,24 @@ export const useAppleLogin = () => {
 
   const handleAppleSignInSuccess = (event: any) => {
     const verifyAppleAuthCode = async (code: string) => {
-      const { hasAdditionalInformation, accessToken, refreshToken } = await accountFetcher.authorizeApple(code);
+      const { hasAdditionalInformation, isAlreadyRegistered, registerType, accessToken, refreshToken } =
+        await accountFetcher.authorizeApple(code);
 
       if (!hasAdditionalInformation) {
         navigate("/signup/step1?type=social", {
           state: {
             accessToken,
             refreshToken,
+          },
+        });
+
+        return;
+      }
+
+      if (isAlreadyRegistered) {
+        navigate("/login", {
+          state: {
+            type: registerType,
           },
         });
 

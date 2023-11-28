@@ -44,7 +44,7 @@ function Test() {
         onClick={() =>
           navigate("/login", {
             state: {
-              type: "local",
+              type: "DEFAULT",
             },
           })
         }

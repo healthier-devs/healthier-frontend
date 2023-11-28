@@ -142,4 +142,6 @@ export interface IVerifyAppleCodeResponse {
   accessToken: string;
   refreshToken: string;
   hasAdditionalInformation: boolean;
+  isAlreadyRegistered: boolean;
+  registerType: "KAKAO" | "APPLE" | "DEFAULT";
 }
