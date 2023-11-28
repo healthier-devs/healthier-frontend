@@ -12,58 +12,52 @@ export const useAppleLogin = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    // @ts-ignore
-    AppleID.auth.init({
-      clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
-      scope: process.env.REACT_APP_APPLE_SCOPES,
-      redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
-      state: process.env.REACT_APP_APPLE_STATE,
-      usePopup: true,
-    });
-    const handleAppleSignInSuccess = (event: any) => {
-      const verifyAppleAuthCode = async (code: string) => {
-        const { hasAdditionalInformation, accessToken, refreshToken } = await accountFetcher.authorizeApple(code);
+  const handleAppleSignOnFailure = (event: any) => {
+    const { error } = (event as IAppleAuthorizationError).error;
 
-        if (!hasAdditionalInformation) {
-          navigate("/signup/step1?type=social", {
-            state: {
-              accessToken,
-              refreshToken,
-            },
-          });
+    if (error === "popup_closed_by_user") {
+      return;
+    }
+    alert("문제가 발생했습니다. 처음부터 다시 시도해 주세요.");
+  };
 
-          return;
-        }
+  const handleAppleSignInSuccess = (event: any) => {
+    const verifyAppleAuthCode = async (code: string) => {
+      const { hasAdditionalInformation, isAlreadyRegistered, registerType, accessToken, refreshToken } =
+        await accountFetcher.authorizeApple(code);
 
-        saveToken({ accessToken, refreshToken });
-        dispatch(loginAction());
+      if (!hasAdditionalInformation) {
+        navigate("/signup/step1?type=social", {
+          state: {
+            accessToken,
+            refreshToken,
+          },
+        });
 
-        queryClient.clear();
-        navigate("/");
-      };
-
-      const { code } = (event as IAppleAuthorizationSuccess).detail.authorization;
-
-      verifyAppleAuthCode(code);
-    };
-
-    const handleAppleSignOnFailure = (event: any) => {
-      const { error } = (event as IAppleAuthorizationError).detail;
-
-      if (error === "popup_closed_by_user") {
         return;
       }
-      alert("문제가 발생했습니다. 처음부터 다시 시도해 주세요.");
+
+      if (isAlreadyRegistered) {
+        navigate("/login", {
+          state: {
+            type: registerType,
+          },
+        });
+
+        return;
+      }
+
+      saveToken({ accessToken, refreshToken });
+      dispatch(loginAction());
+
+      queryClient.clear();
+      navigate("/");
     };
 
-    document.addEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
+    const { code } = (event as IAppleAuthorizationSuccess).authorization;
 
-    document.addEventListener("AppleIDSignInOnFailure", handleAppleSignOnFailure);
+    verifyAppleAuthCode(code);
+  };
 
-    return () => {
-      document.removeEventListener("AppleIDSignInOnSuccess", handleAppleSignInSuccess);
-      document.removeEventListener("AppleIDSignInOnFailure", handleAppleSignOnFailure);
-    };
-  }, [navigate, dispatch, queryClient]);
+  return { handleAppleSignInSuccess, handleAppleSignOnFailure };
 };

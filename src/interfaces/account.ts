@@ -125,17 +125,15 @@ export interface IInquiry {
 }
 
 export interface IAppleAuthorizationSuccess {
-  detail: {
-    authorization: {
-      code: string;
-      id_token: string;
-      state: string;
-    };
+  authorization: {
+    code: string;
+    id_token: string;
+    state: string;
   };
 }
 
 export interface IAppleAuthorizationError {
-  detail: {
+  error: {
     error: string;
   };
 }
@@ -144,4 +142,6 @@ export interface IVerifyAppleCodeResponse {
   accessToken: string;
   refreshToken: string;
   hasAdditionalInformation: boolean;
+  isAlreadyRegistered: boolean;
+  registerType: "KAKAO" | "APPLE" | "DEFAULT";
 }

@@ -34,6 +34,10 @@ export const TitleContainer = styled.div`
     font-weight: 300;
     letter-spacing: -0.5px;
   }
+
+  .login__button {
+    cursor: pointer;
+  }
 `;
 
 export const Description = styled.p`

@@ -32,6 +32,7 @@
     "mapbox-gl": "^2.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-apple-login": "^1.1.6",
     "react-calendar": "^4.2.1",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",

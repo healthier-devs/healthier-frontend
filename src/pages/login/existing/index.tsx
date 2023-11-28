@@ -1,15 +1,25 @@
+import AppleLogin from "react-apple-login";
 import { useNavigate } from "react-router-dom";
 import ContentHeader from "src/components/contentHeader";
 import FlexBox from "src/components/flexBox";
+import { useAppleLogin } from "src/hooks/account/useAppleLogin";
 import * as Styled from "./index.style";
 import LoginButton from "./LoginButton";
 
 interface IExistingAccountProps {
-  type: string;
+  type: "KAKAO" | "APPLE" | "DEFAULT";
 }
 
 function ExistingAccount({ type }: IExistingAccountProps) {
   const navigate = useNavigate();
+
+  const { handleAppleSignInSuccess, handleAppleSignOnFailure } = useAppleLogin();
+  const handleClickKakaoButton = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&response_type=code&redirect_uri=${window.location.origin}/kakaoCallback`;
+  };
+  const handleClickLocalButton = () => {
+    navigate("/login");
+  };
 
   return (
     <>
@@ -24,9 +34,26 @@ function ExistingAccount({ type }: IExistingAccountProps) {
         </Styled.TitleWrapper>
 
         <FlexBox flexDirection="column" gap="1.2rem" style={{ flex: 1 }}>
-          {type === "kakao" && <LoginButton type="kakao" email="" />}
-          {type === "apple" && <LoginButton type="apple" email="" />}
-          {type === "local" && <LoginButton type="email" email="" />}
+          {type === "KAKAO" && <LoginButton type="kakao" onClick={handleClickKakaoButton} />}
+          {type === "APPLE" && (
+            <AppleLogin
+              clientId={process.env.REACT_APP_APPLE_CLIENT_ID!}
+              redirectURI={process.env.REACT_APP_APPLE_REDIRECT_URI!}
+              scope={"name email"}
+              responseMode={"form_post"}
+              usePopup={true}
+              render={({ onClick }) => <LoginButton type="apple" onClick={onClick} />}
+              callback={(d) => {
+                if ("error" in d) {
+                  handleAppleSignOnFailure(d);
+
+                  return;
+                }
+                handleAppleSignInSuccess(d);
+              }}
+            />
+          )}
+          {type === "DEFAULT" && <LoginButton type="local" onClick={handleClickLocalButton} />}
         </FlexBox>
 
         <Styled.ResetPasswordContainer>
