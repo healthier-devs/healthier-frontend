@@ -63,7 +63,7 @@ export const signup = async (signupParam: TSignUp): Promise<IValidateAccountResp
 
       return signupData;
     } else {
-      const signupData = await accountFetcher.signUpKakao(body);
+      const signupData = await accountFetcher.signUpKakao(body, signupParam.accessToken);
 
       return signupData;
     }

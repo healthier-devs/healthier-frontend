@@ -35,6 +35,17 @@ function TermsAgreement() {
           refreshToken,
         },
       });
+    } else if (type === "kakao") {
+      navigate("/signup/step4", {
+        state: {
+          type: "kakao",
+          user: {
+            marketingOptIn: optionals[0],
+          },
+          accessToken,
+          refreshToken,
+        },
+      });
     } else {
       navigate("/signup/step2", {
         state: { isAgree: true, marketingOptIn: optionals[0] },

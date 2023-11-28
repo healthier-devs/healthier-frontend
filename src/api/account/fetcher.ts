@@ -13,6 +13,7 @@ import {
   IVerifyAppleCodeResponse,
   TAppleSignUpRequest,
   TKakaoSignUpRequest,
+  TAdditionalInformation,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -36,8 +37,12 @@ export const accountFetcher = {
       },
     });
   },
-  signUpKakao(body: TKakaoSignUpRequest) {
-    return unauthorizedFetcher.post("/auth/kakao/additional-information", body);
+  signUpKakao(body: TKakaoSignUpRequest, accessToken: string) {
+    return unauthorizedFetcher.post("/auth/kakao/additional-information", body, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
   loginUser(body: ILoginRequest) {
     return unauthorizedFetcher.post("/signin", body);

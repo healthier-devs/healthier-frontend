@@ -50,6 +50,7 @@ export type TAppleSignUp = {
 export type TKakaoSignUp = {
   type: "kakao";
   body: TKakaoSignUpRequest;
+  accessToken: string;
 };
 export type TLocalSignUp = {
   type: "local";

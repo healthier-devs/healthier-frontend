@@ -1,10 +1,12 @@
 import { useLocation } from "react-router-dom";
+import { accountFetcher } from "src/api/account/fetcher";
 import Dropdown from "src/components/dropdown";
 import FlexBox from "src/components/flexBox";
 import { MONTH_TO_DATES, MONTHS } from "src/data/dates";
 import { HEALTH_INTERESTS } from "src/data/interest";
 import { useAdditionalInfo } from "src/hooks/account/useAdditionalInfo";
 import { useAppleSignUp } from "src/hooks/account/useAppleSignUp";
+import { useKakaoSignUp } from "src/hooks/account/useKakaoSignUp";
 import { useSignUp } from "src/hooks/account/useSignUp";
 import { Box } from "src/lib/layoutStyle";
 import { formatBirth } from "src/utils/diagnosisHook";
@@ -21,13 +23,14 @@ function AdditionalInformation() {
 
   const { signUp } = useSignUp();
   const { signUpApple } = useAppleSignUp();
+  const { signUpKakao } = useKakaoSignUp();
 
   const { info, birthDate, handleChangeName, handleChangeInviCode, handleChangeBirthDate, handleClickGender, handleClickHealthInterest } =
     useAdditionalInfo();
 
   const isNextButtonEnabled = info.name !== "";
   const handleClickNextButton = () => {
-    if (!isNextButtonEnabled) {
+    if (prevState.type !== "kakao" && !isNextButtonEnabled) {
       return;
     }
 
@@ -42,6 +45,14 @@ function AdditionalInformation() {
         refreshToken: prevState.refreshToken,
       });
     } else if (prevState.type === "kakao") {
+      signUpKakao({
+        body: {
+          ...info,
+          marketingOptIn: prevState.user.marketingOptIn,
+        },
+        accessToken: prevState.accessToken,
+        refreshToken: prevState.refreshToken,
+      });
       //
     } else if (prevState.type === "local") {
       signUp({ ...prevState.user, ...info, birthDate: formatBirth(birthDate) });
@@ -51,66 +62,73 @@ function AdditionalInformation() {
   return (
     <>
       <Styled.Container>
-        <Lib.Title text="필수 정보를 입력해 주세요" description="기본 정보와 추천인 코드를 입력해주세요" mb="4rem" />
+        {prevState.type === "kakao" ? (
+          <Lib.Title text="추가 정보를 수집할게요" description="관심 건강분야와 추천인 코드를 입력해주세요" mb="4rem" />
+        ) : (
+          <Lib.Title text="필수 정보를 입력해 주세요" description="기본 정보와 추천인 코드를 입력해주세요" mb="4rem" />
+        )}
+        {prevState.type !== "kakao" && (
+          <>
+            <Box mb="3.2rem">
+              <Box mb="8px">
+                <Styled.Label>이름</Styled.Label>
+              </Box>
+              <Styled.TextField type="text" placeholder="이름을 입력해주세요" value={info.name} onChange={handleChangeName} />
+            </Box>
 
-        <Box mb="3.2rem">
-          <Box mb="8px">
-            <Styled.Label>이름</Styled.Label>
-          </Box>
-          <Styled.TextField type="text" placeholder="이름을 입력해주세요" value={info.name} onChange={handleChangeName} />
-        </Box>
+            <Box mb="3.2rem">
+              <Box mb="8px">
+                <Styled.Label>출생년도</Styled.Label>
+              </Box>
+              <FlexBox gap="8px">
+                <Styled.BirthDateWrapper flex={3}>
+                  <Dropdown
+                    isSelected={birthDate.year !== 0}
+                    options={YEARS}
+                    value={birthDate.year + "년"}
+                    onChange={handleChangeBirthDate}
+                    name="year"
+                  />
+                </Styled.BirthDateWrapper>
 
-        <Box mb="3.2rem">
-          <Box mb="8px">
-            <Styled.Label>출생년도</Styled.Label>
-          </Box>
-          <FlexBox gap="8px">
-            <Styled.BirthDateWrapper flex={3}>
-              <Dropdown
-                isSelected={birthDate.year !== 0}
-                options={YEARS}
-                value={birthDate.year + "년"}
-                onChange={handleChangeBirthDate}
-                name="year"
-              />
-            </Styled.BirthDateWrapper>
+                <Styled.BirthDateWrapper flex={2}>
+                  <Dropdown
+                    isSelected={birthDate.month !== 0}
+                    options={MONTHS}
+                    value={birthDate.month + "월"}
+                    onChange={handleChangeBirthDate}
+                    name="month"
+                  />
+                </Styled.BirthDateWrapper>
 
-            <Styled.BirthDateWrapper flex={2}>
-              <Dropdown
-                isSelected={birthDate.month !== 0}
-                options={MONTHS}
-                value={birthDate.month + "월"}
-                onChange={handleChangeBirthDate}
-                name="month"
-              />
-            </Styled.BirthDateWrapper>
+                <Styled.BirthDateWrapper flex={2}>
+                  <Dropdown
+                    isSelected={birthDate.date !== 0}
+                    options={MONTH_TO_DATES[birthDate.month as TMonth]}
+                    value={birthDate.date + "일"}
+                    onChange={handleChangeBirthDate}
+                    name="date"
+                  />
+                </Styled.BirthDateWrapper>
+              </FlexBox>
+            </Box>
 
-            <Styled.BirthDateWrapper flex={2}>
-              <Dropdown
-                isSelected={birthDate.date !== 0}
-                options={MONTH_TO_DATES[birthDate.month as TMonth]}
-                value={birthDate.date + "일"}
-                onChange={handleChangeBirthDate}
-                name="date"
-              />
-            </Styled.BirthDateWrapper>
-          </FlexBox>
-        </Box>
+            <Box mb="3.2rem">
+              <Box mb="8px">
+                <Styled.Label>성별</Styled.Label>
+              </Box>
 
-        <Box mb="3.2rem">
-          <Box mb="8px">
-            <Styled.Label>성별</Styled.Label>
-          </Box>
-
-          <FlexBox gap="1rem">
-            <Styled.GenderButton isSelected={info.gender === "m"} name="gender" value="m" onClick={handleClickGender}>
-              남성
-            </Styled.GenderButton>
-            <Styled.GenderButton isSelected={info.gender === "f"} name="gender" value="f" onClick={handleClickGender}>
-              여성
-            </Styled.GenderButton>
-          </FlexBox>
-        </Box>
+              <FlexBox gap="1rem">
+                <Styled.GenderButton isSelected={info.gender === "m"} name="gender" value="m" onClick={handleClickGender}>
+                  남성
+                </Styled.GenderButton>
+                <Styled.GenderButton isSelected={info.gender === "f"} name="gender" value="f" onClick={handleClickGender}>
+                  여성
+                </Styled.GenderButton>
+              </FlexBox>
+            </Box>
+          </>
+        )}
 
         <Box mb="3.2rem">
           <Box mb="8px">
@@ -147,7 +165,7 @@ function AdditionalInformation() {
           />
         </Box>
       </Styled.Container>
-      <Lib.NextButton isEnabled={isNextButtonEnabled} onClick={handleClickNextButton} />
+      <Lib.NextButton isEnabled={prevState.type === "kakao" ? true : isNextButtonEnabled} onClick={handleClickNextButton} />
     </>
   );
 }

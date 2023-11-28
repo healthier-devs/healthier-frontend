@@ -21,13 +21,24 @@ const KakaoCallback = () => {
         } else if (kakaoAuthData.registerType === "APPLE") {
           alert("동일한 이메일으로 애플 서비스를 통해 헬시어 서비스에 가입되어있습니다");
         }
-        navigate(-2);
+        navigate("/onboard");
       } else {
+        if (!kakaoAuthData.hasAdditionalInformation) {
+          navigate("/signup/step1?type=kakao", {
+            state: {
+              accessToken: kakaoAuthData.accessToken,
+              refreshToken: kakaoAuthData.refreshToken,
+            },
+          });
+
+          return;
+        }
+
         saveToken({
           accessToken: kakaoAuthData.accessToken,
           refreshToken: kakaoAuthData.refreshToken,
         });
-        navigate(-2);
+        navigate("/");
       }
     }
   }, [isLoading]);
