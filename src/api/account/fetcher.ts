@@ -13,6 +13,7 @@ import {
   IVerifyAppleCodeResponse,
   TAppleSignUpRequest,
   TKakaoSignUpRequest,
+  TAdditionalInformation,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -36,8 +37,12 @@ export const accountFetcher = {
       },
     });
   },
-  signUpKakao(body: TKakaoSignUpRequest) {
-    return unauthorizedFetcher.post("/auth/kakao/additional-information", body);
+  signUpKakao(body: TKakaoSignUpRequest, accessToken: string) {
+    return unauthorizedFetcher.post("/auth/kakao/additional-information", body, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
   loginUser(body: ILoginRequest) {
     return unauthorizedFetcher.post("/signin", body);
@@ -71,6 +76,9 @@ export const accountFetcher = {
   },
   getImageRoute() {
     return unauthorizedFetcher.get("/inquiry/image");
+  },
+  getKakaoAuth(code: string) {
+    return unauthorizedFetcher.get(`/auth/kakao?code=${code}`);
   },
   authorizeApple(code: string): Promise<IVerifyAppleCodeResponse> {
     return unauthorizedFetcher.get(`/auth/apple?code=${code}`);

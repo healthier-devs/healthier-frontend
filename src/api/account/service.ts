@@ -63,7 +63,7 @@ export const signup = async (signupParam: TSignUp): Promise<IValidateAccountResp
 
       return signupData;
     } else {
-      const signupData = await accountFetcher.signUpKakao(body);
+      const signupData = await accountFetcher.signUpKakao(body, signupParam.accessToken);
 
       return signupData;
     }
@@ -177,6 +177,13 @@ export const getUserData = async () => {
 
     throw new Error();
   }
+};
+
+export const getKakaoAuthData = async () => {
+  const url = new URL(window.location.href);
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  await accountFetcher.getKakaoAuth(url.searchParams.get("code")!);
 };
 
 export const createFCMToken = async (fcmToken: string) => {

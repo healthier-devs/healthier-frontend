@@ -69,6 +69,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Pages.Login />} />
+          <Route path="/kakaoCallback" element={<Pages.KakaoCallback />} />
 
           <Route path="/qr" element={<Pages.IndexQR />} />
           <Route path="/qr/info" element={<Pages.InformationQR />} />
