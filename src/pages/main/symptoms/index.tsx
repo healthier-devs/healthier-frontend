@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 import { useGetStatistics } from "src/hooks/diagnosis/useGetStatistics";
 import { Box } from "../index.style";
 import Title from "../lib/Title";
@@ -6,6 +8,15 @@ import type { IAuthState } from "src/state";
 
 function Symptoms({ authenticated }: Pick<IAuthState, "authenticated">) {
   const { statisticsData } = useGetStatistics({ authenticated });
+  const navigate = useNavigate();
+
+  const handleClickTitle = () => {
+    if (authenticated) {
+      return;
+    }
+
+    navigate("/onboard");
+  };
 
   return (
     <Box>
@@ -18,12 +29,11 @@ function Symptoms({ authenticated }: Pick<IAuthState, "authenticated">) {
       />
       <Styled.BannerContainer image={statisticsData.image ?? ""}>
         <Styled.TextContainer>
-          <Styled.TitleContainer>
+          <Styled.TitleContainer onClick={handleClickTitle}>
             <span
-              className="title"
-              onClick={() => {
-                location.href = `tel:02-111-1111`;
-              }}
+              className={classNames("title", {
+                login__button: !authenticated,
+              })}
             >
               {authenticated ? statisticsData?.name : "로그인 후 확인 가능"}
             </span>
