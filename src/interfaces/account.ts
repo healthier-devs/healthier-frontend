@@ -145,3 +145,8 @@ export interface IVerifyAppleCodeResponse {
   isAlreadyRegistered: boolean;
   registerType: "KAKAO" | "APPLE" | "DEFAULT";
 }
+export interface IEmailFind {
+  name: string;
+  birthDate: string;
+  gender: "m" | "f";
+}
