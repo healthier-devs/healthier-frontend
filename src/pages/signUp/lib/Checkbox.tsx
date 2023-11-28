@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { preloadImage } from "src/utils/image";
 import styled from "styled-components";
 
 interface IIcon {
@@ -20,6 +22,15 @@ function Icon({ variant, checked }: IIcon) {
 }
 
 function Checkbox({ variant = "primary", defaultChecked = false, onClick, id }: ICheckboxProps) {
+  useEffect(() => {
+    preloadImage([
+      "signup/checkbox_primary_selected.svg",
+      "signup/checkbox_primary_unselected.svg",
+      "signup/checkbox_primary_selected.svg",
+      "signup/checkbox_secondary_unselected.svg",
+    ]);
+  }, []);
+
   return (
     <div>
       <Input type="checkbox" onClick={onClick} id={id} defaultChecked={defaultChecked} />

@@ -31,7 +31,7 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding: 3.2rem 0 2.8rem 0;
+  padding: 3.2rem 2rem 2.8rem 2rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -42,9 +42,8 @@ export const ButtonContainer = styled.div`
 
 export const Title = styled.h1`
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 140%;
-  letter-spacing: -0.03rem;
 
   color: ${({ theme }) => theme.color.grey_200};
 
@@ -55,13 +54,15 @@ export const Description = styled.h3`
   margin-top: 0.8rem;
 
   font-size: 1.4rem;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 150%;
   letter-spacing: -0.03rem;
 
   color: ${({ theme }) => theme.color.grey_400};
 
   text-align: center;
+
+  white-space: pre-line;
 `;
 
 export const Image = styled.img`
@@ -103,7 +104,7 @@ export const DoubleButton = styled.button<{ position: "left" | "right" }>`
   padding: 1.4rem 0;
 
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 200;
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
 
@@ -112,6 +113,7 @@ export const DoubleButton = styled.button<{ position: "left" | "right" }>`
   ${({ position }) =>
     position === "right" &&
     css`
+      font-weight: 300;
       border-left: 0.6px solid ${({ theme }) => theme.color.grey_700};
     `}
 `;

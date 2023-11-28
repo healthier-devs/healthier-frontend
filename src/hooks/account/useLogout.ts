@@ -15,8 +15,6 @@ export const useLogout = () => {
       dispatch(logoutAction());
       removeToken();
 
-      alert("로그아웃이 완료되었습니다.");
-
       navigate("/");
     },
   });

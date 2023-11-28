@@ -32,11 +32,12 @@ export const Container = styled(motion.div)<{ height: string }>`
 `;
 
 export const Header = styled.header`
+  font-family: Spoqa Han Sans Neo;
   color: ${({ theme }) => theme.color.grey_200};
-  font-size: 2rem;
-  line-height: 1.4em;
-  font-weight: 300;
-  margin-bottom: 2.4rem;
+  font-size: 20px;
+  line-height: 140%;
+  font-weight: 500;
+  margin-bottom: 24px;
 `;
 
 export const Content = styled.div``;
