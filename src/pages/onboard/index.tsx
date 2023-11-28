@@ -1,4 +1,6 @@
+import AppleLogin from "react-apple-login";
 import { useNavigate } from "react-router-dom";
+import AppleIcon from "src/assets/icons/AppleIcon";
 import KakaoIcon from "src/assets/icons/KakaoIcon";
 import Box from "src/components/box";
 import FlexBox from "src/components/flexBox";
@@ -21,7 +23,7 @@ function Onboard() {
     }
   };
 
-  useAppleLogin();
+  const { handleAppleSignInSuccess, handleAppleSignOnFailure } = useAppleLogin();
 
   return (
     <Styled.Container>
@@ -50,17 +52,26 @@ function Onboard() {
           <Styled.LoginButton className="kakao" onClick={handleKakaoLogin}>
             <KakaoIcon width={30} height={30} />
           </Styled.LoginButton>
+          <AppleLogin
+            clientId={process.env.REACT_APP_APPLE_CLIENT_ID!}
+            redirectURI={process.env.REACT_APP_APPLE_REDIRECT_URI!}
+            usePopup={true}
+            scope={"name email"}
+            responseMode={"form_post"}
+            render={({ onClick }) => (
+              <Styled.LoginButton className="apple" onClick={onClick}>
+                <AppleIcon width={30} height={30} />
+              </Styled.LoginButton>
+            )}
+            callback={(d) => {
+              if ("error" in d) {
+                handleAppleSignOnFailure(d);
 
-          <div
-            id="appleid-signin"
-            className="signin-button"
-            data-mode="logo-only"
-            data-color="white"
-            data-border="true"
-            data-type="sign in"
-            data-border-radius="50"
-            style={{ width: "56px", cursor: "pointer" }}
-          ></div>
+                return;
+              }
+              handleAppleSignInSuccess(d);
+            }}
+          />
         </FlexBox>
 
         <FlexBox justifyContent="center" alignItems="center" gap="12px" mt="2rem">

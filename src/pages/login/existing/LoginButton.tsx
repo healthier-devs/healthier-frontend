@@ -1,33 +1,32 @@
+import classNames from "classnames";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronRightIcon } from "src/assets/icons/ChevronRightIcon";
 import FlexBox from "src/components/flexBox";
-import theme from "src/lib/theme";
 import styled from "styled-components";
 import { Typography } from "./index.style";
 
-interface ILoginButtonProps {
-  type: "email" | "kakao" | "apple";
-  email: string;
+interface ILoginButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  type: "local" | "kakao" | "apple";
 }
 
-function LoginButton({ type, email }: ILoginButtonProps) {
-  const titleText = type === "email" ? "이메일로 로그인하기" : type === "kakao" ? "카카오 계정으로 로그인하기" : "애플 계정으로 로그인하기";
-
+function LoginButton({ type, ...props }: ILoginButtonProps) {
   return (
     <div>
-      <Button>
-        <FlexBox gap="1.6rem">
+      <Button {...props} className={type}>
+        <FlexBox gap="1.6rem" alignItems="center">
           <Image src={`images/login/${type}.png`} />
-          <FlexBox flexDirection="column" style={{ flex: 1 }}>
-            <Title>{titleText}</Title>
-            <Typography variant="body1" color="grey_500" style={{ textAlign: "left" }}>
-              {email}
-            </Typography>
-          </FlexBox>
-          <ChevronRightIcon width={24} height={24} stroke={theme.color.grey_500} strokeWidth={2} d="M9 18L15 12L9 6" />
+          <LoginTextWrapper>
+            <p
+              className={classNames("login__text", {
+                local: type === "local",
+              })}
+            >
+              {type === "kakao" ? "카카오로 로그인" : type === "local" ? "이메일로 로그인" : "Apple로 로그인"}
+            </p>
+          </LoginTextWrapper>
         </FlexBox>
       </Button>
-      {type === "email" && (
+      {type === "local" && (
         <FlexBox gap="1.2rem" justifyContent="center" mt="2.4rem">
           <Typography variant="body3" color="grey_200">
             비밀번호를 잊으셨나요?
@@ -46,19 +45,50 @@ function LoginButton({ type, email }: ILoginButtonProps) {
 
 export default LoginButton;
 
+const LoginTextWrapper = styled.div`
+  flex: 1;
+
+  .login__text {
+    color: ${({ theme: { color } }) => color.grey_900};
+
+    text-align: center;
+    font-family: Spoqa Han Sans Neo;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .local {
+    color: ${({ theme: { color } }) => color.grey_200};
+  }
+`;
+
 const Button = styled.button`
   width: 100%;
-  padding: 2rem 1.8rem 1.6rem;
-  border-radius: 8px;
+  height: 56px;
 
-  background: ${({ theme: { color } }) => color.grey_800};
+  padding: 0 22px;
+  border-radius: 58px;
 
   cursor: pointer;
+
+  &.apple {
+    background: #fff;
+  }
+
+  &.kakao {
+    background: #fee500;
+  }
+
+  &.local {
+    background: ${({ theme: { color } }) => color.grey_800};
+  }
 `;
 
 const Image = styled.img`
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
 `;
 
 const Title = styled.h2`
