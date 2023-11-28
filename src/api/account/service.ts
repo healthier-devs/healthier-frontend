@@ -181,7 +181,11 @@ export const getUserData = async () => {
 
 export const getKakaoAuthData = async () => {
   const url = new URL(window.location.href);
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  await accountFetcher.getKakaoAuth(url.searchParams.get("code")!);
 };
+
 export const createFCMToken = async (fcmToken: string) => {
   try {
     await accountFetcher.postFCMToken(fcmToken);

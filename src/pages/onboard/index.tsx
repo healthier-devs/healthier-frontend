@@ -17,7 +17,7 @@ function Onboard() {
       // 카카오 로그인해도 되는지 물어보기
       window.confirm('"헬시어"가 "kakao.com"을(를) 사용하여 로그인하려고 합니다. 사용자에 관한 정보를 앱 및 웹 사이트가 공유하게 됩니다.')
     ) {
-      window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=3283547109c01f4b0151d37037f15752&response_type=code&redirect_uri=${window.location.origin}/kakaoCallback`;
+      window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&response_type=code&redirect_uri=${window.location.origin}/kakaoCallback`;
     }
   };
 
