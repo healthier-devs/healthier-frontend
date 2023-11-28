@@ -106,5 +106,18 @@
   <script type="text/javascript">
     Kakao.init(`%REACT_APP_KAKAO_APP_KEY%`);
   </script>
+  <script>
+    window.addEventListener("flutterInAppWebViewPlatformReady", function () {
+      setTimeout(function () {
+        // @ts-ignore
+        window.flutter_inappwebview.callHandler("pushTokenHandler").then((payload) => {
+          if (payload.fcmToken) {
+            localStorage.setItem("fcmToken", payload.fcmToken);
+          }
+        });
+      }, 20000);
+    });
+  </script>
+  <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 </html>

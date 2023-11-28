@@ -90,7 +90,7 @@ const Map = ({
           {doctorPositions.map((doc, idx) => (
             <Marker key={idx} latitude={doc.point.y} longitude={doc.point.x} onClick={() => setSelectedHospital(doc.id)}>
               <img
-                src={`/images/doctorAppointment/${selectedHospital === doc.id ? "selected" : "map"}-pin.svg`}
+                src={`/images/doctorAppointment/${selectedHospital === doc.id ? "selected-pin.svg" : "map-pin.png"}`}
                 width={selectedHospital === doc.id ? 44 : 22}
                 height={selectedHospital === doc.id ? 44 : 22}
               />

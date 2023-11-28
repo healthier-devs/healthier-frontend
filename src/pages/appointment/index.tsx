@@ -279,7 +279,7 @@ const Appointment = () => {
           titleTexts={[
             {
               text: "예약을 위해\n주변 병원을 찾아볼게요",
-              style: { display: "inline-block", marginBottom: "4rem", fontWeight: 700 },
+              style: { display: "inline-block", marginBottom: "4rem", fontWeight: 300 },
             },
           ]}
           illustration={<img loading="eager" alt="icon" style={{ width: "26rem", height: "24.8rem" }} src={imageUrl.map_loading} />}

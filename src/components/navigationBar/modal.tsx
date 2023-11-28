@@ -106,7 +106,7 @@ const BackDrop = styled.div`
 
   background-color: rgba(0, 0, 0, 0.6);
 
-  z-index: 10;
+  z-index: 99999;
 
   display: flex;
   justify-content: center;

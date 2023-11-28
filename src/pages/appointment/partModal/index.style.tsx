@@ -39,13 +39,16 @@ export const ContentContainer = styled.div`
   height: 28.2rem;
   overflow-y: scroll;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   margin: 2.4rem 0 1.6rem 0;
 `;
 
 export const Title = styled.p`
   font-size: 2rem;
-  font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 140%;
   letter-spacing: -0.03rem;
 
@@ -66,8 +69,11 @@ export const Card = styled.div<{ selected: boolean }>`
 
   font-size: 1.4rem;
   font-style: normal;
-  font-weight: ${({ selected }) => (selected ? 500 : 400)};
+  font-weight: ${({ selected }) => (selected ? 300 : 200)};
   line-height: 150%;
   letter-spacing: -0.03rem;
   color: ${({ theme, selected }) => (selected ? theme.color.blue : theme.color.grey_400)};
+
+  white-space: pre-line;
+  text-align: center;
 `;

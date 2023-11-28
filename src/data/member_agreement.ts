@@ -685,12 +685,12 @@ export const member_agreement = [
 
 export const NECESSARY_AGREEMENTS = [
   {
-    text: "회원 이용약관에 동의 합니다",
-    url: "https://seolapeutic.notion.site/2c86d82850564d9097d94ad3c334932d",
+    text: "헬시어 서비스 이용약관에 동의 합니다",
+    url: "https://healthier.notion.site/2c86d82850564d9097d94ad3c334932d",
   },
   {
     text: "개인 정보 처리 방침에 동의 합니다",
-    url: "https://seolapeutic.notion.site/dac6c64b62e344f188476541b5ff9377",
+    url: "https://healthier.notion.site/dac6c64b62e344f188476541b5ff9377",
   },
 ] as const;
 
@@ -699,4 +699,22 @@ export const OPTIONAL_AGREEMENTS = [
     text: "이벤트, 혜택 및 마케팅 알림 받기",
     url: "",
   },
+] as const;
+
+export const DATA_DELETION_TERM = [
+  "회원 탈퇴 시 회사가 보관하고 있는 회원 데이터는 모두 영구적으로 삭제 되며 복구 할 수 없습니다.다만, 관련 볍령에 따라 회사가 보관할 의무가 있는 정보 또는 자료는 일정 기간동안 보관됩니다.",
+  "건강챌린지를 통해 획득한 모든 리워드와 티켓은 회원 탈퇴와 동시에 영구적으로 소멸됩니다.",
+];
+
+export const SIGNOUT_TERM = [
+  "본 약관은 헬시어(이하 “당사”)가  회원(이하 “회원”)의 탈퇴에 관한 모든 조건을 규정한 것입니다. ",
+  "회원은 언제든지 서면, 홈페이지 등 당사가 정하는 방법으로 회원 탈퇴를 요청할 수 있으며, 당사는 회원의 요청에 따라 조속히 회원탈퇴에 필요한 제반 절차를 수행합니다. 본 약관은 헬시어(이하 “당사”)가  회원(이하 “회원”)의 탈퇴에 관한 모든 조건을 규정한 것입니다.",
+  "회원은 언제든지 서면, 홈페이지 등 당사가 정하는 방법으로 회원 탈퇴를 요청할 수 있으며, 당사는 회원의 요청에 따라 조속히 회원탈퇴에 필요한 제반 절차를 수행합니다. 본 약관은 헬시어(이하 “당사”)가  회원(이하 “회원”)의 탈퇴에 관한 모든 조건을 규정한 것입니다. ",
+];
+
+export const SIGNOUT_REASONS = [
+  "자주 이용하지 않아서",
+  "증상감별이 정확하지 않은 것 같아서",
+  "서비스 및 고객지원이 만족스럽지 않아서",
+  "광고성 알림이 너무 많이 와서 ",
 ] as const;

@@ -70,7 +70,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
 
       scheduleArr.push({
         day: scheduleMap[scheduleKey],
-        time: `${data.schedule[scheduleKey].start} ~ ${data.schedule[scheduleKey].end}`,
+        time: `${data.schedule[scheduleKey].start || "00:00"} ~ ${data.schedule[scheduleKey].end || "00:00"}`,
       });
     }
 
@@ -106,7 +106,9 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                         {statusMap[data.operatingStatus]}
                       </span>
                       {data.operatingStatus !== "UNKNOWN" &&
-                        ` ・ ${data.schedule[convertWeekDay()].start ?? "00:00"} ~ ${data.schedule[convertWeekDay()].end ?? "00:00"}`}
+                        data.schedule[convertWeekDay()].start &&
+                        data.schedule[convertWeekDay()].start &&
+                        ` ・ ${data.schedule[convertWeekDay()].start} ~ ${data.schedule[convertWeekDay()].end}`}
                     </Styled.Description>
                     <img
                       alt="dropdown"
@@ -136,7 +138,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                 <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-site.svg" />
                   <a href={data.homepage} target="_blank" rel="noreferrer">
-                    <Styled.Description color={theme.color.grey_300} style={{ textDecoration: "underline" }}>
+                    <Styled.Description color={theme.color.grey_400} style={{ textDecoration: "underline" }}>
                       {data.homepage}
                     </Styled.Description>
                   </a>
@@ -146,7 +148,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
               {data.phoneNumber && (
                 <Styled.Flex gap={0.6} align="flex-start" justify="flex-start">
                   <img alt="position" src="/images/doctorAppointment/detail-phone.svg" />
-                  <Styled.Description color={theme.color.grey_300}>{data.phoneNumber}</Styled.Description>
+                  <Styled.Description color={theme.color.grey_400}>{data.phoneNumber}</Styled.Description>
                 </Styled.Flex>
               )}
 
@@ -154,7 +156,7 @@ const HospitalDetail = ({ selectedHospital }: { selectedHospital: string }) => {
                 {...(!data.phoneNumber && { style: { backgroundColor: theme.color.grey_650, color: theme.color.grey_500 } })}
                 onClick={() => {
                   if (data.phoneNumber) {
-                    location.href = "tel:" + data.phoneNumber;
+                    location.href = `tel:${data.phoneNumber}`;
                   }
                 }}
               >

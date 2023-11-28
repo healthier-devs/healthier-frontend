@@ -6,10 +6,6 @@ export const RootContainer = styled.div`
   bottom: 0;
   width: calc(var(--vw) * 100);
 
-  padding: 4rem 2.4rem;
-
-  box-sizing: border-box;
-
   display: flex;
   justify-content: center;
   background: transparent;
@@ -19,8 +15,23 @@ export const RootContainer = styled.div`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 0.8rem;
+
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
 `;
+
+export const PaginationWrapper = styled.div`
+  height: 186px;
+  width: 100%;
+
+  background: linear-gradient(180deg, rgba(19, 20, 22, 0) 0%, rgba(19, 20, 22, 0.95) 78.12%, #131416 100%);
+  position: relative;
+`;
+
 export const Button = styled.button<{ isSelected: boolean }>`
   width: 100%;
   height: 100%;
@@ -42,4 +53,12 @@ export const Button = styled.button<{ isSelected: boolean }>`
 export const ButtonWrapper = styled.div`
   width: 2.6rem;
   height: 2.6rem;
+`;
+
+export const ReserveButtonWrapper = styled.div`
+  width: 100%;
+
+  padding: 4rem 2.4rem;
+
+  box-sizing: border-box;
 `;

@@ -8,7 +8,7 @@ export const useSignUp = () => {
   const navigate = useNavigate();
   const { login } = useLogin();
   const { mutate: signUp } = useMutation({
-    mutationFn: (body: ISignUpRequest) => signup(body),
+    mutationFn: (body: ISignUpRequest) => signup({ type: "local", body }),
     onSuccess(data, variables) {
       if (data.success) {
         login({
