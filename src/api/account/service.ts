@@ -165,3 +165,7 @@ export const getUserData = async () => {
     throw new Error();
   }
 };
+
+export const getKakaoAuthData = async () => {
+  const url = new URL(window.location.href);
+};

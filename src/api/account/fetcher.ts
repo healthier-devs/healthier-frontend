@@ -59,4 +59,7 @@ export const accountFetcher = {
   getImageRoute() {
     return unauthorizedFetcher.get("/inquiry/image");
   },
+  getKakaoAuth(code: string) {
+    return unauthorizedFetcher.get(`/auth/kakao?code=${code}`);
+  },
 };
