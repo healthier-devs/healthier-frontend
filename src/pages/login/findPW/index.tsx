@@ -12,6 +12,7 @@ interface ITextField {
   isError: boolean;
   errorText: string;
   isVerified: boolean;
+  isRetry?: boolean;
 }
 
 const DEFAULT_TEXTFIELD: ITextField = {
@@ -19,16 +20,15 @@ const DEFAULT_TEXTFIELD: ITextField = {
   isError: false,
   errorText: "",
   isVerified: false,
+  isRetry: false,
 };
 
 function Email() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [email, setEmail] = useState<ITextField>(DEFAULT_TEXTFIELD);
   const [code, setCode] = useState<ITextField>(DEFAULT_TEXTFIELD);
   const [timeLeft, setTimeLeft] = useState<number>(0);
-  const serverCode = useRef<string>("");
 
   const setCodeTimer = () => {
     let time = VERIFICATION_CODE_AGE;
@@ -47,11 +47,11 @@ function Email() {
     if (!email.value || email.isVerified) {
       return;
     }
+
+    setCode(DEFAULT_TEXTFIELD);
     const { data, success } = await validateEmail(email.value);
 
-    console.log(success, data);
-
-    if (data === "DEFAULT") {
+    if (data === "이미 가입된 이메일입니다.") {
       await sendVerificationForPW({ email: email.value });
 
       setEmail({ ...email, isVerified: true });
@@ -86,43 +86,56 @@ function Email() {
   };
 
   const handleClickVerifyCode = async () => {
+    if (code.value.length === 0) {
+      return;
+    }
+
     const codeData = await accountFetcher.checkUserPWFindStep1({
       email: email.value,
       code: code.value,
     });
 
-    console.log(codeData);
+    if (!codeData.success) {
+      if (timeLeft === VERIFICATION_CODE_EXPIRED) {
+        setCode({
+          ...code,
+          value: "",
+          isError: true,
+          errorText: "인증시간이 초과되었습니다.",
+        });
+      } else if (codeData.error.message === "인증 코드가 만료되었거나 요청 정보를 찾을 수 없습니다.") {
+        setCode({
+          ...code,
+          value: "",
+          isError: true,
+          errorText: codeData.error.message,
+        });
+      } else if (codeData.error.message === "인증 코드가 일치하지 않습니다.") {
+        setCode({
+          ...code,
+          value: "",
+          isError: true,
+          errorText: codeData.error.message,
+        });
 
-    // if (code.value.length === 0 || code.isVerified) {
-    //   return;
-    // }
-    // if (timeLeft === VERIFICATION_CODE_EXPIRED) {
-    //   setCode({
-    //     ...code,
-    //     value: "",
-    //     isError: true,
-    //     errorText: "인증시간이 초과되었습니다.",
-    //   });
+        return;
+      }
+      setEmail({
+        ...email,
+        isRetry: true,
+      });
 
-    //   return;
-    // }
-
-    // if (code.value !== serverCode.current) {
-    //   setCode({
-    //     ...code,
-    //     value: "",
-    //     isError: true,
-    //     errorText: "인증번호가 올바르지 않습니다",
-    //   });
-
-    //   return;
-    // }
-
-    // setCode({ ...code, isVerified: true });
+      return;
+    } else if (codeData.success) {
+      setCode({
+        ...code,
+        isVerified: true,
+      });
+    }
   };
 
-  const handleClickNextButton = async () => {
-    //
+  const handleClickNextButton = () => {
+    navigate("/account/edit/password");
   };
 
   return (
@@ -149,7 +162,10 @@ function Email() {
             />
           </Styled.TextFieldWrapper>
           <Styled.ButtonWrapper>
-            <Styled.Button isEnabled={email.value.length > 0 && email.isVerified === false} onClick={handleClickVerifyEmail}>
+            <Styled.Button
+              isEnabled={(email.value.length > 0 && email.isVerified === false) || email.isRetry === true}
+              onClick={handleClickVerifyEmail}
+            >
               인증번호 전송
             </Styled.Button>
           </Styled.ButtonWrapper>
