@@ -67,8 +67,10 @@ function App() {
             <Route path="/account/healthInfoModify" element={<Pages.ModifyInformation />} />
             <Route path="/account/signout" element={<Pages.SignOut />} />
             <Route path="/account/find-id" element={<Pages.FindID />} />
-            {/* <Route path="/account/find-pw" element={<Pages.FindPW />} /> */}
+
+            <Route path="/account/find-pw" element={<Pages.FindPW />} />
           </Route>
+          <Route path="/account/no-id" element={<Pages.NoID />} />
           <Route path="/account/signout/complete" element={<Pages.SignoutComplete />} />
 
           <Route path="/login" element={<Pages.Login />} />

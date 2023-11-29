@@ -23,8 +23,9 @@ import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
 import FindID from "./login/findID";
-// import FindPW from "./login/findPW";
+import FindPW from "./login/findPW";
 import KakaoCallback from "./login/kakao";
+import NoID from "./login/noID";
 import Main from "./main";
 import MainPage from "./main_backup";
 import MyChallenge from "./my-challenge";
@@ -100,5 +101,7 @@ export {
   KakaoCallback,
   SignOut,
   FindID,
+  FindPW,
+  NoID,
   SignoutComplete,
 };

@@ -145,6 +145,12 @@ export const checkVerificationCode = async (body: ICheckVerificationCode): Promi
   return checkData;
 };
 
+export const sendVerificationForPW = async ({ email }: { email: string }) => {
+  const { data } = await accountFetcher.postUserPWFindStep1({ email: email });
+
+  console.log(data);
+};
+
 export const resetPassword = async (resetPasswordParam: IResetPassword): Promise<IUserResponse> => {
   try {
     const resetPasswordData = await accountFetcher.resetPassword(resetPasswordParam);

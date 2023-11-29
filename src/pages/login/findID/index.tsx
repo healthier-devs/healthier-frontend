@@ -46,26 +46,37 @@ const FindID = () => {
     }
     const data = await getEmail();
 
-    navigate("/login", {
-      state: {
-        type: data.registerType,
-      },
-    });
+    if (data.message === "User Not Found.") {
+      navigate("/account/no-id");
+    } else if (data.message === "Multiple users are found") {
+      alert("중복된 아이디가 있습니다.\n관리자에게 문의해주세요.");
+      navigate("/");
+    } else if (data.registerType) {
+      navigate("/login", {
+        state: {
+          type: data.registerType,
+        },
+      });
+    }
   };
 
-  const getEmail = async (): Promise<{ email: string; registerType: "DEFAULT" | "APPLE" | "KAKAO" }> => {
-    const EmailData = await accountFetcher.postUserEmailFind({
-      name: information.name,
-      birthDate:
-        information.birth.year +
-        "-" +
-        information.birth.month.toString().padStart(2, "0") +
-        "-" +
-        information.birth.date.toString().padStart(2, "0"),
-      gender: information.gender as "m" | "f",
-    });
+  const getEmail = async () => {
+    try {
+      const EmailData = await accountFetcher.postUserEmailFind({
+        name: information.name,
+        birthDate:
+          information.birth.year +
+          "-" +
+          information.birth.month.toString().padStart(2, "0") +
+          "-" +
+          information.birth.date.toString().padStart(2, "0"),
+        gender: information.gender as "m" | "f",
+      });
 
-    return EmailData;
+      return EmailData;
+    } catch (err: any) {
+      return err.response.data;
+    }
   };
 
   const isNextButtonEnabled = () => {

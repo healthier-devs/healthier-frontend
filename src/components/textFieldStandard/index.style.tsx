@@ -29,7 +29,7 @@ export const Input = styled.input<{ isError: boolean }>`
   &::placeholder {
     color: ${({ theme }) => theme.color.grey_600};
     font-size: 1.8rem;
-    font-height: 1.27em;
+    /* font-height: 1.27em; */
     font-weight: 200;
   }
 

@@ -32,7 +32,7 @@ function LoginButton({ type, ...props }: ILoginButtonProps) {
             비밀번호를 잊으셨나요?
           </Typography>
           {/* TODO: 비밀번호 찾기 페이지 연결 */}
-          <Link to="/login/findPassword">
+          <Link to="/account/find-pw">
             <Typography variant="body3" color="grey_200" underline>
               비밀번호 재설정하기
             </Typography>

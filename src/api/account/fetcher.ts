@@ -101,6 +101,31 @@ export const accountFetcher = {
       gender: gender,
     });
   },
+  postUserPWFindStep1({ email }: { email: string }) {
+    return unauthorizedFetcher.post("/send-verification-code/reset-password", {
+      email: email,
+      code: "null",
+    });
+  },
+  async checkUserPWFindStep1({ email, code }: { email: string; code: string }) {
+    try {
+      // Attempt to make the post request
+      const response = await unauthorizedFetcher.post("check-verification-code/reset-password", {
+        email: email,
+        code: code,
+      });
+
+      return {
+        success: true,
+        data: response.data,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.response ? error.response.data : error.message,
+      };
+    }
+  },
   postWithdrawal(body: IWithDrawlBody): Promise<IValidateAccountResponse> {
     return fetcher.post("/withdrawal", body);
   },
