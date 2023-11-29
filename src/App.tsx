@@ -71,6 +71,7 @@ function App() {
             <Route path="/account/find-pw" element={<Pages.FindPW />} />
           </Route>
           <Route path="/account/no-id" element={<Pages.NoID />} />
+          <Route path="/account/signout/complete" element={<Pages.SignoutComplete />} />
 
           <Route path="/login" element={<Pages.Login />} />
           <Route path="/kakaoCallback" element={<Pages.KakaoCallback />} />

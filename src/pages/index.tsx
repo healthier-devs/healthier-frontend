@@ -9,6 +9,7 @@ import Inquiry from "./account/inquiry";
 import ModifyInformation from "./account/modify-information";
 import AccountSettings from "./account/settings";
 import SignOut from "./account/sign-out";
+import SignoutComplete from "./account/sign-out/complete";
 import Appointment from "./appointment";
 import ChallengeDetail from "./challenge-detail";
 import ChallengeList from "./challenge-list";
@@ -102,4 +103,5 @@ export {
   FindID,
   FindPW,
   NoID,
+  SignoutComplete,
 };

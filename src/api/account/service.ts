@@ -12,6 +12,7 @@ import type {
   ISendVerificationCode,
   IResetPassword,
   TSignUp,
+  ICheckVerificationCode,
 } from "src/interfaces/account";
 
 export const validateEmail = async (email: string) => {
@@ -134,13 +135,14 @@ export const logout = async (): Promise<IUserResponse | IException> => {
   }
 };
 
-export const sendVerificationCode = async (body: ISendVerificationCode): Promise<{ code: string }> => {
-  const { data } = await accountFetcher.sendVerificationCode(body);
-  const tokens = data.split(" ");
+export const sendVerificationCode = async (body: ISendVerificationCode) => {
+  await accountFetcher.sendVerificationCode(body);
+};
 
-  return {
-    code: tokens[tokens.length - 1],
-  };
+export const checkVerificationCode = async (body: ICheckVerificationCode): Promise<IUserResponse | IException> => {
+  const checkData = await accountFetcher.checkVerificationCode(body);
+
+  return checkData;
 };
 
 export const sendVerificationForPW = async ({ email }: { email: string }) => {

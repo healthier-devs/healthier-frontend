@@ -7,6 +7,7 @@ import Dialog from "src/components/dialog";
 import Divider from "src/components/divider";
 import FlexBox from "src/components/flexBox";
 import { DATA_DELETION_TERM, SIGNOUT_TERM, SIGNOUT_REASONS } from "src/data/member_agreement";
+import { useWithdrawal } from "src/hooks/account/useWithdrawal";
 import useModal from "src/hooks/useModal";
 import { Checkbox, NextButton } from "src/pages/signUp/lib";
 import { RootContainer, Container, Title, TitleWrapper, Typography, List, Button } from "./index.style";
@@ -16,6 +17,7 @@ function SignOut() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signoutReasonIdx, setSignoutReasonIdx] = useState<number | null>(null);
   const { isOpenModal: isDialogOpen, modalRef: dialogRef, closeModal: closeDialog, openModal: openDialog } = useModal();
+  const { withdrawal } = useWithdrawal();
 
   const isNextButtonEnabled = signoutAgreed && signoutReasonIdx !== null;
 
@@ -29,6 +31,16 @@ function SignOut() {
       return;
     }
     openDialog();
+  };
+
+  const handleClickWithdrawalButton = () => {
+    if (signoutReasonIdx === null) {
+      return;
+    }
+    withdrawal({
+      reason: SIGNOUT_REASONS[signoutReasonIdx],
+    });
+    closeDialog();
   };
 
   return (
@@ -112,6 +124,7 @@ function SignOut() {
           title="정말 탈퇴하시겠습니까?"
           description={"탈퇴 후 14일간 재가입이 제한되며,\n동일 계정으로 가입이 불가합니다"}
           onClickCancel={closeDialog}
+          onClickConfirm={handleClickWithdrawalButton}
         />
       )}
       <NextButton isEnabled={isNextButtonEnabled} onClick={handleClickNextButton} isGradient />
