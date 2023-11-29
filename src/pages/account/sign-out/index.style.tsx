@@ -19,11 +19,9 @@ export const TitleWrapper = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: Spoqa Han Sans Neo;
-
   font-size: 22px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   color: ${({ theme }) => theme.color.grey_200};
   white-space: pre-line;
 `;
@@ -42,9 +40,8 @@ export const List = styled.ul`
 
   .signout__term__desc {
     color: ${({ theme }) => theme.color.grey_300};
-    font-family: Spoqa Han Sans Neo;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 200;
     line-height: 150%;
     list-style: disc;
   }
@@ -61,33 +58,29 @@ export const List = styled.ul`
 export const Typography = styled.p`
   &.signout__term__title {
     color: ${({ theme }) => theme.color.grey_400};
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
     line-height: 150%;
   }
 
   &.signout__reason__select {
     color: ${({ theme }) => theme.color.grey_400};
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 200;
     line-height: 150%;
     letter-spacing: 0;
   }
 
   &.signout__agree {
     color: ${({ theme }) => theme.color.grey_200};
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   &.signout__reason__desc {
     color: ${({ theme }) => theme.color.grey_400};
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 200;
   }
   &.reason__item__selected {
     color: ${({ theme }) => theme.color.grey_200};
@@ -106,9 +99,8 @@ export const Button = styled.button`
   padding: 8px 10px;
 
   color: ${({ theme }) => theme.color.grey_400};
-  font-family: Spoqa Han Sans Neo;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 300;
   letter-spacing: -0.5px;
 `;
 
