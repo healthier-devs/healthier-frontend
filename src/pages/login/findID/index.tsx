@@ -48,6 +48,9 @@ const FindID = () => {
 
     if (data.message === "User Not Found.") {
       navigate("/account/no-id");
+    } else if (data.message === "Multiple users are found") {
+      alert("중복된 아이디가 있습니다.\n관리자에게 문의해주세요.");
+      navigate("/");
     } else if (data.registerType) {
       navigate("/login", {
         state: {
