@@ -97,4 +97,16 @@ export const accountFetcher = {
       gender: gender,
     });
   },
+  postUserPWFindStep1({ email }: { email: string }) {
+    return unauthorizedFetcher.post("/send-verification-code/reset-password", {
+      email: email,
+      code: "null",
+    });
+  },
+  checkUserPWFindStep1({ email, code }: { email: string; code: string }) {
+    return unauthorizedFetcher.post("check-verification-code/reset-password", {
+      email: email,
+      code: code,
+    });
+  },
 };

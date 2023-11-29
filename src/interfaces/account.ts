@@ -2,8 +2,8 @@ export interface IValidateAccountResponse {
   data: string;
   success: boolean;
   timestamp: string;
-  cause: string;
-  path: string;
+  cause?: string;
+  path?: string;
 }
 
 export interface IValidatePasswordRequest {
