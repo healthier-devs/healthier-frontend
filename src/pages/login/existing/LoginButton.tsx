@@ -52,9 +52,8 @@ const LoginTextWrapper = styled.div`
     color: ${({ theme: { color } }) => color.grey_900};
 
     text-align: center;
-    font-family: Spoqa Han Sans Neo;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .local {
