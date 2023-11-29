@@ -14,6 +14,7 @@ import {
   TAppleSignUpRequest,
   TKakaoSignUpRequest,
   TAdditionalInformation,
+  IEmailFind,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -88,5 +89,12 @@ export const accountFetcher = {
   },
   getFCMToken() {
     return fetcher.get("/fcmtoken");
+  },
+  postUserEmailFind({ name, birthDate, gender }: IEmailFind) {
+    return unauthorizedFetcher.post("/find-email", {
+      name: name,
+      birthDate: birthDate,
+      gender: gender,
+    });
   },
 };

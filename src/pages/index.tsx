@@ -21,6 +21,8 @@ import IndexQR from "./index-qr";
 import InformationQR from "./info-qr";
 import Information from "./information";
 import Login from "./login";
+import FindID from "./login/findID";
+import FindPW from "./login/findPW";
 import KakaoCallback from "./login/kakao";
 import Main from "./main";
 import MainPage from "./main_backup";
@@ -96,4 +98,6 @@ export {
   Inquiry,
   KakaoCallback,
   SignOut,
+  FindID,
+  FindPW,
 };
