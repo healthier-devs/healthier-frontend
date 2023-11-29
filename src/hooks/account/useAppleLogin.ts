@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { accountFetcher } from "src/api/account/fetcher";
+import { getAppleAuthData } from "src/api/account/service";
 import { useAppDispatch } from "src/state";
 import { login as loginAction } from "src/state/authSlice";
 import { saveToken } from "src/utils/cookies";
@@ -23,8 +23,19 @@ export const useAppleLogin = () => {
 
   const handleAppleSignInSuccess = (event: any) => {
     const verifyAppleAuthCode = async (code: string) => {
-      const { hasAdditionalInformation, isAlreadyRegistered, registerType, accessToken, refreshToken } =
-        await accountFetcher.authorizeApple(code);
+      const appleAuthData = await getAppleAuthData(code);
+
+      if ("code" in appleAuthData && "message" in appleAuthData) {
+        if (appleAuthData.message === "Withdrawal already processed.") {
+          alert("탈퇴한 회원은 14일 이내에 가입이 불가능합니다");
+        } else {
+          alert("문제가 발생했습니다. 처음부터 다시 시도해 주세요.");
+        }
+        navigate("/onboard");
+
+        return;
+      }
+      const { hasAdditionalInformation, isAlreadyRegistered, registerType, accessToken, refreshToken } = appleAuthData;
 
       if (!hasAdditionalInformation) {
         navigate("/signup/step1?type=social", {

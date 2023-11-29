@@ -185,7 +185,39 @@ export const getKakaoAuthData = async () => {
   const url = new URL(window.location.href);
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  await accountFetcher.getKakaoAuth(url.searchParams.get("code")!);
+  try {
+    const kakaoAuthData = await accountFetcher.getKakaoAuth(url.searchParams.get("code")!);
+
+    return kakaoAuthData;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response) {
+      const { status } = err.response;
+
+      if (status === StatusCodes.UNAUTHORIZED) {
+        return err.response.data as IException;
+      }
+    }
+
+    throw new Error();
+  }
+};
+
+export const getAppleAuthData = async (code: string) => {
+  try {
+    const appleAuthData = await accountFetcher.authorizeApple(code);
+
+    return appleAuthData;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response) {
+      const { status } = err.response;
+
+      if (status === StatusCodes.UNAUTHORIZED) {
+        return err.response.data as IException;
+      }
+    }
+
+    throw new Error();
+  }
 };
 
 export const createFCMToken = async (fcmToken: string) => {
