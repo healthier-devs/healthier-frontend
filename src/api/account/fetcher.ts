@@ -15,6 +15,7 @@ import {
   TKakaoSignUpRequest,
   IEmailFind,
   IWithDrawlBody,
+  ICheckVerificationCode,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -56,6 +57,9 @@ export const accountFetcher = {
   },
   sendVerificationCode(body: ISendVerificationCode) {
     return unauthorizedFetcher.post("/send-verification-code", body);
+  },
+  checkVerificationCode(body: ICheckVerificationCode) {
+    return unauthorizedFetcher.post("/check-verification-code", body);
   },
   resetPassword({ userEmail, body }: IResetPassword) {
     return fetcher.put(`/${userEmail}/reset-password`, body);

@@ -94,6 +94,11 @@ export interface ISendVerificationCode {
   email: string;
 }
 
+export interface ICheckVerificationCode {
+  email: string;
+  code: string;
+}
+
 export type TResetPasswordBody = Omit<IValidatePasswordRequest, "email">;
 export interface IResetPassword {
   userEmail: string;

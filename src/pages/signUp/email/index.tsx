@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { validateEmail, sendVerificationCode } from "src/api/account/service";
+import { validateEmail, sendVerificationCode, checkVerificationCode } from "src/api/account/service";
 import FlexBox from "src/components/flexBox";
 import { VERIFICATION_CODE_LENGTH, VERIFICATION_CODE_AGE, VERIFICATION_CODE_EXPIRED } from "src/data/account";
 import * as Lib from "../lib";
@@ -52,10 +52,9 @@ function Email() {
     const { data, success } = await validateEmail(email.value);
 
     if (success) {
-      const codeData = await sendVerificationCode({ email: email.value });
+      await sendVerificationCode({ email: email.value });
 
       setEmail({ ...email, isVerified: true });
-      serverCode.current = codeData.code;
       setCodeTimer();
 
       return;
@@ -82,8 +81,9 @@ function Email() {
 
       return;
     }
+    const checkData = checkVerificationCode({ email: email.value, code: code.value });
 
-    if (code.value !== serverCode.current) {
+    if ("code" in checkData && "message" in checkData) {
       setCode({
         ...code,
         value: "",
@@ -167,10 +167,7 @@ function Email() {
               />
             </Styled.TextFieldWrapper>
             <Styled.ButtonWrapper>
-              <Styled.Button
-                isEnabled={code.value.length === VERIFICATION_CODE_LENGTH && code.isVerified === false}
-                onClick={handleClickVerifyCode}
-              >
+              <Styled.Button isEnabled={code.value.length > 0 && code.isVerified === false} onClick={handleClickVerifyCode}>
                 확인
               </Styled.Button>
             </Styled.ButtonWrapper>
