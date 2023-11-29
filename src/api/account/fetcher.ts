@@ -13,8 +13,8 @@ import {
   IVerifyAppleCodeResponse,
   TAppleSignUpRequest,
   TKakaoSignUpRequest,
-  TAdditionalInformation,
   IEmailFind,
+  IWithDrawlBody,
 } from "src/interfaces/account";
 import { createFetcher, createUnauthorizedFetcher } from "../";
 
@@ -96,5 +96,8 @@ export const accountFetcher = {
       birthDate: birthDate,
       gender: gender,
     });
+  },
+  postWithdrawal(body: IWithDrawlBody): Promise<IValidateAccountResponse> {
+    return fetcher.post("/withdrawal", body);
   },
 };
