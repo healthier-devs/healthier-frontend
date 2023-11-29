@@ -24,6 +24,7 @@ import Login from "./login";
 import FindID from "./login/findID";
 import FindPW from "./login/findPW";
 import KakaoCallback from "./login/kakao";
+import NoID from "./login/noID";
 import Main from "./main";
 import MainPage from "./main_backup";
 import MyChallenge from "./my-challenge";
@@ -100,4 +101,5 @@ export {
   SignOut,
   FindID,
   FindPW,
+  NoID,
 };
