@@ -150,3 +150,7 @@ export interface IEmailFind {
   birthDate: string;
   gender: "m" | "f";
 }
+
+export interface IWithDrawlBody {
+  reason: string;
+}
