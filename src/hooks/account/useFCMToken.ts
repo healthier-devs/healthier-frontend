@@ -7,10 +7,9 @@ export const useFCMToken = () => {
   const { authenticated } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    const isTokenCreated = localStorage.getItem(IS_TOKEN_CREATED);
     const fcmToken = localStorage.getItem(FCM_TOKEN);
 
-    if (!authenticated || isTokenCreated || !fcmToken) {
+    if (!authenticated || !fcmToken) {
       return;
     }
 
