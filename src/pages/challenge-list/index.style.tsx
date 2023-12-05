@@ -2,6 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  height: calc(100% - 56px);
+  overflow-y: hidden;
+`;
+
+export const Ghost = styled.div`
+  width: 100%;
+  height: 240px;
 `;
 
 export const HeaderContainer = styled.div`
@@ -123,4 +130,6 @@ export const CardList = styled.ul`
   gap: 1.2rem;
 
   margin: 1.2rem 2.4rem;
+  height: calc(100% - 250px);
+  overflow-y: scroll;
 `;
