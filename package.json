@@ -59,7 +59,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "deploy": "aws s3 sync ./build s3://healthier.frontend --profile=Jinsil",
+    "deploy": "aws s3 sync ./build s3://healthier.frontend --profile=Jinsil && aws cloudfront create-invalidation --profile=Jinsil --distribution-id E2ORMY850AA40F --paths '/*'",
     "all": "npm-run-all -s build deploy"
   },
   "eslintConfig": {
