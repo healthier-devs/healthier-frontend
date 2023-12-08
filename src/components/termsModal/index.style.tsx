@@ -18,7 +18,7 @@ export const Container = styled.div`
   width: inherit;
   height: calc(100% - 56px);
 
-  padding: 20px 24px;
+  padding: 20px 24px 56px 24px;
   box-sizing: border-box;
 
   overflow-y: scroll;
@@ -69,5 +69,34 @@ export const Typography = styled.p`
 
   &.indentation-2 {
     padding-left: 32px;
+  }
+
+  &.indentation-3 {
+    padding-left: 48px;
+  }
+
+  &.indentation-4 {
+    padding-left: 64px;
+  }
+
+  &.list-type {
+    display: list-item;
+    margin-left: 1em;
+    list-style-type: disc;
+
+    &.indentation-3 {
+      padding-left: 0;
+      margin-left: 64px;
+    }
+
+    &.indentation-4 {
+      padding-left: 0;
+      margin-left: 80px;
+    }
+  }
+
+  &.background {
+    padding: 10px;
+    background-color: #1e2127;
   }
 `;

@@ -14,7 +14,7 @@ export default function TermOfUse({ closeModal }: ITermOfUse) {
       <Styled.Container>
         <Styled.TitleWrapper>
           <Styled.Decorator />
-          <Styled.Title>헬시어 회원 이용약관 </Styled.Title>
+          <Styled.Title>헬시어 회원 이용약관</Styled.Title>
         </Styled.TitleWrapper>
 
         <FlexBox flexDirection="column" gap="20px">

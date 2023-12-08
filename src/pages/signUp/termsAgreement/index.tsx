@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
+import PrivacyPolicy from "src/components/termsModal/PrivacyPolicy";
 import TermOfUse from "src/components/termsModal/TermOfUse";
 import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
 import useTermsModal from "src/hooks/useTermsModal";
@@ -90,6 +91,7 @@ function TermsAgreement() {
   return (
     <>
       {termOfUseOpen && <TermOfUse closeModal={closeTermOfUse} />}
+      {privacyPolicyOpen && <PrivacyPolicy closeModal={closePrivacyPolicy} />}
       <Lib.Container>
         <Lib.Title text={"헬시어 서비스 이용약관에\n동의해주세요"} />
         <Styled.Box isEnabled={all}>
