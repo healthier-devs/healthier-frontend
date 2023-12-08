@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import NavigationBar from "src/components/navigationBar";
 import { useGetChallengeCategory } from "src/hooks/challenge/useGetChallengeCategory";
 import { useGetChallenges } from "src/hooks/challenge/useGetChallenges";
+import { useAppSelector } from "src/state";
+import { useAppDispatch } from "src/state";
+import { saveChallengeCategory } from "src/state/challengeSlice";
 import { IChallenge } from "../../interfaces/challenges";
 import ChallengeCard from "./challenge-card";
 import * as Styled from "./index.style";
@@ -15,8 +18,10 @@ interface IPageInfo {
 
 function ChallengeList() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { challengeCategory } = useAppSelector((state) => state.challenge);
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>(challengeCategory);
   const [pageInfo, setPageInfo] = useState<IPageInfo>({ page: 0, size: 15 });
   const [challengeList, setChallengeList] = useState<IChallenge[]>([]);
 
@@ -33,16 +38,19 @@ function ChallengeList() {
     setChallengeList([]);
     setPageInfo({ page: 0, size: 15 });
   }, [selectedCategory]);
+
   useEffect(() => {
     if (challengeCategoryData && !selectedCategory) {
       setSelectedCategory(challengeCategoryData[0].name);
     }
   }, [challengeCategoryData]);
+
   useEffect(() => {
     if (challengesData) {
       setChallengeList((prev) => [...prev, ...challengesData.data]);
     }
   }, [challengesData]);
+
   useEffect(() => {
     if (inView) {
       setPageInfo({ ...pageInfo, page: pageInfo.page + 1 });
@@ -61,8 +69,15 @@ function ChallengeList() {
 
       <Styled.Container>
         <Styled.Categories>
-          {challengeCategoryData?.map(({ name, koreanName }, index) => (
-            <Styled.Item key={name} isSelected={name === selectedCategory} onClick={() => setSelectedCategory(name)}>
+          {challengeCategoryData?.map(({ name, koreanName }) => (
+            <Styled.Item
+              key={name}
+              isSelected={name === selectedCategory}
+              onClick={() => {
+                setSelectedCategory(name);
+                dispatch(saveChallengeCategory({ challengeCategory: name }));
+              }}
+            >
               <Styled.ImgWrapper className="background">
                 <Styled.Img className="img" src={`/images/challenge/${name}.svg`} alt="challenge-icon" />
               </Styled.ImgWrapper>

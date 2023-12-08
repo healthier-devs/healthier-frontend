@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import sessionStorage from "redux-persist/es/storage/session";
 import authReducer from "./authSlice";
+import challengeReducer from "./challengeSlice";
 import diagnoseReducer from "./diagnoseSlice";
 import userReducer from "./userSlice";
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   auth: authReducer,
   diagnose: diagnoseReducer,
+  challenge: challengeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
