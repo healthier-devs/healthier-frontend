@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
 import FlexBox from "src/components/flexBox";
+import PrivacyPolicy from "src/components/termsModal/PrivacyPolicy";
+import TermOfUse from "src/components/termsModal/TermOfUse";
 import { NECESSARY_AGREEMENTS, OPTIONAL_AGREEMENTS } from "src/data/member_agreement";
+import useTermsModal from "src/hooks/useTermsModal";
 import * as Lib from "../lib";
 import * as Styled from "./index.style";
 
@@ -20,6 +23,7 @@ function TermsAgreement() {
   const [all, setAll] = useState<boolean>(false);
   const [necessaries, setNecessaries] = useState<boolean[]>(Array.from({ length: NECESSARY_NUMS }, () => false));
   const [optionals, setOptionals] = useState<boolean[]>(Array.from({ length: OPTIONAL_NUMS }, () => false));
+  const { termOfUseOpen, openPrivacyPolicy, closePrivacyPolicy, privacyPolicyOpen, openTermOfUse, closeTermOfUse } = useTermsModal();
 
   const isEnabled = necessaries.filter((agree) => agree === true).length === NECESSARY_NUMS;
 
@@ -86,6 +90,8 @@ function TermsAgreement() {
 
   return (
     <>
+      {termOfUseOpen && <TermOfUse closeModal={closeTermOfUse} />}
+      {privacyPolicyOpen && <PrivacyPolicy closeModal={closePrivacyPolicy} />}
       <Lib.Container>
         <Lib.Title text={"헬시어 서비스 이용약관에\n동의해주세요"} />
         <Styled.Box isEnabled={all}>
@@ -96,22 +102,35 @@ function TermsAgreement() {
         </Styled.Box>
         <div>
           <Styled.List>
-            {NECESSARY_AGREEMENTS.map(({ text, url }, idx) => (
-              <Styled.ListItem key={idx}>
-                <FlexBox alignItems="center" gap="10px">
-                  <Lib.Checkbox
-                    id={`necessary-${idx + 1}`}
-                    variant="secondary"
-                    defaultChecked={necessaries[idx]}
-                    onClick={() => handleClickNecessary(idx)}
-                  />
-                  <Styled.Typography className="body2">{text} (필수)</Styled.Typography>
-                  <Link to={url} target="_blank">
-                    <Styled.Typography className="link">내용 보기</Styled.Typography>
-                  </Link>
-                </FlexBox>
-              </Styled.ListItem>
-            ))}
+            <Styled.ListItem>
+              <FlexBox alignItems="center" gap="10px">
+                <Lib.Checkbox
+                  id={`necessary-${1}`}
+                  variant="secondary"
+                  defaultChecked={necessaries[0]}
+                  onClick={() => handleClickNecessary(0)}
+                />
+                <Styled.Typography className="body2">헬시어 서비스 이용약관에 동의합니다 (필수)</Styled.Typography>
+                <div onClick={openTermOfUse} style={{ cursor: "pointer" }}>
+                  <Styled.Typography className="link">내용 보기</Styled.Typography>
+                </div>
+              </FlexBox>
+            </Styled.ListItem>
+            <Styled.ListItem>
+              <FlexBox alignItems="center" gap="10px">
+                <Lib.Checkbox
+                  id={`necessary-${2}`}
+                  variant="secondary"
+                  defaultChecked={necessaries[1]}
+                  onClick={() => handleClickNecessary(1)}
+                />
+                <Styled.Typography className="body2">개인 정보 처리 방침에 동의 합니다 (필수)</Styled.Typography>
+                <div onClick={openPrivacyPolicy} style={{ cursor: "pointer" }}>
+                  <Styled.Typography className="link">내용 보기</Styled.Typography>
+                </div>
+              </FlexBox>
+            </Styled.ListItem>
+
             {OPTIONAL_AGREEMENTS.map(({ text, url }, idx) => (
               <Styled.ListItem key={idx}>
                 <FlexBox alignItems="center" gap="10px">

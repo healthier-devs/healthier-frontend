@@ -8,7 +8,7 @@ import VersionInformation from "./version-info";
 
 function Settings() {
   return (
-    <div>
+    <div style={{ width: "inherit" }}>
       <Notifications />
       <Divider />
       <Terms />

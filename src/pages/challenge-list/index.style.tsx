@@ -82,6 +82,9 @@ export const Categories = styled.ul`
   gap: 1.6rem;
   padding: 2rem 2.4rem;
   overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Item = styled.li<{ isSelected: boolean }>`
@@ -132,4 +135,8 @@ export const CardList = styled.ul`
   margin: 1.2rem 2.4rem;
   height: calc(100% - 250px);
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
