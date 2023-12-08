@@ -35,23 +35,23 @@ export const useAppleLogin = () => {
 
         return;
       }
-      const { hasAdditionalInformation, isAlreadyRegistered, registerType, accessToken, refreshToken } = appleAuthData;
+      const { hasAdditionalInformation, alreadyRegistered, registerType, accessToken, refreshToken } = appleAuthData;
 
-      if (!hasAdditionalInformation) {
-        navigate("/signup/step1?type=social", {
+      if (alreadyRegistered) {
+        navigate("/login", {
           state: {
-            accessToken,
-            refreshToken,
+            type: registerType,
           },
         });
 
         return;
       }
 
-      if (isAlreadyRegistered) {
-        navigate("/login", {
+      if (!hasAdditionalInformation) {
+        navigate("/signup/step1?type=social", {
           state: {
-            type: registerType,
+            accessToken,
+            refreshToken,
           },
         });
 

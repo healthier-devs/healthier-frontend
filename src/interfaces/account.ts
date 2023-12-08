@@ -147,7 +147,7 @@ export interface IVerifyAppleCodeResponse {
   accessToken: string;
   refreshToken: string;
   hasAdditionalInformation: boolean;
-  isAlreadyRegistered: boolean;
+  alreadyRegistered: boolean;
   registerType: "KAKAO" | "APPLE" | "DEFAULT";
 }
 export interface IEmailFind {
