@@ -35,7 +35,7 @@ function ChallengeStamp() {
 
   const { putStampImage } = usePutStampImage({
     id: challengeId,
-    url: presignedUrlData?.url.split("?")[0] ?? "",
+    url: presignedUrlData?.url ?? "",
     refetch,
     onSuccessImageUpload: certificateImageUploadDialog.openModal,
   });
