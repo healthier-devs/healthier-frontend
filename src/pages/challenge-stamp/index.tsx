@@ -13,6 +13,7 @@ import { CertificateImageUploadDialog, ForgiveDialog, InviteCodeCopyDialog, Revi
 import * as Styled from "./index.style";
 import StampGrid from "./stamp-grid";
 import Toast from "./toast";
+import type { IStamp } from "src/interfaces/stamp";
 
 function ChallengeStamp() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function ChallengeStamp() {
   const certificateImageUploadDialog = useModal();
 
   const [toastText, setToastText] = useState<ReactNode>("");
+  const [isTodayVerified, setIsTodayVerified] = useState<boolean>(false);
 
   const challengeId = parseInt(param.id ?? "0");
 
@@ -55,6 +57,23 @@ function ChallengeStamp() {
       }, 5000);
     }
   }, [toastText]);
+
+  useEffect(() => {
+    if (!stampChartData) {
+      return;
+    }
+    const checked = stampChartData.submissions.filter((s: IStamp) => s.status === "CHECKING");
+
+    if (checked.length === 0) {
+      return;
+    }
+
+    const lastChecked = checked[checked.length - 1];
+
+    if (new Date(lastChecked.submitTime).getDate() === new Date().getDate()) {
+      setIsTodayVerified(true);
+    }
+  }, [stampChartData]);
 
   const handleClickRevivalTicket = useCallback(() => {
     if (!stampChartData?.submissions.some((stamp) => stamp.status === "FAILURE")) {
@@ -87,6 +106,9 @@ function ChallengeStamp() {
   };
 
   const handleClickCertificate = () => {
+    if (isTodayVerified) {
+      return;
+    }
     const imageInput = document.getElementById("certificateImageInput");
 
     imageInput?.click();
@@ -171,8 +193,15 @@ function ChallengeStamp() {
           </Styled.Container>
 
           <Styled.CTAContainer>
-            <RoundButton onClick={handleClickCertificate} style={{ pointerEvents: "auto" }}>
-              오늘의 챌린지 인증하기
+            <RoundButton
+              onClick={handleClickCertificate}
+              backgroundColor={isTodayVerified ? theme.color.grey_600 : theme.color.blue}
+              color={isTodayVerified ? theme.color.grey_500 : theme.color.grey_100}
+              style={{
+                pointerEvents: "auto",
+              }}
+            >
+              {isTodayVerified ? "인증 완료" : "오늘의 챌린지 인증하기"}
             </RoundButton>
             <input id="certificateImageInput" type="file" accept="image/*" style={{ display: "none" }} />
           </Styled.CTAContainer>

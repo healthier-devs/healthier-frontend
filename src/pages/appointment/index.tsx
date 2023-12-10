@@ -50,6 +50,7 @@ const Appointment = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(true);
 
+  console.log(selectedPart);
   /* eslint "@tanstack/query/exhaustive-deps": 0 */
   const {
     data: mapData,

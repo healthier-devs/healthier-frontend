@@ -33,7 +33,7 @@ export default function Error({ error, resetErrorBoundary }: FallbackProps) {
         dispatch(logout());
         resetErrorBoundary();
 
-        location.pathname !== "/" && navigate("/login");
+        location.pathname !== "/" && navigate("/onboard");
       }
     }
   }, [error, location.pathname, navigate, dispatch, resetErrorBoundary]);
