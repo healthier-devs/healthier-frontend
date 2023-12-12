@@ -67,7 +67,8 @@ const Inquiry = () => {
 
           const response = await axios.put(imgRoute.url, file, {
             headers: {
-              "Content-Type": "multipart/form-data",
+              "cache-control": "no-cache",
+              "Content-Type": file.type,
             },
           });
 
@@ -75,8 +76,6 @@ const Inquiry = () => {
           return imgRoute.url.split("?")[0];
         } catch (err) {
           console.error(err);
-          // Depending on how you want to handle individual file errors,
-          // you could return null or throw an error
 
           return null;
         }
@@ -132,7 +131,7 @@ const Inquiry = () => {
             <div className="title">문의 사진은 최대 3장까지 올릴 수 있어요</div>
             <div className="pictureDiv">
               <>
-                <input type="file" multiple={true} id="fileSelector" onChange={handleChangeImg} />
+                <input type="file" accept="image/*" multiple={true} id="fileSelector" onChange={handleChangeImg} />
                 <label className="fileSelector" htmlFor="fileSelector">
                   <img src={FileSelectorImg} alt="fileSelector" className="fileSelectorIcon" />
                 </label>
