@@ -1,5 +1,6 @@
 import cn from "classnames";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CheckIcon from "src/assets/icons/CheckIcon";
 import BottomSheet from "src/components/bottomSheet";
 import Box from "src/components/box";
@@ -10,14 +11,18 @@ import { DATA_DELETION_TERM, SIGNOUT_TERM, SIGNOUT_REASONS } from "src/data/memb
 import { useWithdrawal } from "src/hooks/account/useWithdrawal";
 import useModal from "src/hooks/useModal";
 import { Checkbox, NextButton } from "src/pages/signUp/lib";
+import { useAppSelector } from "src/state";
 import { RootContainer, Container, Title, TitleWrapper, Typography, List, Button } from "./index.style";
 
 function SignOut() {
+  const navigate = useNavigate();
+
   const [signoutAgreed, setSignoutAgreed] = useState<boolean>(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const [signoutReasonIdx, setSignoutReasonIdx] = useState<number | null>(null);
   const { isOpenModal: isDialogOpen, modalRef: dialogRef, closeModal: closeDialog, openModal: openDialog } = useModal();
   const { withdrawal } = useWithdrawal();
+  const { authenticated } = useAppSelector((state) => state.auth);
 
   const isNextButtonEnabled = signoutAgreed && signoutReasonIdx !== null;
 
@@ -42,6 +47,15 @@ function SignOut() {
     });
     closeDialog();
   };
+
+  useEffect(() => {
+    if (!authenticated) {
+      alert("로그인 후 이용해 주세요");
+      navigate("/");
+
+      return;
+    }
+  }, [authenticated, navigate]);
 
   return (
     <RootContainer>
